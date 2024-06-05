@@ -7,4 +7,3 @@ from .configuration import AindSlimsApiSettings
 config = AindSlimsApiSettings()
 
 from .core import SlimsClient
-from .waterlog import WaterlogSlimsClient
