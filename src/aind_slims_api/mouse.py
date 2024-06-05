@@ -1,7 +1,7 @@
-import logging
-from typing import Annotated, Optional
+"""Contains a model for the mouse content, and a method for fetching it"""
 
-from slims.slims import Record
+import logging
+from typing import Annotated
 
 from pydantic import Field, ValidationError
 
@@ -11,6 +11,8 @@ logger = logging.getLogger()
 
 
 class SlimsMouseContent(SlimsBaseModel):
+    """Model for an instance of the Mouse ContentType"""
+
     baseline_weight_g: Annotated[float | None, UnitSpec("g")] = Field(
         ..., alias="cntn_cf_baselineWeight"
     )
@@ -55,7 +57,8 @@ def fetch_mouse_content(
         mouse_details = mice[0]
         if len(mice) > 1:
             logger.warning(
-                f"Warning, Multiple mice in SLIMS with barcode {mouse_name}, using pk={mouse_details.cntn_pk}"
+                f"Warning, Multiple mice in SLIMS with barcode "
+                f"{mouse_name}, using pk={mouse_details.cntn_pk}"
             )
     else:
         logger.warning("Warning, Mouse not in SLIMS")

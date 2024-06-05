@@ -1,7 +1,7 @@
+""" Tests waterlog models, methods, and Mouse class"""
+
 import unittest
 
-from aind_slims_api.configuration import AindSlimsApiSettings
-import datetime
 from aind_slims_api import SlimsClient
 from aind_slims_api.waterlog import Mouse
 from aind_slims_api.user import SlimsUser
@@ -11,6 +11,7 @@ class TestWaterlog(unittest.TestCase):
     """Example Test Class"""
 
     def setup(self):
+        """set client, user, and test_mouse_id"""
         self.client = SlimsClient()
         # self.user = fetch_user(client, "SIPE")
         self.user = SlimsUser(
@@ -21,6 +22,7 @@ class TestWaterlog(unittest.TestCase):
         self.test_mouse_id = "614173"
 
     def test_main_sequence_using_mouse_object(self):
+        """Runs through waterlog methods"""
         self.setup()
 
         mouse = Mouse(
@@ -30,7 +32,7 @@ class TestWaterlog(unittest.TestCase):
         if mouse.mouse.water_restricted:
             mouse.switch_to_adlib_water()
 
-        ## Make some waterlog entries
+        # Make some waterlog entries
         for i in range(3):
             mouse.add_waterlog_record(
                 weight=20 + i,
@@ -40,13 +42,13 @@ class TestWaterlog(unittest.TestCase):
                 comments=f"Test {i}",
             )
 
-        ## Post baseline weight
+        # Post baseline weight
         mouse.post_baseline_weight(21)
 
-        ## Water restrict
+        # Water restrict
         mouse.switch_to_water_restricted(target_weight_fraction=0.86)
 
-        ## Add another waterlog result
+        # Add another waterlog result
         mouse.add_waterlog_record(
             weight=20,
             water_earned=0.5,
@@ -55,10 +57,10 @@ class TestWaterlog(unittest.TestCase):
             comments=f"Test {i+1}",
         )
 
-        ## Update target weight fraction
+        # Update target weight fraction
         mouse.update_target_weight_fraction(0.9)
 
-        ## Switch to adlib
+        # Switch to adlib
         mouse.switch_to_adlib_water()
 
 

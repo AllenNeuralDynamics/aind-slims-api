@@ -1,15 +1,19 @@
+"""Contains a model for a user, and a method for fetching it"""
+
 import logging
-from typing import Annotated, Optional
+from typing import Optional
 
 from pydantic import Field, ValidationError
 
-from .core import SlimsBaseModel, SlimsClient, UnitSpec
+from .core import SlimsBaseModel, SlimsClient
 
 logger = logging.getLogger()
 
 
 # TODO: Tighten this up once users are more commonly used
 class SlimsUser(SlimsBaseModel):
+    """Model for user information in SLIMS"""
+
     username: str = Field(..., alias="user_userName")
     first_name: Optional[str] = Field("", alias="user_firstName")
     last_name: Optional[str] = Field("", alias="user_lastName")
@@ -34,7 +38,8 @@ def fetch_user(
         user_details = users[0]
         if len(users) > 1:
             logger.warning(
-                f"Warning, Multiple users in SLIMS with username {users}, using pk={user_details.pk}"
+                f"Warning, Multiple users in SLIMS with "
+                f"username {users}, using pk={user_details.pk}"
             )
     else:
         logger.warning("Warning, User not in SLIMS")

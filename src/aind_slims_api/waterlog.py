@@ -1,17 +1,15 @@
+"""Contains models for Waterlog Results and Water Restriction Events and
+methods for fetching each of those.
+
+Also contains a Mouse class for keeping track of relevant data for a given
+mouse and fetching/updating/posting data to SLIMS"""
+
 from datetime import datetime
-from functools import partial
 import logging
 import os
-from typing import Annotated, Optional, Literal
+from typing import Annotated, Optional
 
-from pydantic import (
-    BaseModel,
-    BeforeValidator,
-    Field,
-    ValidationError,
-    confloat,
-)
-from slims.slims import _SlimsApiException
+from pydantic import Field, ValidationError
 
 import aind_slims_api
 from aind_slims_api.user import SlimsUser
@@ -23,6 +21,8 @@ logger = logging.getLogger()
 
 
 class SLIMSWaterlogResult(SlimsBaseModel):
+    """Model for a SLIMS Waterlog Result, the daily water/weight records"""
+
     date: datetime = Field(datetime.now(), alias="rslt_cf_datePerformed")
     operator: Optional[str] = Field(None, alias="rslt_cf_waterlogOperator")
     weight_g: Annotated[float | None, UnitSpec("g")] = Field(
@@ -54,6 +54,8 @@ class SLIMSWaterlogResult(SlimsBaseModel):
 
 
 class SlimsWaterRestrictionEvent(SlimsBaseModel):
+    """Model for a Water Restriction Event"""
+
     start_date: datetime = Field(datetime.now(), alias="cnvn_cf_startDate")
     end_date: Optional[datetime] = Field(None, alias="cnvn_cf_endDate")
     assigned_by: str = Field(..., alias="cnvn_cf_assignedBy")
@@ -74,7 +76,7 @@ def fetch_mouse_waterlog_results(
     client: SlimsClient,
     mouse: SlimsMouseContent,
 ) -> list[SLIMSWaterlogResult]:
-    """Fetch "Waterlog" Results from SLIMS and update the mouse accordingly
+    """Fetch "Waterlog" Results from SLIMS
 
     Args:
         client (SlimsClient): SLIMS client object
@@ -113,7 +115,7 @@ def fetch_water_restriction_events(
         mouse (SlimsMouseContent): Mouse data object
 
     Returns:
-        list[SlimsWaterRestrictionEvent]: SLIMS records of water restriction events
+        list[SlimsWaterRestrictionEvent]: SLIMS records of events
     """
 
     slims_records: list[SlimsWaterRestrictionEvent] = client.fetch(
@@ -135,7 +137,10 @@ def fetch_water_restriction_events(
 
 
 class Mouse:
+    """Class for tracking mouse water/weight data and syncing with SLIMS"""
+
     def __init__(self, mouse_name: str, user: SlimsUser, slims_client=None):
+        """Fetch data from Slims for mouse with barcode={mouse_name}"""
         self.client = slims_client or SlimsClient()
         self.mouse_name = mouse_name
         self.user = user
@@ -145,10 +150,15 @@ class Mouse:
         self.restriction: SlimsWaterRestrictionEvent = None
         self.all_restrictions: list[SlimsWaterRestrictionEvent] = []
 
+        self.link_mouse: str = None
+        self.link_restrictions: str = None
+        self.link_wl_records: str = None
+
         self._fetch_data()
-        self.get_pks()
+        self._fetch_pks()
 
     def _fetch_data(self):
+        """Fetches mouse/waterlog/restriction data from SLIMS"""
 
         self.mouse = fetch_mouse_content(self.client, self.mouse_name)
         self.waterlog_results = fetch_mouse_waterlog_results(
@@ -163,13 +173,15 @@ class Mouse:
             event_active = latest_restriction.end_date is None
             if not (self.mouse.water_restricted == event_active):
                 logger.warning(
-                    f"Warning, inconsistent water restricted data in SLIMS, MID, {self.mouse.barcode}"
+                    f"Warning, inconsistent water restricted data in SLIMS, "
+                    f"MID, {self.mouse.barcode}"
                 )
             self.restriction = latest_restriction if event_active else None
 
-        self.make_links()
+        self._make_links()
 
-    def make_links(self):
+    def _make_links(self):
+        """Constructs useful links to SLIMS tables"""
         self.link_mouse = self.client.rest_link(
             "Content", cntn_cf_labtracksId=self.mouse_name
         )
@@ -180,7 +192,8 @@ class Mouse:
             "ContentEvent", cnvn_fk_content=self.mouse_name
         )
 
-    def get_pks(self):
+    def _fetch_pks(self):
+        """Fetches useful SLIMS pks"""
         self.wrest_pk = self.client.fetch_pk(
             "ContentEventType", cnvt_uniqueIdentifier="cnvt_water_restriction"
         )
@@ -197,6 +210,8 @@ class Mouse:
         total_water: float = None,
         comments: str = None,
     ):
+        """Creates and adds a new waterlog weight/water record to SLIMS, and
+        updates self.waterlog_results accordingly"""
         if total_water is None:
             total_water = water_earned + water_supplement_delivered
 
@@ -217,13 +232,20 @@ class Mouse:
         logger.info("Added SLIMS Waterlog record")
 
     def post_baseline_weight(self, new_baseline_weight: float):
+        """Update the baseline weight in SLIMS and self.mouse"""
         self.mouse.baseline_weight_g = new_baseline_weight
         self.mouse = self.client.update_model(self.mouse, "baseline_weight")
         logger.info(
-            f"Updated mouse {self.mouse_name} baseline weight to {new_baseline_weight}"
+            f"Updated mouse {self.mouse_name} "
+            f"baseline weight to {new_baseline_weight}"
         )
 
     def switch_to_water_restricted(self, target_weight_fraction: float):
+        """If the mouse is on ad-lib water,
+        - Create a water restriction event starting today
+        - Update the mouse's water_restricted field
+        - Update SLIMS with the above
+        - Update local data accordingly"""
         if self.mouse.water_restricted:
             logger.info("Mouse is already water restricted")
             return
@@ -242,6 +264,11 @@ class Mouse:
         logger.info(f"Switched mouse {self.mouse_name} to Water Restricted")
 
     def switch_to_adlib_water(self):
+        """If the mouse is water restricted,
+        - Set the end date of the active restriction event to today
+        - Update the mouse's water_restricted field
+        - Update SLIMS with the above
+        - Update local data accordingly"""
         if not self.mouse.water_restricted:
             logger.info("Mouse is already on ad-lib water")
             return
@@ -257,10 +284,15 @@ class Mouse:
         logger.info(f"Switched mouse {self.mouse_name} to Adlib Water")
 
     def update_target_weight_fraction(self, new_twf: float):
+        """Update the target weight fraction of the active restriction"""
+        if not self.mouse.water_restricted:
+            logger.info("Mouse is not water restricted")
+            return
         self.restriction.target_weight_fraction = new_twf
         self.restriction = self.client.update_model(
             self.restriction, "target_weight_fraction"
         )
         logger.info(
-            f"Updated mouse {self.mouse_name} target weight fraction to {new_twf}"
+            f"Updated mouse {self.mouse_name} "
+            f"target weight fraction to {new_twf}"
         )

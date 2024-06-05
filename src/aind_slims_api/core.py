@@ -1,28 +1,24 @@
-from datetime import timezone as tz
-import datetime
+"""Contents:
+
+Utilities for creating pydantic models for SLIMS data:
+    SlimsBaseModel - to be subclassed for SLIMS pydantic models
+    UnitSpec - To be included in a type annotation of a Quantity field
+
+SlimsClient - Basic wrapper around slims-python-api client with convenience
+    methods and integration with SlimsBaseModel subtypes
+"""
+
 from datetime import datetime
-from enum import Enum
 from functools import lru_cache
-import os
-import json
-from dataclasses import dataclass
-from zoneinfo import ZoneInfo
 from pydantic import (
     BaseModel,
-    BeforeValidator,
-    ValidationError,
     ValidationInfo,
-    conlist,
     field_serializer,
     field_validator,
-    model_validator,
 )
 from pydantic.fields import FieldInfo
-import requests
-from requests.auth import HTTPBasicAuth
 import logging
-from typing import Annotated, Any, Self, Union, Literal, Optional
-import math
+from typing import Literal, Optional
 
 from slims.slims import Slims, _SlimsApiException
 from slims.internal import (
@@ -49,10 +45,13 @@ SLIMSTABLES = Literal[
 
 
 class UnitSpec:
+    """Used in type annotation metadata to specify units"""
+
     units: list[str]
     preferred_unit: str = None
 
     def __init__(self, *args, preferred_unit=None):
+        """Set list of acceptable units from args, and preferred_unit"""
         self.units = args
         if len(self.units) == 0:
             raise ValueError("One or more units must be specified")
@@ -60,7 +59,8 @@ class UnitSpec:
             self.preferred_unit = self.units[0]
 
 
-def find_unit_spec(field: FieldInfo) -> UnitSpec | None:
+def _find_unit_spec(field: FieldInfo) -> UnitSpec | None:
+    """Given a Pydantic FieldInfo, find the UnitSpec in its metadata"""
     metadata = field.metadata
     for m in metadata:
         if isinstance(m, UnitSpec):
@@ -90,29 +90,36 @@ class SlimsBaseModel(
     _slims_table: SLIMSTABLES
 
     @field_validator("*", mode="before")
-    def validate(cls, value, info: ValidationInfo):
+    def _validate(cls, value, info: ValidationInfo):
+        """Validates a field, accounts for Quantities"""
         if isinstance(value, SlimsColumn):
             if value.datatype == "QUANTITY":
-                unit_spec = find_unit_spec(cls.model_fields[info.field_name])
+                unit_spec = _find_unit_spec(cls.model_fields[info.field_name])
                 if unit_spec is None:
-                    msg = f'Quantity field "{info.field_name}" must be annotated with a UnitSpec'
+                    msg = (
+                        f'Quantity field "{info.field_name}"'
+                        "must be annotated with a UnitSpec"
+                    )
                     raise TypeError(msg)
                 if value.unit not in unit_spec.units:
-                    msg = f'Unexpected unit "{value.unit}" for field {info.field_name}, Expected {unit_spec.units}'
+                    msg = (
+                        f'Unexpected unit "{value.unit}" for field '
+                        f"{info.field_name}, Expected {unit_spec.units}"
+                    )
                     raise ValueError(msg)
             return value.value
         else:
             return value
 
     @field_serializer("*")
-    def serialize(self, field, info):
-        unit_spec = find_unit_spec(self.model_fields[info.field_name])
+    def _serialize(self, field, info):
+        """Serialize a field, accounts for Quantities and datetime"""
+        unit_spec = _find_unit_spec(self.model_fields[info.field_name])
         if unit_spec and field is not None:
             quantity = {
                 "amount": field,
                 "unit_display": unit_spec.preferred_unit,
             }
-            # quantity["unit_pk"] = 6 if unit_spec.preferred_unit == "g" else 15
             return quantity
         elif isinstance(field, datetime):
             return int(field.timestamp() * 10**3)
@@ -125,7 +132,10 @@ class SlimsBaseModel(
 
 
 class SlimsClient:
+    """Wrapper around slims-python-api client with convenience methods"""
+
     def __init__(self, url=None, username=None, password=None):
+        """Create object and try to connect to database"""
         self.url = url or config.slims_url
         self.db: Slims = None
 
@@ -136,6 +146,7 @@ class SlimsClient:
         )
 
     def connect(self, url: str, username: str, password: str):
+        """Connect to the database"""
         self.db = Slims(
             "slims",
             url,
@@ -186,11 +197,9 @@ class SlimsClient:
 
         return records
 
-    def fetch_unit(self, unit_name: str) -> SlimsRecord:
-        return self.fetch("Unit", unit_name=unit_name)[0]
-
     @lru_cache(maxsize=None)
     def fetch_pk(self, table: SLIMSTABLES, *args, **kwargs) -> int | None:
+        """SlimsClient.fetch but returns the pk of the first returned record"""
         records = self.fetch(table, *args, **kwargs)
         if len(records) > 0:
             return records[0].pk()
@@ -198,14 +207,17 @@ class SlimsClient:
             return None
 
     def fetch_user(self, user_name: str):
+        """Fetches a user by username"""
         return self.fetch("User", user_userName=user_name)
 
     def add(self, table: SLIMSTABLES, data: dict):
+        """Add a SLIMS record to a given SLIMS table"""
         record = self.db.add(table, data)
         logger.info(f"SLIMS Add: {table}/{record.pk()}")
         return record
 
     def update(self, table: SLIMSTABLES, pk: int, data: dict):
+        """Update a SLIMS record"""
         record = self.db.fetch_by_pk(table, pk)
         if record is None:
             raise ValueError('No data in SLIMS "{table}" table for pk "{pk}"')
@@ -214,11 +226,24 @@ class SlimsClient:
         return new_record
 
     def rest_link(self, table: SLIMSTABLES, **kwargs):
+        """Construct a url link to a SLIMS table with arbitrary filters"""
         base_url = f"{self.url}/rest/{table}"
         queries = [f"?{k}={v}" for k, v in kwargs.items()]
         return base_url + "".join(queries)
 
-    def add_model(self, model: SlimsBaseModel, *args, **kwargs):
+    def add_model(
+        self, model: SlimsBaseModel, *args, **kwargs
+    ) -> SlimsBaseModel:
+        """Given a SlimsBaseModel object, add it to SLIMS
+        Args
+            model (SlimsBaseModel): object to add
+            *args (str): fields to include in the serialization
+            **kwargs: passed to model.model_dump()
+
+        Returns
+            An instance of the same type of model, with data from
+            the resulting SLIMS record
+        """
         fields_to_include = set(args) or None
         fields_to_exclude = set(kwargs.get("exclude", []))
         fields_to_exclude.add("pk")
@@ -234,6 +259,17 @@ class SlimsClient:
         return type(model).model_validate(rtn)
 
     def update_model(self, model: SlimsBaseModel, *args, **kwargs):
+        """Given a SlimsBaseModel object, update its (existing) SLIMS record
+
+        Args
+            model (SlimsBaseModel): object to update
+            *args (str): fields to include in the serialization
+            **kwargs: passed to model.model_dump()
+
+        Returns
+            An instance of the same type of model, with data from
+            the resulting SLIMS record
+        """
         fields_to_include = set(args) or None
         rtn = self.update(
             model._slims_table,
