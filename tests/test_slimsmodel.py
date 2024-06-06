@@ -1,6 +1,6 @@
 """ Tests the generic SlimsBaseModel"""
 
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Annotated
 import unittest
 
@@ -91,6 +91,8 @@ class TestSlimsModel(unittest.TestCase):
         """Test aliasing of fields"""
 
         class TestModelAlias(SlimsBaseModel):
+            """model with field aliases"""
+
             field: str = Field(..., alias="alias")
             pk: int = Field(None, alias="cntn_pk")
 
