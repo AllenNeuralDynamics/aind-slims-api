@@ -20,13 +20,6 @@ class TestSlimsModel(unittest.TestCase):
         stringfield: str = None
         quantfield: Annotated[float, UnitSpec("um", "nm")] = None
 
-    # def test_generic_model(self):
-    #     """test model with dummy data"""
-    #     record_json = self._generate_json()
-    #     mock_slims_record = Record(json_entity=record_json, slims_api=None)
-    #     obj = self.TestModel.model_validate(mock_slims_record)
-    #     self.assertEqual(obj.stringfield, mock_slims_record.stringfield.value)
-
     def test_string_field(self):
         """Test basic usage for SLIMS column to Model field"""
         obj = self.TestModel()
