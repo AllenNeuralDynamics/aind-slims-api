@@ -8,15 +8,13 @@ SlimsClient - Basic wrapper around slims-python-api client with convenience
     methods and integration with SlimsBaseModel subtypes
 """
 
-from functools import lru_cache
 import logging
+from functools import lru_cache
 from typing import Literal, Optional
 
-from slims.slims import Slims, _SlimsApiException
-from slims.internal import (
-    Record as SlimsRecord,
-)
 from slims.criteria import Criterion, conjunction, equals
+from slims.internal import Record as SlimsRecord
+from slims.slims import Slims, _SlimsApiException
 
 from aind_slims_api import config
 
