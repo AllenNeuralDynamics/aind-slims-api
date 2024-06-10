@@ -14,7 +14,3 @@ class AindSlimsApiSettings(BaseSettings):
     slims_url: str = "https://aind-test.us.slims.agilent.com/slimsrest/"
     slims_username: str = ""
     slims_password: SecretStr = ""
-
-    wl_default_target_weight_fraction: float = 0.85
-    wl_min_target_weight_fraction: float = 0.75
-    wl_max_target_weight_fraction: float = 1.0
