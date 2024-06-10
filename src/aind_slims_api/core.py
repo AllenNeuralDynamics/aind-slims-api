@@ -34,6 +34,7 @@ SLIMSTABLES = Literal[
     "Groups",
 ]
 
+
 class SlimsClient:
     """Wrapper around slims-python-api client with convenience methods"""
 
