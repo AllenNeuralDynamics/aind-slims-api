@@ -1,0 +1,480 @@
+[
+   {
+      "pk": 8,
+      "tableName": "User",
+      "columns": [
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "user_fk_avatar",
+            "title": "Avatar",
+            "position": 0,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Avatar",
+            "displayValue": null,
+            "displayField": "avat_name",
+            "foreignDisplayColumn": "avat_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_userName",
+            "title": "User name",
+            "position": 1,
+            "value": "PersonA",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 2,
+            "value": "user_persona",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "user_authenticationMethod",
+            "title": "Authentication method",
+            "position": 3,
+            "value": "LOCAL",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Local Authentication"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "user_passwordDirty",
+            "title": "Require password change on next login",
+            "position": 4,
+            "value": false,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "user_fk_role",
+            "title": "Role",
+            "position": 5,
+            "value": 2,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Role",
+            "displayValue": "Administrator",
+            "displayField": "role_name",
+            "foreignDisplayColumn": "role_name"
+         },
+         {
+            "datatype": "ENUM",
+            "name": "user_license",
+            "title": "License type",
+            "position": 6,
+            "value": "NAMED",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Named"
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_lastName",
+            "title": "Last name",
+            "position": 7,
+            "value": "A",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_firstName",
+            "title": "First name",
+            "position": 8,
+            "value": "Person",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_fullName",
+            "title": "Full name",
+            "position": 9,
+            "value": "Person A",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_email",
+            "title": "E-mail",
+            "position": 10,
+            "value": "person.a@fake_url",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "user_locale",
+            "title": "Language",
+            "position": 11,
+            "value": "en",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "English"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "user_browserNotifications",
+            "title": "Enable browser notifications",
+            "position": 12,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "user_notificationLevel",
+            "title": "Display notifications with this level or higher",
+            "position": 13,
+            "value": "INFO",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Info"
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_ecm3Account",
+            "title": "ECM Account",
+            "position": 14,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_ecm3Domain",
+            "title": "ECM Domain",
+            "position": 15,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_ecm3User",
+            "title": "ECM Username",
+            "position": 16,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "user_active",
+            "title": "Active",
+            "position": 17,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "user_locked",
+            "title": "Locked",
+            "position": 18,
+            "value": false,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_createdBy",
+            "title": "Created by",
+            "position": 19,
+            "value": "PersonB",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "user_createdOn",
+            "title": "Created on",
+            "position": 20,
+            "value": 1670355126130,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_modifiedBy",
+            "title": "Modified by",
+            "position": 21,
+            "value": "PersonA",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "user_modifiedOn",
+            "title": "Modified on",
+            "position": 22,
+            "value": 1717788094709,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "user_fk_perspective",
+            "title": "Layout",
+            "position": 24,
+            "value": 42,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 25,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "user_pk",
+            "title": "user_pk",
+            "position": 26,
+            "value": 8,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_salt",
+            "title": "Salt",
+            "position": 27,
+            "value": "+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=",
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "user_failedLoginAttempts",
+            "title": "Failed login attempts",
+            "position": 28,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "role_name",
+            "title": "Name",
+            "position": 29,
+            "value": "Administrator",
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_timezone",
+            "title": "Timezone",
+            "position": 30,
+            "value": "America/Los_Angeles",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "http://fake_url/rest/User/8"
+         },
+         {
+            "rel": "user_fk_role",
+            "href": "http://fake_url/rest/Role/2"
+         },
+         {
+            "rel": "-wdgt_fk_user",
+            "href": "http://fake_url/rest/Widget?wdgt_fk_user=8"
+         },
+         {
+            "rel": "-prdc_fk_user",
+            "href": "http://fake_url/rest/Product?prdc_fk_user=8"
+         },
+         {
+            "rel": "-prjo_fk_user",
+            "href": "http://fake_url/rest/PrinterJob?prjo_fk_user=8"
+         },
+         {
+            "rel": "-wrfl_fk_user",
+            "href": "http://fake_url/rest/Workflow?wrfl_fk_user=8"
+         },
+         {
+            "rel": "-crfr_fk_user",
+            "href": "http://fake_url/rest/CaseReportForm?crfr_fk_user=8"
+         },
+         {
+            "rel": "-prjc_fk_user",
+            "href": "http://fake_url/rest/Project?prjc_fk_user=8"
+         },
+         {
+            "rel": "-cnvn_fk_user",
+            "href": "http://fake_url/rest/ContentEvent?cnvn_fk_user=8"
+         },
+         {
+            "rel": "-note_fk_user",
+            "href": "http://fake_url/rest/Note?note_fk_user=8"
+         },
+         {
+            "rel": "-qtus_fk_user",
+            "href": "http://fake_url/rest/QuantityUsage?qtus_fk_user=8"
+         },
+         {
+            "rel": "-evnt_fk_user",
+            "href": "http://fake_url/rest/Event?evnt_fk_user=8"
+         },
+         {
+            "rel": "-wrkl_fk_user",
+            "href": "http://fake_url/rest/WorkList?wrkl_fk_user=8"
+         },
+         {
+            "rel": "-dhbd_fk_user",
+            "href": "http://fake_url/rest/Dashboard?dhbd_fk_user=8"
+         },
+         {
+            "rel": "-attm_fk_user",
+            "href": "http://fake_url/rest/Attachment?attm_fk_user=8"
+         },
+         {
+            "rel": "-attm_fk_ecm3UploadUser",
+            "href": "http://fake_url/rest/Attachment?attm_fk_ecm3UploadUser=8"
+         },
+         {
+            "rel": "-nfsr_fk_user",
+            "href": "http://fake_url/rest/NotificationUser?nfsr_fk_user=8"
+         },
+         {
+            "rel": "-rprt_fk_user",
+            "href": "http://fake_url/rest/Report?rprt_fk_user=8"
+         },
+         {
+            "rel": "-rqst_fk_assignee",
+            "href": "http://fake_url/rest/Request?rqst_fk_assignee=8"
+         },
+         {
+            "rel": "-lnwo_fk_user",
+            "href": "http://fake_url/rest/ElnWorkedOn?lnwo_fk_user=8"
+         },
+         {
+            "rel": "-userPk",
+            "href": "http://fake_url/rest/ELNTree?userPk=8"
+         },
+         {
+            "rel": "-lctn_fk_user",
+            "href": "http://fake_url/rest/Location?lctn_fk_user=8"
+         },
+         {
+            "rel": "-rdrc_fk_user",
+            "href": "http://fake_url/rest/ReferenceDataRecord?rdrc_fk_user=8"
+         },
+         {
+            "rel": "-srgr_fk_user",
+            "href": "http://fake_url/rest/UserGroup?srgr_fk_user=8"
+         },
+         {
+            "rel": "-rtrg_fk_user",
+            "href": "http://fake_url/rest/RightsUserGroup?rtrg_fk_user=8"
+         },
+         {
+            "rel": "-timr_fk_user",
+            "href": "http://fake_url/rest/TimerRun?timr_fk_user=8"
+         },
+         {
+            "rel": "-xprn_fk_user",
+            "href": "http://fake_url/rest/ExperimentRun?xprn_fk_user=8"
+         },
+         {
+            "rel": "-bgjb_fk_user",
+            "href": "http://fake_url/rest/BackgroundJob?bgjb_fk_user=8"
+         },
+         {
+            "rel": "-xprs_fk_user",
+            "href": "http://fake_url/rest/ExperimentRunStep?xprs_fk_user=8"
+         },
+         {
+            "rel": "-chlg_fk_user",
+            "href": "http://fake_url/rest/Changelog?chlg_fk_user=8"
+         },
+         {
+            "rel": "-stud_fk_user",
+            "href": "http://fake_url/rest/Study?stud_fk_user=8"
+         },
+         {
+            "rel": "-stop_fk_user",
+            "href": "http://fake_url/rest/Sop?stop_fk_user=8"
+         },
+         {
+            "rel": "-rslt_cf_fk_surgeon",
+            "href": "http://fake_url/rest/Result?rslt_cf_fk_surgeon=8"
+         },
+         {
+            "rel": "-rslt_cf_fk_behaviorTrainer",
+            "href": "http://fake_url/rest/Result?rslt_cf_fk_behaviorTrainer=8"
+         },
+         {
+            "rel": "-rslt_fk_filler",
+            "href": "http://fake_url/rest/Result?rslt_fk_filler=8"
+         },
+         {
+            "rel": "-prsp_fk_user",
+            "href": "http://fake_url/rest/PerspectiveComponent?prsp_fk_user=8"
+         },
+         {
+            "rel": "-ordr_fk_user",
+            "href": "http://fake_url/rest/Order?ordr_fk_user=8"
+         },
+         {
+            "rel": "-ordr_cf_fk_histologyRequester",
+            "href": "http://fake_url/rest/Order?ordr_cf_fk_histologyRequester=8"
+         },
+         {
+            "rel": "-xprm_fk_user",
+            "href": "http://fake_url/rest/Experiment?xprm_fk_user=8"
+         },
+         {
+            "rel": "-cntn_fk_user",
+            "href": "http://fake_url/rest/Content?cntn_fk_user=8"
+         },
+         {
+            "rel": "-cntn_cf_fk_histologyRequester",
+            "href": "http://fake_url/rest/Content?cntn_cf_fk_histologyRequester=8"
+         },
+         {
+            "rel": "-flrn_fk_user",
+            "href": "http://fake_url/rest/FlowRun?flrn_fk_user=8"
+         },
+         {
+            "rel": "-prsp_fk_user",
+            "href": "http://fake_url/rest/Perspective?prsp_fk_user=8"
+         },
+         {
+            "rel": "-nstr_fk_user",
+            "href": "http://fake_url/rest/Instrument?nstr_fk_user=8"
+         },
+         {
+            "rel": "attachments",
+            "href": "http://fake_url/rest/attachment/User/8"
+         }
+      ]
+   }
+]
