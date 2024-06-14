@@ -1,0 +1,960 @@
+[
+   {
+      "pk": 3038,
+      "tableName": "Content",
+      "columns": [
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_originalContent",
+            "title": "Original Content",
+            "position": 0,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Content",
+            "displayValue": null,
+            "displayField": "cntn_originalContentBarCode",
+            "foreignDisplayColumn": "cntn_id"
+         },
+         {
+            "datatype": "ENUM",
+            "name": "icon",
+            "title": "Icon",
+            "position": 1,
+            "value": "data_icons/mouse.png",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "data_icons/mouse.png"
+         },
+         {
+            "datatype": "ENUM",
+            "name": "containerIcon",
+            "title": "Container icon",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_category",
+            "title": "Category",
+            "position": 3,
+            "value": 45,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "ContentType",
+            "displayValue": "Subjects",
+            "displayField": "category_name",
+            "foreignDisplayColumn": "cntp_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_contentType",
+            "title": "Type",
+            "position": 4,
+            "value": 5,
+            "hidden": false,
+            "editable": false,
+            "foreignTable": "ContentType",
+            "displayValue": "Mouse",
+            "displayField": "cntp_name",
+            "foreignDisplayColumn": "cntp_name"
+         },
+         {
+            "datatype": "QUANTITY",
+            "name": "cntn_cf_volume",
+            "title": "Volume",
+            "position": 5,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "unit": "ml"
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_barCode",
+            "title": "Barcode",
+            "position": 6,
+            "value": "123456",
+            "hidden": false,
+            "editable": false
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_containerContentType",
+            "title": "Container type",
+            "position": 7,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "ContentType",
+            "displayValue": null,
+            "displayField": "container_name",
+            "foreignDisplayColumn": "cntp_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_product",
+            "title": "Product",
+            "position": 8,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Product",
+            "displayValue": null,
+            "displayField": "prdc_name",
+            "foreignDisplayColumn": "prdc_name"
+         },
+         {
+            "datatype": "QUANTITY",
+            "name": "cntn_cf_baselineWeight",
+            "title": "Baseline Weight",
+            "position": 9,
+            "value": 25.2,
+            "hidden": false,
+            "editable": true,
+            "unit": "g"
+         },
+         {
+            "datatype": "QUANTITY",
+            "name": "cntn_cf_mass",
+            "title": "Mass",
+            "position": 10,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "unit": "g"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "cntn_cf_waterRestricted",
+            "title": "Water Restricted",
+            "position": 11,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FLOAT",
+            "name": "cntn_dilutionFactor",
+            "title": "Dilution Factor",
+            "position": 12,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_id",
+            "title": "ID",
+            "position": 13,
+            "value": "123456",
+            "hidden": false,
+            "editable": false
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_cf_contactPerson",
+            "title": "Contact Person",
+            "position": 14,
+            "value": "PersonB",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_cf_scientificPointOfContact",
+            "title": "Scientific Point of Contact",
+            "position": 15,
+            "value": "PersonC",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_user",
+            "title": "User",
+            "position": 16,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "FLOAT",
+            "name": "cntn_quantity",
+            "title": "Quantity",
+            "position": 17,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_unit",
+            "title": "Unit",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "cntn_status",
+            "title": "Status",
+            "position": 19,
+            "value": "10",
+            "hidden": false,
+            "editable": false,
+            "displayValue": "Pending"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_status",
+            "title": "Status",
+            "position": 20,
+            "value": 28,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Status",
+            "displayValue": "Pending",
+            "displayField": "stts_name",
+            "foreignDisplayColumn": "stts_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_location",
+            "title": "Location",
+            "position": 21,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Location",
+            "displayValue": null,
+            "displayField": "lctn_name",
+            "foreignDisplayColumn": "lctn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_location_recursive",
+            "title": "Location (including sublocations)",
+            "position": 22,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Location",
+            "displayValue": null,
+            "displayField": "lctn_name",
+            "foreignDisplayColumn": "lctn_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "locationPath",
+            "title": "Location path",
+            "position": 23,
+            "value": null,
+            "hidden": false,
+            "editable": false
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_disease",
+            "title": "Disease",
+            "position": 24,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Disease",
+            "displayValue": null,
+            "displayField": "diss_name",
+            "foreignDisplayColumn": "diss_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_group",
+            "title": "Group",
+            "position": 25,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Groups",
+            "displayValue": null,
+            "displayField": "grps_groupName",
+            "foreignDisplayColumn": "grps_groupName"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_provider",
+            "title": "Provider",
+            "position": 26,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Provider",
+            "displayValue": null,
+            "displayField": "prvd_name",
+            "foreignDisplayColumn": "prvd_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_position_row",
+            "title": "Located at row",
+            "position": 27,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_position_column",
+            "title": "Located at column",
+            "position": 28,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "cntn_cf_dateOfBirth",
+            "title": "Date of birth",
+            "position": 29,
+            "value": 1715774400000,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy",
+            "subType": "date",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_cf_fk_fundingCode",
+            "title": "Project ID",
+            "position": 30,
+            "value": 1385,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "ReferenceDataRecord",
+            "displayValue": "Learning mFISH - V1 omFISH",
+            "displayField": "cntn_cf_fk_fundingCode_display",
+            "foreignDisplayColumn": "rdrc_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_cf_genotype",
+            "title": "Full Genotype",
+            "position": 31,
+            "value": "SSt",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_cf_iacucProtocol",
+            "title": "IACUC Protocol",
+            "position": 32,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_cf_labtracksGroup",
+            "title": "LabTracks Group",
+            "position": 33,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_cf_labtracksId",
+            "title": "Labtracks ID",
+            "position": 34,
+            "value": "123456",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_cf_lightcycle",
+            "title": "LightCycle",
+            "position": 35,
+            "value": "Reverse Light Cycle (9 PM-9 AM light)",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "cntn_cf_mouseAge",
+            "title": "Mouse age (mo)",
+            "position": 36,
+            "value": 29,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_cf_parentBarcode",
+            "title": "Parent barcode",
+            "position": 37,
+            "value": "N/A - no parent",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "cntn_cf_sex",
+            "title": "Sex",
+            "position": 38,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "cntn_fk_product_strain",
+            "title": "Product (filtering without version)",
+            "position": 39,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Product",
+            "displayValue": null,
+            "displayField": "prdc_name",
+            "foreignDisplayColumn": "prdc_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "relationToProband",
+            "title": "Relation to proband",
+            "position": 40,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "father",
+            "title": "Father",
+            "position": 41,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Content",
+            "displayValue": null,
+            "displayField": "father_display",
+            "foreignDisplayColumn": "cntn_id"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "mother",
+            "title": "Mother",
+            "position": 42,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Content",
+            "displayValue": null,
+            "displayField": "mother_display",
+            "foreignDisplayColumn": "cntn_id"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "derivedCount",
+            "title": "Derivation count",
+            "position": 43,
+            "value": 1,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "ingredientCount",
+            "title": "Ingredient count",
+            "position": 44,
+            "value": 0,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "mixCount",
+            "title": "Mix count",
+            "position": 45,
+            "value": 0,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_createdBy",
+            "title": "Created by",
+            "position": 46,
+            "value": "PersonD",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "cntn_createdOn",
+            "title": "Created on",
+            "position": 47,
+            "value": 1715797617414,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_modifiedBy",
+            "title": "Modified by",
+            "position": 48,
+            "value": "PersonE",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "cntn_modifiedOn",
+            "title": "Modified on",
+            "position": 49,
+            "value": 1716928135809,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "flags",
+            "title": "Flags",
+            "position": 50,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "ContentEventType",
+            "displayValue": null,
+            "displayField": "cnvt_name",
+            "foreignDisplayColumn": "cnvt_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "previousFlags",
+            "title": "Previous flags",
+            "position": 51,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "ContentEventType",
+            "displayValue": null,
+            "displayField": "cnvt_name",
+            "foreignDisplayColumn": "cnvt_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_externalId",
+            "title": "External Id",
+            "position": 52,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "lctn_name",
+            "title": "Name",
+            "position": 53,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "isNaFilter",
+            "title": "Field is N/A",
+            "position": 54,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "isNotNaFilter",
+            "title": "Field is not N/A",
+            "position": 55,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "cntp_containerType",
+            "title": "Is a container type",
+            "position": 56,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "mother_display",
+            "title": "mother_display",
+            "position": 57,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_input",
+            "title": "xprs_input",
+            "position": 58,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "cntp_canEnrollInStudy",
+            "title": "Can enroll in a study",
+            "position": 59,
+            "value": true,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "cntn_pk",
+            "title": "cntn_pk",
+            "position": 60,
+            "value": 3038,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 61,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "lctn_rows",
+            "title": "Rows",
+            "position": 62,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "cntp_slimsGeneratesBarcode",
+            "title": "SLIMS generates a barcode for content of this type",
+            "position": 63,
+            "value": false,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "prvd_name",
+            "title": "Name",
+            "position": 64,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "lctp_positionLess",
+            "title": "Don't require positions",
+            "position": 65,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "cntp_useBarcodeAsId",
+            "title": "Use barcode as id",
+            "position": 66,
+            "value": true,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "lctn_barCode",
+            "title": "Barcode",
+            "position": 67,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "diss_name",
+            "title": "Name",
+            "position": 68,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "lctn_columns",
+            "title": "Columns",
+            "position": 69,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "grps_groupName",
+            "title": "Name",
+            "position": 70,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "stts_name",
+            "title": "Name",
+            "position": 71,
+            "value": "Pending",
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntp_name",
+            "title": "Name",
+            "position": 72,
+            "value": "Mouse",
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "user_userName",
+            "title": "User name",
+            "position": 73,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "father_display",
+            "title": "father_display",
+            "position": 74,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "cntn_originalContentBarCode",
+            "title": "Original content barcode",
+            "position": 75,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "sorc_name",
+            "title": "Name",
+            "position": 76,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_output",
+            "title": "xprs_output",
+            "position": 77,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "http://fake_url/rest/Content/3038"
+         },
+         {
+            "rel": "cntn_fk_category",
+            "href": "http://fake_url/rest/ContentType/45"
+         },
+         {
+            "rel": "cntn_fk_contentType",
+            "href": "http://fake_url/rest/ContentType/5"
+         },
+         {
+            "rel": "cntn_fk_status",
+            "href": "http://fake_url/rest/Status/28"
+         },
+         {
+            "rel": "cntn_cf_fk_fundingCode",
+            "href": "http://fake_url/rest/ReferenceDataRecord/1385"
+         },
+         {
+            "rel": "-prjo_fk_content",
+            "href": "http://fake_url/rest/PrinterJob?prjo_fk_content=3038"
+         },
+         {
+            "rel": "-flfm_fk_content",
+            "href": "http://fake_url/rest/Fulfillment?flfm_fk_content=3038"
+         },
+         {
+            "rel": "-cnvn_fk_content",
+            "href": "http://fake_url/rest/ContentEvent?cnvn_fk_content=3038"
+         },
+         {
+            "rel": "-cnst_fk_content",
+            "href": "http://fake_url/rest/ContentStudy?cnst_fk_content=3038"
+         },
+         {
+            "rel": "-rlrn_fk_content",
+            "href": "http://fake_url/rest/RuleRun?rlrn_fk_content=3038"
+         },
+         {
+            "rel": "-qtus_fk_content",
+            "href": "http://fake_url/rest/QuantityUsage?qtus_fk_content=3038"
+         },
+         {
+            "rel": "-ccpt_fk_content",
+            "href": "http://fake_url/rest/Occupation?ccpt_fk_content=3038"
+         },
+         {
+            "rel": "-corl_fk_from",
+            "href": "http://fake_url/rest/ContentRelation?corl_fk_from=3038"
+         },
+         {
+            "rel": "-corl_fk_to",
+            "href": "http://fake_url/rest/ContentRelation?corl_fk_to=3038"
+         },
+         {
+            "rel": "-ssnc_fk_content",
+            "href": "http://fake_url/rest/SavedSelectionContent?ssnc_fk_content=3038"
+         },
+         {
+            "rel": "-rdcn_fk_content",
+            "href": "http://fake_url/rest/OrderContent?rdcn_fk_content=3038"
+         },
+         {
+            "rel": "-rqst_fk_content",
+            "href": "http://fake_url/rest/Request?rqst_fk_content=3038"
+         },
+         {
+            "rel": "-cntn_pk",
+            "href": "http://fake_url/rest/Schedule?cntn_pk=3038"
+         },
+         {
+            "rel": "-qlng_fk_content",
+            "href": "http://fake_url/rest/QueueElementIngredient?qlng_fk_content=3038"
+         },
+         {
+            "rel": "-qlag_fk_content",
+            "href": "http://fake_url/rest/QueueElementAggregator?qlag_fk_content=3038"
+         },
+         {
+            "rel": "-tpnr_fk_batch",
+            "href": "http://fake_url/rest/TimepointEnrollment?tpnr_fk_batch=3038"
+         },
+         {
+            "rel": "-ssnr_fk_content",
+            "href": "http://fake_url/rest/StabilityStudyEnrollment?ssnr_fk_content=3038"
+         },
+         {
+            "rel": "-qulm_fk_content",
+            "href": "http://fake_url/rest/QueueElement?qulm_fk_content=3038"
+         },
+         {
+            "rel": "-xrsc_fk_content",
+            "href": "http://fake_url/rest/ExperimentRunStepContent?xrsc_fk_content=3038"
+         },
+         {
+            "rel": "-kitc_fk_content",
+            "href": "http://fake_url/rest/KitContent?kitc_fk_content=3038"
+         },
+         {
+            "rel": "-nrcn_fk_content",
+            "href": "http://fake_url/rest/InstrumentRunContent?nrcn_fk_content=3038"
+         },
+         {
+            "rel": "-rslt_fk_content",
+            "href": "http://fake_url/rest/Result?rslt_fk_content=3038"
+         },
+         {
+            "rel": "-rslt_cf_fk_primaryAntibody",
+            "href": "http://fake_url/rest/Result?rslt_cf_fk_primaryAntibody=3038"
+         },
+         {
+            "rel": "-rslt_cf_fk_secondaryAntibody",
+            "href": "http://fake_url/rest/Result?rslt_cf_fk_secondaryAntibody=3038"
+         },
+         {
+            "rel": "-rslt_cf_fk_virus",
+            "href": "http://fake_url/rest/Result?rslt_cf_fk_virus=3038"
+         },
+         {
+            "rel": "-rslt_fk_batch",
+            "href": "http://fake_url/rest/Result?rslt_fk_batch=3038"
+         },
+         {
+            "rel": "-ordr_cf_fk_dye",
+            "href": "http://fake_url/rest/Order?ordr_cf_fk_dye=3038"
+         },
+         {
+            "rel": "-ordr_fk_batch",
+            "href": "http://fake_url/rest/Order?ordr_fk_batch=3038"
+         },
+         {
+            "rel": "-cntn_fk_originalContent",
+            "href": "http://fake_url/rest/Content?cntn_fk_originalContent=3038"
+         },
+         {
+            "rel": "-cntn_cf_fk_primaryStain",
+            "href": "http://fake_url/rest/Content?cntn_cf_fk_primaryStain=3038"
+         },
+         {
+            "rel": "-cntn_cf_fk_secondaryStain",
+            "href": "http://fake_url/rest/Content?cntn_cf_fk_secondaryStain=3038"
+         },
+         {
+            "rel": "-father",
+            "href": "http://fake_url/rest/Content?father=3038"
+         },
+         {
+            "rel": "-mother",
+            "href": "http://fake_url/rest/Content?mother=3038"
+         },
+         {
+            "rel": "-pptp_fk_content",
+            "href": "http://fake_url/rest/PlatePositionOutput?pptp_fk_content=3038"
+         },
+         {
+            "rel": "attachments",
+            "href": "http://fake_url/rest/attachment/Content/3038"
+         }
+      ]
+   }
+]

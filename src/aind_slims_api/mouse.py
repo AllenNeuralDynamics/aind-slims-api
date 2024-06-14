@@ -1,8 +1,9 @@
 """Contains a model for the mouse content, and a method for fetching it"""
 
 import logging
+from typing import Optional
 
-from .core import SlimsClient
+from aind_slims_api.core import SlimsClient
 
 logger = logging.getLogger()
 
@@ -10,7 +11,7 @@ logger = logging.getLogger()
 def fetch_mouse_content(
     client: SlimsClient,
     mouse_name: str,
-) -> dict:
+) -> Optional[dict]:
     """Fetches mouse information for a mouse with labtracks id {mouse_name}"""
     mice = client.fetch(
         "Content",
@@ -23,10 +24,10 @@ def fetch_mouse_content(
         if len(mice) > 1:
             logger.warning(
                 f"Warning, Multiple mice in SLIMS with barcode "
-                f"{mouse_name}, using pk={mouse_details.cntn_pk}"
+                f"{mouse_name}, using pk={mouse_details.cntn_pk.value}"
             )
     else:
         logger.warning("Warning, Mouse not in SLIMS")
-        return
+        mouse_details = None
 
-    return mouse_details
+    return None if mouse_details is None else mouse_details.json_entity

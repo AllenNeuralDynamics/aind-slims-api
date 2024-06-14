@@ -1,8 +1,9 @@
 """Contains a model for a user, and a method for fetching it"""
 
 import logging
+from typing import Optional
 
-from .core import SlimsClient
+from aind_slims_api.core import SlimsClient
 
 logger = logging.getLogger()
 
@@ -10,7 +11,7 @@ logger = logging.getLogger()
 def fetch_user(
     client: SlimsClient,
     username: str,
-) -> dict:
+) -> Optional[dict]:
     """Fetches user information for a user with username {username}"""
     users = client.fetch(
         "User",
@@ -22,10 +23,11 @@ def fetch_user(
         if len(users) > 1:
             logger.warning(
                 f"Warning, Multiple users in SLIMS with "
-                f"username {users}, using pk={user_details.pk}"
+                f"username {[u.json_entity for u in users]}, "
+                f"using pk={user_details.pk()}"
             )
     else:
         logger.warning("Warning, User not in SLIMS")
-        return
+        user_details = None
 
-    return user_details
+    return None if user_details is None else user_details.json_entity
