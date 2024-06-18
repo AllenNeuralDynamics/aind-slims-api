@@ -1,17 +1,51 @@
 """Contains a model for the mouse content, and a method for fetching it"""
 
 import logging
-from typing import Optional
+from typing import Annotated
 
-from aind_slims_api.core import SlimsClient
+from pydantic import Field, ValidationError
+
+from .core import SlimsBaseModel, SlimsClient, UnitSpec, SLIMSTABLES
 
 logger = logging.getLogger()
+
+
+class SlimsMouseContent(SlimsBaseModel):
+    """Model for an instance of the Mouse ContentType"""
+
+    baseline_weight_g: Annotated[float | None, UnitSpec("g")] = Field(
+        ..., alias="cntn_cf_baselineWeight"
+    )
+    point_of_contact: str | None = Field(
+        ..., alias="cntn_cf_scientificPointOfContact"
+    )
+    water_restricted: bool = Field(..., alias="cntn_cf_waterRestricted")
+    barcode: str = Field(..., alias="cntn_barCode")
+    pk: int = Field(..., alias="cntn_pk")
+
+    _slims_table: SLIMSTABLES = "Content"
+
+    # TODO: Include other helpful fields (genotype, gender...)
+
+    # pk: callable
+    # cntn_fk_category: SlimsColumn
+    # cntn_fk_contentType: SlimsColumn
+    # cntn_barCode: SlimsColumn
+    # cntn_id: SlimsColumn
+    # cntn_cf_contactPerson: SlimsColumn
+    # cntn_status: SlimsColumn
+    # cntn_fk_status: SlimsColumn
+    # cntn_fk_user: SlimsColumn
+    # cntn_cf_fk_fundingCode: SlimsColumn
+    # cntn_cf_genotype: SlimsColumn
+    # cntn_cf_labtracksId: SlimsColumn
+    # cntn_cf_parentBarcode: SlimsColumn
 
 
 def fetch_mouse_content(
     client: SlimsClient,
     mouse_name: str,
-) -> Optional[dict]:
+) -> SlimsMouseContent | None:
     """Fetches mouse information for a mouse with labtracks id {mouse_name}"""
     mice = client.fetch(
         "Content",
@@ -28,6 +62,12 @@ def fetch_mouse_content(
             )
     else:
         logger.warning("Warning, Mouse not in SLIMS")
-        mouse_details = None
+        return
 
-    return None if mouse_details is None else mouse_details.json_entity
+    try:
+        mouse = SlimsMouseContent.model_validate(mouse_details)
+    except ValidationError as e:
+        logger.error(f"SLIMS data validation failed, {repr(e)}")
+        return
+
+    return mouse

@@ -3,15 +3,31 @@
 import logging
 from typing import Optional
 
-from aind_slims_api.core import SlimsClient
+from pydantic import Field, ValidationError
+
+from .core import SlimsBaseModel, SlimsClient
 
 logger = logging.getLogger()
+
+
+# TODO: Tighten this up once users are more commonly used
+class SlimsUser(SlimsBaseModel):
+    """Model for user information in SLIMS"""
+
+    username: str = Field(..., alias="user_userName")
+    first_name: Optional[str] = Field("", alias="user_firstName")
+    last_name: Optional[str] = Field("", alias="user_lastName")
+    full_name: Optional[str] = Field("", alias="user_fullName")
+    email: Optional[str] = Field("", alias="user_email")
+    pk: int = Field(..., alias="user_pk")
+
+    _slims_table: str = "User"
 
 
 def fetch_user(
     client: SlimsClient,
     username: str,
-) -> Optional[dict]:
+) -> SlimsUser | None:
     """Fetches user information for a user with username {username}"""
     users = client.fetch(
         "User",
@@ -23,11 +39,17 @@ def fetch_user(
         if len(users) > 1:
             logger.warning(
                 f"Warning, Multiple users in SLIMS with "
-                f"username {[u.json_entity for u in users]}, "
+                f"username {username}, "
                 f"using pk={user_details.pk()}"
             )
     else:
         logger.warning("Warning, User not in SLIMS")
-        user_details = None
+        return
 
-    return None if user_details is None else user_details.json_entity
+    try:
+        user = SlimsUser.model_validate(user_details)
+    except ValidationError as e:
+        logger.error(f"SLIMS data validation failed, {repr(e)}")
+        return
+
+    return user
