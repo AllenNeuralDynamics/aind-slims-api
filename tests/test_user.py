@@ -57,7 +57,6 @@ class TestUser(unittest.TestCase):
             user_info,
         )
         mock_log_error.assert_called()
-        # mock_log_error.assert_called_with(f"SLIMS data validation failed")
 
     @patch("logging.Logger.warning")
     @patch("slims.slims.Slims.fetch")

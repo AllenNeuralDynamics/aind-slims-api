@@ -10,7 +10,7 @@ from unittest.mock import MagicMock, patch
 from slims.criteria import conjunction, equals
 from slims.internal import Record, _SlimsApiException
 
-from aind_slims_api.core import SlimsClient, SlimsBaseModel
+from aind_slims_api.core import SlimsClient
 from aind_slims_api.unit import SlimsUnit
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / "resources"
@@ -134,7 +134,10 @@ class TestSlimsClient(unittest.TestCase):
     @patch("logging.Logger.info")
     @patch("slims.internal.Record.update")
     def test_update(
-        self, mock_update: MagicMock, mock_log: MagicMock, mock_fetch_by_pk: MagicMock
+        self,
+        mock_update: MagicMock,
+        mock_log: MagicMock,
+        mock_fetch_by_pk: MagicMock,
     ):
         """Tests update method success"""
         input_data = deepcopy(self.example_fetch_unit_response[0].json_entity)
@@ -156,14 +159,18 @@ class TestSlimsClient(unittest.TestCase):
     @patch("logging.Logger.info")
     @patch("slims.internal.Record.update")
     def test_update_failure(
-        self, mock_update: MagicMock, mock_log: MagicMock, mock_fetch_by_pk: MagicMock
+        self,
+        mock_update: MagicMock,
+        mock_log: MagicMock,
+        mock_fetch_by_pk: MagicMock,
     ):
         """Tests update method when a failure occurs"""
         mock_fetch_by_pk.return_value = None
         with self.assertRaises(ValueError) as e:
             self.example_client.update(table="Unit", pk=30000, data={})
         self.assertEqual(
-            'No data in SLIMS "Unit" table for pk "30000"', e.exception.args[0]
+            'No data in SLIMS "Unit" table for pk "30000"',
+            e.exception.args[0],
         )
         mock_update.assert_not_called()
         mock_log.assert_not_called()
@@ -183,7 +190,10 @@ class TestSlimsClient(unittest.TestCase):
     @patch("logging.Logger.info")
     @patch("slims.internal.Record.update")
     def test_update_model(
-        self, mock_update: MagicMock, mock_log: MagicMock, mock_fetch_by_pk: MagicMock
+        self,
+        mock_update: MagicMock,
+        mock_log: MagicMock,
+        mock_fetch_by_pk: MagicMock,
     ):
         """Tests update method success"""
         input_data = deepcopy(self.example_fetch_unit_response[0].json_entity)
