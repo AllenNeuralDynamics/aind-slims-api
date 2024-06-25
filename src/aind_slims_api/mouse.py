@@ -5,7 +5,7 @@ from typing import Annotated
 
 from pydantic import Field, BeforeValidator, ValidationError
 
-from .core import SlimsBaseModel, SlimsClient, UnitSpec, SLIMSTABLES
+from aind_slims_api.core import SlimsBaseModel, SlimsClient, UnitSpec, SLIMSTABLES
 
 logger = logging.getLogger()
 

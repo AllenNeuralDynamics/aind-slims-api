@@ -5,7 +5,7 @@ from typing import Optional
 
 from pydantic import Field
 
-from .core import SlimsBaseModel
+from aind_slims_api.core import SlimsBaseModel
 
 logger = logging.getLogger()
 
