@@ -1,0 +1,472 @@
+[
+   {
+      "pk": 31,
+      "tableName": "Unit",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "unit_abbreviation",
+            "title": "Abbreviation",
+            "position": 0,
+            "value": "pm^3",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_name",
+            "title": "Name",
+            "position": 1,
+            "value": "picometer^3",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "unit_fk_originalUnit",
+            "title": "Original unit",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Unit",
+            "displayValue": null,
+            "displayField": "originalUnitAbbreviation",
+            "foreignDisplayColumn": "unit_abbreviation"
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_fromOriginalUnitGroovy",
+            "title": "Value expression to convert from original unit",
+            "position": 3,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_toOriginalUnitGroovy",
+            "title": "Value expression to convert to original unit",
+            "position": 4,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "unit_prefix",
+            "title": "Prefix",
+            "position": 5,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_subDimension",
+            "title": "Sub dimension",
+            "position": 6,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "unit_type",
+            "title": "Type",
+            "position": 7,
+            "value": "COMPOUND",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Compound"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "unit_fk_dimension",
+            "title": "Dimension",
+            "position": 8,
+            "value": 5,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Dimension",
+            "displayValue": "Volume",
+            "displayField": "dmns_name",
+            "foreignDisplayColumn": "dmns_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_createdBy",
+            "title": "Created by",
+            "position": 9,
+            "value": "admin",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "unit_createdOn",
+            "title": "Created on",
+            "position": 10,
+            "value": 1668796217413,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_modifiedBy",
+            "title": "Modified by",
+            "position": 11,
+            "value": "PersonA",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "unit_modifiedOn",
+            "title": "Modified on",
+            "position": 12,
+            "value": 1674504031658,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "unit_pk",
+            "title": "unit_pk",
+            "position": 13,
+            "value": 31,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "dmns_name",
+            "title": "Dimension",
+            "position": 14,
+            "value": "Volume",
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_seqNo",
+            "title": "Sequence number",
+            "position": 15,
+            "value": "-33.0000000000000000000",
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_subdimension",
+            "title": "unit_subdimension",
+            "position": 16,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "unit_suspicious",
+            "title": "Suspicious",
+            "position": 17,
+            "value": false,
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "http://fake_url/rest/Unit/31"
+         },
+         {
+            "rel": "unit_fk_dimension",
+            "href": "http://fake_url/rest/Dimension/5"
+         },
+         {
+            "rel": "-tftr_fk_unit",
+            "href": "http://fake_url/rest/TableFieldTypeRestriction?tftr_fk_unit=31"
+         },
+         {
+            "rel": "-tftr_fk_lowerUnit",
+            "href": "http://fake_url/rest/TableFieldTypeRestriction?tftr_fk_lowerUnit=31"
+         },
+         {
+            "rel": "-tftr_fk_upperUnit",
+            "href": "http://fake_url/rest/TableFieldTypeRestriction?tftr_fk_upperUnit=31"
+         },
+         {
+            "rel": "-tbfl_fk_unit",
+            "href": "http://fake_url/rest/Field?tbfl_fk_unit=31"
+         },
+         {
+            "rel": "-tbfl_fk_lowerUnit",
+            "href": "http://fake_url/rest/Field?tbfl_fk_lowerUnit=31"
+         },
+         {
+            "rel": "-tbfl_fk_upperUnit",
+            "href": "http://fake_url/rest/Field?tbfl_fk_upperUnit=31"
+         },
+         {
+            "rel": "-unit_fk_originalUnit",
+            "href": "http://fake_url/rest/Unit?unit_fk_originalUnit=31"
+         },
+         {
+            "rel": "-cmnl_fk_unit",
+            "href": "http://fake_url/rest/CompoundUnitLink?cmnl_fk_unit=31"
+         },
+         {
+            "rel": "-cmnl_fk_compoundUnit",
+            "href": "http://fake_url/rest/CompoundUnitLink?cmnl_fk_compoundUnit=31"
+         },
+         {
+            "rel": "attachments",
+            "href": "http://fake_url/rest/attachment/Unit/31"
+         }
+      ]
+   },
+   {
+      "pk": 15,
+      "tableName": "Unit",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "unit_abbreviation",
+            "title": "Abbreviation",
+            "position": 0,
+            "value": "pm^2",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_name",
+            "title": "Name",
+            "position": 1,
+            "value": "picometer^2",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "unit_fk_originalUnit",
+            "title": "Original unit",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Unit",
+            "displayValue": null,
+            "displayField": "originalUnitAbbreviation",
+            "foreignDisplayColumn": "unit_abbreviation"
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_fromOriginalUnitGroovy",
+            "title": "Value expression to convert from original unit",
+            "position": 3,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_toOriginalUnitGroovy",
+            "title": "Value expression to convert to original unit",
+            "position": 4,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "unit_prefix",
+            "title": "Prefix",
+            "position": 5,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_subDimension",
+            "title": "Sub dimension",
+            "position": 6,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "unit_type",
+            "title": "Type",
+            "position": 7,
+            "value": "COMPOUND",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Compound"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "unit_fk_dimension",
+            "title": "Dimension",
+            "position": 8,
+            "value": 4,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Dimension",
+            "displayValue": "Surface",
+            "displayField": "dmns_name",
+            "foreignDisplayColumn": "dmns_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_createdBy",
+            "title": "Created by",
+            "position": 9,
+            "value": "admin",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "unit_createdOn",
+            "title": "Created on",
+            "position": 10,
+            "value": 1668796214042,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_modifiedBy",
+            "title": "Modified by",
+            "position": 11,
+            "value": "PersonA",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "unit_modifiedOn",
+            "title": "Modified on",
+            "position": 12,
+            "value": 1674504029413,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "unit_pk",
+            "title": "unit_pk",
+            "position": 13,
+            "value": 15,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "dmns_name",
+            "title": "Dimension",
+            "position": 14,
+            "value": "Surface",
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_seqNo",
+            "title": "Sequence number",
+            "position": 15,
+            "value": "-24.0000000000000000000",
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "unit_subdimension",
+            "title": "unit_subdimension",
+            "position": 16,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "unit_suspicious",
+            "title": "Suspicious",
+            "position": 17,
+            "value": false,
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "http://fake_url/rest/Unit/15"
+         },
+         {
+            "rel": "unit_fk_dimension",
+            "href": "http://fake_url/rest/Dimension/4"
+         },
+         {
+            "rel": "-tftr_fk_unit",
+            "href": "http://fake_url/rest/TableFieldTypeRestriction?tftr_fk_unit=15"
+         },
+         {
+            "rel": "-tftr_fk_lowerUnit",
+            "href": "http://fake_url/rest/TableFieldTypeRestriction?tftr_fk_lowerUnit=15"
+         },
+         {
+            "rel": "-tftr_fk_upperUnit",
+            "href": "http://fake_url/rest/TableFieldTypeRestriction?tftr_fk_upperUnit=15"
+         },
+         {
+            "rel": "-tbfl_fk_unit",
+            "href": "http://fake_url/rest/Field?tbfl_fk_unit=15"
+         },
+         {
+            "rel": "-tbfl_fk_lowerUnit",
+            "href": "http://fake_url/rest/Field?tbfl_fk_lowerUnit=15"
+         },
+         {
+            "rel": "-tbfl_fk_upperUnit",
+            "href": "http://fake_url/rest/Field?tbfl_fk_upperUnit=15"
+         },
+         {
+            "rel": "-unit_fk_originalUnit",
+            "href": "http://fake_url/rest/Unit?unit_fk_originalUnit=15"
+         },
+         {
+            "rel": "-cmnl_fk_unit",
+            "href": "http://fake_url/rest/CompoundUnitLink?cmnl_fk_unit=15"
+         },
+         {
+            "rel": "-cmnl_fk_compoundUnit",
+            "href": "http://fake_url/rest/CompoundUnitLink?cmnl_fk_compoundUnit=15"
+         },
+         {
+            "rel": "attachments",
+            "href": "http://fake_url/rest/attachment/Unit/15"
+         }
+      ]
+   }
+]

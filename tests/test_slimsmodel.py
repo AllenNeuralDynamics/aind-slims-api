@@ -65,28 +65,6 @@ class TestSlimsModel(unittest.TestCase):
                 }
             )
 
-    # def test_date_field(self):
-    #     """ test datetime fields back and forth to timestamps"""
-    #     obj = self.TestModel()
-    #     value = 1714003450843
-    #     value_dt = datetime.fromtimestamp(
-    #         value / 1e3, tz=timezone("America/Los_Angeles")
-    #     )
-    #     obj.datefield = Column(
-    #         {
-    #             "datatype": "DATE",
-    #             "name": "datefield",
-    #             "value": 1714003450843,
-    #             "timeZone": "America/Los_Angeles",
-    #         }
-    #     )
-
-    #     self.assertEqual(obj.datefield, value_dt)
-
-    #     serialized = obj.model_dump()["datefield"]
-    #     expected = int(value_dt.timestamp() * 10**3)
-    #     self.assertEqual(serialized, expected)
-
     def test_alias(self):
         """Test aliasing of fields"""
 
@@ -116,6 +94,10 @@ class TestSlimsModel(unittest.TestCase):
         serialized = obj.model_dump(include="field", by_alias=True)
         expected = {"alias": "value2"}
         self.assertEqual(serialized, expected)
+
+    def test_unitspec(self):
+        """Test unitspec with no arguments"""
+        self.assertRaises(ValueError, UnitSpec)
 
 
 if __name__ == "__main__":

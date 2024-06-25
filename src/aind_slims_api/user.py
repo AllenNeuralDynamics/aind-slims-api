@@ -5,7 +5,7 @@ from typing import Optional
 
 from pydantic import Field, ValidationError
 
-from .core import SlimsBaseModel, SlimsClient
+from aind_slims_api.core import SlimsBaseModel, SlimsClient
 
 logger = logging.getLogger()
 
@@ -27,7 +27,7 @@ class SlimsUser(SlimsBaseModel):
 def fetch_user(
     client: SlimsClient,
     username: str,
-) -> SlimsUser:
+) -> SlimsUser | dict | None:
     """Fetches user information for a user with username {username}"""
     users = client.fetch(
         "User",
@@ -39,16 +39,17 @@ def fetch_user(
         if len(users) > 1:
             logger.warning(
                 f"Warning, Multiple users in SLIMS with "
-                f"username {users}, using pk={user_details.pk}"
+                f"username {username}, "
+                f"using pk={user_details.pk()}"
             )
     else:
         logger.warning("Warning, User not in SLIMS")
         return
 
     try:
-        mouse = SlimsUser.model_validate(user_details)
+        user = SlimsUser.model_validate(user_details)
     except ValidationError as e:
         logger.error(f"SLIMS data validation failed, {repr(e)}")
-        return
+        return user_details.json_entity
 
-    return mouse
+    return user

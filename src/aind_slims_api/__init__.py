@@ -1,9 +1,9 @@
 """Init package"""
 
-__version__ = "0.0.0"
+__version__ = "0.0.2"
 
-from .configuration import AindSlimsApiSettings
+from aind_slims_api.configuration import AindSlimsApiSettings
 
 config = AindSlimsApiSettings()
 
-from .core import SlimsClient  # noqa
+from aind_slims_api.core import SlimsClient  # noqa

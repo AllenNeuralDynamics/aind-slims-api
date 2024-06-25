@@ -5,7 +5,7 @@
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 ![Interrogate](https://img.shields.io/badge/interrogate-100.0%25-brightgreen)
 ![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen?logo=codecov)
-![Python](https://img.shields.io/badge/python->=3.7-blue?logo=python)
+![Python](https://img.shields.io/badge/python->=3.10-blue?logo=python)
 
 This library is for pythonic access to data stored in the AIND SLIMS deployment. It is not meant to be a generic way to interact with SLIMS, but rather specific to how data is modeled in AIND's SLIMS instance.
 

@@ -87,6 +87,7 @@ class SlimsBaseModel(
     """
 
     pk: int = None
+    json_entity: dict = None
     _slims_table: SLIMSTABLES
 
     @field_validator("*", mode="before")
@@ -137,7 +138,7 @@ class SlimsClient:
     def __init__(self, url=None, username=None, password=None):
         """Create object and try to connect to database"""
         self.url = url or config.slims_url
-        self.db: Slims = None
+        self.db: Optional[Slims] = None
 
         self.connect(
             self.url,
@@ -191,9 +192,10 @@ class SlimsClient:
                 start=start,
                 end=end,
             )
-        except _SlimsApiException:
-            raise
-            return None  # TODO: Raise or return empty list?
+        except _SlimsApiException as e:
+            # TODO: Add better error handling
+            #  Let's just raise error for the time being
+            raise e
 
         return records
 
@@ -220,7 +222,7 @@ class SlimsClient:
         """Update a SLIMS record"""
         record = self.db.fetch_by_pk(table, pk)
         if record is None:
-            raise ValueError('No data in SLIMS "{table}" table for pk "{pk}"')
+            raise ValueError(f'No data in SLIMS "{table}" table for pk "{pk}"')
         new_record = record.update(data)
         logger.info(f"SLIMS Update: {table}/{pk}")
         return new_record
@@ -231,9 +233,7 @@ class SlimsClient:
         queries = [f"?{k}={v}" for k, v in kwargs.items()]
         return base_url + "".join(queries)
 
-    def add_model(
-        self, model: SlimsBaseModel, *args, **kwargs
-    ) -> SlimsBaseModel:
+    def add_model(self, model: SlimsBaseModel, *args, **kwargs) -> SlimsBaseModel:
         """Given a SlimsBaseModel object, add it to SLIMS
         Args
             model (SlimsBaseModel): object to add
