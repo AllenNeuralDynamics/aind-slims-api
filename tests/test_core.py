@@ -10,7 +10,8 @@ from unittest.mock import MagicMock, patch
 from slims.criteria import conjunction, equals
 from slims.internal import Record, _SlimsApiException
 
-from aind_slims_api.core import SlimsClient
+from aind_slims_api.core import SlimsClient, SlimsBaseModel
+from aind_slims_api.unit import SlimsUnit
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / "resources"
 
@@ -166,6 +167,41 @@ class TestSlimsClient(unittest.TestCase):
         )
         mock_update.assert_not_called()
         mock_log.assert_not_called()
+
+    @patch("logging.Logger.info")
+    @patch("slims.slims.Slims.add")
+    def test_add_model(self, mock_slims_add: MagicMock, mock_log: MagicMock):
+        """Tests add_model method with mock mouse data"""
+        record = self.example_fetch_unit_response[0]
+        mock_slims_add.return_value = record
+        input_model = SlimsUnit.model_validate(record)
+        added = self.example_client.add_model(input_model)
+        self.assertEqual(input_model, added)
+        mock_log.assert_called_once_with("SLIMS Add: Unit/31")
+
+    @patch("slims.slims.Slims.fetch_by_pk")
+    @patch("logging.Logger.info")
+    @patch("slims.internal.Record.update")
+    def test_update_model(
+        self, mock_update: MagicMock, mock_log: MagicMock, mock_fetch_by_pk: MagicMock
+    ):
+        """Tests update method success"""
+        input_data = deepcopy(self.example_fetch_unit_response[0].json_entity)
+        mock_record = Record(
+            json_entity=input_data, slims_api=self.example_client.db.slims_api
+        )
+        mock_fetch_by_pk.return_value = mock_record
+        updated_model = SlimsUnit.model_validate(mock_record)
+        new_data = deepcopy(input_data)
+        new_data["columns"][0]["value"] = "PM^3"
+        mocked_updated_record = Record(
+            json_entity=new_data, slims_api=self.example_client.db.slims_api
+        )
+        mock_update.return_value = mocked_updated_record
+        updated_model = SlimsUnit.model_validate(mocked_updated_record)
+        returned_model = self.example_client.update_model(updated_model)
+        self.assertEqual(updated_model, returned_model)
+        mock_log.assert_called_once_with("SLIMS Update: Unit/31")
 
 
 if __name__ == "__main__":

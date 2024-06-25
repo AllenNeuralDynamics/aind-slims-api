@@ -37,7 +37,7 @@ class TestMouse(unittest.TestCase):
         mock_fetch.return_value = self.example_fetch_mouse_response
         mouse_details = fetch_mouse_content(self.example_client, mouse_name="123456")
         self.assertEqual(
-            self.example_fetch_mouse_response[0].json_entity, mouse_details
+            self.example_fetch_mouse_response[0].json_entity, mouse_details.json_entity
         )
 
     @patch("logging.Logger.warning")
@@ -63,7 +63,7 @@ class TestMouse(unittest.TestCase):
         ]
         mouse_details = fetch_mouse_content(self.example_client, mouse_name="123456")
         self.assertEqual(
-            self.example_fetch_mouse_response[0].json_entity, mouse_details
+            self.example_fetch_mouse_response[0].json_entity, mouse_details.json_entity
         )
         mock_log_warn.assert_called_with(
             "Warning, Multiple mice in SLIMS with barcode 123456, using pk=3038"
