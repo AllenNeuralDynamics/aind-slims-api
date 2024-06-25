@@ -5,6 +5,7 @@ import os
 import unittest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
+from copy import deepcopy
 
 from slims.internal import Record
 
@@ -68,6 +69,22 @@ class TestMouse(unittest.TestCase):
         mock_log_warn.assert_called_with(
             "Warning, Multiple mice in SLIMS with barcode 123456, using pk=3038"
         )
+
+    @patch("logging.Logger.error")
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_mouse_content_validation_fail(
+        self, mock_fetch: MagicMock, mock_log_error: MagicMock
+    ):
+        """Test fetch_mouse when successful"""
+        wrong_return = deepcopy(self.example_fetch_mouse_response)
+        wrong_return[0].cntn_cf_waterRestricted.value = 14
+        mock_fetch.return_value = wrong_return
+        mouse_info = fetch_mouse_content(self.example_client, mouse_name="123456")
+        self.assertEqual(
+            self.example_fetch_mouse_response[0].json_entity,
+            mouse_info,
+        )
+        mock_log_error.assert_called()
 
 
 if __name__ == "__main__":

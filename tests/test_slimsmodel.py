@@ -95,6 +95,10 @@ class TestSlimsModel(unittest.TestCase):
         expected = {"alias": "value2"}
         self.assertEqual(serialized, expected)
 
+    def test_unitspec(self):
+        """Test unitspec with no arguments"""
+        self.assertRaises(ValueError, UnitSpec)
+
 
 if __name__ == "__main__":
     unittest.main()
