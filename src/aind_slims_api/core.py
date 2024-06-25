@@ -221,7 +221,7 @@ class SlimsClient:
         """Update a SLIMS record"""
         record = self.db.fetch_by_pk(table, pk)
         if record is None:
-            raise ValueError('No data in SLIMS "{table}" table for pk "{pk}"')
+            raise ValueError(f'No data in SLIMS "{table}" table for pk "{pk}"')
         new_record = record.update(data)
         logger.info(f"SLIMS Update: {table}/{pk}")
         return new_record
