@@ -87,6 +87,7 @@ class SlimsBaseModel(
     """
 
     pk: int = None
+    json_entity: dict = None
     _slims_table: SLIMSTABLES
 
     @field_validator("*", mode="before")
@@ -232,9 +233,7 @@ class SlimsClient:
         queries = [f"?{k}={v}" for k, v in kwargs.items()]
         return base_url + "".join(queries)
 
-    def add_model(
-        self, model: SlimsBaseModel, *args, **kwargs
-    ) -> SlimsBaseModel:
+    def add_model(self, model: SlimsBaseModel, *args, **kwargs) -> SlimsBaseModel:
         """Given a SlimsBaseModel object, add it to SLIMS
         Args
             model (SlimsBaseModel): object to add
