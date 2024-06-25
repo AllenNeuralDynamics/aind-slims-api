@@ -68,6 +68,6 @@ def fetch_mouse_content(
         mouse = SlimsMouseContent.model_validate(mouse_details)
     except ValidationError as e:
         logger.error(f"SLIMS data validation failed, {repr(e)}")
-        return mouse_details
+        return mouse_details.json_entity
 
     return mouse
