@@ -10,6 +10,11 @@ from aind_slims_api.configuration import AindSlimsApiSettings
 class TestAindSlimsApiSettings(unittest.TestCase):
     """Tests methods in AindSlimsApiSettings class"""
 
+    @patch.dict(
+        os.environ,
+        {},
+        clear=True,
+    )
     def test_default_settings(self):
         """Tests that the class will be set with defaults"""
         default_settings = AindSlimsApiSettings()
