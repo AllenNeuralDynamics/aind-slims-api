@@ -27,7 +27,7 @@ class SlimsUser(SlimsBaseModel):
 def fetch_user(
     client: SlimsClient,
     username: str,
-) -> SlimsUser | None:
+) -> SlimsUser | dict | None:
     """Fetches user information for a user with username {username}"""
     users = client.fetch(
         "User",
@@ -50,6 +50,6 @@ def fetch_user(
         user = SlimsUser.model_validate(user_details)
     except ValidationError as e:
         logger.error(f"SLIMS data validation failed, {repr(e)}")
-        return
+        return user_details.json_entity
 
     return user

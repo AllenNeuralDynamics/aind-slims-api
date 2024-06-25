@@ -3,7 +3,7 @@
 import logging
 from typing import Annotated
 
-from pydantic import Field, ValidationError
+from pydantic import Field, BeforeValidator, ValidationError
 
 from .core import SlimsBaseModel, SlimsClient, UnitSpec, SLIMSTABLES
 
@@ -16,10 +16,10 @@ class SlimsMouseContent(SlimsBaseModel):
     baseline_weight_g: Annotated[float | None, UnitSpec("g")] = Field(
         ..., alias="cntn_cf_baselineWeight"
     )
-    point_of_contact: str | None = Field(
-        ..., alias="cntn_cf_scientificPointOfContact"
+    point_of_contact: str | None = Field(..., alias="cntn_cf_scientificPointOfContact")
+    water_restricted: Annotated[bool, BeforeValidator(lambda x: x or False)] = Field(
+        ..., alias="cntn_cf_waterRestricted"
     )
-    water_restricted: bool = Field(..., alias="cntn_cf_waterRestricted")
     barcode: str = Field(..., alias="cntn_barCode")
     pk: int = Field(..., alias="cntn_pk")
 
@@ -45,7 +45,7 @@ class SlimsMouseContent(SlimsBaseModel):
 def fetch_mouse_content(
     client: SlimsClient,
     mouse_name: str,
-) -> SlimsMouseContent | None:
+) -> SlimsMouseContent | dict | None:
     """Fetches mouse information for a mouse with labtracks id {mouse_name}"""
     mice = client.fetch(
         "Content",
@@ -68,6 +68,6 @@ def fetch_mouse_content(
         mouse = SlimsMouseContent.model_validate(mouse_details)
     except ValidationError as e:
         logger.error(f"SLIMS data validation failed, {repr(e)}")
-        return
+        return mouse_details
 
     return mouse
