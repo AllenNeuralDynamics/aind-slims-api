@@ -13,12 +13,13 @@ from functools import lru_cache
 from pydantic import (
     BaseModel,
     ValidationInfo,
+    ValidationError,
     field_serializer,
     field_validator,
 )
 from pydantic.fields import FieldInfo
 import logging
-from typing import Literal, Optional
+from typing import Any, Literal, Optional, Type, TypeVar
 
 from slims.slims import Slims, _SlimsApiException
 from slims.internal import (
@@ -41,6 +42,7 @@ SLIMSTABLES = Literal[
     "Test",
     "User",
     "Groups",
+    "Instrument",
 ]
 
 
@@ -132,6 +134,9 @@ class SlimsBaseModel(
     # TODO: Support attachments
 
 
+SlimsBaseModelTypeVar = TypeVar("SlimsBaseModelTypeVar", bound=SlimsBaseModel)
+
+
 class SlimsClient:
     """Wrapper around slims-python-api client with convenience methods"""
 
@@ -199,6 +204,44 @@ class SlimsClient:
 
         return records
 
+    def fetch_models(
+        self,
+        model: Type[SlimsBaseModelTypeVar],
+        *args,
+        sort: Optional[str | list[str]] = None,
+        start: Optional[int] = None,
+        end: Optional[int] = None,
+        **kwargs,
+    ) -> tuple[list[SlimsBaseModelTypeVar], list[dict[str, Any]]]:
+        """Fetch records from SLIMS and return them as SlimsBaseModel objects
+
+        Returns
+        -------
+        tuple:
+            list:
+                Validated SlimsBaseModel objects
+            list:
+                Dictionaries representations of objects that failed validation
+        """
+        response = self.fetch(
+            model._slims_table.default,  # TODO: consider changing fetch method
+            *args,
+            sort=sort,
+            start=start,
+            end=end,
+            **kwargs,
+        )
+        validated = []
+        unvalidated = []
+        for record in response:
+            try:
+                validated.append(model.model_validate(record))
+            except ValidationError as e:
+                logger.error(f"SLIMS data validation failed, {repr(e)}")
+                unvalidated.append(record.json_entity)
+
+        return validated, unvalidated
+
     @lru_cache(maxsize=None)
     def fetch_pk(self, table: SLIMSTABLES, *args, **kwargs) -> int | None:
         """SlimsClient.fetch but returns the pk of the first returned record"""
@@ -233,7 +276,9 @@ class SlimsClient:
         queries = [f"?{k}={v}" for k, v in kwargs.items()]
         return base_url + "".join(queries)
 
-    def add_model(self, model: SlimsBaseModel, *args, **kwargs) -> SlimsBaseModel:
+    def add_model(
+        self, model: SlimsBaseModelTypeVar, *args, **kwargs
+    ) -> SlimsBaseModelTypeVar:
         """Given a SlimsBaseModel object, add it to SLIMS
         Args
             model (SlimsBaseModel): object to add

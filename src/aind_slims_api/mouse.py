@@ -62,7 +62,7 @@ def fetch_mouse_content(
             )
     else:
         logger.warning("Warning, Mouse not in SLIMS")
-        return
+        return None
 
     try:
         mouse = SlimsMouseContent.model_validate(mouse_details)
