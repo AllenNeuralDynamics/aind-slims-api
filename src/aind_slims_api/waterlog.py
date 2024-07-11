@@ -13,8 +13,8 @@ from pydantic import Field, ValidationError
 
 import aind_slims_api
 from aind_slims_api.user import SlimsUser
-from .core import SLIMSTABLES, SlimsClient, SlimsBaseModel, UnitSpec
-from .mouse import SlimsMouseContent, fetch_mouse_content
+from aind_slims_api.core import SLIMSTABLES, SlimsClient, SlimsBaseModel, UnitSpec
+from aind_slims_api.mouse import SlimsMouseContent, fetch_mouse_content
 from aind_slims_api import config
 
 logger = logging.getLogger()
@@ -31,21 +31,19 @@ class SLIMSWaterlogResult(SlimsBaseModel):
     water_earned_ml: Annotated[float | None, UnitSpec("ml")] = Field(
         ..., alias="rslt_cf_waterEarned"
     )
-    water_supplement_delivered_ml: Annotated[float | None, UnitSpec("ml")] = (
-        Field(..., alias="rslt_cf_waterSupplementDelivered")
+    water_supplement_delivered_ml: Annotated[float | None, UnitSpec("ml")] = Field(
+        ..., alias="rslt_cf_waterSupplementDelivered"
     )
-    water_supplement_recommended_ml: Annotated[
-        float | None, UnitSpec("ml")
-    ] = Field(..., alias="rslt_cf_waterSupplementRecommended")
+    water_supplement_recommended_ml: Annotated[float | None, UnitSpec("ml")] = Field(
+        ..., alias="rslt_cf_waterSupplementRecommended"
+    )
     total_water: Annotated[float | None, UnitSpec("ml")] = Field(
         ..., alias="rslt_cf_totalWater"
     )
     comments: Optional[str] = Field(None, alias="rslt_comments")
     work_station: Optional[str] = Field(None, alias="rslt_cf_fk_workStation")
     sw_source: str = Field("aind-slims-api", alias="rslt_cf_swSource")
-    sw_version: str = Field(
-        aind_slims_api.__version__, alias="rslt_cf_swVersion"
-    )
+    sw_version: str = Field(aind_slims_api.__version__, alias="rslt_cf_swVersion")
     pk: Optional[int] = Field(None, alias="rslt_pk")
     fk_content: Optional[int] = Field(None, alias="rslt_fk_content")
     fk_test: Optional[int] = Field(None, alias="rslt_fk_test")
@@ -95,11 +93,11 @@ def fetch_mouse_waterlog_results(
 
     try:
         records = [
-            SLIMSWaterlogResult.model_validate(record)
-            for record in slims_records
+            SLIMSWaterlogResult.model_validate(record) for record in slims_records
         ]
     except ValidationError as e:
         logger.error(f"SLIMS data validation failed, {repr(e)}")
+        return [r.json_entity for r in slims_records]
 
     return records
 
@@ -132,6 +130,7 @@ def fetch_water_restriction_events(
         ]
     except ValidationError as e:
         logger.error(f"SLIMS data validation failed, {repr(e)}")
+        return [r.json_entity for r in slims_records]
 
     return restriction_records
 
@@ -161,12 +160,8 @@ class Mouse:
         """Fetches mouse/waterlog/restriction data from SLIMS"""
 
         self.mouse = fetch_mouse_content(self.client, self.mouse_name)
-        self.waterlog_results = fetch_mouse_waterlog_results(
-            self.client, self.mouse
-        )
-        self.all_restrictions = fetch_water_restriction_events(
-            self.client, self.mouse
-        )
+        self.waterlog_results = fetch_mouse_waterlog_results(self.client, self.mouse)
+        self.all_restrictions = fetch_water_restriction_events(self.client, self.mouse)
 
         if len(self.all_restrictions) > 0:
             latest_restriction = self.all_restrictions[-1]
@@ -197,9 +192,7 @@ class Mouse:
         self.wrest_pk = self.client.fetch_pk(
             "ContentEventType", cnvt_uniqueIdentifier="cnvt_water_restriction"
         )
-        self.wl_test_pk = self.client.fetch_pk(
-            "Test", test_name="test_waterlog"
-        )
+        self.wl_test_pk = self.client.fetch_pk("Test", test_name="test_waterlog")
 
     def add_waterlog_record(
         self,
@@ -277,9 +270,7 @@ class Mouse:
         self.mouse = self.client.update_model(self.mouse, "water_restricted")
 
         self.restriction.end_date = datetime.now()
-        self.restriction = self.client.update_model(
-            self.restriction, "end_date"
-        )
+        self.restriction = self.client.update_model(self.restriction, "end_date")
         self.restriction = None
         logger.info(f"Switched mouse {self.mouse_name} to Adlib Water")
 
@@ -293,6 +284,5 @@ class Mouse:
             self.restriction, "target_weight_fraction"
         )
         logger.info(
-            f"Updated mouse {self.mouse_name} "
-            f"target weight fraction to {new_twf}"
+            f"Updated mouse {self.mouse_name} " f"target weight fraction to {new_twf}"
         )
