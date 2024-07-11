@@ -1,10 +1,19 @@
 """ Tests waterlog models, methods, and Mouse class"""
 
 import unittest
+from unittest.mock import MagicMock, patch
+from pathlib import Path
+import os
 
 from aind_slims_api import SlimsClient
-from aind_slims_api.waterlog import Mouse
+from aind_slims_api.waterlog import (
+    Mouse,
+    fetch_mouse_waterlog_results,
+    fetch_water_restriction_events,
+)
 from aind_slims_api.user import SlimsUser
+
+RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / "resources"
 
 
 class TestWaterlog(unittest.TestCase):
@@ -19,15 +28,30 @@ class TestWaterlog(unittest.TestCase):
             user_fullName="test mctesterson",
             user_pk=8000,
         )
-        self.test_mouse_id = "614173"
+        self.test_mouse_id = "12345"
 
-    def test_main_sequence_using_mouse_object(self):
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_waterlog(self, mock_fetch: MagicMock):
+        """Test fetch_mouse_content when successful"""
+        mock_fetch.return_value = self.example_fetch_mouse_response
+        mouse_details = fetch_mouse_waterlog_results(
+            self.example_client, mouse_name="123456"
+        )
+        self.assertEqual(
+            self.example_fetch_mouse_response[0].json_entity, mouse_details.json_entity
+        )
+
+    @patch("logging.Logger.info")
+    @patch("aind_slims_api.SlimsClient")
+    def test_main_sequence_using_mouse_object(
+        self,
+        mock_client: MagicMock,
+        mock_log_info: MagicMock,
+    ):
         """Runs through waterlog methods"""
         self.setup()
 
-        mouse = Mouse(
-            self.test_mouse_id, user=self.user, slims_client=self.client
-        )
+        mouse = Mouse(self.test_mouse_id, user=self.user, slims_client=self.client)
 
         if mouse.mouse.water_restricted:
             mouse.switch_to_adlib_water()
@@ -44,9 +68,16 @@ class TestWaterlog(unittest.TestCase):
 
         # Post baseline weight
         mouse.post_baseline_weight(21)
+        mock_log_info.assert_called_with(
+            f"Updated mouse {mouse.name} baseline weight to {21}"
+        )
 
         # Water restrict
         mouse.switch_to_water_restricted(target_weight_fraction=0.86)
+
+        # Water restrict already restricted
+        mouse.switch_to_water_restricted(target_weight_fraction=0.86)
+        mock_log_info.assert_called_with("Mouse is already water restricted")
 
         # Add another waterlog result
         mouse.add_waterlog_record(
@@ -64,14 +95,14 @@ class TestWaterlog(unittest.TestCase):
         mouse.switch_to_adlib_water()
 
 
-# class TestPydanticModels(unittest.TestCase):
-#     def test_slimsmousecontent(self):
-#         mouse = SLIMSMouseContent(
-#             cntn_cf_baseline_weight=50,
-#             cntn_cf_scientificPointOfContact="me",
-#             cntn_cf_waterRestricted=False,
-#             cntn_pk=9000,
-#         )
+class TestPydanticModels(unittest.TestCase):
+    def test_slimsmousecontent(self):
+        mouse = SLIMSMouseContent(
+            cntn_cf_baseline_weight=50,
+            cntn_cf_scientificPointOfContact="me",
+            cntn_cf_waterRestricted=False,
+            cntn_pk=9000,
+        )
 
 
 if __name__ == "__main__":

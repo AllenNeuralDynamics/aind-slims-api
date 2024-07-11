@@ -25,6 +25,9 @@ class TestAindSlimsApiSettings(unittest.TestCase):
         )
         self.assertEqual("", default_settings.slims_username)
         self.assertEqual("", default_settings.slims_password.get_secret_value())
+        self.assertEqual(0.85, default_settings.wl_default_target_weight_fraction)
+        self.assertEqual(0.75, default_settings.wl_min_target_weight_fraction)
+        self.assertEqual(1.0, default_settings.wl_max_target_weight_fraction)
 
     @patch.dict(
         os.environ,
