@@ -1,6 +1,6 @@
 """Contains a model for the mouse content, and a method for fetching it"""
 
-from typing import Annotated, ClassVar
+from typing import Annotated, ClassVar, Optional
 
 from pydantic import BeforeValidator, Field
 
@@ -23,14 +23,30 @@ class SlimsMouseContent(SlimsBaseModel):
     """
 
     baseline_weight_g: Annotated[float | None, UnitSpec("g")] = Field(
-        ..., alias="cntn_cf_baselineWeight"
+        ...,
+        serialization_alias="cntn_cf_baselineWeight",
+        validation_alias="cntn_cf_baselineWeight",
     )
-    point_of_contact: str | None = Field(..., alias="cntn_cf_scientificPointOfContact")
+    point_of_contact: Optional[str] = Field(
+        ...,
+        serialization_alias="cntn_cf_scientificPointOfContact",
+        validation_alias="cntn_cf_scientificPointOfContact",
+    )
     water_restricted: Annotated[bool, BeforeValidator(lambda x: x or False)] = Field(
-        ..., alias="cntn_cf_waterRestricted"
+        ...,
+        serialization_alias="cntn_cf_waterRestricted",
+        validation_alias="cntn_cf_waterRestricted",
     )
-    barcode: str = Field(..., alias="cntn_barCode")
-    pk: int = Field(..., alias="cntn_pk")
+    barcode: str = Field(
+        ...,
+        serialization_alias="cntn_barCode",
+        validation_alias="cntn_barCode",
+    )
+    pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="cntn_pk",
+        validation_alias="cntn_pk",
+    )
 
     _slims_table = "Content"
     _base_fetch_filters: ClassVar[dict[str, str]] = {

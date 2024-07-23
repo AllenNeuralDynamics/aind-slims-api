@@ -18,11 +18,35 @@ class SlimsUser(SlimsBaseModel):
     >>> user = client.fetch_model(SlimsUser, username="LKim")
     """
 
-    username: str = Field(..., alias="user_userName")
-    first_name: Optional[str] = Field("", alias="user_firstName")
-    last_name: Optional[str] = Field("", alias="user_lastName")
-    full_name: Optional[str] = Field("", alias="user_fullName")
-    email: Optional[str] = Field("", alias="user_email")
-    pk: int = Field(..., alias="user_pk")
+    username: str = Field(
+        ...,
+        serialization_alias="user_userName",
+        validation_alias="user_userName",
+    )
+    first_name: Optional[str] = Field(
+        "",
+        serialization_alias="user_firstName",
+        validation_alias="user_firstName",
+    )
+    last_name: Optional[str] = Field(
+        "",
+        serialization_alias="user_lastName",
+        validation_alias="user_lastName",
+    )
+    full_name: Optional[str] = Field(
+        "",
+        serialization_alias="user_fullName",
+        validation_alias="user_fullName",
+    )
+    email: Optional[str] = Field(
+        "",
+        serialization_alias="user_email",
+        validation_alias="user_email",
+    )
+    pk: int = Field(
+        ...,
+        serialization_alias="user_pk",
+        validation_alias="user_pk",
+    )
 
     _slims_table = "User"

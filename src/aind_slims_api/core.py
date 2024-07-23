@@ -22,7 +22,7 @@ from slims.slims import Slims, _SlimsApiException
 
 from aind_slims_api import config
 from aind_slims_api.exceptions import SlimsRecordNotFound
-from aind_slims_api.models.attachment import SlimsAttachment
+from aind_slims_api.models import SlimsAttachment
 from aind_slims_api.models.base import SlimsBaseModel
 from aind_slims_api.types import SLIMS_TABLES
 
@@ -105,10 +105,20 @@ class SlimsClient:
         model: Type[SlimsBaseModelTypeVar],
         attr_name: str,
     ) -> str:
-        """Given a SlimsBaseModel object, resolve its pk to the actual value"""
+        """Given a SlimsBaseModel object, resolve its pk to the actual value
+
+        Notes
+        -----
+        - Raises ValueError if the alias cannot be resolved
+        - Resolves the validation alias for a given field name
+        """
         for field_name, field_info in model.model_fields.items():
-            if field_name == attr_name and field_info.alias:
-                return field_info.alias
+            if (
+                field_name == attr_name
+                and field_info.validation_alias
+                and isinstance(field_info.validation_alias, str)
+            ):
+                return field_info.validation_alias
         else:
             raise ValueError(f"Cannot resolve alias for {attr_name} on {model}")
 

@@ -18,6 +18,7 @@ class SlimsBaseModel(
     BaseModel,
     from_attributes=True,
     validate_assignment=True,
+    populate_by_name=True,
 ):
     """Pydantic model to represent a SLIMS record.
     Subclass with fields matching those in the SLIMS record.
