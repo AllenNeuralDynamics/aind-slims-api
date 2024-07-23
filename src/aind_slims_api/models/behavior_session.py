@@ -4,7 +4,7 @@
 
 import logging
 from datetime import datetime
-from typing import ClassVar
+from typing import ClassVar, Optional
 
 from pydantic import Field
 
@@ -15,6 +15,27 @@ logger = logging.getLogger()
 
 class SlimsBehaviorSession(SlimsBaseModel):
     """Model for an instance of the Behavior Session ContentEvent
+
+    Properties
+    ----------
+    mouse_pk : Optional[int]
+        The primary key of the mouse associated with this behavior session.
+    instrument_pk : Optional[int]
+        The primary key of the instrument associated with this behavior session.
+    trainer_pks : Optional[list[int]]
+        The primary keys of the trainers associated with this behavior session.
+    task : Optional[str]
+        Name of the task associated with the session.
+    task_stage : Optional[str]
+        Name of the stage associated with the session.
+    task_schema_version : Optional[str]
+        Version of the task schema.
+    is_curriculum_suggestion : Optional[bool]
+        Whether the session is a curriculum suggestion.
+    date : Optional[datetime]
+        Date of the suggestion.
+    notes : Optional[str]
+        Notes about the session.
 
     Examples
     --------
@@ -35,15 +56,15 @@ class SlimsBehaviorSession(SlimsBaseModel):
     >>> instrument = client.fetch_model(SlimsInstrument, name="323_EPHYS1_OPTO")
     >>> added = client.add_model(
     ...  SlimsBehaviorSession(
-    ...      cnvn_fk_content=mouse.pk,
-    ...      cnvn_cf_fk_instrument=instrument.pk,
-    ...      cnvn_cf_fk_trainer=[trainer.pk],
-    ...      cnvn_cf_notes="notes",
-    ...      cnvn_cf_taskStage="stage",
-    ...      cnvn_cf_task="task",
-    ...      cnvn_cf_taskSchemaVersion="0.0.1",
-    ...      cnvn_cf_stageIsOnCurriculum=True,
-    ...      cnvn_cf_scheduledDate=datetime(2021, 1, 2),
+    ...      mouse_pk=mouse.pk,
+    ...      instrument_pk=instrument.pk,
+    ...      trainer_pks=[trainer.pk],
+    ...      notes="notes",
+    ...      task_stage="stage",
+    ...      task="task",
+    ...      task_schema_version="0.0.1",
+    ...      is_curriculum_suggestion=True,
+    ...      date=datetime(2021, 1, 2),
     ...  )
     ... )
 
@@ -57,27 +78,64 @@ class SlimsBehaviorSession(SlimsBaseModel):
     ... )
     """
 
-    pk: int | None = Field(default=None, alias="cnvn_pk")
-    mouse_pk: int | None = Field(
+    pk: Optional[int] = Field(
         default=None,
-        alias="cnvn_fk_content",
+        serialization_alias="cnvn_pk",
+        validation_alias="cnvn_pk",
+    )
+    mouse_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="cnvn_fk_content",
+        validation_alias="cnvn_fk_content",
         description=(
             "The primary key of the mouse associated with this behavior session."
         ),
     )  # used as reference to mouse
-    notes: str | None = Field(default=None, alias="cnvn_cf_notes")
-    task_stage: str | None = Field(default=None, alias="cnvn_cf_taskStage")
-    instrument: int | None = Field(default=None, alias="cnvn_cf_fk_instrument")
-    trainers: list[int] = Field(default=[], alias="cnvn_cf_fk_trainer")
-    task: str | None = Field(default=None, alias="cnvn_cf_task")
-    is_curriculum_suggestion: bool | None = Field(
-        default=None, alias="cnvn_cf_stageIsOnCurriculum"
+    notes: Optional[str] = Field(
+        default=None,
+        serialization_alias="cnvn_cf_notes",
+        validation_alias="cnvn_cf_notes",
     )
-    task_schema_version: str | None = Field(
-        default=None, alias="cnvn_cf_taskSchemaVersion"
+    task_stage: Optional[str] = Field(
+        default=None,
+        serialization_alias="cnvn_cf_taskStage",
+        validation_alias="cnvn_cf_taskStage",
     )
-    software_version: str | None = Field(default=None, alias="cnvn_cf_softwareVersion")
-    date: datetime | None = Field(default=None, alias="cnvn_cf_scheduledDate")
+    instrument_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="cnvn_fk_instrument",
+        validation_alias="cnvn_fk_instrument",
+    )
+    trainer_pks: Optional[list[int]] = Field(
+        default=[],
+        serialization_alias="cnvn_cf_fk_trainer",
+        validation_alias="cnvn_cf_fk_trainer",
+    )
+    task: Optional[str] = Field(
+        default=None,
+        serialization_alias="cnvn_cf_task",
+        validation_alias="cnvn_cf_task",
+    )
+    is_curriculum_suggestion: Optional[bool] = Field(
+        default=None,
+        serialization_alias="cnvn_cf_stageIsOnCurriculum",
+        validation_alias="cnvn_cf_stageIsOnCurriculum",
+    )
+    task_schema_version: Optional[str] = Field(
+        default=None,
+        serialization_alias="cnvn_cf_taskSchemaVersion",
+        validation_alias="cnvn_cf_taskSchemaVersion",
+    )
+    software_version: Optional[str] = Field(
+        default=None,
+        serialization_alias="cnvn_cf_softwareVersion",
+        validation_alias="cnvn_cf_softwareVersion",
+    )
+    date: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="cnvn_cf_scheduledDate",
+        validation_alias="cnvn_cf_scheduledDate",
+    )
     cnvn_fk_contentEventType: int = 10  # pk of Behavior Session ContentEvent
     _slims_table = "ContentEvent"
     _base_fetch_filters: ClassVar[dict[str, str]] = {

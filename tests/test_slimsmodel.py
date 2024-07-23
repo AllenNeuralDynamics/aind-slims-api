@@ -2,7 +2,7 @@
 
 import unittest
 from datetime import datetime
-from typing import Annotated
+from typing import Annotated, Optional
 
 from pydantic import Field
 from slims.internal import Column, Record
@@ -72,8 +72,16 @@ class TestSlimsModel(unittest.TestCase):
         class TestModelAlias(SlimsBaseModel):
             """model with field aliases"""
 
-            field: str = Field(..., alias="alias")
-            pk: int = Field(None, alias="cntn_pk")
+            field: str = Field(
+                ...,
+                serialization_alias="alias",
+                validation_alias="alias",
+            )
+            pk: Optional[int] = Field(
+                None,
+                serialization_alias="cntn_pk",
+                validation_alias="cntn_pk",
+            )
 
         record = Record(
             json_entity={
@@ -82,7 +90,12 @@ class TestSlimsModel(unittest.TestCase):
                         "datatype": "STRING",
                         "name": "alias",
                         "value": "value",
-                    }
+                    },
+                    {
+                        "datatype": "INTEGER",
+                        "name": "cntn_pk",
+                        "value": 1,
+                    },
                 ]
             },
             slims_api=None,

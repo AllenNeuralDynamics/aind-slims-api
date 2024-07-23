@@ -23,7 +23,7 @@ pip install -e .[dev]
 ## Usage
 
 ### VScode
-![](example-usage.gif)
+![Example usage](example-usage.gif)
 
 Requires the [pylance extension](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) to be installed for similar functionality.
 

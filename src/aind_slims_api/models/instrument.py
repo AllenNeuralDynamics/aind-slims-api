@@ -1,5 +1,7 @@
 """Contains a model for the instrument content, and a method for fetching it"""
 
+from typing import Optional
+
 from pydantic import Field
 
 from aind_slims_api.models.base import SlimsBaseModel
@@ -15,12 +17,18 @@ class SlimsInstrument(SlimsBaseModel):
     >>> instrument = client.fetch_model(SlimsInstrument, name="323_EPHYS1_OPTO")
     """
 
+    # can't use alias for this due to https://github.com/pydantic/pydantic/issues/5893
     name: str = Field(
         ...,
-        alias="nstr_name",
+        serialization_alias="nstr_name",
+        validation_alias="nstr_name",
         description="The name of the instrument",
     )
-    pk: int = Field(..., alias="nstr_pk")
+    pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="nstr_pk",
+        validation_alias="nstr_pk",
+    )
     _slims_table = "Instrument"
 
     # todo add more useful fields
