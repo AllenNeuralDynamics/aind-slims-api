@@ -24,5 +24,5 @@ class SlimsAttachment(SlimsBaseModel):
     """
 
     pk: int = Field(..., alias="attm_pk")
-    name: str = Field(..., alias="attm_name")
+    name: str = Field(alias="attm_name")
     _slims_table = "Attachment"

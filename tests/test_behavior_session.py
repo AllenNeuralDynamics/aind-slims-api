@@ -5,7 +5,7 @@ import os
 import unittest
 from datetime import datetime
 from pathlib import Path
-from unittest.mock import MagicMock, patch, call
+from unittest.mock import MagicMock, call, patch
 
 from slims.internal import Record
 
@@ -128,9 +128,7 @@ class TestBehaviorSession(unittest.TestCase):
     @patch("aind_slims_api.core.logger")
     @patch("slims.slims.Slims.add")
     def test_write_behavior_session_content_events_success(
-        self,
-        mock_add: MagicMock,
-        mock_log_info: MagicMock
+        self, mock_add: MagicMock, mock_log_info: MagicMock
     ):
         """Test write_behavior_session_content_events success"""
         mock_add.return_value = self.example_write_sessions_response
@@ -143,9 +141,7 @@ class TestBehaviorSession(unittest.TestCase):
         )
         self.assertTrue(all((item.mouse_pk == self.example_mouse.pk for item in added)))
         self.assertTrue(len(added) == len(self.example_behavior_sessions))
-        mock_log_info.assert_has_calls(
-            [call.info('SLIMS Add: ContentEvent/79')]
-        )
+        mock_log_info.assert_has_calls([call.info("SLIMS Add: ContentEvent/79")])
 
 
 if __name__ == "__main__":

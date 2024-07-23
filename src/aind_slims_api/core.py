@@ -8,6 +8,7 @@ SlimsClient - Basic wrapper around slims-python-api client with convenience
     methods and integration with SlimsBaseModel subtypes
 """
 
+import base64
 import logging
 from copy import deepcopy
 from functools import lru_cache
@@ -211,9 +212,21 @@ class SlimsClient:
             ),
         )
 
-    def fetch_attachment_content(self, attachment: SlimsAttachment) -> Response:
-        """Fetch attachment content for a given attachment."""
-        return self.db.slims_api.get(f"repo/{attachment.pk}")
+    def fetch_attachment_content(
+        self,
+        attachment: int | SlimsAttachment,
+    ) -> Response:
+        """Fetch attachment content for a given attachment.
+
+        Parameters
+        -----------
+        attachment: int | SlimsAttachment
+            The primary key of the attachment or an attachment object
+        """
+        if isinstance(attachment, SlimsAttachment):
+            attachment = attachment.pk
+
+        return self.db.slims_api.get(f"repo/{attachment}")
 
     @lru_cache(maxsize=None)
     def fetch_pk(self, table: SLIMS_TABLES, *args, **kwargs) -> int | None:
@@ -302,3 +315,38 @@ class SlimsClient:
             ),
         )
         return type(model).model_validate(rtn)
+
+    def add_attachment_content(
+        self,
+        record: SlimsBaseModel,
+        name: str,
+        content: bytes | str,
+    ) -> int:
+        """Add an attachment to a SLIMS record
+
+        Returns
+        -------
+        int: Primary key of the attachment added.
+
+        Notes
+        -----
+        - Returned attachment does not contain the name of the attachment in
+         Slims, this requires a separate fetch.
+        """
+        if record.pk is None:
+            raise ValueError("Cannot add attachment to a record without a pk")
+
+        if isinstance(content, str):
+            content = content.encode("utf-8")
+
+        response = self.db.slims_api.post(
+            url="repo",
+            body={
+                "attm_name": name,
+                "atln_recordPk": record.pk,
+                "atln_recordTable": record._slims_table,
+                "contents": base64.b64encode(content).decode("utf-8"),
+            },
+        )
+        response.raise_for_status()
+        return int(response.text)

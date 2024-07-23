@@ -13,6 +13,7 @@ from slims.internal import Record, _SlimsApiException
 
 from aind_slims_api.core import SlimsAttachment, SlimsClient
 from aind_slims_api.exceptions import SlimsRecordNotFound
+from aind_slims_api.models.behavior_session import SlimsBehaviorSession
 from aind_slims_api.models.unit import SlimsUnit
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / "resources"
@@ -26,6 +27,7 @@ class TestSlimsClient(unittest.TestCase):
     example_fetch_mouse_response: list[Record]
     example_fetch_user_response: list[Record]
     example_fetch_attachment_response: list[Record]
+    example_add_attachments_response_text = str
 
     @classmethod
     def setUpClass(cls):
@@ -53,6 +55,9 @@ class TestSlimsClient(unittest.TestCase):
         cls.example_fetch_attachment_response = get_response(
             "example_fetch_attachments_response.json_entity"
         )
+        cls.example_add_attachments_response_text = (
+            RESOURCES_DIR / "example_add_attachment_content_response_text.txt"
+        ).read_text()
 
     def test_rest_link(self):
         """Tests rest_link method with both queries and no queries."""
@@ -247,40 +252,67 @@ class TestSlimsClient(unittest.TestCase):
         with self.assertRaises(SlimsRecordNotFound):
             self.example_client.fetch_model(SlimsUnit)
 
-    def test_fetch_attachments(self):
+    @patch("slims.internal._SlimsApi.get_entities")
+    def test_fetch_attachments(self, mock_get_entities: MagicMock):
         """Tests fetch_attachments method success."""
         # slims_api is dynamically added to slims client
-        assert len(self.example_fetch_attachment_response) == 1
-        with patch.object(
-            self.example_client.db.slims_api,
-            "get_entities",
-            return_value=self.example_fetch_attachment_response,
-        ):
-            unit = SlimsUnit.model_validate(
-                Record(
-                    json_entity=self.example_fetch_unit_response[0].json_entity,
-                    slims_api=self.example_client.db.slims_api,
-                )
+        mock_get_entities.return_value = self.example_fetch_attachment_response
+        unit = SlimsUnit.model_validate(
+            Record(
+                json_entity=self.example_fetch_unit_response[0].json_entity,
+                slims_api=self.example_client.db.slims_api,
             )
-            attachments = self.example_client.fetch_attachments(
-                unit,
-            )
-            assert len(attachments) == 1
+        )
+        attachments = self.example_client.fetch_attachments(
+            unit,
+        )
+        self.assertEqual(1, len(attachments))
 
-    def test_fetch_attachment_content(self):
+    @patch("slims.slims._SlimsApi.get")
+    def test_fetch_attachment_content(self, mock_get: MagicMock):
         """Tests fetch_attachment_content method success."""
-        # slims_api is dynamically added to slims client
-        with patch.object(
-            self.example_client.db.slims_api,
-            "get",
-            return_value=Response(),
-        ):
-            self.example_client.fetch_attachment_content(
-                SlimsAttachment(
-                    attm_name="test",
-                    attm_pk=1,
-                )
+        mock_get.return_value = Response()
+        self.example_client.fetch_attachment_content(
+            SlimsAttachment(
+                attm_name="test",
+                attm_pk=1,
             )
+        )
+        mock_get.assert_called_once()
+
+    @patch("slims.internal._SlimsApi.post")
+    def test_add_attachment_content(self, mock_post: MagicMock):
+        """Tests add_attachment_content method success."""
+        mock_response = MagicMock()
+        mock_response.text.return_value = self.example_add_attachments_response_text
+        mock_post.return_value = mock_response
+        unit_pk = 1
+        self.example_client.add_attachment_content(
+            SlimsUnit(
+                unit_name="test",
+                unit_pk=unit_pk,
+            ),
+            "test",
+            "some test content",
+        )
+        self.assertEqual(mock_post.call_count, 1)
+        self.assertEqual(
+            mock_post.mock_calls[0].kwargs["body"]["atln_recordPk"], unit_pk
+        )
+
+    @patch("slims.internal._SlimsApi.post")
+    def test_add_attachment_content_no_pk(self, mock_post: MagicMock):
+        """Tests add_attachment_content method failure due to lack of pk."""
+        mock_response = MagicMock()
+        mock_response.text.return_value = self.example_add_attachments_response_text
+        mock_post.return_value = mock_response
+        with self.assertRaises(ValueError):
+            self.example_client.add_attachment_content(
+                SlimsBehaviorSession(),
+                "test",
+                "some test content",
+            )
+        mock_post.assert_not_called()
 
     @patch("logging.Logger.error")
     def test__validate_model_invalid_model(self, mock_log: MagicMock):
@@ -303,8 +335,8 @@ class TestSlimsClient(unittest.TestCase):
                 ),
             ],
         )
-        assert len(validated) == 1
-        assert mock_log.call_count == 1
+        self.assertEqual(1, len(validated))
+        self.assertEqual(1, mock_log.call_count)
 
     def test_resolve_model_alias_invalid(self):
         """Tests resolve_model_alias method raises expected error with an

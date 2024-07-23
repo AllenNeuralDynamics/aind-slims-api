@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import ClassVar, Optional
 
 from pydantic import BaseModel, ValidationInfo, field_serializer, field_validator
-from slims.internal import Column as SlimsColumn
+from slims.internal import Column as SlimsColumn  # type: ignore
 
 from aind_slims_api.models.utils import _find_unit_spec
 from aind_slims_api.types import SLIMS_TABLES
@@ -42,7 +42,7 @@ class SlimsBaseModel(
     def _validate(cls, value, info: ValidationInfo):
         """Validates a field, accounts for Quantities"""
         if isinstance(value, SlimsColumn):
-            if value.datatype == "QUANTITY":
+            if value.datatype == "QUANTITY" and info.field_name is not None:
                 unit_spec = _find_unit_spec(cls.model_fields[info.field_name])
                 if unit_spec is None:
                     msg = (

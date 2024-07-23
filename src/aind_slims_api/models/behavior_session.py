@@ -18,12 +18,43 @@ class SlimsBehaviorSession(SlimsBaseModel):
 
     Examples
     --------
+    Read a session.
+
+    >>> from datetime import datetime
     >>> from aind_slims_api import SlimsClient
     >>> from aind_slims_api.models import SlimsMouseContent
     >>> client = SlimsClient()
     >>> mouse = client.fetch_model(SlimsMouseContent, barcode="00000000")
     >>> behavior_sessions = client.fetch_models(SlimsBehaviorSession,
     ...  mouse_pk=mouse.pk, sort=["date"])
+    >>> curriculum_attachments = client.fetch_attachments(behavior_sessions[0])
+
+    Write a new session.
+    >>> from aind_slims_api.models import SlimsInstrument, SlimsUser
+    >>> trainer = client.fetch_model(SlimsUser, username="LKim")
+    >>> instrument = client.fetch_model(SlimsInstrument, name="323_EPHYS1_OPTO")
+    >>> added = client.add_model(
+    ...  SlimsBehaviorSession(
+    ...      cnvn_fk_content=mouse.pk,
+    ...      cnvn_cf_fk_instrument=instrument.pk,
+    ...      cnvn_cf_fk_trainer=[trainer.pk],
+    ...      cnvn_cf_notes="notes",
+    ...      cnvn_cf_taskStage="stage",
+    ...      cnvn_cf_task="task",
+    ...      cnvn_cf_taskSchemaVersion="0.0.1",
+    ...      cnvn_cf_stageIsOnCurriculum=True,
+    ...      cnvn_cf_scheduledDate=datetime(2021, 1, 2),
+    ...  )
+    ... )
+
+    Add a curriculum attachment to the session (Attachment content isn't
+     available immediately.)
+    >>> import json
+    >>> attachment_pk = client.add_attachment_content(
+    ...  added,
+    ...  "curriculum",
+    ...  json.dumps({"curriculum_key": "curriculum_value"}),
+    ... )
     """
 
     pk: int | None = Field(default=None, alias="cnvn_pk")
