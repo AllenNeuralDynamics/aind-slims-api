@@ -1,9 +1,11 @@
+"""Contains a model for a waterlog water restriction event stored in SLIMS."""
+
 from datetime import datetime
 from typing import ClassVar, Optional
+
 from pydantic import Field
 
 from aind_slims_api.models.base import SlimsBaseModel
-
 
 DEFAULT_WEIGHT_FRACTION = 0.85
 MIN_WEIGHT_FRACTION = 0.75
