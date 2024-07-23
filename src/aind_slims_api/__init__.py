@@ -1,6 +1,6 @@
 """Init package"""
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 from aind_slims_api.configuration import AindSlimsApiSettings
 
