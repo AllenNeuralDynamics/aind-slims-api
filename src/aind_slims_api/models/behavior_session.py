@@ -18,20 +18,20 @@ class SlimsBehaviorSession(SlimsBaseModel):
 
     Examples
     --------
-    ### Read
     >>> from datetime import datetime
     >>> from aind_slims_api import SlimsClient
-    >>> from aind_slims_api.models import SlimsMouseContent
+    >>> from aind_slims_api import models
     >>> client = SlimsClient()
-    >>> mouse = client.fetch_model(SlimsMouseContent, barcode="00000000")
+    >>> mouse = client.fetch_model(models.SlimsMouseContent, barcode="00000000")
+
+    ### Read
     >>> behavior_sessions = client.fetch_models(SlimsBehaviorSession,
     ...  mouse_pk=mouse.pk, sort=["date"])
     >>> curriculum_attachments = client.fetch_attachments(behavior_sessions[0])
 
     ### Write
-    >>> from aind_slims_api.models import SlimsInstrument, SlimsUser
-    >>> trainer = client.fetch_model(SlimsUser, username="LKim")
-    >>> instrument = client.fetch_model(SlimsInstrument, name="323_EPHYS1_OPTO")
+    >>> trainer = client.fetch_model(models.SlimsUser, username="LKim")
+    >>> instrument = client.fetch_model(models.SlimsInstrument, name="323_EPHYS1_OPTO")
     >>> added = client.add_model(
     ...  SlimsBehaviorSession(
     ...      mouse_pk=mouse.pk,
