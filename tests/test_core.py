@@ -27,7 +27,7 @@ class TestSlimsClient(unittest.TestCase):
     example_fetch_mouse_response: list[Record]
     example_fetch_user_response: list[Record]
     example_fetch_attachment_response: list[Record]
-    example_add_attachments_response_text = str
+    example_add_attachments_response_text: str
 
     @classmethod
     def setUpClass(cls):
@@ -284,10 +284,10 @@ class TestSlimsClient(unittest.TestCase):
     def test_add_attachment_content(self, mock_post: MagicMock):
         """Tests add_attachment_content method success."""
         mock_response = MagicMock()
-        mock_response.text.return_value = self.example_add_attachments_response_text
+        mock_response.text = self.example_add_attachments_response_text
         mock_post.return_value = mock_response
         unit_pk = 1
-        self.example_client.add_attachment_content(
+        result = self.example_client.add_attachment_content(
             SlimsUnit(
                 unit_name="test",
                 unit_pk=unit_pk,
@@ -295,6 +295,8 @@ class TestSlimsClient(unittest.TestCase):
             "test",
             "some test content",
         )
+        self.assertEqual(
+            result, int(self.example_add_attachments_response_text))
         self.assertEqual(mock_post.call_count, 1)
         self.assertEqual(
             mock_post.mock_calls[0].kwargs["body"]["atln_recordPk"], unit_pk
