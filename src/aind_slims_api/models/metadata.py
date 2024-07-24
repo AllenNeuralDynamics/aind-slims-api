@@ -33,6 +33,14 @@ class SlimsMetadataReference(SlimsBaseModel):
     ... )
     """
 
-    name: str = Field(..., alias="rdrc_name")
-    pk: Optional[int] = Field(None, alias="rdrc_pk")
+    name: str = Field(
+        ...,
+        serialization_alias="rdrc_name",
+        validation_alias="rdrc_name",
+    )
+    pk: Optional[int] = Field(
+        None,
+        serialization_alias="rdrc_pk",
+        validation_alias="rdrc_pk",
+    )
     _slims_table = "ReferenceDataRecord"
