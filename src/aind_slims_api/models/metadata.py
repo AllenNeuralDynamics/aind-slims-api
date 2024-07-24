@@ -1,3 +1,4 @@
+"""Models for the metadata stored in SLIMS."""
 from pydantic import Field
 from typing import Optional
 from aind_slims_api.models.base import SlimsBaseModel
