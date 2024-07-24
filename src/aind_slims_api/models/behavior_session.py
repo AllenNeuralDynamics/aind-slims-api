@@ -16,6 +16,45 @@ logger = logging.getLogger()
 class SlimsBehaviorSession(SlimsBaseModel):
     """Model for an instance of the Behavior Session ContentEvent
 
+    Examples
+    --------
+    >>> from datetime import datetime
+    >>> from aind_slims_api import SlimsClient
+    >>> from aind_slims_api import models
+    >>> client = SlimsClient()
+    >>> mouse = client.fetch_model(models.SlimsMouseContent, barcode="00000000")
+
+    ### Read
+    >>> behavior_sessions = client.fetch_models(SlimsBehaviorSession,
+    ...  mouse_pk=mouse.pk, sort=["date"])
+    >>> curriculum_attachments = client.fetch_attachments(behavior_sessions[0])
+
+    ### Write
+    >>> trainer = client.fetch_model(models.SlimsUser, username="LKim")
+    >>> instrument = client.fetch_model(models.SlimsInstrument, name="323_EPHYS1_OPTO")
+    >>> added = client.add_model(
+    ...  SlimsBehaviorSession(
+    ...      mouse_pk=mouse.pk,
+    ...      instrument_pk=instrument.pk,
+    ...      trainer_pks=[trainer.pk],
+    ...      notes="notes",
+    ...      task_stage="stage",
+    ...      task="task",
+    ...      task_schema_version="0.0.1",
+    ...      is_curriculum_suggestion=True,
+    ...      date=datetime(2021, 1, 2),
+    ...  )
+    ... )
+
+    ### Add a curriculum attachment
+    Attachment content isn't available immediately.
+    >>> import json
+    >>> attachment_pk = client.add_attachment_content(
+    ...  added,
+    ...  "curriculum",
+    ...  json.dumps({"curriculum_key": "curriculum_value"}),
+    ... )
+
     Properties
     ----------
     mouse_pk : Optional[int]
@@ -36,46 +75,6 @@ class SlimsBehaviorSession(SlimsBaseModel):
         Date of the suggestion.
     notes : Optional[str]
         Notes about the session.
-
-    Examples
-    --------
-    Read a session.
-
-    >>> from datetime import datetime
-    >>> from aind_slims_api import SlimsClient
-    >>> from aind_slims_api.models import SlimsMouseContent
-    >>> client = SlimsClient()
-    >>> mouse = client.fetch_model(SlimsMouseContent, barcode="00000000")
-    >>> behavior_sessions = client.fetch_models(SlimsBehaviorSession,
-    ...  mouse_pk=mouse.pk, sort=["date"])
-    >>> curriculum_attachments = client.fetch_attachments(behavior_sessions[0])
-
-    Write a new session.
-    >>> from aind_slims_api.models import SlimsInstrument, SlimsUser
-    >>> trainer = client.fetch_model(SlimsUser, username="LKim")
-    >>> instrument = client.fetch_model(SlimsInstrument, name="323_EPHYS1_OPTO")
-    >>> added = client.add_model(
-    ...  SlimsBehaviorSession(
-    ...      mouse_pk=mouse.pk,
-    ...      instrument_pk=instrument.pk,
-    ...      trainer_pks=[trainer.pk],
-    ...      notes="notes",
-    ...      task_stage="stage",
-    ...      task="task",
-    ...      task_schema_version="0.0.1",
-    ...      is_curriculum_suggestion=True,
-    ...      date=datetime(2021, 1, 2),
-    ...  )
-    ... )
-
-    Add a curriculum attachment to the session (Attachment content isn't
-     available immediately.)
-    >>> import json
-    >>> attachment_pk = client.add_attachment_content(
-    ...  added,
-    ...  "curriculum",
-    ...  json.dumps({"curriculum_key": "curriculum_value"}),
-    ... )
     """
 
     pk: Optional[int] = Field(
