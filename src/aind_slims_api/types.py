@@ -11,6 +11,7 @@ SLIMS_TABLES = Literal[
     "ContentEvent",
     "Unit",
     "Result",
+    "ReferenceDataRecord",
     "Test",
     "User",
     "Groups",
