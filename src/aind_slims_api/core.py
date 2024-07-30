@@ -12,11 +12,11 @@ import base64
 import logging
 from copy import deepcopy
 from functools import lru_cache
-from typing import Optional, Type, TypeVar
+from typing import Optional, Type, TypeVar, get_type_hints
 
 from pydantic import ValidationError
 from requests import Response
-from slims.criteria import Criterion, conjunction, equals
+from slims.criteria import Criterion, conjunction, equals, Junction, Expression
 from slims.internal import Record as SlimsRecord
 from slims.slims import Slims, _SlimsApiException
 
@@ -111,14 +111,21 @@ class SlimsClient:
         -----
         - Raises ValueError if the alias cannot be resolved
         - Resolves the validation alias for a given field name
+        - If prefixed with `-` will return the validation alias prefixed with
+         `-`
         """
+        has_prefix = attr_name.startswith("-")
+        _attr_name = attr_name.lstrip("-")
         for field_name, field_info in model.model_fields.items():
             if (
-                field_name == attr_name
+                field_name == _attr_name
                 and field_info.validation_alias
                 and isinstance(field_info.validation_alias, str)
             ):
-                return field_info.validation_alias
+                alias = field_info.validation_alias
+                if has_prefix:
+                    return f"-{alias}"
+                return alias
         else:
             raise ValueError(f"Cannot resolve alias for {attr_name} on {model}")
 
@@ -136,16 +143,61 @@ class SlimsClient:
                 logger.error(f"SLIMS data validation failed, {repr(e)}")
         return validated
 
+    @staticmethod
+    def _resolve_criteria(
+        model_type: Type[SlimsBaseModelTypeVar],
+        criteria: Criterion
+    ) -> Criterion:
+        """Resolves field name to serialization alias in a criterion.
+        """
+        if isinstance(criteria, Junction):
+            criteria.members = [
+                SlimsClient._resolve_criteria(model_type, sub_criteria)
+                for sub_criteria in criteria.members
+            ]
+            return criteria
+        elif isinstance(criteria, Expression):
+            criteria.criterion = {
+                SlimsClient.resolve_model_alias(model_type, field_name): value
+                for field_name, value in criteria.criterion.items()
+            }
+            return criteria
+        else:
+            raise ValueError(f"Invalid criterion type: {type(criteria)}")
+
+    @staticmethod
+    def _validate_criteria(
+        model_type: Type[SlimsBaseModelTypeVar],
+        criteria: Criterion
+    ) -> None:
+        """Validates that the types used in a criterion are compatible with the
+         types on the model. Raises a ValueError if they are not.
+        """
+        if isinstance(criteria, Junction):
+            for sub_criteria in criteria.members:
+                SlimsClient._validate_criteria(model_type, sub_criteria)
+        elif isinstance(criteria, Expression):
+            field_type_map = get_type_hints(model_type)
+            for field_name, value in criteria.criterion.items():
+                field_type = field_type_map[field_name]
+                if not isinstance(value, field_type):
+                    raise ValueError(
+                        f"{value} is incompatible with {field_type}"
+                        f" for field {field_name}"
+                    )
+        else:
+            raise ValueError(f"Invalid criterion type: {type(criteria)}")
+
     def fetch_models(
         self,
         model: Type[SlimsBaseModelTypeVar],
-        *args,
+        *args: Criterion,
         sort: Optional[str | list[str]] = None,
         start: Optional[int] = None,
         end: Optional[int] = None,
         **kwargs,
     ) -> list[SlimsBaseModelTypeVar]:
-        """Fetch records from SLIMS and return them as SlimsBaseModel objects
+        """Fetch records from SLIMS and return them as SlimsBaseModel objects.
 
         Returns
         -------
@@ -155,7 +207,8 @@ class SlimsClient:
 
         Notes
         -----
-        - kwargs are mapped to field alias values
+        - kwargs are mapped to field alias names and used as equality filters
+         for the fetch.
         """
         resolved_kwargs = deepcopy(model._base_fetch_filters)
         for name, value in kwargs.items():
@@ -170,9 +223,14 @@ class SlimsClient:
                     self.resolve_model_alias(model, sort_key) for sort_key in sort
                 ]
         logger.debug("Resolved sort: %s", resolved_sort)
+        resolved_args = []
+        for arg in args:
+            self._validate_criteria(model, arg)
+            resolved_args.append(self._resolve_criteria(model, arg))
+        logger.debug("Resolved args: %s", resolved_args)
         response = self.fetch(
-            model._slims_table,  # TODO: consider changing fetch method
-            *args,
+            model._slims_table,
+            *resolved_args,
             sort=resolved_sort,
             start=start,
             end=end,
@@ -183,7 +241,7 @@ class SlimsClient:
     def fetch_model(
         self,
         model: Type[SlimsBaseModelTypeVar],
-        *args,
+        *args: Criterion,
         sort: Optional[str | list[str]] = None,
         start: Optional[int] = None,
         end: Optional[int] = None,
