@@ -1,7 +1,7 @@
 """Contains a model for a user."""
 
-from typing import Optional
 from datetime import datetime
+from typing import Optional
 
 from pydantic import Field
 

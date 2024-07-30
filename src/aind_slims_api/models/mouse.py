@@ -1,7 +1,8 @@
 """Contains a model for the mouse content, and a method for fetching it"""
 
-from typing import Annotated, ClassVar, Optional
 from datetime import datetime
+from typing import Annotated, ClassVar, Optional
+
 from pydantic import BeforeValidator, Field
 
 from aind_slims_api.models.base import SlimsBaseModel

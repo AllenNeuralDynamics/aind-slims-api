@@ -16,7 +16,7 @@ from typing import Optional, Type, TypeVar, get_type_hints
 
 from pydantic import ValidationError
 from requests import Response
-from slims.criteria import Criterion, conjunction, equals, Junction, Expression
+from slims.criteria import Criterion, Expression, Junction, conjunction, equals
 from slims.internal import Record as SlimsRecord
 from slims.slims import Slims, _SlimsApiException
 
@@ -85,6 +85,10 @@ class SlimsClient:
 
         for k, v in kwargs.items():
             criteria.add(equals(k, v))
+
+        if isinstance(sort, str):
+            sort = [sort]
+
         try:
             records = self.db.fetch(
                 table,
@@ -145,11 +149,9 @@ class SlimsClient:
 
     @staticmethod
     def _resolve_criteria(
-        model_type: Type[SlimsBaseModelTypeVar],
-        criteria: Criterion
+        model_type: Type[SlimsBaseModelTypeVar], criteria: Criterion
     ) -> Criterion:
-        """Resolves field name to serialization alias in a criterion.
-        """
+        """Resolves criterion field name to serialization alias in a criterion."""
         if isinstance(criteria, Junction):
             criteria.members = [
                 SlimsClient._resolve_criteria(model_type, sub_criteria)
@@ -167,11 +169,10 @@ class SlimsClient:
 
     @staticmethod
     def _validate_criteria(
-        model_type: Type[SlimsBaseModelTypeVar],
-        criteria: Criterion
+        model_type: Type[SlimsBaseModelTypeVar], criteria: Criterion
     ) -> None:
         """Validates that the types used in a criterion are compatible with the
-         types on the model. Raises a ValueError if they are not.
+        types on the model. Raises a ValueError if they are not.
         """
         if isinstance(criteria, Junction):
             for sub_criteria in criteria.members:
@@ -256,8 +257,8 @@ class SlimsClient:
             model,
             *args,
             sort="-created_on",
-            start=1,
-            end=2,
+            start=0,  # slims rows appear to be 0-indexed
+            end=1,
             **kwargs,
         )
         if len(records) > 0:

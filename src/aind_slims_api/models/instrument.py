@@ -1,7 +1,7 @@
 """Contains a model for the instrument content, and a method for fetching it"""
 
-from typing import Optional
 from datetime import datetime
+from typing import Optional
 
 from pydantic import Field
 

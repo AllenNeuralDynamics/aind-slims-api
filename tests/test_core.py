@@ -296,8 +296,7 @@ class TestSlimsClient(unittest.TestCase):
             "test",
             "some test content",
         )
-        self.assertEqual(
-            result, int(self.example_add_attachments_response_text))
+        self.assertEqual(result, int(self.example_add_attachments_response_text))
         self.assertEqual(mock_post.call_count, 1)
         self.assertEqual(
             mock_post.mock_calls[0].kwargs["body"]["atln_recordPk"], unit_pk
@@ -350,14 +349,14 @@ class TestSlimsClient(unittest.TestCase):
 
     @patch("slims.slims.Slims.fetch")
     def test_fetch_model_criterion(self, mock_slims_fetch: MagicMock):
+        """Tests fetch_model method with a criterion."""
         mock_slims_fetch.return_value = self.example_fetch_user_response
-        self.example_client.fetch_model(
-            SlimsUser, equals("username", "LKim")
-        )
+        self.example_client.fetch_model(SlimsUser, equals("username", "LKim"))
         mock_slims_fetch.assert_called_once()
 
     @patch("slims.slims.Slims.fetch")
     def test_fetch_model_criterion_junction(self, mock_slims_fetch: MagicMock):
+        """Tests fetch_model method with a junction criterion."""
         mock_slims_fetch.return_value = self.example_fetch_user_response
         self.example_client.fetch_model(
             SlimsUser,
@@ -367,30 +366,26 @@ class TestSlimsClient(unittest.TestCase):
 
     @patch("slims.slims.Slims.fetch")
     def test_fetch_model_criterion_invalid_criterion_type(
-        self,
-        mock_slims_fetch: MagicMock
+        self, mock_slims_fetch: MagicMock
     ):
+        """Tests fetch_model method with an invalid criterion type."""
         mock_slims_fetch.return_value = []
         with self.assertRaises(ValueError):
-            self.example_client.fetch_model(
-                SlimsUser, equals("username", 1)
-            )
+            self.example_client.fetch_model(SlimsUser, equals("username", 1))
         mock_slims_fetch.assert_not_called()
 
     @patch("slims.slims.Slims.fetch")
     def test_fetch_model_invalid_criterion(self, mock_slims_fetch: MagicMock):
+        """Tests fetch_model method with a non Expression/Junction input."""
         mock_slims_fetch.return_value = []
         with self.assertRaises(ValueError):
-            self.example_client.fetch_model(
-                SlimsUser, 1
-            )
+            self.example_client.fetch_model(SlimsUser, 1)
         mock_slims_fetch.assert_not_called()
 
     def test__resolve_criteria_invalid_criterion(self):
+        """Tests _resolve_criteria method with a non Expression/Junction input."""
         with self.assertRaises(ValueError):
-            self.example_client._resolve_criteria(
-                SlimsUser, 1
-            )
+            self.example_client._resolve_criteria(SlimsUser, 1)
 
 
 if __name__ == "__main__":
