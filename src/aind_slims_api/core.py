@@ -157,10 +157,10 @@ class SlimsClient:
             ]
             return criteria
         elif isinstance(criteria, Expression):
-            criteria.criterion = {
-                SlimsClient.resolve_model_alias(model_type, field_name): value
-                for field_name, value in criteria.criterion.items()
-            }
+            criteria.criterion["fieldName"] = SlimsClient.resolve_model_alias(
+                model_type,
+                criteria.criterion["fieldName"],
+            )
             return criteria
         else:
             raise ValueError(f"Invalid criterion type: {type(criteria)}")
@@ -178,13 +178,14 @@ class SlimsClient:
                 SlimsClient._validate_criteria(model_type, sub_criteria)
         elif isinstance(criteria, Expression):
             field_type_map = get_type_hints(model_type)
-            for field_name, value in criteria.criterion.items():
-                field_type = field_type_map[field_name]
-                if not isinstance(value, field_type):
-                    raise ValueError(
-                        f"{value} is incompatible with {field_type}"
-                        f" for field {field_name}"
-                    )
+            field_name = criteria.criterion["fieldName"]
+            value = criteria.criterion["value"]
+            field_type = field_type_map[field_name]
+            if not isinstance(value, field_type):
+                raise ValueError(
+                    f"{value} is incompatible with {field_type}"
+                    f" for field {field_name}"
+                )
         else:
             raise ValueError(f"Invalid criterion type: {type(criteria)}")
 

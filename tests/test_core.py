@@ -15,6 +15,7 @@ from aind_slims_api.core import SlimsAttachment, SlimsClient
 from aind_slims_api.exceptions import SlimsRecordNotFound
 from aind_slims_api.models.behavior_session import SlimsBehaviorSession
 from aind_slims_api.models.unit import SlimsUnit
+from aind_slims_api.models.user import SlimsUser
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / "resources"
 
@@ -346,6 +347,50 @@ class TestSlimsClient(unittest.TestCase):
         """
         with self.assertRaises(ValueError):
             self.example_client.resolve_model_alias(SlimsUnit, "not_an_alias")
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_model_criterion(self, mock_slims_fetch: MagicMock):
+        mock_slims_fetch.return_value = self.example_fetch_user_response
+        self.example_client.fetch_model(
+            SlimsUser, equals("username", "LKim")
+        )
+        mock_slims_fetch.assert_called_once()
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_model_criterion_junction(self, mock_slims_fetch: MagicMock):
+        mock_slims_fetch.return_value = self.example_fetch_user_response
+        self.example_client.fetch_model(
+            SlimsUser,
+            conjunction().add(equals("username", "LKim")),
+        )
+        mock_slims_fetch.assert_called_once()
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_model_criterion_invalid_criterion_type(
+        self,
+        mock_slims_fetch: MagicMock
+    ):
+        mock_slims_fetch.return_value = []
+        with self.assertRaises(ValueError):
+            self.example_client.fetch_model(
+                SlimsUser, equals("username", 1)
+            )
+        mock_slims_fetch.assert_not_called()
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_model_invalid_criterion(self, mock_slims_fetch: MagicMock):
+        mock_slims_fetch.return_value = []
+        with self.assertRaises(ValueError):
+            self.example_client.fetch_model(
+                SlimsUser, 1
+            )
+        mock_slims_fetch.assert_not_called()
+
+    def test__resolve_criteria_invalid_criterion(self):
+        with self.assertRaises(ValueError):
+            self.example_client._resolve_criteria(
+                SlimsUser, 1
+            )
 
 
 if __name__ == "__main__":
