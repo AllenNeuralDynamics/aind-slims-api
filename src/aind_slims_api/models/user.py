@@ -1,6 +1,7 @@
 """Contains a model for a user."""
 
 from typing import Optional
+from datetime import datetime
 
 from pydantic import Field
 
@@ -47,6 +48,11 @@ class SlimsUser(SlimsBaseModel):
         ...,
         serialization_alias="user_pk",
         validation_alias="user_pk",
+    )
+    created_on: Optional[datetime] = Field(
+        None,
+        serialization_alias="user_createdOn",
+        validation_alias="user_createdOn",
     )
 
     _slims_table = "User"

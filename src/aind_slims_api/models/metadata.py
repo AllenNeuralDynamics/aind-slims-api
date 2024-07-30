@@ -1,6 +1,7 @@
 """Models for the metadata stored in SLIMS."""
 from pydantic import Field
 from typing import Optional
+from datetime import datetime
 from aind_slims_api.models.base import SlimsBaseModel
 
 
@@ -42,5 +43,10 @@ class SlimsMetadataReference(SlimsBaseModel):
         None,
         serialization_alias="rdrc_pk",
         validation_alias="rdrc_pk",
+    )
+    created_on: Optional[datetime] = Field(
+        None,
+        serialization_alias="rdrc_createdOn",
+        validation_alias="rdrc_createdOn",
     )
     _slims_table = "ReferenceDataRecord"

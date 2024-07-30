@@ -242,9 +242,6 @@ class SlimsClient:
         self,
         model: Type[SlimsBaseModelTypeVar],
         *args: Criterion,
-        sort: Optional[str | list[str]] = None,
-        start: Optional[int] = None,
-        end: Optional[int] = None,
         **kwargs,
     ) -> SlimsBaseModelTypeVar | None:
         """Fetch a single record from SLIMS and return it as a validated
@@ -257,9 +254,9 @@ class SlimsClient:
         records = self.fetch_models(
             model,
             *args,
-            sort=sort,
-            start=start,
-            end=end,
+            sort="-created_on",
+            start=1,
+            end=2,
             **kwargs,
         )
         if len(records) > 0:

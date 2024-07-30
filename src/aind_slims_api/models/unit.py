@@ -1,6 +1,7 @@
 """Contains a model for a unit"""
 
 from typing import Optional
+from datetime import datetime
 
 from pydantic import Field
 
@@ -25,5 +26,9 @@ class SlimsUnit(SlimsBaseModel):
         serialization_alias="unit_pk",
         validation_alias="unit_pk",
     )
-
+    created_on: Optional[datetime] = Field(
+        None,
+        serialization_alias="unit_createdOn",
+        validation_alias="unit_createdOn",
+    )
     _slims_table = "Unit"
