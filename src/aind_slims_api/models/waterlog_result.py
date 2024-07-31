@@ -107,6 +107,11 @@ class SlimsWaterlogResult(SlimsBaseModel):
         serialization_alias="rslt_pk",
         validation_alias="rslt_pk",
     )
+    created_on: Optional[datetime] = Field(
+        None,
+        serialization_alias="rslt_createdOn",
+        validation_alias="rslt_createdOn",
+    )
     mouse_pk: Optional[int] = Field(
         None,
         serialization_alias="rslt_fk_content",

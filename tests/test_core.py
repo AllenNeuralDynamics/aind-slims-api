@@ -8,13 +8,23 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 from requests import Response
-from slims.criteria import conjunction, equals
+from slims.criteria import (
+    between_inclusive,
+    conjunction,
+    disjunction,
+    equals,
+    is_na,
+    is_not,
+    is_not_one_of,
+    is_one_of,
+)
 from slims.internal import Record, _SlimsApiException
 
 from aind_slims_api.core import SlimsAttachment, SlimsClient
 from aind_slims_api.exceptions import SlimsRecordNotFound
 from aind_slims_api.models.behavior_session import SlimsBehaviorSession
 from aind_slims_api.models.unit import SlimsUnit
+from aind_slims_api.models.user import SlimsUser
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / "resources"
 
@@ -295,8 +305,7 @@ class TestSlimsClient(unittest.TestCase):
             "test",
             "some test content",
         )
-        self.assertEqual(
-            result, int(self.example_add_attachments_response_text))
+        self.assertEqual(result, int(self.example_add_attachments_response_text))
         self.assertEqual(mock_post.call_count, 1)
         self.assertEqual(
             mock_post.mock_calls[0].kwargs["body"]["atln_recordPk"], unit_pk
@@ -346,6 +355,148 @@ class TestSlimsClient(unittest.TestCase):
         """
         with self.assertRaises(ValueError):
             self.example_client.resolve_model_alias(SlimsUnit, "not_an_alias")
+
+    def test__validate_field_name_failure(self):
+        """Tests _validate_field_name method raises expected error with an
+        invalid field name.
+        """
+        with self.assertRaises(ValueError):
+            self.example_client._validate_field_name(SlimsUnit, "not_an_alias")
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_model_criterion(self, mock_slims_fetch: MagicMock):
+        """Tests fetch_model method with a criterion."""
+        mock_slims_fetch.return_value = self.example_fetch_user_response
+        self.example_client.fetch_model(SlimsUser, equals("username", "LKim"))
+        mock_slims_fetch.assert_called_once()
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_model_criterion_junction(self, mock_slims_fetch: MagicMock):
+        """Tests fetch_model method with a junction criterion."""
+        mock_slims_fetch.return_value = self.example_fetch_user_response
+        self.example_client.fetch_model(
+            SlimsUser,
+            conjunction().add(equals("username", "LKim")),
+        )
+        mock_slims_fetch.assert_called_once()
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_model_criterion_invalid_criterion_type(
+        self, mock_slims_fetch: MagicMock
+    ):
+        """Tests fetch_model method with an invalid criterion type."""
+        mock_slims_fetch.return_value = []
+        with self.assertRaises(ValueError):
+            self.example_client.fetch_model(SlimsUser, equals("username", 1))
+        mock_slims_fetch.assert_not_called()
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_model_invalid_criterion(self, mock_slims_fetch: MagicMock):
+        """Tests fetch_model method with a non Expression/Junction input."""
+        mock_slims_fetch.return_value = []
+        with self.assertRaises(ValueError):
+            self.example_client.fetch_model(SlimsUser, 1)
+        mock_slims_fetch.assert_not_called()
+
+    def test__resolve_criteria_invalid_criterion(self):
+        """Tests _resolve_criteria method with a non Expression/Junction input."""
+        with self.assertRaises(ValueError):
+            self.example_client._resolve_criteria(SlimsUser, 1)
+
+    @patch("slims.internal._SlimsApi.get_entities")
+    def test_fetch_attachment(self, mock_get_entities: MagicMock):
+        """Tests fetch_attachment method success."""
+        mock_get_entities.return_value = self.example_fetch_attachment_response
+        unit = SlimsUnit.model_validate(
+            Record(
+                json_entity=self.example_fetch_unit_response[0].json_entity,
+                slims_api=self.example_client.db.slims_api,
+            )
+        )
+        self.example_client.fetch_attachment(unit, equals("name", "test"))
+
+    @patch("slims.internal._SlimsApi.get_entities")
+    def test_fetch_attachment_no_attachments(self, mock_get_entities: MagicMock):
+        """Tests fetch_attachment method failure due to no attachments."""
+        mock_get_entities.return_value = []
+        unit = SlimsUnit.model_validate(
+            Record(
+                json_entity=self.example_fetch_unit_response[0].json_entity,
+                slims_api=self.example_client.db.slims_api,
+            )
+        )
+        with self.assertRaises(SlimsRecordNotFound):
+            self.example_client.fetch_attachment(unit)
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_str_sort(self, mock_slims_fetch: MagicMock):
+        """Tests fetch method when sort is a string."""
+        mock_slims_fetch.return_value = []
+        self.example_client.fetch(SlimsUser._slims_table, sort="username")
+        mock_slims_fetch.assert_called_once()
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_models_invalid_start_end(self, mock_slims_fetch: MagicMock):
+        """Tests fetch_model method failure due to only supplying start or end."""
+        mock_slims_fetch.return_value = []
+        with self.assertRaises(ValueError):
+            self.example_client.fetch_models(SlimsUser._slims_table, start=1)
+        with self.assertRaises(ValueError):
+            self.example_client.fetch_models(SlimsUser._slims_table, end=1)
+        mock_slims_fetch.assert_not_called()
+
+    def test_validate_criteria_is_one_of(self):
+        """Tests _validate_criteria method with an is_one_of, is_not_one_of
+        criterion.
+        """
+        self.example_client._validate_criteria(
+            SlimsUser,
+            is_one_of("username", ["LKim", "JSmith"]),
+        )
+        self.example_client._validate_criteria(
+            SlimsUser,
+            is_not_one_of("username", ["LKim", "JSmith"]),
+        )
+
+    def test_validate_criteria_between_inclusive(self):
+        """Tests _validate_criteria method with an between_inclusive criterion."""
+        self.example_client._validate_criteria(
+            SlimsUser,
+            between_inclusive("username", "LKim", "JSmith"),
+        )
+
+    def test_validate_criteria_is_na(self):
+        """Tests _validate_criteria method with an is_na criterion."""
+        self.example_client._validate_criteria(
+            SlimsUser,
+            is_na("username"),
+        )
+
+    def test_resolve_criteria_is_na(self):
+        """Tests _resolve_criteria method with an is_na criterion."""
+        self.example_client._resolve_criteria(
+            SlimsUser,
+            is_na("username"),
+        )
+
+    def test_validate_criteria_is_not(self):
+        """Tests _validate_criteria method with an is_not criterion."""
+        self.example_client._validate_criteria(
+            SlimsUser,
+            is_not(is_one_of("username", ["LKim", "JSmith"])),
+        )
+
+    def test_validate_criteria_disjunction(self):
+        """Tests _validate_criteria method with an is_not criterion."""
+        criteria = (
+            disjunction()
+            .add(is_one_of("username", ["LKim"]))
+            .add(is_one_of("username", ["JSmith"]))
+        )
+        self.example_client._validate_criteria(
+            SlimsUser,
+            criteria,
+        )
 
 
 if __name__ == "__main__":

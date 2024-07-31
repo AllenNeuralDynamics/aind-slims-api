@@ -1,5 +1,8 @@
 """Model for a record in the Attachment table in SLIMS."""
 
+from datetime import datetime
+from typing import Optional
+
 from pydantic import Field
 
 from aind_slims_api.models.base import SlimsBaseModel
@@ -28,6 +31,11 @@ class SlimsAttachment(SlimsBaseModel):
         ...,
         serialization_alias="attm_pk",
         validation_alias="attm_pk",
+    )
+    created_on: Optional[datetime] = Field(
+        None,
+        serialization_alias="attm_createdOn",
+        validation_alias="attm_createdOn",
     )
     name: str = Field(
         ...,
