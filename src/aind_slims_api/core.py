@@ -12,7 +12,7 @@ import base64
 import logging
 from copy import deepcopy
 from functools import lru_cache
-from typing import Optional, Type, TypeVar, get_type_hints
+from typing import Any, Optional, Type, TypeVar, get_type_hints
 
 from pydantic import ValidationError
 from requests import Response
@@ -168,6 +168,35 @@ class SlimsClient:
             raise ValueError(f"Invalid criterion type: {type(criteria)}")
 
     @staticmethod
+    def _validate_field_name(
+        model_type: Type[SlimsBaseModelTypeVar],
+        field_name: str,
+    ) -> None:
+        """Check if field_name is a field on a model. Raises a ValueError if it
+        is not.
+        """
+        field_type_map = get_type_hints(model_type)
+        if field_name not in field_type_map:
+            raise ValueError(f"{field_name} is not a field on {model_type}.")
+
+    @staticmethod
+    def _validate_field_value(
+        model_type: Type[SlimsBaseModelTypeVar],
+        field_name: str,
+        field_value: Any,
+    ) -> None:
+        """Check if field_value is a compatible with
+        the type associated with that field. Raises a ValueError if it is not.
+        """
+        field_type_map = get_type_hints(model_type)
+        field_type = field_type_map[field_name]
+        if not isinstance(field_value, field_type):
+            raise ValueError(
+                f"{field_value} is incompatible with {field_type}"
+                f" for field {field_name}"
+            )
+
+    @staticmethod
     def _validate_criteria(
         model_type: Type[SlimsBaseModelTypeVar], criteria: Criterion
     ) -> None:
@@ -178,23 +207,48 @@ class SlimsClient:
             for sub_criteria in criteria.members:
                 SlimsClient._validate_criteria(model_type, sub_criteria)
         elif isinstance(criteria, Expression):
-            field_type_map = get_type_hints(model_type)
-            field_name = criteria.criterion["fieldName"]
-            value = criteria.criterion["value"]
-            field_type = field_type_map[field_name]
-            if not isinstance(value, field_type):
-                raise ValueError(
-                    f"{value} is incompatible with {field_type}"
-                    f" for field {field_name}"
-                )
+            SlimsClient._validate_field_name(
+                model_type,
+                criteria.criterion["fieldName"],
+            )
+            SlimsClient._validate_field_value(
+                model_type,
+                criteria.criterion["fieldName"],
+                criteria.criterion["value"],
+            )
         else:
             raise ValueError(f"Invalid criterion type: {type(criteria)}")
+
+    @staticmethod
+    def _resolve_filter_args(
+        model: Type[SlimsBaseModelTypeVar],
+        *args: Criterion,
+        sort: list[str] = [],
+        start: Optional[int] = None,
+        end: Optional[int] = None,
+        **kwargs,
+    ) -> tuple[list[Criterion], list[str], Optional[int], Optional[int]]:
+        """Validates filter arguments and resolves field names to SLIMS API
+        column names.
+        """
+        criteria = deepcopy(list(args))
+        criteria.extend(map(lambda item: equals(item[0], item[1]), kwargs.items()))
+        resolved_criteria: list[Criterion] = []
+        for criterion in criteria:
+            SlimsClient._validate_criteria(model, criterion)
+            resolved_criteria.append(SlimsClient._resolve_criteria(model, criterion))
+        resolved_sort = [
+            SlimsClient.resolve_model_alias(model, sort_key) for sort_key in sort
+        ]
+        if start is not None and end is None or end is not None and start is None:
+            raise ValueError("Must provide both start and end or neither for fetch.")
+        return resolved_criteria, resolved_sort, start, end
 
     def fetch_models(
         self,
         model: Type[SlimsBaseModelTypeVar],
         *args: Criterion,
-        sort: Optional[str | list[str]] = None,
+        sort: str | list[str] = [],
         start: Optional[int] = None,
         end: Optional[int] = None,
         **kwargs,
@@ -212,31 +266,23 @@ class SlimsClient:
         - kwargs are mapped to field alias names and used as equality filters
          for the fetch.
         """
-        resolved_kwargs = deepcopy(model._base_fetch_filters)
-        for name, value in kwargs.items():
-            resolved_kwargs[self.resolve_model_alias(model, name)] = value
-        logger.debug("Resolved kwargs: %s", resolved_kwargs)
-        resolved_sort: Optional[str | list[str]] = None
-        if sort is not None:
-            if isinstance(sort, str):
-                resolved_sort = self.resolve_model_alias(model, sort)
-            else:
-                resolved_sort = [
-                    self.resolve_model_alias(model, sort_key) for sort_key in sort
-                ]
-        logger.debug("Resolved sort: %s", resolved_sort)
-        resolved_args = []
-        for arg in args:
-            self._validate_criteria(model, arg)
-            resolved_args.append(self._resolve_criteria(model, arg))
-        logger.debug("Resolved args: %s", resolved_args)
+        if isinstance(sort, str):
+            sort = [sort]
+
+        criteria, resolved_sort, start, end = self._resolve_filter_args(
+            model,
+            *args,
+            sort=sort,
+            start=start,
+            end=end,
+            **kwargs,
+        )
         response = self.fetch(
             model._slims_table,
-            *resolved_args,
+            *criteria,
             sort=resolved_sort,
             start=start,
             end=end,
-            **resolved_kwargs,
         )
         return self._validate_models(model, response)
 
@@ -252,6 +298,7 @@ class SlimsClient:
         Notes
         -----
         - kwargs are mapped to field alias values
+        - sorts records on created_on in descending order and returns the first
         """
         records = self.fetch_models(
             model,
@@ -267,17 +314,92 @@ class SlimsClient:
             raise SlimsRecordNotFound("No record found.")
         return records[0]
 
+    @staticmethod
+    def _create_get_entities_body(
+        *args: Criterion,
+        sort: list[str] = [],
+        start: Optional[int] = None,
+        end: Optional[int] = None,
+    ) -> dict[str, Any]:
+        """Creates get entities body for SLIMS API request."""
+        body: dict[str, Any] = {
+            "sortBy": sort,
+            "startRow": start,
+            "endRow": end,
+        }
+        if args:
+            criteria = conjunction()
+            for arg in args:
+                criteria.add(arg)
+            body["criteria"] = criteria.to_dict()
+
+        return body
+
     def fetch_attachments(
         self,
         record: SlimsBaseModel,
+        *args,
+        sort: str | list[str] = [],
+        start: Optional[int] = None,
+        end: Optional[int] = None,
+        **kwargs,
     ) -> list[SlimsAttachment]:
-        """Fetch attachments for a given record."""
+        """Fetch attachments for a given record.
+
+        Notes
+        -----
+        - kwargs are mapped to field alias values
+        """
+        if isinstance(sort, str):
+            sort = [sort]
+
+        criteria, sort, start, end = self._resolve_filter_args(
+            SlimsAttachment,
+            *args,
+            sort=sort,
+            start=start,
+            end=end,
+            **kwargs,
+        )
         return self._validate_models(
             SlimsAttachment,
             self.db.slims_api.get_entities(
-                f"attachment/{record._slims_table}/{record.pk}"
+                f"attachment/{record._slims_table}/{record.pk}",
+                body=self._create_get_entities_body(
+                    *criteria,
+                    sort=sort,
+                    start=start,
+                    end=end,
+                ),
             ),
         )
+
+    def fetch_attachment(
+        self,
+        record: SlimsBaseModel,
+        *args,
+        **kwargs,
+    ) -> SlimsAttachment:
+        """Fetch attachments for a given record.
+
+        Notes
+        -----
+        - kwargs are mapped to field alias values
+        - sorts records on created_on in descending order and returns the first
+        """
+        records = self.fetch_attachments(
+            record,
+            *args,
+            sort="-created_on",
+            start=0,  # slims rows appear to be 0-indexed
+            end=1,
+            **kwargs,
+        )
+        if len(records) > 0:
+            logger.debug(f"Found {len(records)} records for {record}.")
+        if len(records) < 1:
+            raise SlimsRecordNotFound("No record found.")
+        return records[0]
 
     def fetch_attachment_content(
         self,

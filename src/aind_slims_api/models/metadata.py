@@ -28,6 +28,11 @@ class SlimsMetadataReference(SlimsBaseModel):
     >>> metadata.json()["rig_id"]
     '323_EPHYS1_OPTO_2024-02-12'
 
+    ### Read latest attachment
+    >>> latest_attachment = client.fetch_attachment(
+    ...  metadata_reference,
+    ... )
+
     ### Write
     >>> import json
     >>> attachment_pk = client.add_attachment_content(

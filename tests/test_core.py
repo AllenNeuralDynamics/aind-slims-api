@@ -347,6 +347,13 @@ class TestSlimsClient(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.example_client.resolve_model_alias(SlimsUnit, "not_an_alias")
 
+    def test__validate_field_name_failure(self):
+        """Tests _validate_field_name method raises expected error with an
+        invalid field name.
+        """
+        with self.assertRaises(ValueError):
+            self.example_client._validate_field_name(SlimsUnit, "not_an_alias")
+
     @patch("slims.slims.Slims.fetch")
     def test_fetch_model_criterion(self, mock_slims_fetch: MagicMock):
         """Tests fetch_model method with a criterion."""
@@ -386,6 +393,48 @@ class TestSlimsClient(unittest.TestCase):
         """Tests _resolve_criteria method with a non Expression/Junction input."""
         with self.assertRaises(ValueError):
             self.example_client._resolve_criteria(SlimsUser, 1)
+
+    @patch("slims.internal._SlimsApi.get_entities")
+    def test_fetch_attachment(self, mock_get_entities: MagicMock):
+        """Tests fetch_attachment method success."""
+        mock_get_entities.return_value = self.example_fetch_attachment_response
+        unit = SlimsUnit.model_validate(
+            Record(
+                json_entity=self.example_fetch_unit_response[0].json_entity,
+                slims_api=self.example_client.db.slims_api,
+            )
+        )
+        self.example_client.fetch_attachment(unit, equals("name", "test"))
+
+    @patch("slims.internal._SlimsApi.get_entities")
+    def test_fetch_attachment_no_attachments(self, mock_get_entities: MagicMock):
+        """Tests fetch_attachment method failure due to no attachments."""
+        mock_get_entities.return_value = []
+        unit = SlimsUnit.model_validate(
+            Record(
+                json_entity=self.example_fetch_unit_response[0].json_entity,
+                slims_api=self.example_client.db.slims_api,
+            )
+        )
+        with self.assertRaises(SlimsRecordNotFound):
+            self.example_client.fetch_attachment(unit)
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_str_sort(self, mock_slims_fetch: MagicMock):
+        """Tests fetch method when sort is a string."""
+        mock_slims_fetch.return_value = []
+        self.example_client.fetch(SlimsUser._slims_table, sort="username")
+        mock_slims_fetch.assert_called_once()
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_models_invalid_start_end(self, mock_slims_fetch: MagicMock):
+        """Tests fetch_model method failure due to only supplying start or end."""
+        mock_slims_fetch.return_value = []
+        with self.assertRaises(ValueError):
+            self.example_client.fetch_models(SlimsUser._slims_table, start=1)
+        with self.assertRaises(ValueError):
+            self.example_client.fetch_models(SlimsUser._slims_table, end=1)
+        mock_slims_fetch.assert_not_called()
 
 
 if __name__ == "__main__":
