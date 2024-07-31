@@ -159,10 +159,16 @@ class SlimsClient:
             ]
             return criteria
         elif isinstance(criteria, Expression):
-            criteria.criterion["fieldName"] = SlimsClient.resolve_model_alias(
-                model_type,
-                criteria.criterion["fieldName"],
-            )
+            if criteria.criterion["fieldName"] == "isNaFilter":
+                criteria.criterion["value"] = SlimsClient.resolve_model_alias(
+                    model_type,
+                    criteria.criterion["value"],
+                )
+            else:
+                criteria.criterion["fieldName"] = SlimsClient.resolve_model_alias(
+                    model_type,
+                    criteria.criterion["fieldName"],
+                )
             return criteria
         else:
             raise ValueError(f"Invalid criterion type: {type(criteria)}")
@@ -207,15 +213,47 @@ class SlimsClient:
             for sub_criteria in criteria.members:
                 SlimsClient._validate_criteria(model_type, sub_criteria)
         elif isinstance(criteria, Expression):
-            SlimsClient._validate_field_name(
-                model_type,
-                criteria.criterion["fieldName"],
-            )
-            SlimsClient._validate_field_value(
-                model_type,
-                criteria.criterion["fieldName"],
-                criteria.criterion["value"],
-            )
+            if criteria.criterion["fieldName"] == "isNaFilter":
+                SlimsClient._validate_field_name(
+                    model_type,
+                    criteria.criterion["value"],
+                )
+            elif criteria.criterion["operator"] in ["inSet", "notInSet"]:
+                for value in criteria.criterion["value"]:
+                    SlimsClient._validate_field_name(
+                        model_type,
+                        criteria.criterion["fieldName"],
+                    )
+                    SlimsClient._validate_field_value(
+                        model_type,
+                        criteria.criterion["fieldName"],
+                        value,
+                    )
+            elif criteria.criterion["operator"] == "betweenInclusive":
+                SlimsClient._validate_field_name(
+                    model_type,
+                    criteria.criterion["fieldName"],
+                )
+                SlimsClient._validate_field_value(
+                    model_type,
+                    criteria.criterion["fieldName"],
+                    criteria.criterion["start"],
+                )
+                SlimsClient._validate_field_value(
+                    model_type,
+                    criteria.criterion["fieldName"],
+                    criteria.criterion["end"],
+                )
+            else:
+                SlimsClient._validate_field_name(
+                    model_type,
+                    criteria.criterion["fieldName"],
+                )
+                SlimsClient._validate_field_value(
+                    model_type,
+                    criteria.criterion["fieldName"],
+                    criteria.criterion["value"],
+                )
         else:
             raise ValueError(f"Invalid criterion type: {type(criteria)}")
 
@@ -338,7 +376,7 @@ class SlimsClient:
     def fetch_attachments(
         self,
         record: SlimsBaseModel,
-        *args,
+        *args: Criterion,
         sort: str | list[str] = [],
         start: Optional[int] = None,
         end: Optional[int] = None,
@@ -377,7 +415,7 @@ class SlimsClient:
     def fetch_attachment(
         self,
         record: SlimsBaseModel,
-        *args,
+        *args: Criterion,
         **kwargs,
     ) -> SlimsAttachment:
         """Fetch attachments for a given record.

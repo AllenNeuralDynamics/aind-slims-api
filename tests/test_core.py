@@ -8,7 +8,16 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 from requests import Response
-from slims.criteria import conjunction, equals
+from slims.criteria import (
+    between_inclusive,
+    conjunction,
+    disjunction,
+    equals,
+    is_na,
+    is_not,
+    is_not_one_of,
+    is_one_of,
+)
 from slims.internal import Record, _SlimsApiException
 
 from aind_slims_api.core import SlimsAttachment, SlimsClient
@@ -435,6 +444,59 @@ class TestSlimsClient(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.example_client.fetch_models(SlimsUser._slims_table, end=1)
         mock_slims_fetch.assert_not_called()
+
+    def test_validate_criteria_is_one_of(self):
+        """Tests _validate_criteria method with an is_one_of, is_not_one_of
+        criterion.
+        """
+        self.example_client._validate_criteria(
+            SlimsUser,
+            is_one_of("username", ["LKim", "JSmith"]),
+        )
+        self.example_client._validate_criteria(
+            SlimsUser,
+            is_not_one_of("username", ["LKim", "JSmith"]),
+        )
+
+    def test_validate_criteria_between_inclusive(self):
+        """Tests _validate_criteria method with an between_inclusive criterion."""
+        self.example_client._validate_criteria(
+            SlimsUser,
+            between_inclusive("username", "LKim", "JSmith"),
+        )
+
+    def test_validate_criteria_is_na(self):
+        """Tests _validate_criteria method with an is_na criterion."""
+        self.example_client._validate_criteria(
+            SlimsUser,
+            is_na("username"),
+        )
+
+    def test_resolve_criteria_is_na(self):
+        """Tests _resolve_criteria method with an is_na criterion."""
+        self.example_client._resolve_criteria(
+            SlimsUser,
+            is_na("username"),
+        )
+
+    def test_validate_criteria_is_not(self):
+        """Tests _validate_criteria method with an is_not criterion."""
+        self.example_client._validate_criteria(
+            SlimsUser,
+            is_not(is_one_of("username", ["LKim", "JSmith"])),
+        )
+
+    def test_validate_criteria_disjunction(self):
+        """Tests _validate_criteria method with an is_not criterion."""
+        criteria = (
+            disjunction()
+            .add(is_one_of("username", ["LKim"]))
+            .add(is_one_of("username", ["JSmith"]))
+        )
+        self.example_client._validate_criteria(
+            SlimsUser,
+            criteria,
+        )
 
 
 if __name__ == "__main__":
