@@ -188,7 +188,7 @@ class SlimsClient:
         start: Optional[int] = None,
         end: Optional[int] = None,
         **kwargs,
-    ) -> SlimsBaseModelTypeVar | None:
+    ) -> SlimsBaseModelTypeVar:
         """Fetch a single record from SLIMS and return it as a validated
          SlimsBaseModel object.
 
