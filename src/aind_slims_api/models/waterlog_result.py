@@ -92,12 +92,12 @@ class SlimsWaterlogResult(SlimsBaseModel):
         serialization_alias="rslt_cf_fk_workStation",
         validation_alias="rslt_cf_fk_workStation",
     )
-    sw_source: str = Field(
+    sw_source: Optional[str] = Field(
         "aind-slims-api",
         serialization_alias="rslt_cf_swSource",
         validation_alias="rslt_cf_swSource",
     )
-    sw_version: str = Field(
+    sw_version: Optional[str] = Field(
         __version__,
         serialization_alias="rslt_cf_swVersion",
         validation_alias="rslt_cf_swVersion",
