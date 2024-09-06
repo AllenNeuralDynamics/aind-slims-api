@@ -9,12 +9,17 @@ from aind_slims_api import models, SlimsClient, exceptions
 
 def get_waterlog_suggestion(
     client: SlimsClient,
-    labtracks_id: str,
+    mouse: str | models.SlimsMouseContent,
     current_weight: float,
-) -> float | None:
+    water_restriction_event: Optional[models.SlimsWaterRestrictionEvent] = None,
+) -> float:
     """Helper function for getting the waterlog water suggestion in ml for a
-     mouse. If mouse is not water restricted or mouse has no baseline weight,
-     returns None.
+     mouse. If mouse has no baseline weight returns None.
+
+    Raises
+    ------
+    exceptions.SlimsApiException
+        If the mouse has no baseline weight.
 
     Examples
     --------
@@ -22,26 +27,28 @@ def get_waterlog_suggestion(
     >>> client = SlimsClient()
     >>> suggestion = get_waterlog_suggestion(client, "123456", 30.0)
     """
-    mouse = client.fetch_model(models.SlimsMouseContent, barcode=labtracks_id)
+    if isinstance(mouse, str):
+        mouse = client.fetch_model(
+            models.SlimsMouseContent, barcode=mouse)
 
-    try:
-        restriction_event = client.fetch_model(
+    if water_restriction_event is None:
+        water_restriction_event = client.fetch_model(
             models.SlimsWaterRestrictionEvent,
             mouse_pk=mouse.pk,
         )
-    except exceptions.SlimsRecordNotFound:
-        return None
 
-    if not mouse.baseline_weight_g:
-        return None
+    if mouse.baseline_weight_g is None:
+        raise exceptions.SlimsAPIException(
+            "Mouse has no baseline weight, cannot calculate water suggestion."
+        )
 
-    return (restriction_event.target_weight_fraction * mouse.baseline_weight_g) \
+    return (water_restriction_event.target_weight_fraction * mouse.baseline_weight_g) \
         - current_weight
 
 
 def write_waterlog_result(
     client: SlimsClient,
-    labtracks_id: str,
+    mouse: str | models.SlimsMouseContent,
     date: datetime,
     weight_g: float,
     water_earned_ml: float,
@@ -67,7 +74,10 @@ def write_waterlog_result(
     ...  "aibs-computer-id",
     ... )
     """
-    mouse = client.fetch_model(models.SlimsMouseContent, barcode=labtracks_id)
+    if isinstance(mouse, str):
+        mouse = client.fetch_model(
+            models.SlimsMouseContent, barcode=mouse)
+    
     test_pk = client.fetch_pk("Test", test_name="test_waterlog")  # TODO: Explain why SLIMS needs this
 
     return client.add_model(
