@@ -13,7 +13,8 @@ def get_waterlog_suggestion(
     current_weight: float,
 ) -> float | None:
     """Helper function for getting the waterlog water suggestion in ml for a
-     mouse. If mouse is not water restricted, returns None.
+     mouse. If mouse is not water restricted or mouse has no baseline weight,
+     returns None.
 
     Examples
     --------
@@ -32,9 +33,7 @@ def get_waterlog_suggestion(
         return None
 
     if not mouse.baseline_weight_g:
-        raise exceptions.SlimsAPIException(
-            "Mouse does not have a baseline weight."
-        )
+        return None
 
     return (restriction_event.target_weight_fraction * mouse.baseline_weight_g) \
         - current_weight
