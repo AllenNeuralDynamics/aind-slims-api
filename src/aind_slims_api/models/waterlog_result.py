@@ -38,12 +38,11 @@ class SlimsWaterlogResult(SlimsBaseModel):
     ... )
 
     Read a waterlog result.
-    >>> waterlog_results = client.fetch_models(
+    >>> waterlog_result = client.fetch_model(
     ...  models.SlimsWaterlogResult,
     ...  mouse_pk=mouse.pk,
-    ...  sort=["date"],
     ... )
-    >>> waterlog_results[-1].weight_g
+    >>> waterlog_result.weight_g
     20.0
     """
 
