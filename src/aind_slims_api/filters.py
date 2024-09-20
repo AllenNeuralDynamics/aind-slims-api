@@ -6,6 +6,7 @@ from copy import deepcopy
 from typing import Any, Optional, Type, TypeVar, get_type_hints
 
 from slims.criteria import Criterion, Expression, Junction, equals
+
 from aind_slims_api.models.base import SlimsBaseModel
 
 logger = logging.getLogger(__name__)
@@ -17,7 +18,8 @@ def resolve_model_alias(
     model: Type[SlimsBaseModelTypeVar],
     attr_name: str,
 ) -> str:
-    """Given a SlimsBaseModel object, resolve its pk to the actual value
+    """Given a SlimsBaseModel object, resolve an alias name to the actual slims
+     column name.
 
     Notes
     -----
@@ -42,19 +44,22 @@ def resolve_model_alias(
         raise ValueError(f"Cannot resolve alias for {attr_name} on {model}")
 
 
-def _resolve_criteria(
+CriteriaType = TypeVar("CriteriaType", Junction, Expression)
+
+
+def resolve_criteria(
     model_type: Type[SlimsBaseModelTypeVar],
-    criteria: Criterion,
-) -> Criterion:
+    criteria: Type[CriteriaType],
+) -> Type[CriteriaType]:
     """Resolves criterion field name to serialization alias in a criterion."""
 
     if isinstance(criteria, Junction):
         criteria.members = [
-            _resolve_criteria(model_type, sub_criteria)
+            resolve_criteria(model_type, sub_criteria)
             for sub_criteria in criteria.members
         ]
         return criteria
-    elif isinstance(criteria, Expression):
+    else:  # Expression
         if criteria.criterion["fieldName"] == "isNaFilter":
             criteria.criterion["value"] = resolve_model_alias(
                 model_type,
@@ -66,29 +71,14 @@ def _resolve_criteria(
                 criteria.criterion["fieldName"],
             )
         return criteria
-    else:
-        raise ValueError(f"Invalid criterion type: {type(criteria)}")
-
-
-def validate_criterion(
-    model_type: Type[SlimsBaseModelTypeVar],
-    field_name: str,
-) -> None:
-    """Check if field_name is a field on a model. Raises a ValueError if it
-    is not.
-    """
-    field_type_map = get_type_hints(model_type)
-    if field_name not in field_type_map:
-        raise ValueError(f"{field_name} is not a field on {model_type}.")
-
 
 
 def _validate_field_name(
     model_type: Type[SlimsBaseModelTypeVar],
     field_name: str,
 ) -> None:
-    """Check if field_name is a field on a model. Raises a ValueError if it
-    is not.
+    """Check if field_name is a field on a model. Raises an Attribute error if
+    it is not.
     """
     field_type_map = get_type_hints(model_type)
     if field_name not in field_type_map:
@@ -100,8 +90,8 @@ def _validate_field_value(
     field_name: str,
     field_value: Any,
 ) -> None:
-    """Check if field_value is a compatible with
-    the type associated with that field. Raises a ValueError if it is not.
+    """Check if field_value is a compatible with the type associated with that
+    field. Raises a ValueError if it is not.
     """
     field_type_map = get_type_hints(model_type)
     field_type = field_type_map[field_name]
@@ -112,11 +102,18 @@ def _validate_field_value(
         )
 
 
-def _validate_criteria(
-    model_type: Type[SlimsBaseModelTypeVar], criteria: Criterion
+def validate_criteria(
+    model_type: Type[SlimsBaseModelTypeVar], criteria: Type[CriteriaType]
 ) -> None:
-    """Validates that the types used in a criterion are compatible with the
-    types on the model. Raises a ValueError if they are not.
+    """Check if field_name is a field on a model. Raises a ValueError if it
+     is not.
+
+    Raises
+    ------
+    AttributeError
+        If the field_name is not a field on the model_type.
+    ValueError
+        If the field_value is not compatible with the field type.
 
     Notes
     -----
@@ -125,8 +122,8 @@ def _validate_criteria(
     """
     if isinstance(criteria, Junction):
         for sub_criteria in criteria.members:
-            _validate_criteria(model_type, sub_criteria)
-    elif isinstance(criteria, Expression):
+            validate_criteria(model_type, sub_criteria)
+    else:  # Expression
         if criteria.criterion["fieldName"] == "isNaFilter":
             _validate_field_name(
                 model_type,
@@ -168,8 +165,6 @@ def _validate_criteria(
                 criteria.criterion["fieldName"],
                 criteria.criterion["value"],
             )
-    else:
-        raise ValueError(f"Invalid criterion type: {type(criteria)}")
 
 
 def resolve_filter_args(
@@ -180,19 +175,16 @@ def resolve_filter_args(
     end: Optional[int] = None,
     **kwargs,
 ) -> tuple[list[Criterion], list[str], Optional[int], Optional[int]]:
-    """Validates filter arguments and resolves field names to SLIMS API
+    """Validates filter arguments and resolves field name aliases to SLIMS API
     column names.
     """
     criteria = deepcopy(list(args))
     criteria.extend(map(lambda item: equals(item[0], item[1]), kwargs.items()))
     resolved_criteria: list[Criterion] = []
     for criterion in criteria:
-        _validate_criteria(model, criterion)
-        resolved_criteria.append(_resolve_criteria(model, criterion))
-    resolved_sort = [
-        resolve_model_alias(model, sort_key) for sort_key in sort
-    ]
+        validate_criteria(model, criterion)
+        resolved_criteria.append(resolve_criteria(model, criterion))
+    resolved_sort = [resolve_model_alias(model, sort_key) for sort_key in sort]
     if start is not None and end is None or end is not None and start is None:
-        raise ValueError(
-            "Must provide both start and end or neither for fetch.")
+        raise ValueError("Must provide both start and end or neither for fetch.")
     return resolved_criteria, resolved_sort, start, end
