@@ -6,7 +6,6 @@ from aind_slims_api.models.base import SlimsBaseModel
 from aind_slims_api.models.utils import UnitSpec
 
 
-
 class SlimsStreamsResult(SlimsBaseModel):
     """Model for a SLIMS Result Streams"""
     test_label: str = Field(
@@ -42,8 +41,8 @@ class SlimsStreamsResult(SlimsBaseModel):
     # Look up in ReferenceDataRecord table
     stream_modules_pk: Optional[List] = Field(
         default=None,
-        serialization_alias="rslt_cf_fk_injectionMaterial2_display",
-        validation_alias="rslt_cf_fk_injectionMaterial2_display"
+        serialization_alias="rslt_cf_fk_injectionMaterial2",
+        validation_alias="rslt_cf_fk_injectionMaterial2"
     )
     pk: Optional[int] = Field(
         None,
@@ -57,7 +56,7 @@ class SlimsStreamsResult(SlimsBaseModel):
     )
     _slims_table = "Result"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
-        "test_label": "Streams",
+        "test_name": "test_ephys_in_vivo_recording_stream",
     }
 
 
@@ -72,11 +71,6 @@ class SlimsStimulusEpochsResult(SlimsBaseModel):
         default=None,
         serialization_alias="rslt_cf_fk_mouseSession_display",
         validation_alias="rslt_cf_fk_mouseSession_display"
-    )
-    mouse_session_pk: Optional[int] = Field(
-        default=None,
-        serialization_alias="rslt_cf_fk_mouseSession",
-        validation_alias="rslt_cf_fk_mouseSession"
     )
     stimulus_device_names: Optional[str] = Field(
         default=None,
@@ -143,7 +137,15 @@ class SlimsStimulusEpochsResult(SlimsBaseModel):
         serialization_alias="rslt_fk_content",
         validation_alias="rslt_fk_content",
     )
+    mouse_session_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="rslt_cf_fk_mouseSession",
+        validation_alias="rslt_cf_fk_mouseSession"
+    )
     _slims_table = "Result"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "test_name": "test_stimulus_epochs",
+    }
 
 
 class SlimsMouseSessionResult(SlimsBaseModel):
@@ -153,15 +155,15 @@ class SlimsMouseSessionResult(SlimsBaseModel):
         serialization_alias="test_label",
         validation_alias="test_label"
     )
+    mouse_session_id: str = Field(
+        ...,
+        serialization_alias="rslt_uniqueIdentifier",
+        validation_alias="rslt_uniqueIdentifier"
+    )
     mouse_session: Optional[str] = Field(
         default=None,
         serialization_alias="rslt_cf_fk_mouseSession_display",
         validation_alias="rslt_cf_fk_mouseSession_display"
-    )
-    mouse_session_pk: Optional[int] = Field(
-        default=None,
-        serialization_alias="rslt_cf_fk_mouseSession",
-        validation_alias="rslt_cf_fk_mouseSession"
     )
     weight_prior_g: Annotated[float | None, UnitSpec("g")] = Field(
         default=None,
@@ -198,7 +200,15 @@ class SlimsMouseSessionResult(SlimsBaseModel):
         serialization_alias="rslt_fk_content",
         validation_alias="rslt_fk_content",
     )
+    mouse_session_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="rslt_cf_fk_mouseSession",
+        validation_alias="rslt_cf_fk_mouseSession"
+    )
     _slims_table = "Result"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "test_name": "test_session_information",
+    }
 
 
 class SlimsEphysInsertionResult(SlimsBaseModel):
@@ -244,4 +254,7 @@ class SlimsEphysInsertionResult(SlimsBaseModel):
         validation_alias="rslt_fk_content",
     )
     _slims_table = "Result"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "test_name": "test_ephys_insertion",
+    }
 
