@@ -82,6 +82,11 @@ class SlimsBehaviorSession(SlimsBaseModel):
         serialization_alias="cnvn_pk",
         validation_alias="cnvn_pk",
     )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="cnvn_createdOn",
+        validation_alias="cnvn_createdOn",
+    )
     mouse_pk: Optional[int] = Field(
         default=None,
         serialization_alias="cnvn_fk_content",

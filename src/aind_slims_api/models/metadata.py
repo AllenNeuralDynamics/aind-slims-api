@@ -1,7 +1,10 @@
 """Models for the metadata stored in SLIMS."""
 
-from pydantic import Field
+from datetime import datetime
 from typing import Optional
+
+from pydantic import Field
+
 from aind_slims_api.models.base import SlimsBaseModel
 
 
@@ -25,6 +28,11 @@ class SlimsMetadataReference(SlimsBaseModel):
     >>> metadata.json()["rig_id"]
     '323_EPHYS1_OPTO_2024-02-12'
 
+    ### Read latest attachment
+    >>> latest_attachment = client.fetch_attachment(
+    ...  metadata_reference,
+    ... )
+
     ### Write
     >>> import json
     >>> attachment_pk = client.add_attachment_content(
@@ -43,5 +51,10 @@ class SlimsMetadataReference(SlimsBaseModel):
         None,
         serialization_alias="rdrc_pk",
         validation_alias="rdrc_pk",
+    )
+    created_on: Optional[datetime] = Field(
+        None,
+        serialization_alias="rdrc_createdOn",
+        validation_alias="rdrc_createdOn",
     )
     _slims_table = "ReferenceDataRecord"

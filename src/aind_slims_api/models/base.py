@@ -34,6 +34,7 @@ class SlimsBaseModel(
     """
 
     pk: Optional[int] = None
+    created_on: Optional[datetime] = None
     json_entity: Optional[dict] = None
     _slims_table: ClassVar[SLIMS_TABLES]
     # base filters for model fetch

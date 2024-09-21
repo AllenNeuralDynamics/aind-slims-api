@@ -15,6 +15,7 @@ from aind_slims_api.core import SlimsAttachment, SlimsClient
 from aind_slims_api.exceptions import SlimsRecordNotFound
 from aind_slims_api.models.behavior_session import SlimsBehaviorSession
 from aind_slims_api.models.unit import SlimsUnit
+from aind_slims_api.models.user import SlimsUser
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / "resources"
 
@@ -339,12 +340,74 @@ class TestSlimsClient(unittest.TestCase):
         self.assertEqual(1, len(validated))
         self.assertEqual(1, mock_log.call_count)
 
-    def test_resolve_model_alias_invalid(self):
-        """Tests resolve_model_alias method raises expected error with an
-        invalid alias name.
-        """
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_model_criterion(self, mock_slims_fetch: MagicMock):
+        """Tests fetch_model method with a criterion."""
+        mock_slims_fetch.return_value = self.example_fetch_user_response
+        self.example_client.fetch_model(SlimsUser, equals("username", "LKim"))
+        mock_slims_fetch.assert_called_once()
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_model_criterion_junction(self, mock_slims_fetch: MagicMock):
+        """Tests fetch_model method with a junction criterion."""
+        mock_slims_fetch.return_value = self.example_fetch_user_response
+        self.example_client.fetch_model(
+            SlimsUser,
+            conjunction().add(equals("username", "LKim")),
+        )
+        mock_slims_fetch.assert_called_once()
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_model_criterion_invalid_criterion_type(
+        self, mock_slims_fetch: MagicMock
+    ):
+        """Tests fetch_model method with an invalid criterion type."""
+        mock_slims_fetch.return_value = []
         with self.assertRaises(ValueError):
-            self.example_client.resolve_model_alias(SlimsUnit, "not_an_alias")
+            self.example_client.fetch_model(SlimsUser, equals("username", 1))
+        mock_slims_fetch.assert_not_called()
+
+    @patch("slims.internal._SlimsApi.get_entities")
+    def test_fetch_attachment(self, mock_get_entities: MagicMock):
+        """Tests fetch_attachment method success."""
+        mock_get_entities.return_value = self.example_fetch_attachment_response
+        unit = SlimsUnit.model_validate(
+            Record(
+                json_entity=self.example_fetch_unit_response[0].json_entity,
+                slims_api=self.example_client.db.slims_api,
+            )
+        )
+        self.example_client.fetch_attachment(unit, equals("name", "test"))
+
+    @patch("slims.internal._SlimsApi.get_entities")
+    def test_fetch_attachment_no_attachments(self, mock_get_entities: MagicMock):
+        """Tests fetch_attachment method failure due to no attachments."""
+        mock_get_entities.return_value = []
+        unit = SlimsUnit.model_validate(
+            Record(
+                json_entity=self.example_fetch_unit_response[0].json_entity,
+                slims_api=self.example_client.db.slims_api,
+            )
+        )
+        with self.assertRaises(SlimsRecordNotFound):
+            self.example_client.fetch_attachment(unit)
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_str_sort(self, mock_slims_fetch: MagicMock):
+        """Tests fetch method when sort is a string."""
+        mock_slims_fetch.return_value = []
+        self.example_client.fetch(SlimsUser._slims_table, sort="username")
+        mock_slims_fetch.assert_called_once()
+
+    @patch("slims.slims.Slims.fetch")
+    def test_fetch_models_invalid_start_end(self, mock_slims_fetch: MagicMock):
+        """Tests fetch_model method failure due to only supplying start or end."""
+        mock_slims_fetch.return_value = []
+        with self.assertRaises(ValueError):
+            self.example_client.fetch_models(SlimsUser._slims_table, start=1)
+        with self.assertRaises(ValueError):
+            self.example_client.fetch_models(SlimsUser._slims_table, end=1)
+        mock_slims_fetch.assert_not_called()
 
 
 if __name__ == "__main__":

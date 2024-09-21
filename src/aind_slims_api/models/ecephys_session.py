@@ -148,6 +148,11 @@ class SlimsStimulusEpochsResult(SlimsBaseModel):
         serialization_alias="rslt_cf_fk_mouseSession",
         validation_alias="rslt_cf_fk_mouseSession",
     )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="rslt_createdOn",
+        validation_alias="rslt_createdOn",
+    )
     _slims_table = "Result"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "test_name": "test_stimulus_epochs",
@@ -210,6 +215,11 @@ class SlimsMouseSessionResult(SlimsBaseModel):
         serialization_alias="rslt_cf_fk_mouseSession",
         validation_alias="rslt_cf_fk_mouseSession",
     )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="rslt_createdOn",
+        validation_alias="rslt_createdOn",
+    )
     _slims_table = "Result"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "test_name": "test_session_information",
@@ -256,6 +266,11 @@ class SlimsEphysInsertionResult(SlimsBaseModel):
         None,
         serialization_alias="rslt_fk_content",
         validation_alias="rslt_fk_content",
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="rslt_createdOn",
+        validation_alias="rslt_createdOn",
     )
     _slims_table = "Result"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
