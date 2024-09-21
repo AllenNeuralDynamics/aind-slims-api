@@ -1,5 +1,6 @@
 """Contains a model for an ecephys result stored in SLIMS."""
 
+from datetime import datetime
 from typing import Annotated, List, Optional, ClassVar
 from pydantic import Field
 from aind_slims_api.models.base import SlimsBaseModel
@@ -17,11 +18,6 @@ class SlimsStreamsResult(SlimsBaseModel):
         default=None,
         serialization_alias="rslt_cf_fk_mouseSession_display",
         validation_alias="rslt_cf_fk_mouseSession_display"
-    )
-    mouse_session_pk: Optional[int] = Field(
-        default=None,
-        serialization_alias="rslt_cf_fk_mouseSession",
-        validation_alias="rslt_cf_fk_mouseSession"
     )
     stream_modalities: Optional[List] = Field(
         default=None,
@@ -53,6 +49,16 @@ class SlimsStreamsResult(SlimsBaseModel):
         None,
         serialization_alias="rslt_fk_content",
         validation_alias="rslt_fk_content",
+    )
+    mouse_session_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="rslt_cf_fk_mouseSession",
+        validation_alias="rslt_cf_fk_mouseSession"
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="rslt_createdOn",
+        validation_alias="rslt_createdOn"
     )
     _slims_table = "Result"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
@@ -257,4 +263,3 @@ class SlimsEphysInsertionResult(SlimsBaseModel):
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "test_name": "test_ephys_insertion",
     }
-
