@@ -295,8 +295,7 @@ class TestSlimsClient(unittest.TestCase):
             "test",
             "some test content",
         )
-        self.assertEqual(
-            result, int(self.example_add_attachments_response_text))
+        self.assertEqual(result, int(self.example_add_attachments_response_text))
         self.assertEqual(mock_post.call_count, 1)
         self.assertEqual(
             mock_post.mock_calls[0].kwargs["body"]["atln_recordPk"], unit_pk
