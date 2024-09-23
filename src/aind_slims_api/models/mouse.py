@@ -47,6 +47,16 @@ class SlimsMouseContent(SlimsBaseModel):
         serialization_alias="cntn_pk",
         validation_alias="cntn_pk",
     )
+    status: Optional[int] = Field(
+        default=28,
+        serialization_alias="cntn_fk_status",
+        validation_alias="cntn_fk_status",
+    )
+    content_type: Optional[int] = Field(
+        default=5,
+        serialization_alias="cntn_fk_contentType",
+        validation_alias="cntn_fk_contentType",
+    )
 
     _slims_table = "Content"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
