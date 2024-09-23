@@ -1,0 +1,681 @@
+[{
+    "pk": 2329,
+    "tableName": "Result",
+    "columns": [
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_content",
+            "title": "Content",
+            "position": 0,
+            "value": 3135,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Content",
+            "displayValue": "725804",
+            "displayField": "cntn_id",
+            "foreignDisplayColumn": "cntn_id"
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_analyte",
+            "title": "Analyte",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Analyte",
+            "displayValue": null,
+            "displayField": "nlyt_name",
+            "foreignDisplayColumn": "nlyt_name"
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_test",
+            "title": "Test",
+            "position": 2,
+            "value": 71,
+            "hidden": false,
+            "editable": false,
+            "foreignTable": "Test",
+            "displayValue": "Mouse Session",
+            "displayField": "test_label",
+            "foreignDisplayColumn": "test_label"
+        },
+        {
+            "datatype": "STRING",
+            "name": "test_name",
+            "title": "Name",
+            "position": 3,
+            "value": "test_session_information",
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "STRING",
+            "name": "test_label",
+            "title": "Label",
+            "position": 4,
+            "value": "Mouse Session",
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "BOOLEAN",
+            "name": "test_requireAnalyte",
+            "title": "Requires analyte",
+            "position": 5,
+            "value": false,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "STRING",
+            "name": "test_dynamicFormat",
+            "title": "Format observations",
+            "position": 6,
+            "value": null,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_resultObservationPoint",
+            "title": "Observation",
+            "position": 7,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "ResultObservationPoint",
+            "displayValue": null,
+            "displayField": "rsbp_label",
+            "foreignDisplayColumn": "rsbp_label"
+        },
+        {
+            "datatype": "STRING",
+            "name": "rsbp_label",
+            "title": "Label",
+            "position": 8,
+            "value": null,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "INTEGER",
+            "name": "rsbp_offset",
+            "title": "Offset",
+            "position": 9,
+            "value": null,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "BOOLEAN",
+            "name": "rslt_manualValue",
+            "title": "Manual value",
+            "position": 10,
+            "value": false,
+            "hidden": false,
+            "editable": true
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_cf_fk_instrument",
+            "title": "Instrument",
+            "position": 11,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Instrument",
+            "displayValue": null,
+            "displayField": "rslt_cf_fk_instrument_display",
+            "foreignDisplayColumn": "nstr_name"
+        },
+        {
+            "datatype": "INTEGER",
+            "name": "rslt_cf_trajectorySequence",
+            "title": "Session Sequence",
+            "position": 12,
+            "value": null,
+            "hidden": false,
+            "editable": true
+        },
+        {
+            "datatype": "QUANTITY",
+            "name": "rslt_cf_animalWeightPrior",
+            "title": "Animal Weight Prior",
+            "position": 13,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "unit": "g"
+        },
+        {
+            "datatype": "QUANTITY",
+            "name": "rslt_cf_animalWeightPost",
+            "title": "Animal Weight Post",
+            "position": 14,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "unit": "g"
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_cf_fk_rewardDelivery",
+            "title": "Reward Delivery",
+            "position": 15,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "ReferenceDataRecord",
+            "displayValue": null,
+            "displayField": "rslt_cf_fk_rewardDelivery_display",
+            "foreignDisplayColumn": "rdrc_name"
+        },
+        {
+            "datatype": "STRING",
+            "name": "rslt_cf_rewardDelivery",
+            "title": "Reward Delivery",
+            "position": 16,
+            "value": null,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "QUANTITY",
+            "name": "rslt_cf_rewardConsumedvolume",
+            "title": "Reward Consumed",
+            "position": 17,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "unit": "ml"
+        },
+        {
+            "datatype": "STRING",
+            "name": "rslt_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 18,
+            "value": "RSLT0000002377",
+            "hidden": false,
+            "editable": true
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_stabilityStudy",
+            "title": "Stability study",
+            "position": 19,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "StabilityStudy",
+            "displayValue": null,
+            "displayField": "stsd_name",
+            "foreignDisplayColumn": "stsd_name"
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_stabilityStudyStorage",
+            "title": "Storage condition",
+            "position": 20,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "StabilityStudyStorage",
+            "displayValue": null,
+            "displayField": "storageName",
+            "foreignDisplayColumn": "sssr_uniqueIdentifier"
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_stabilityStudyTimepoint",
+            "title": "Timepoint",
+            "position": 21,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "StabilityStudyTimepoint",
+            "displayValue": null,
+            "displayField": "timepointName",
+            "foreignDisplayColumn": "sstp_uniqueIdentifier"
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_batch",
+            "title": "Batch",
+            "position": 22,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Content",
+            "displayValue": null,
+            "displayField": "enrolledBatch",
+            "foreignDisplayColumn": "cntn_id"
+        },
+        {
+            "datatype": "ENUM",
+            "name": "rslt_aggregationMethod",
+            "title": "Aggregation method",
+            "position": 23,
+            "value": null,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "STRING",
+            "name": "rslt_eventSummary",
+            "title": "Event summary",
+            "position": 24,
+            "value": null,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "DATE",
+            "name": "rslt_valueEnteredOn",
+            "title": "Value entered on",
+            "position": 25,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_filler",
+            "title": "Filler",
+            "position": 26,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_status",
+            "title": "Status",
+            "position": 27,
+            "value": 12,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Status",
+            "displayValue": "Pending",
+            "displayField": "stts_name",
+            "foreignDisplayColumn": "stts_name"
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_workList",
+            "title": "Worklist",
+            "position": 28,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "WorkList",
+            "displayValue": null,
+            "displayField": "wrkl_name",
+            "foreignDisplayColumn": "wrkl_name"
+        },
+        {
+            "datatype": "DATE",
+            "name": "rslt_workListDate",
+            "title": "Worklist date",
+            "position": 29,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+        },
+        {
+            "datatype": "STRING",
+            "name": "rslt_qcWarning",
+            "title": "Warning",
+            "position": 30,
+            "value": null,
+            "hidden": false,
+            "editable": true
+        },
+        {
+            "datatype": "BOOLEAN",
+            "name": "rslt_qcMarked",
+            "title": "Marked",
+            "position": 31,
+            "value": false,
+            "hidden": false,
+            "editable": true
+        },
+        {
+            "datatype": "INTEGER",
+            "name": "rslt_qcCardPosition",
+            "title": "Position",
+            "position": 32,
+            "value": null,
+            "hidden": false,
+            "editable": true
+        },
+        {
+            "datatype": "BOOLEAN",
+            "name": "rslt_isARepeat",
+            "title": "Is a repeat",
+            "position": 33,
+            "value": false,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "BOOLEAN",
+            "name": "rslt_isRepeated",
+            "title": "Is repeated",
+            "position": 34,
+            "value": false,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "BOOLEAN",
+            "name": "rslt_report",
+            "title": "Report",
+            "position": 35,
+            "value": true,
+            "hidden": false,
+            "editable": true
+        },
+        {
+            "datatype": "STRING",
+            "name": "rslt_createdBy",
+            "title": "Created by",
+            "position": 36,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+        },
+        {
+            "datatype": "DATE",
+            "name": "rslt_createdOn",
+            "title": "Created on",
+            "position": 37,
+            "value": 1724092556053,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+        },
+        {
+            "datatype": "STRING",
+            "name": "rslt_modifiedBy",
+            "title": "Modified by",
+            "position": 38,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+        },
+        {
+            "datatype": "DATE",
+            "name": "rslt_modifiedOn",
+            "title": "Modified on",
+            "position": 39,
+            "value": 1724112551323,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+        },
+        {
+            "datatype": "INTEGER",
+            "name": "tsgr_seqNo",
+            "title": "Seq no",
+            "position": 40,
+            "value": null,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "INTEGER",
+            "name": "test_seqNo",
+            "title": "Seq no",
+            "position": 41,
+            "value": null,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "STRING",
+            "name": "grps_groupName",
+            "title": "Name",
+            "position": 42,
+            "value": null,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "STRING",
+            "name": "stts_name",
+            "title": "Name",
+            "position": 43,
+            "value": "Pending",
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_previousStatus",
+            "title": "Previous status",
+            "position": 44,
+            "value": 12,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Status",
+            "displayValue": "Pending",
+            "displayField": "stts_namePrevious",
+            "foreignDisplayColumn": "stts_name"
+        },
+        {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 45,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "STRING",
+            "name": "stts_namePrevious",
+            "title": "stts_namePrevious",
+            "position": 46,
+            "value": "Pending",
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "BOOLEAN",
+            "name": "test_readOnly",
+            "title": "Read only",
+            "position": 47,
+            "value": false,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "BOOLEAN",
+            "name": "rslt_manuallyCreated",
+            "title": "rslt_manuallyCreated",
+            "position": 48,
+            "value": null,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_timepointEnrollment",
+            "title": "Timepoint enrollment",
+            "position": 49,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "TimepointEnrollment",
+            "displayValue": null,
+            "displayField": "tpnr_uniqueIdentifier",
+            "foreignDisplayColumn": "tpnr_uniqueIdentifier"
+        },
+        {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 50,
+            "value": 1724092554658,
+            "hidden": true,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+        },
+        {
+            "datatype": "INTEGER",
+            "name": "rslt_pk",
+            "title": "rslt_pk",
+            "position": 51,
+            "value": 2329,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "STRING",
+            "name": "user_userName",
+            "title": "User name",
+            "position": 52,
+            "value": null,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "BOOLEAN",
+            "name": "rslt_isMainTest",
+            "title": "Is main test",
+            "position": 53,
+            "value": false,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_request",
+            "title": "Request",
+            "position": 54,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Request",
+            "displayValue": null
+        },
+        {
+            "datatype": "INTEGER",
+            "name": "tsgr_fk_mainTest",
+            "title": "Main test",
+            "position": 55,
+            "value": null,
+            "hidden": true,
+            "editable": true
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_experimentRunStep",
+            "title": "Protocol run step",
+            "position": 56,
+            "value": 64456,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+        },
+        {
+            "datatype": "FOREIGN_KEY",
+            "name": "rslt_fk_order",
+            "title": "Order",
+            "position": 57,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Order",
+            "displayValue": null,
+            "displayField": "ordr_barCode",
+            "foreignDisplayColumn": "ordr_barCode"
+        }
+    ],
+    "canUpdate": true,
+    "canDelete": true,
+    "links": [
+        {
+            "rel": "self",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result/2329"
+        },
+        {
+            "rel": "rslt_fk_content",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content/3135"
+        },
+        {
+            "rel": "rslt_fk_test",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Test/71"
+        },
+        {
+            "rel": "rslt_fk_status",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Status/12"
+        },
+        {
+            "rel": "rslt_fk_previousStatus",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Status/12"
+        },
+        {
+            "rel": "rslt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64456"
+        },
+        {
+            "rel": "-rggr_fk_result",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ResultAggregation?rggr_fk_result=2329"
+        },
+        {
+            "rel": "-rggr_fk_aggregation",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ResultAggregation?rggr_fk_aggregation=2329"
+        },
+        {
+            "rel": "-rqtm_fk_result",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ResultQcTemplate?rqtm_fk_result=2329"
+        },
+        {
+            "rel": "-rlvl_fk_result",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleEvaluation?rlvl_fk_result=2329"
+        },
+        {
+            "rel": "-rslt_cf_fk_burr",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_burr=2329"
+        },
+        {
+            "rel": "-rslt_cf_fk_ephysTrajectory",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_ephysTrajectory=2329"
+        },
+        {
+            "rel": "-rslt_cf_fk_mouseSession",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_mouseSession=2329"
+        },
+        {
+            "rel": "-qrrv_fk_result",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QcResultRuleEvaluation?qrrv_fk_result=2329"
+        },
+        {
+            "rel": "attachments",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/Result/2329"
+        }
+    ]
+}
+    ]

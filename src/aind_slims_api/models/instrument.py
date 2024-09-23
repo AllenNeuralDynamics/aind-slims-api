@@ -1,5 +1,6 @@
 """Contains a model for the instrument content, and a method for fetching it"""
 
+from datetime import datetime
 from typing import Optional
 
 from pydantic import Field
@@ -28,6 +29,11 @@ class SlimsInstrument(SlimsBaseModel):
         default=None,
         serialization_alias="nstr_pk",
         validation_alias="nstr_pk",
+    )
+    created_on: Optional[datetime] = Field(
+        None,
+        serialization_alias="nstr_createdOn",
+        validation_alias="nstr_createdOn",
     )
     _slims_table = "Instrument"
 

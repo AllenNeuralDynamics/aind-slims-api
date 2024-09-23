@@ -34,12 +34,11 @@ class SlimsWaterRestrictionEvent(SlimsBaseModel):
     ... )
 
     ### Read
-    >>> water_restriction_events = client.fetch_models(
+    >>> water_restriction_event = client.fetch_model(
     ...  models.SlimsWaterRestrictionEvent,
     ...  mouse_pk=mouse.pk,
-    ...  sort=["start_date"],
     ... )
-    >>> water_restriction_events[-1].target_weight_fraction
+    >>> water_restriction_event.target_weight_fraction
     0.9
     """
 
@@ -69,6 +68,11 @@ class SlimsWaterRestrictionEvent(SlimsBaseModel):
         None,
         serialization_alias="cnvn_pk",
         validation_alias="cnvn_pk",
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="cnvn_createdOn",
+        validation_alias="cnvn_createdOn",
     )
     mouse_pk: Optional[int] = Field(
         None,
