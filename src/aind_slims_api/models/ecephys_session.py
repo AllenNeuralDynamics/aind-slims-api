@@ -276,3 +276,122 @@ class SlimsEphysInsertionResult(SlimsBaseModel):
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "test_name": "test_ephys_insertion",
     }
+
+
+class EphysLoggingRdrc(SlimsBaseModel):
+    """Ephys Logging"""
+    unique_identifier: str = Field(
+        ...,
+        serialization_alias="rdrc_uniqueIdentifier",
+        validation_alias="rdrc_uniqueIdentifier"
+    )
+    # DOME MODULE FIELDS
+    dm_implant_hole: Optional[float] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_bsl",
+        validation_alias="rdrc_cf_bsl"
+    )
+    dm_assembly_name: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_assemblyName",
+        validation_alias="rdrc_cf_assemblyName"
+    )
+    dm_probe_name: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_probeName",
+        validation_alias="rdrc_cf_probeName"
+    )
+    dm_primary_targeted_structure: Optional[str]  = Field(
+        default=None,
+        serialization_alias="rdrc_cf_fk_primaryTargetedStructure_display",
+        validation_alias="rdrc_cf_fk_primaryTargetedStructure_display"
+    )
+    dm_secondary_targeted_structures: Optional[List] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_fk_secondaryTargetedStructures2_display",
+        validation_alias="rdrc_cf_fk_secondaryTargetedStructures2_display"
+    )
+    dm_arc_angle: Annotated[float | None, UnitSpec("degree")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_arcAngle",
+        validation_alias="rdrc_cf_arcAngle"
+    )
+    dm_module_angle: Annotated[float | None, UnitSpec("degree")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_moduleAngle",
+        validation_alias="rdrc_cf_moduleAngle"
+    )
+    dm_rotation_angle: Annotated[float | None, UnitSpec("degree")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_rotationAngle",
+        validation_alias="rdrc_cf_rotationAngle"
+    )
+    dm_coordinate_transform: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_manipulatorCalibrations_display",
+        validation_alias="rdrc_cf_manipulatorCalibrations_display"
+    )
+    dm_ccf_coordinate_ap: Annotated[float | None, UnitSpec("um")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_targetedCcfCoordinatesAp",
+        validation_alias="rdrc_cf_targetedCcfCoordinatesAp"
+    )
+    dm_ccf_coordinate_ml: Annotated[float | None, UnitSpec("um")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_targetedCcfCoordinatesMl",
+        validation_alias="rdrc_cf_targetedCcfCoordinatesMl"
+    )
+    dm_ccf_coordinate_dv: Annotated[float | None, UnitSpec("um")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_targetedCcfCoordinatesDv",
+        validation_alias="rdrc_cf_targetedCcfCoordinatesDv"
+    )
+    dm_ccf_version: Optional[float] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_ccfVersion",
+        validation_alias="rdrc_cf_ccfVersion"
+    )
+    # todo: bregma units are editable, we can't assume um (could be mm)
+    dm_bregma_target_ap: Annotated[float | None, UnitSpec("um")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_targetAp",
+        validation_alias="rdrc_cf_targetAp"
+    )
+    dm_bregma_target_ml: Annotated[float | None, UnitSpec("um")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_targetMl",
+        validation_alias="rdrc_cf_targetMl"
+    )
+    dm_bregma_target_dv: Annotated[float | None, UnitSpec("um")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_targetDv",
+        validation_alias="rdrc_cf_targetDv"
+    )
+    dm_surface_z: Annotated[float | None, UnitSpec("um")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_surfaceZ",
+        validation_alias="rdrc_cf_surfaceZ"
+    )
+    dm_manipulator_x: Annotated[float | None, UnitSpec("um")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_manipulatorX",
+        validation_alias="rdrc_cf_manipulatorX"
+    )
+    dm_manipulator_y: Annotated[float | None, UnitSpec("um")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_manipulatory",
+        validation_alias="rdrc_cf_manipulatory"
+    )
+    dm_manipulator_z: Annotated[float | None, UnitSpec("um")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_manipulatorZ",
+        validation_alias="rdrc_cf_manipulatorZ"
+    )
+    dm_dye: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_fk_dye_display",
+        validation_alias="rdrc_cf_fk_dye_display"
+    )
+
+
+
