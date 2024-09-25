@@ -1,5 +1,6 @@
 """Contains a model for the mouse content, and a method for fetching it"""
 
+from datetime import datetime
 from typing import Annotated, ClassVar, Optional
 
 from pydantic import BeforeValidator, Field
@@ -47,7 +48,21 @@ class SlimsMouseContent(SlimsBaseModel):
         serialization_alias="cntn_pk",
         validation_alias="cntn_pk",
     )
-
+    status: Optional[int] = Field(
+        default=28,
+        serialization_alias="cntn_fk_status",
+        validation_alias="cntn_fk_status",
+    )
+    content_type: Optional[int] = Field(
+        default=5,
+        serialization_alias="cntn_fk_contentType",
+        validation_alias="cntn_fk_contentType",
+    )
+    created_on: Optional[datetime] = Field(
+        None,
+        serialization_alias="cntn_createdOn",
+        validation_alias="cntn_createdOn",
+    )
     _slims_table = "Content"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "cntp_name": "Mouse",
