@@ -33,7 +33,7 @@ class SlimsBaseModel(
     Datetime fields will be serialized to an integer ms timestamp
     """
 
-    pk: Optional[int] = None
+    # pk: Optional[int] = None
     created_on: Optional[datetime] = None
     json_entity: Optional[dict] = None
     _slims_table: ClassVar[SLIMS_TABLES]

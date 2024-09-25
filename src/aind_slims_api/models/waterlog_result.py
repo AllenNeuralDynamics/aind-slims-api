@@ -18,13 +18,14 @@ class SlimsWaterlogResult(SlimsBaseModel):
     >>> from aind_slims_api.core import SlimsClient
     >>> from aind_slims_api import models
     >>> client = SlimsClient()
-    >>> mouse = client.fetch_model(models.SlimsMouseContent, barcode="00000000")
+    >>> mouse_pk = client.fetch_pk("Content", cntn_barCode="00000000",
+    ...  cntp_name="Mouse"
+    ... )
     >>> test_pk = client.fetch_pk("Test", test_name="test_waterlog")
 
     Write waterlog result.
     >>> waterlog_result = client.add_model(
     ...  models.SlimsWaterlogResult(
-    ...   mouse_pk=mouse.pk,
     ...   date=datetime(2021,1,1),
     ...   weight_g=20.0,
     ...   water_earned_ml=5.0,
@@ -33,19 +34,22 @@ class SlimsWaterlogResult(SlimsBaseModel):
     ...   total_water_ml=10.0,
     ...   comments="comments",
     ...   workstation="aibs-computer-id",
-    ...   test_pk=test_pk,
-    ...  )
+    ...  ),
+    ...  overloads={
+    ...   "rslt_fk_content": mouse_pk,
+    ...   "rslt_fk_test": test_pk,
+    ...  }
     ... )
 
-    Read a waterlog result.
+    Read waterlog results.
     >>> waterlog_result = client.fetch_model(
     ...  models.SlimsWaterlogResult,
-    ...  mouse_pk=mouse.pk,
+    ...  rslt_fk_content=mouse_pk,
+    ...  rslt_fk_test=test_pk,
     ... )
     >>> waterlog_result.weight_g
     20.0
     """
-
     date: datetime = Field(
         datetime.now(),
         serialization_alias="rslt_cf_datePerformed",
@@ -101,29 +105,5 @@ class SlimsWaterlogResult(SlimsBaseModel):
         serialization_alias="rslt_cf_swVersion",
         validation_alias="rslt_cf_swVersion",
     )
-    pk: Optional[int] = Field(
-        None,
-        serialization_alias="rslt_pk",
-        validation_alias="rslt_pk",
-    )
-    created_on: Optional[datetime] = Field(
-        None,
-        serialization_alias="rslt_createdOn",
-        validation_alias="rslt_createdOn",
-    )
-    mouse_pk: Optional[int] = Field(
-        None,
-        serialization_alias="rslt_fk_content",
-        validation_alias="rslt_fk_content",
-    )
-    test_pk: Optional[int] = Field(
-        None,
-        serialization_alias="rslt_fk_test",
-        validation_alias="rslt_fk_test",
-    )
 
     _slims_table = "Result"
-
-    _base_fetch_filters: ClassVar[dict[str, str]] = {
-        "test_name": "test_waterlog",
-    }

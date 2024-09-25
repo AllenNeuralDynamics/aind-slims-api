@@ -143,20 +143,13 @@ class SlimsClient:
         if isinstance(sort, str):
             sort = [sort]
 
-        criteria, resolved_sort, start, end = resolve_filter_args(
-            model,
+        response = self.fetch(
+            model._slims_table,
             *args,
             sort=sort,
             start=start,
             end=end,
             **kwargs,
-        )
-        response = self.fetch(
-            model._slims_table,
-            *criteria,
-            sort=resolved_sort,
-            start=start,
-            end=end,
         )
         return self._validate_models(model, response)
 
@@ -325,30 +318,57 @@ class SlimsClient:
         queries = [f"?{k}={v}" for k, v in kwargs.items()]
         return base_url + "".join(queries)
 
+    # def add_model(
+    #     self, model: SlimsBaseModelTypeVar, *args, **kwargs
+    # ) -> SlimsBaseModelTypeVar:
+    #     """Given a SlimsBaseModel object, add it to SLIMS
+    #     Args
+    #         model (SlimsBaseModel): object to add
+    #         *args (str): fields to include in the serialization
+    #         **kwargs: passed to model.model_dump()
+
+    #     Returns
+    #         An instance of the same type of model, with data from
+    #         the resulting SLIMS record
+    #     """
+    #     fields_to_include = set(args) or None
+    #     fields_to_exclude = set(kwargs.get("exclude", []))
+    #     fields_to_exclude.update(["pk", "attachments", "slims_api"])
+    #     rtn = self.add(
+    #         model._slims_table,
+    #         model.model_dump(
+    #             include=fields_to_include,
+    #             exclude=fields_to_exclude,
+    #             **kwargs,
+    #             by_alias=True,
+    #         ),
+    #     )
+    #     return type(model).model_validate(rtn)
+    
     def add_model(
-        self, model: SlimsBaseModelTypeVar, *args, **kwargs
+        self,
+        model: SlimsBaseModelTypeVar,
+        overloads: dict[str, Any] = {},
     ) -> SlimsBaseModelTypeVar:
         """Given a SlimsBaseModel object, add it to SLIMS
-        Args
-            model (SlimsBaseModel): object to add
-            *args (str): fields to include in the serialization
-            **kwargs: passed to model.model_dump()
+
+        overloads: dict[str, Any]
+            Fields name, field value pairs to add to data post validation
 
         Returns
             An instance of the same type of model, with data from
             the resulting SLIMS record
+
+        Notes
+        -----
+        - overloads are added after validation, so they can overwrite
+         validated fields
         """
-        fields_to_include = set(args) or None
-        fields_to_exclude = set(kwargs.get("exclude", []))
-        fields_to_exclude.update(["pk", "attachments", "slims_api"])
+        dumped = model.model_dump(by_alias=True)
+        dumped.update(overloads)
         rtn = self.add(
             model._slims_table,
-            model.model_dump(
-                include=fields_to_include,
-                exclude=fields_to_exclude,
-                **kwargs,
-                by_alias=True,
-            ),
+            dumped,
         )
         return type(model).model_validate(rtn)
 
