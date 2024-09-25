@@ -3,8 +3,58 @@
 from datetime import datetime
 from typing import Annotated, List, Optional, ClassVar
 from pydantic import Field
+from slims.slims import Slims
+
 from aind_slims_api.models.base import SlimsBaseModel
 from aind_slims_api.models.utils import UnitSpec
+
+class SlimsExperimentRunStepContent(SlimsBaseModel):
+    """Model for a SLIMS ExperimentRunStepContent"""
+    pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="xrsc_pk",
+        validation_alias="xrsc_pk"
+    )
+    mouse_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="xrsc_fk_content",
+        validation_alias="xrsc_fk_content"
+    )
+    runstep_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="xrsc_fk_experimentRunStep",
+        validation_alias="xrsc_fk_experimentRunStep"
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="xrsc_createdOn",
+        validation_alias="xrsc_createdOn",
+    )
+    _slims_table = "ExperimentRunStepContent"
+
+class SlimsExperimentRunStep(SlimsBaseModel):
+    """Model for a Slims ExperimentRunStep"""
+    step_name: Optional[str] = Field(
+        default=None,
+        serialization_alias="xprs_name",
+        validation_alias="xprs_name"
+    )
+    pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="xprs_pk",
+        validation_alias="xprs_pk"
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="xprs_createdOn",
+        validation_alias="xprs_createdOn",
+    )
+    result_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="rslt_fk_experimentRunStep",
+        validation_alias="rslt_fk_experimentRunStep"
+    )
+    _slims_table = "ExperimentRunStep"
 
 
 class SlimsStreamsResult(SlimsBaseModel):
@@ -65,6 +115,7 @@ class SlimsStreamsResult(SlimsBaseModel):
     }
 
 
+# TODO: Do we also need to check StimulusEpochs in ReferenceData?
 class SlimsStimulusEpochsResult(SlimsBaseModel):
     """Model for a SLIMS Result Stimulus Epochs"""
 
@@ -286,6 +337,7 @@ class EphysLoggingRdrc(SlimsBaseModel):
         validation_alias="rdrc_uniqueIdentifier"
     )
     # DOME MODULE FIELDS
+    # Dome Modules -> Stick Microscopes,
     dm_implant_hole: Optional[float] = Field(
         default=None,
         serialization_alias="rdrc_cf_bsl",
@@ -392,6 +444,7 @@ class EphysLoggingRdrc(SlimsBaseModel):
         serialization_alias="rdrc_cf_fk_dye_display",
         validation_alias="rdrc_cf_fk_dye_display"
     )
+    # TODO: add fields for calibrations, maintenance, fiber connections
 
 
 
