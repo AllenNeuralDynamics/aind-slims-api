@@ -1,6 +1,7 @@
 """Contains a model for an ecephys result stored in SLIMS."""
 
 from datetime import datetime
+from email.policy import default
 from typing import Annotated, List, Optional, ClassVar
 from pydantic import Field
 from slims.slims import Slims
@@ -34,32 +35,46 @@ class SlimsExperimentRunStepContent(SlimsBaseModel):
 
 class SlimsExperimentRunStep(SlimsBaseModel):
     """Model for a Slims ExperimentRunStep"""
-    step_name: Optional[str] = Field(
-        default=None,
-        serialization_alias="xprs_name",
-        validation_alias="xprs_name"
-    )
     pk: Optional[int] = Field(
         default=None,
         serialization_alias="xprs_pk",
         validation_alias="xprs_pk"
+    )
+    name: Optional[str] = Field(
+        default=None,
+        serialization_alias="xprs_name",
+        validation_alias="xprs_name"
+    )
+    session_type: Optional[str] = Field(
+        default=None,
+        serialization_alias="xprs_cf_sessionType",
+        validation_alias="xprs_cf_sessionType"
+    )
+    mouse_platform_name: Optional[str] = Field(
+        default=None,
+        serialization_alias="xprs_cf_mousePlatformName",
+        validation_alias="xprs_cf_mousePlatformName"
+    )
+    active_mouse_platform: Optional[bool] = Field(
+        default=None,
+        serialization_alias="xprs_cf_activeMousePlatform",
+        validation_alias="xprs_cf_activeMousePlatform"
     )
     created_on: Optional[datetime] = Field(
         default=None,
         serialization_alias="xprs_createdOn",
         validation_alias="xprs_createdOn",
     )
-    result_pk: Optional[int] = Field(
+    experimentrun_pk: Optional[int] = Field(
         default=None,
-        serialization_alias="rslt_fk_experimentRunStep",
-        validation_alias="rslt_fk_experimentRunStep"
+        serialization_alias="xprs_fk_experimentRun",
+        validation_alias="xprs_fk_experimentRun"
     )
     _slims_table = "ExperimentRunStep"
 
 
 class SlimsStreamsResult(SlimsBaseModel):
     """Model for a SLIMS Result Streams"""
-
     test_label: str = Field(
         "Streams", serialization_alias="test_label", validation_alias="test_label"
     )
@@ -103,6 +118,11 @@ class SlimsStreamsResult(SlimsBaseModel):
         default=None,
         serialization_alias="rslt_cf_fk_mouseSession",
         validation_alias="rslt_cf_fk_mouseSession",
+    )
+    experiment_run_step_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="rslt_fk_experimentRunStep",
+        validation_alias="rslt_fk_experimentRunStep"
     )
     created_on: Optional[datetime] = Field(
         default=None,
@@ -199,6 +219,11 @@ class SlimsStimulusEpochsResult(SlimsBaseModel):
         serialization_alias="rslt_cf_fk_mouseSession",
         validation_alias="rslt_cf_fk_mouseSession",
     )
+    experiment_run_step_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="rslt_fk_experimentRunStep",
+        validation_alias="rslt_fk_experimentRunStep"
+    )
     created_on: Optional[datetime] = Field(
         default=None,
         serialization_alias="rslt_createdOn",
@@ -212,7 +237,6 @@ class SlimsStimulusEpochsResult(SlimsBaseModel):
 
 class SlimsMouseSessionResult(SlimsBaseModel):
     """Model for a SLIMS Result Mouse Session"""
-
     test_label: str = Field(
         "Mouse Session", serialization_alias="test_label", validation_alias="test_label"
     )
@@ -265,6 +289,11 @@ class SlimsMouseSessionResult(SlimsBaseModel):
         default=None,
         serialization_alias="rslt_cf_fk_mouseSession",
         validation_alias="rslt_cf_fk_mouseSession",
+    )
+    experiment_run_step_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="rslt_fk_experimentRunStep",
+        validation_alias="rslt_fk_experimentRunStep"
     )
     created_on: Optional[datetime] = Field(
         default=None,
@@ -403,7 +432,7 @@ class EphysLoggingRdrc(SlimsBaseModel):
         serialization_alias="rdrc_cf_ccfVersion",
         validation_alias="rdrc_cf_ccfVersion"
     )
-    # todo: bregma units are editable, we can't assume um (could be mm)
+    # TODO: bregma units are editable, we can't assume um (could be mm)
     dm_bregma_target_ap: Annotated[float | None, UnitSpec("um")] = Field(
         default=None,
         serialization_alias="rdrc_cf_targetAp",
