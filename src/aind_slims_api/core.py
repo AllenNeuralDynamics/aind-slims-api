@@ -10,6 +10,7 @@ SlimsClient - Basic wrapper around slims-python-api client with convenience
 
 import base64
 import logging
+from copy import deepcopy
 from functools import lru_cache
 from typing import Any, Optional, Type, TypeVar
 
@@ -105,6 +106,19 @@ class SlimsClient:
         return records
 
     @staticmethod
+    def resolve_model_alias(
+            model: Type[SlimsBaseModelTypeVar],
+            attr_name: str,
+    ) -> str:
+        """Given a SlimsBaseModel object, resolve its pk to the actual value"""
+        for field_name, field_info in model.model_fields.items():
+            if field_name == attr_name and field_info.alias:
+                return field_info.alias
+        else:
+            raise ValueError(f"Cannot resolve alias for {attr_name} on {model}")
+
+
+    @staticmethod
     def _validate_models(
         model_type: Type[SlimsBaseModelTypeVar], records: list[SlimsRecord]
     ) -> list[SlimsBaseModelTypeVar]:
@@ -140,6 +154,10 @@ class SlimsClient:
         - kwargs are mapped to field alias names and used as equality filters
          for the fetch.
         """
+        resolved_kwargs = deepcopy(model._base_fetch_filters)
+        for name, value in kwargs.items():
+            resolved_kwargs[self.resolve_model_alias(model, name)] = value
+
         if isinstance(sort, str):
             sort = [sort]
 
@@ -413,3 +431,4 @@ class SlimsClient:
         )
         response.raise_for_status()
         return int(response.text)
+

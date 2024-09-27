@@ -70,6 +70,12 @@ class SlimsExperimentRunStep(SlimsBaseModel):
         serialization_alias="xprs_fk_experimentRun",
         validation_alias="xprs_fk_experimentRun"
     )
+    # TODO: add device calibrations once we have an example
+    # device_calibrations_attachment: Optional[str] = Field(
+    #     default=None,
+    #     serialization_alias="xprs_cf_deviceCalibrations",
+    #     validation_alias="xprs_cf_deviceCalibrations"
+    # )
     _slims_table = "ExperimentRunStep"
 
 
@@ -260,11 +266,6 @@ class SlimsMouseSessionResult(SlimsBaseModel):
         serialization_alias="rslt_cf_animalWeightPost",
         validation_alias="rslt_cf_animalWeightPost",
     )
-    reward_delivery: Optional[str] = Field(
-        default=None,
-        serialization_alias="rslt_cf_rewardDelivery",
-        validation_alias="rslt_cf_rewardDelivery",
-    )
     reward_consumed_vol: Annotated[float | None, UnitSpec("ml")] = Field(
         default=None,
         serialization_alias="rslt_cf_rewardConsumedvolume",
@@ -358,122 +359,201 @@ class SlimsEphysInsertionResult(SlimsBaseModel):
     }
 
 
-class EphysLoggingRdrc(SlimsBaseModel):
+class SlimsDomeModuleRdrc(SlimsBaseModel):
     """Ephys Logging"""
-    unique_identifier: str = Field(
+    unique_identifier: Optional[str] = Field(
         ...,
         serialization_alias="rdrc_uniqueIdentifier",
         validation_alias="rdrc_uniqueIdentifier"
     )
-    # DOME MODULE FIELDS
-    # Dome Modules -> Stick Microscopes,
-    dm_implant_hole: Optional[float] = Field(
+    pk: Optional[float] = Field(
+        default=None,
+        serialization_alias="rdrc_pk",
+        validation_alias="rdrc_pk"
+    )
+    implant_hole: Optional[float] = Field(
         default=None,
         serialization_alias="rdrc_cf_bsl",
         validation_alias="rdrc_cf_bsl"
     )
-    dm_assembly_name: Optional[str] = Field(
+    assembly_name: Optional[str] = Field(
         default=None,
         serialization_alias="rdrc_cf_assemblyName",
         validation_alias="rdrc_cf_assemblyName"
     )
-    dm_probe_name: Optional[str] = Field(
+    probe_name: Optional[str] = Field(
         default=None,
         serialization_alias="rdrc_cf_probeName",
         validation_alias="rdrc_cf_probeName"
     )
-    dm_primary_targeted_structure: Optional[str]  = Field(
+    primary_targeted_structure: Optional[str]  = Field(
         default=None,
         serialization_alias="rdrc_cf_fk_primaryTargetedStructure_display",
         validation_alias="rdrc_cf_fk_primaryTargetedStructure_display"
     )
-    dm_secondary_targeted_structures: Optional[List] = Field(
+    secondary_targeted_structures: Optional[List] = Field(
         default=None,
         serialization_alias="rdrc_cf_fk_secondaryTargetedStructures2_display",
         validation_alias="rdrc_cf_fk_secondaryTargetedStructures2_display"
     )
-    dm_arc_angle: Annotated[float | None, UnitSpec("degree")] = Field(
+    arc_angle: Annotated[float | None, UnitSpec("degree")] = Field(
         default=None,
         serialization_alias="rdrc_cf_arcAngle",
         validation_alias="rdrc_cf_arcAngle"
     )
-    dm_module_angle: Annotated[float | None, UnitSpec("degree")] = Field(
+    module_angle: Annotated[float | None, UnitSpec("degree")] = Field(
         default=None,
         serialization_alias="rdrc_cf_moduleAngle",
         validation_alias="rdrc_cf_moduleAngle"
     )
-    dm_rotation_angle: Annotated[float | None, UnitSpec("degree")] = Field(
+    rotation_angle: Annotated[float | None, UnitSpec("degree")] = Field(
         default=None,
         serialization_alias="rdrc_cf_rotationAngle",
         validation_alias="rdrc_cf_rotationAngle"
     )
-    dm_coordinate_transform: Optional[str] = Field(
+    coordinate_transform: Optional[str] = Field(
         default=None,
         serialization_alias="rdrc_cf_manipulatorCalibrations_display",
         validation_alias="rdrc_cf_manipulatorCalibrations_display"
     )
-    dm_ccf_coordinate_ap: Annotated[float | None, UnitSpec("um")] = Field(
+    ccf_coordinate_ap: Annotated[float | None, UnitSpec("um")] = Field(
         default=None,
         serialization_alias="rdrc_cf_targetedCcfCoordinatesAp",
         validation_alias="rdrc_cf_targetedCcfCoordinatesAp"
     )
-    dm_ccf_coordinate_ml: Annotated[float | None, UnitSpec("um")] = Field(
+    ccf_coordinate_ml: Annotated[float | None, UnitSpec("um")] = Field(
         default=None,
         serialization_alias="rdrc_cf_targetedCcfCoordinatesMl",
         validation_alias="rdrc_cf_targetedCcfCoordinatesMl"
     )
-    dm_ccf_coordinate_dv: Annotated[float | None, UnitSpec("um")] = Field(
+    ccf_coordinate_dv: Annotated[float | None, UnitSpec("um")] = Field(
         default=None,
         serialization_alias="rdrc_cf_targetedCcfCoordinatesDv",
         validation_alias="rdrc_cf_targetedCcfCoordinatesDv"
     )
-    dm_ccf_version: Optional[float] = Field(
+    ccf_version: Optional[float] = Field(
         default=None,
         serialization_alias="rdrc_cf_ccfVersion",
         validation_alias="rdrc_cf_ccfVersion"
     )
     # TODO: bregma units are editable, we can't assume um (could be mm)
-    dm_bregma_target_ap: Annotated[float | None, UnitSpec("um")] = Field(
+    bregma_target_ap: Annotated[float | None, UnitSpec("um")] = Field(
         default=None,
         serialization_alias="rdrc_cf_targetAp",
         validation_alias="rdrc_cf_targetAp"
     )
-    dm_bregma_target_ml: Annotated[float | None, UnitSpec("um")] = Field(
+    bregma_target_ml: Annotated[float | None, UnitSpec("um")] = Field(
         default=None,
         serialization_alias="rdrc_cf_targetMl",
         validation_alias="rdrc_cf_targetMl"
     )
-    dm_bregma_target_dv: Annotated[float | None, UnitSpec("um")] = Field(
+    bregma_target_dv: Annotated[float | None, UnitSpec("um")] = Field(
         default=None,
         serialization_alias="rdrc_cf_targetDv",
         validation_alias="rdrc_cf_targetDv"
     )
-    dm_surface_z: Annotated[float | None, UnitSpec("um")] = Field(
+    surface_z: Annotated[float | None, UnitSpec("um")] = Field(
         default=None,
         serialization_alias="rdrc_cf_surfaceZ",
         validation_alias="rdrc_cf_surfaceZ"
     )
-    dm_manipulator_x: Annotated[float | None, UnitSpec("um")] = Field(
+    manipulator_x: Annotated[float | None, UnitSpec("um")] = Field(
         default=None,
         serialization_alias="rdrc_cf_manipulatorX",
         validation_alias="rdrc_cf_manipulatorX"
     )
-    dm_manipulator_y: Annotated[float | None, UnitSpec("um")] = Field(
+    manipulator_y: Annotated[float | None, UnitSpec("um")] = Field(
         default=None,
         serialization_alias="rdrc_cf_manipulatory",
         validation_alias="rdrc_cf_manipulatory"
     )
-    dm_manipulator_z: Annotated[float | None, UnitSpec("um")] = Field(
+    manipulator_z: Annotated[float | None, UnitSpec("um")] = Field(
         default=None,
         serialization_alias="rdrc_cf_manipulatorZ",
         validation_alias="rdrc_cf_manipulatorZ"
     )
-    dm_dye: Optional[str] = Field(
+    dye: Optional[str] = Field(
         default=None,
         serialization_alias="rdrc_cf_fk_dye_display",
         validation_alias="rdrc_cf_fk_dye_display"
     )
-    # TODO: add fields for calibrations, maintenance, fiber connections
+    fiber_connections_pk: Optional[float] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_fk_fiberConnections",
+        validation_alias="rdrc_cf_fk_fiberConnections"
+    )
 
+class SlimsFiberConnectionsRdrc(SlimsBaseModel):
+    """Model for Fiber Connections Reference Data"""
+    pk: Optional[float] = Field(
+        serialization_alias="rdrc_pk",
+        validation_alias="rdrc_pk"
+    )
+    patch_cord_name: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_patchCordName",
+        validation_alias="rdrc_cf_patchCordName"
+    )
+    patch_cord_output_power: Annotated[float | None, UnitSpec("uW")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_patchCordOutputPower",
+        validation_alias="rdrc_cf_patchCordOutputPower"
+    )
+    fiber_names: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_fiberNames",
+        validation_alias="rdrc_cf_fiberNames"
+    )
+    _slims_table = "Reference Data Record"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "name": "Fiber Connections",
+    }
 
+class SlimsRewardDeliveryRdrc(SlimsBaseModel):
+    """Model for Reward Delivery Reference Data"""
+    pk: Optional[float] = Field(
+        serialization_alias="rdrc_pk",
+        validation_alias="rdrc_pk"
+    )
+    reward_spouts_pk: Optional[List] = Field(
+        default=[],
+        serialization_alias="rdrc_cf_fk_rewardSpouts",
+        validation_alias="rdrc_cf_fk_rewardSpouts"
+    )
+    # OPTIONS: "Water", or "Other (if Other, specify below)"
+    reward_solution: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_rewardSolution",
+        validation_alias="rdrc_cf_rewardSolution"
+    )
+    other_reward_solution: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_specifyrewardSolution",
+        validation_alias="rdrc_cf_specifyrewardSolution"
+    )
+    _slims_table = "Reference Data Record"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "name": "Reward Delivery",
+    }
 
+class SlimsRewardSpoutsRdrc(SlimsBaseModel):
+    """Model for Reward Spouts Reference Data"""
+    spout_side: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_spoutSide",
+        validation_alias="rdrc_cf_spoutSide"
+    )
+    starting_position: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_startingPosition",
+        validation_alias="rdrc_cf_startingPosition"
+    )
+    variable_position: Optional[bool] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_variablePosition",
+        validation_alias="rdrc_cf_variablePosition"
+    )
+    _slims_table = "Reference Data Record"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "name": "Reward Spouts",
+    }
