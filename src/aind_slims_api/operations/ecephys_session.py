@@ -24,11 +24,11 @@ class EcephysSession(BaseModel):
     """
     session_group: Optional[SlimsExperimentRunStep]
     session_result: Optional[SlimsMouseSessionResult]
-    streams: Optional[List[SlimsStreamsResult]] = None
-    stream_modules: Optional[List[SlimsDomeModuleRdrc]] = None
+    streams: Optional[List[SlimsStreamsResult]] = []
+    stream_modules: Optional[List[SlimsDomeModuleRdrc]] = []
     reward_delivery: Optional[SlimsRewardDeliveryRdrc] = None
-    reward_spouts: Optional[List[SlimsRewardSpoutsRdrc]] = None
-    stimulus_epochs: Optional[List[SlimsStimulusEpochsResult]] = None
+    reward_spouts: Optional[SlimsRewardSpoutsRdrc] = None
+    stimulus_epochs: Optional[List[SlimsStimulusEpochsResult]] = []
 
 
 
@@ -63,18 +63,17 @@ class SlimsEcephysSession:
 
                     if streams:
                         for stream in streams:
-                            stream_modules.extend(
-                                self.client.fetch_models(SlimsDomeModuleRdrc, pk=stream_module_pk)
-                                for stream_module_pk in stream.stream_modules_pk
-                            )
+                            if stream.stream_modules_pk:
+                                stream_modules.extend(
+                                    self.client.fetch_model(SlimsDomeModuleRdrc, pk=stream_module_pk)
+                                    for stream_module_pk in stream.stream_modules_pk
+                                )
+                            # TODO: add fiber connections
 
                     if session.reward_delivery_pk:
                         reward_delivery = self.client.fetch_model(SlimsRewardDeliveryRdrc, pk=session.reward_delivery_pk)
                         if reward_delivery.reward_spouts_pk:
-                            reward_spouts = [
-                                self.client.fetch_model(SlimsRewardSpoutsRdrc, pk=pk)
-                                for pk in reward_delivery.reward_spouts_pk
-                            ]
+                            reward_spouts = self.client.fetch_model(SlimsRewardSpoutsRdrc, pk=reward_delivery.reward_spouts_pk)
 
                     stimulus_epochs = self.client.fetch_models(
                         SlimsStimulusEpochsResult, experiment_run_step_pk=step.pk
@@ -104,6 +103,8 @@ class SlimsEcephysSession:
         for content_run in content_runs:
             try:
                 content_run_step = self.client.fetch_model(SlimsExperimentRunStep, pk=content_run.runstep_pk)
+
+                # TODO: consider splitting ExperimentRunSrep into GroupOfSessionsRunStep and MouseSessionRunStep
                 run_steps = self.client.fetch_models(SlimsExperimentRunStep, experimentrun_pk=content_run_step.experimentrun_pk)
 
                 ecephys_sessions = self.fetch_ecephys_session(run_steps=run_steps)

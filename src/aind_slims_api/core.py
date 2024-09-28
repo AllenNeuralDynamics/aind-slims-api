@@ -21,6 +21,7 @@ from slims.internal import Record as SlimsRecord
 from slims.slims import Slims, _SlimsApiException
 
 from aind_slims_api import config
+from aind_slims_api.filters import resolve_model_alias
 from aind_slims_api.exceptions import SlimsRecordNotFound
 from aind_slims_api.filters import resolve_filter_args
 from aind_slims_api.models import SlimsAttachment
@@ -105,18 +106,6 @@ class SlimsClient:
 
         return records
 
-    @staticmethod
-    def resolve_model_alias(
-            model: Type[SlimsBaseModelTypeVar],
-            attr_name: str,
-    ) -> str:
-        """Given a SlimsBaseModel object, resolve its pk to the actual value"""
-        for field_name, field_info in model.model_fields.items():
-            if field_name == attr_name and field_info.alias:
-                return field_info.alias
-        else:
-            raise ValueError(f"Cannot resolve alias for {attr_name} on {model}")
-
 
     @staticmethod
     def _validate_models(
@@ -156,7 +145,7 @@ class SlimsClient:
         """
         resolved_kwargs = deepcopy(model._base_fetch_filters)
         for name, value in kwargs.items():
-            resolved_kwargs[self.resolve_model_alias(model, name)] = value
+            resolved_kwargs[resolve_model_alias(model, name)] = value
 
         if isinstance(sort, str):
             sort = [sort]
