@@ -145,6 +145,7 @@ class SlimsClient:
         resolved_kwargs = deepcopy(model._base_fetch_filters)
         for name, value in kwargs.items():
             resolved_kwargs[resolve_model_alias(model, name)] = value
+        logger.debug("Resolved kwargs: %s", resolved_kwargs)
 
         if isinstance(sort, str):
             sort = [sort]

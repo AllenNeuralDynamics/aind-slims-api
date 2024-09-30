@@ -48,6 +48,16 @@ class SlimsMouseContent(SlimsBaseModel):
         serialization_alias="cntn_pk",
         validation_alias="cntn_pk",
     )
+    status: Optional[int] = Field(
+        default=28,
+        serialization_alias="cntn_fk_status",
+        validation_alias="cntn_fk_status",
+    )
+    content_type: Optional[int] = Field(
+        default=5,
+        serialization_alias="cntn_fk_contentType",
+        validation_alias="cntn_fk_contentType",
+    )
     created_on: Optional[datetime] = Field(
         None,
         serialization_alias="cntn_createdOn",
