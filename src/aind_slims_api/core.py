@@ -12,6 +12,7 @@ import base64
 import logging
 from copy import deepcopy
 from functools import lru_cache
+from pydoc import resolve
 from typing import Any, Optional, Type, TypeVar
 
 from pydantic import ValidationError
@@ -163,6 +164,7 @@ class SlimsClient:
             sort=resolved_sort,
             start=start,
             end=end,
+            **resolved_kwargs
         )
         return self._validate_models(model, response)
 
