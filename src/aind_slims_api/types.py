@@ -18,5 +18,5 @@ SLIMS_TABLES = Literal[
     "Instrument",
     "Unit",
     "ExperimentRunStepContent",
-    "ExperimentRunStep"
+    "ExperimentRunStep",
 ]

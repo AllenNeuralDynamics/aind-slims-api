@@ -106,7 +106,6 @@ class SlimsClient:
 
         return records
 
-
     @staticmethod
     def _validate_models(
         model_type: Type[SlimsBaseModelTypeVar], records: list[SlimsRecord]
@@ -420,4 +419,3 @@ class SlimsClient:
         )
         response.raise_for_status()
         return int(response.text)
-
