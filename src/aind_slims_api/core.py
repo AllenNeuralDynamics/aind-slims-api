@@ -10,6 +10,7 @@ SlimsClient - Basic wrapper around slims-python-api client with convenience
 
 import base64
 import logging
+from copy import deepcopy
 from functools import lru_cache
 from typing import Any, Optional, Type, TypeVar
 
@@ -20,6 +21,7 @@ from slims.internal import Record as SlimsRecord
 from slims.slims import Slims, _SlimsApiException
 
 from aind_slims_api import config
+from aind_slims_api.filters import resolve_model_alias
 from aind_slims_api.exceptions import SlimsRecordNotFound
 from aind_slims_api.filters import resolve_filter_args
 from aind_slims_api.models import SlimsAttachment
@@ -140,6 +142,10 @@ class SlimsClient:
         - kwargs are mapped to field alias names and used as equality filters
          for the fetch.
         """
+        resolved_kwargs = deepcopy(model._base_fetch_filters)
+        for name, value in kwargs.items():
+            resolved_kwargs[resolve_model_alias(model, name)] = value
+        logger.debug("Resolved kwargs: %s", resolved_kwargs)
         if isinstance(sort, str):
             sort = [sort]
 

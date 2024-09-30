@@ -404,9 +404,9 @@ class TestSlimsClient(unittest.TestCase):
         """Tests fetch_model method failure due to only supplying start or end."""
         mock_slims_fetch.return_value = []
         with self.assertRaises(ValueError):
-            self.example_client.fetch_models(SlimsUser._slims_table, start=1)
+            self.example_client.fetch_models(SlimsUser, start=1)
         with self.assertRaises(ValueError):
-            self.example_client.fetch_models(SlimsUser._slims_table, end=1)
+            self.example_client.fetch_models(SlimsUser, end=1)
         mock_slims_fetch.assert_not_called()
 
 
