@@ -12,7 +12,6 @@ import base64
 import logging
 from copy import deepcopy
 from functools import lru_cache
-from pydoc import resolve
 from typing import Any, Optional, Type, TypeVar
 
 from pydantic import ValidationError
