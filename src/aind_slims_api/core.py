@@ -21,7 +21,6 @@ from slims.internal import Record as SlimsRecord
 from slims.slims import Slims, _SlimsApiException
 
 from aind_slims_api import config
-from aind_slims_api.filters import resolve_model_alias
 from aind_slims_api.exceptions import SlimsRecordNotFound
 from aind_slims_api.filters import resolve_filter_args
 from aind_slims_api.models import SlimsAttachment
