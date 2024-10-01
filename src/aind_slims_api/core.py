@@ -161,7 +161,7 @@ class SlimsClient:
             sort=resolved_sort,
             start=start,
             end=end,
-            **resolved_kwargs
+            **resolved_kwargs,
         )
         return self._validate_models(model, response)
 

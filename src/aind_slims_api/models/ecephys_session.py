@@ -74,6 +74,7 @@ class SlimsExperimentRunStep(SlimsBaseModel):
     # )
     _slims_table = "ExperimentRunStep"
 
+
 class SlimsGroupOfSessionsRunStep(SlimsBaseModel):
     """Model for a Slims ExperimentRunStep"""
 
@@ -119,6 +120,7 @@ class SlimsGroupOfSessionsRunStep(SlimsBaseModel):
         "xprs_name": "Group of Sessions",
     }
 
+
 class SlimsMouseSessionRunStep(SlimsBaseModel):
     """Model for a Slims ExperimentRunStep"""
 
@@ -148,7 +150,6 @@ class SlimsMouseSessionRunStep(SlimsBaseModel):
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "xprs_name": "Mouse Session",
     }
-
 
 
 class SlimsStreamsResult(SlimsBaseModel):
@@ -435,6 +436,7 @@ class SlimsEphysInsertionResult(SlimsBaseModel):
 
 class SlimsDomeModuleRdrc(SlimsBaseModel):
     """Model for Dome Module Reference Data"""
+
     pk: Optional[int] = Field(
         default=None, serialization_alias="rdrc_pk", validation_alias="rdrc_pk"
     )
