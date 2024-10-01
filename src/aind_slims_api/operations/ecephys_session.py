@@ -1,7 +1,6 @@
 """
 Module defining operations to build EcephysSession.
 """
-
 from typing import List, Optional
 from pydantic import BaseModel
 from aind_slims_api import SlimsClient
@@ -14,7 +13,7 @@ from aind_slims_api.models.ecephys_session import (
     SlimsExperimentRunStep,
     SlimsDomeModuleRdrc,
     SlimsRewardDeliveryRdrc,
-    SlimsRewardSpoutsRdrc,
+    SlimsRewardSpoutsRdrc, SlimsGroupOfSessionsRunStep, SlimsMouseSessionRunStep,
 )
 
 
@@ -32,7 +31,7 @@ class EcephysSession(BaseModel):
     stimulus_epochs: Optional[List[SlimsStimulusEpochsResult]] = []
 
 
-class SlimsEcephysSession:
+class SlimsEcephysSessionOperator:
     """
     Class for fetching and encapsulating EcephysSession data from SLIMS.
     """
@@ -44,71 +43,50 @@ class SlimsEcephysSession:
         self.subject_id = subject_id
         self.client = slims_client or SlimsClient()
 
-    def fetch_ecephys_session(
-        self, run_steps: List[SlimsExperimentRunStep]
+    def _process_sessions(
+            self, group_run_step: SlimsGroupOfSessionsRunStep, session_run_steps: List[SlimsMouseSessionRunStep]
     ) -> List[EcephysSession]:
         """
         Fetch all data related to a single ecephys session
-        and returns a list of EcephysSession objects.
+        and return a list of EcephysSession objects.
         """
-        session_groups = [
-            step for step in run_steps if step.name == "Group of Sessions"
-        ]
         ecephys_sessions = []
 
-        for step in run_steps:
-            if step.name == "Mouse Session":
-                sessions = self.client.fetch_models(
-                    SlimsMouseSessionResult, experiment_run_step_pk=step.pk
-                )
+        for step in session_run_steps:
+            # retrieve session, streams, and epochs from Results table
+            session = self.client.fetch_model(SlimsMouseSessionResult, experiment_run_step_pk=step.pk)
+            streams = self.client.fetch_models(SlimsStreamsResult, mouse_session_pk=session.pk)
+            stimulus_epochs = self.client.fetch_models(SlimsStimulusEpochsResult, mouse_session_pk=session.pk)
 
-                for session in sessions:
-                    streams = self.client.fetch_models(
-                        SlimsStreamsResult, mouse_session_pk=session.pk
-                    )
-                    stream_modules = []
-                    reward_delivery = None
-                    reward_spouts = None
+            # retrieve modules and reward info from ReferenceDataRecord table
+            stream_modules = [
+                self.client.fetch_model(SlimsDomeModuleRdrc, pk=stream_module_pk)
+                for stream in streams if stream.stream_modules_pk
+                for stream_module_pk in stream.stream_modules_pk
+            ]
 
-                    if streams:
-                        for stream in streams:
-                            if stream.stream_modules_pk:
-                                stream_modules.extend(
-                                    self.client.fetch_model(
-                                        SlimsDomeModuleRdrc, pk=stream_module_pk
-                                    )
-                                    for stream_module_pk in stream.stream_modules_pk
-                                )
-                            # TODO: add fiber connections
+            reward_delivery = self.client.fetch_model(SlimsRewardDeliveryRdrc, pk=session.reward_delivery_pk) \
+                if session.reward_delivery_pk else None
 
-                    if session.reward_delivery_pk:
-                        reward_delivery = self.client.fetch_model(
-                            SlimsRewardDeliveryRdrc, pk=session.reward_delivery_pk
-                        )
-                        if reward_delivery.reward_spouts_pk:
-                            reward_spouts = self.client.fetch_model(
-                                SlimsRewardSpoutsRdrc,
-                                pk=reward_delivery.reward_spouts_pk,
-                            )
+            reward_spouts = self.client.fetch_model(SlimsRewardSpoutsRdrc, pk=reward_delivery.reward_spouts_pk) \
+                if reward_delivery and reward_delivery.reward_spouts_pk else None
 
-                    stimulus_epochs = self.client.fetch_models(
-                        SlimsStimulusEpochsResult, experiment_run_step_pk=step.pk
-                    )
-
-                    ecephys_session = EcephysSession(
-                        session_group=session_groups[0] if session_groups else None,
-                        session_result=session,
-                        streams=streams or None,
-                        stream_modules=stream_modules or None,
-                        reward_delivery=reward_delivery,
-                        reward_spouts=reward_spouts,
-                        stimulus_epochs=stimulus_epochs or None,
-                    )
-                    ecephys_sessions.append(ecephys_session)
+            # encapsulate all info for a single session
+            ecephys_session = EcephysSession(
+                session_group=group_run_step,
+                session_result=session,
+                streams=streams or None,
+                stream_modules=stream_modules or None,
+                reward_delivery=reward_delivery,
+                reward_spouts=reward_spouts,
+                stimulus_epochs=stimulus_epochs or None,
+            )
+            ecephys_sessions.append(ecephys_session)
 
         return ecephys_sessions
 
-    def process_run_steps(self) -> List[EcephysSession]:
+
+    def fetch_sessions(self) -> List[EcephysSession]:
         """
         Process all run steps for a given mouse
          and return a list of EcephysSession objects.
@@ -121,18 +99,24 @@ class SlimsEcephysSession:
 
         for content_run in content_runs:
             try:
+                # retrieves content step to find experimentrun_pk
                 content_run_step = self.client.fetch_model(
                     SlimsExperimentRunStep, pk=content_run.runstep_pk
                 )
 
-                # TODO: consider splitting ExperimentRunStep into GroupOfSessionsRunStep and MouseSessionRunStep
-                run_steps = self.client.fetch_models(
-                    SlimsExperimentRunStep,
-                    experimentrun_pk=content_run_step.experimentrun_pk,
+                # retrieve group of session step and mouse sessions in the experiment run
+                group_run_step = self.client.fetch_models(
+                    SlimsGroupOfSessionsRunStep, experimentrun_pk=content_run_step.experimentrun_pk
                 )
-
-                ecephys_sessions = self.fetch_ecephys_session(run_steps=run_steps)
-                ecephys_sessions_list.extend(ecephys_sessions)
+                session_run_steps = self.client.fetch_models(
+                    SlimsMouseSessionRunStep, experimentrun_pk=content_run_step.experimentrun_pk
+                )
+                if group_run_step and session_run_steps:
+                    ecephys_sessions = self._process_sessions(
+                        group_run_step=group_run_step[0],
+                        session_run_steps=session_run_steps
+                    )
+                    ecephys_sessions_list.extend(ecephys_sessions)
 
             except Exception as e:
                 print(f"Error processing run step {content_run.runstep_pk}: {e}")

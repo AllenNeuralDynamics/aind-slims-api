@@ -74,6 +74,82 @@ class SlimsExperimentRunStep(SlimsBaseModel):
     # )
     _slims_table = "ExperimentRunStep"
 
+class SlimsGroupOfSessionsRunStep(SlimsBaseModel):
+    """Model for a Slims ExperimentRunStep"""
+
+    pk: Optional[int] = Field(
+        default=None, serialization_alias="xprs_pk", validation_alias="xprs_pk"
+    )
+    # name: Optional[str] = Field(
+    #     default=None, serialization_alias="xprs_name", validation_alias="xprs_name"
+    # )
+    session_type: Optional[str] = Field(
+        default=None,
+        serialization_alias="xprs_cf_sessionType",
+        validation_alias="xprs_cf_sessionType",
+    )
+    mouse_platform_name: Optional[str] = Field(
+        default=None,
+        serialization_alias="xprs_cf_mousePlatformName",
+        validation_alias="xprs_cf_mousePlatformName",
+    )
+    active_mouse_platform: Optional[bool] = Field(
+        default=None,
+        serialization_alias="xprs_cf_activeMousePlatform",
+        validation_alias="xprs_cf_activeMousePlatform",
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="xprs_createdOn",
+        validation_alias="xprs_createdOn",
+    )
+    experimentrun_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="xprs_fk_experimentRun",
+        validation_alias="xprs_fk_experimentRun",
+    )
+    # TODO: add device calibrations once we have an example
+    # device_calibrations_attachment: Optional[str] = Field(
+    #     default=None,
+    #     serialization_alias="xprs_cf_deviceCalibrations",
+    #     validation_alias="xprs_cf_deviceCalibrations"
+    # )
+    _slims_table = "ExperimentRunStep"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "xprs_name": "Group of Sessions",
+    }
+
+class SlimsMouseSessionRunStep(SlimsBaseModel):
+    """Model for a Slims ExperimentRunStep"""
+
+    pk: Optional[int] = Field(
+        default=None, serialization_alias="xprs_pk", validation_alias="xprs_pk"
+    )
+    # name: Optional[str] = Field(
+    #     default=None, serialization_alias="xprs_name", validation_alias="xprs_name"
+    # )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="xprs_createdOn",
+        validation_alias="xprs_createdOn",
+    )
+    experimentrun_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="xprs_fk_experimentRun",
+        validation_alias="xprs_fk_experimentRun",
+    )
+    # TODO: add device calibrations once we have an example
+    # device_calibrations_attachment: Optional[str] = Field(
+    #     default=None,
+    #     serialization_alias="xprs_cf_deviceCalibrations",
+    #     validation_alias="xprs_cf_deviceCalibrations"
+    # )
+    _slims_table = "ExperimentRunStep"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "xprs_name": "Mouse Session",
+    }
+
+
 
 class SlimsStreamsResult(SlimsBaseModel):
     """Model for a SLIMS Result Streams"""
@@ -359,7 +435,6 @@ class SlimsEphysInsertionResult(SlimsBaseModel):
 
 class SlimsDomeModuleRdrc(SlimsBaseModel):
     """Model for Dome Module Reference Data"""
-
     pk: Optional[int] = Field(
         default=None, serialization_alias="rdrc_pk", validation_alias="rdrc_pk"
     )
@@ -484,7 +559,7 @@ class SlimsDomeModuleRdrc(SlimsBaseModel):
     )
     _slims_table = "ReferenceDataRecord"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
-        "rdrc_fk_referenceDataType": "Dome Module",
+        "rdty_name": "Dome Module",
     }
 
 
@@ -514,7 +589,7 @@ class SlimsFiberConnectionsRdrc(SlimsBaseModel):
     )
     _slims_table = "ReferenceDataRecord"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
-        "rdrc_fk_referenceDataType": "Fiber Connections",
+        "rdty_name": "Fiber Connections",
     }
 
 
@@ -545,7 +620,7 @@ class SlimsRewardDeliveryRdrc(SlimsBaseModel):
     )
     _slims_table = "ReferenceDataRecord"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
-        "rdrc_fk_referenceDataType": "Reward Delivery",
+        "rdty_name": "Reward Delivery",
     }
 
 
@@ -575,5 +650,5 @@ class SlimsRewardSpoutsRdrc(SlimsBaseModel):
     )
     _slims_table = "ReferenceDataRecord"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
-        "rdrc_fk_referenceDataType": "Reward Spouts",
+        "rdty_name": "Reward Spouts",
     }
