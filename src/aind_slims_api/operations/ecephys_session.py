@@ -44,7 +44,9 @@ class SlimsEcephysSessionOperator:
     Examples
     --------
     >>> from aind_slims_api.core import SlimsClient
-    >>> from aind_slims_api.operations.ecephys_session import SlimsEcephysSessionOperator
+    >>> from aind_slims_api.operations.ecephys_session import (
+            SlimsEcephysSessionOperator
+        )
     >>> client = SlimsClient()
     >>> operator = SlimsEcephysSessionOperator(slims_client=client)
     >>> operator.fetch_sessions(subject_id="000000")
