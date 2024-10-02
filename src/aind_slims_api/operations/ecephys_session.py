@@ -41,6 +41,13 @@ class EcephysSession(BaseModel):
 class SlimsEcephysSessionOperator:
     """
     Class for fetching and encapsulating EcephysSession data from SLIMS.
+    Examples
+    --------
+    >>> from aind_slims_api.core import SlimsClient
+    >>> from aind_slims_api.operations.ecephys_session import SlimsEcephysSessionOperator
+    >>> client = SlimsClient()
+    >>> operator = SlimsEcephysSessionOperator(slims_client=client)
+    >>> operator.fetch_sessions(subject_id="000000")
     """
 
     def __init__(self, slims_client: Optional[SlimsClient] = None):
