@@ -19,7 +19,7 @@ from aind_slims_api.models.base import SlimsBaseModel
 logger = logging.getLogger(__name__)
 
 
-class Mouse:
+class WaterlogMouseOperator:
     """Class for tracking mouse water/weight data and syncing with SLIMS
 
     Examples
@@ -59,7 +59,7 @@ class Mouse:
 
     details: SlimsMouseContent
     waterlog_results: list[SlimsWaterlogResult]
-    restriction: SlimsWaterRestrictionEvent
+    restriction: SlimsWaterRestrictionEvent | None
     all_restrictions: list[SlimsWaterRestrictionEvent]
 
     def __init__(self, barcode: str, user: SlimsUser, slims_client=None):
@@ -83,14 +83,17 @@ class Mouse:
     def _fetch_data(self):
         """Fetches mouse/waterlog/restriction data from SLIMS"""
 
-        self.details = SlimsMouseContent.fetch_by_barcode(self.client, self.barcode)
-        self.waterlog_results = SlimsWaterlogResult.fetch_by_mouse(
-            self.client,
-            self.details,
+        self.details = self.client.fetch_model(
+            SlimsMouseContent,
+            barcode=self.barcode,
         )
-        self.all_restrictions = SlimsWaterRestrictionEvent.fetch_by_mouse(
-            self.client,
-            self.details,
+        self.waterlog_results = self.client.fetch_models(
+            SlimsWaterlogResult,
+            mouse_pk=self.details.pk,
+        )
+        self.all_restrictions = self.client.fetch_models(
+            SlimsWaterRestrictionEvent,
+            mouse_pk=self.details.pk,
         )
 
         if len(self.all_restrictions) > 0:
@@ -105,8 +108,10 @@ class Mouse:
     def _make_links(self):
         """Constructs useful links to SLIMS tables"""
         self.link_mouse = self.client.rest_link(SlimsMouseContent._slims_table, cntn_cf_labtracksId=self.barcode)
-        self.link_wl_records = self.client.rest_link("Result", rslt_fk_content=self.barcode)
-        self.link_restrictions = self.client.rest_link("ContentEvent", cnvn_fk_content=self.barcode)
+        self.link_wl_records = self.client.rest_link(SlimsWaterlogResult._slims_table, rslt_fk_content=self.barcode)
+        self.link_restrictions = self.client.rest_link(
+            SlimsWaterRestrictionEvent._slims_table, cnvn_fk_content=self.barcode
+        )
 
     def _fetch_pks(self):
         """Fetches useful SLIMS pks"""
@@ -119,14 +124,13 @@ class Mouse:
         water_earned: float,
         water_supplement_recommended: float,
         water_supplement_delivered: float,
-        total_water: Optional[float] = None,
         comments: Optional[str] = None,
         workstation: Optional[str] = None,
     ):
         """Creates and adds a new waterlog weight/water record to SLIMS, and
         updates self.waterlog_results accordingly"""
-        if total_water is None:
-            total_water = water_earned + water_supplement_delivered
+
+        total_water = water_earned + water_supplement_delivered
 
         record = SlimsWaterlogResult(
             weight_g=weight,
