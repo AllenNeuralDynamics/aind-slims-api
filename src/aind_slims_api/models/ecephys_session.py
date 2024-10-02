@@ -41,21 +41,6 @@ class SlimsExperimentRunStep(SlimsBaseModel):
     name: Optional[str] = Field(
         default=None, serialization_alias="xprs_name", validation_alias="xprs_name"
     )
-    session_type: Optional[str] = Field(
-        default=None,
-        serialization_alias="xprs_cf_sessionType",
-        validation_alias="xprs_cf_sessionType",
-    )
-    mouse_platform_name: Optional[str] = Field(
-        default=None,
-        serialization_alias="xprs_cf_mousePlatformName",
-        validation_alias="xprs_cf_mousePlatformName",
-    )
-    active_mouse_platform: Optional[bool] = Field(
-        default=None,
-        serialization_alias="xprs_cf_activeMousePlatform",
-        validation_alias="xprs_cf_activeMousePlatform",
-    )
     created_on: Optional[datetime] = Field(
         default=None,
         serialization_alias="xprs_createdOn",
@@ -66,24 +51,12 @@ class SlimsExperimentRunStep(SlimsBaseModel):
         serialization_alias="xprs_fk_experimentRun",
         validation_alias="xprs_fk_experimentRun",
     )
-    # TODO: add device calibrations once we have an example
-    # device_calibrations_attachment: Optional[str] = Field(
-    #     default=None,
-    #     serialization_alias="xprs_cf_deviceCalibrations",
-    #     validation_alias="xprs_cf_deviceCalibrations"
-    # )
     _slims_table = "ExperimentRunStep"
 
 
-class SlimsGroupOfSessionsRunStep(SlimsBaseModel):
+class SlimsGroupOfSessionsRunStep(SlimsExperimentRunStep):
     """Model for a Slims ExperimentRunStep"""
 
-    pk: Optional[int] = Field(
-        default=None, serialization_alias="xprs_pk", validation_alias="xprs_pk"
-    )
-    # name: Optional[str] = Field(
-    #     default=None, serialization_alias="xprs_name", validation_alias="xprs_name"
-    # )
     session_type: Optional[str] = Field(
         default=None,
         serialization_alias="xprs_cf_sessionType",
@@ -99,54 +72,20 @@ class SlimsGroupOfSessionsRunStep(SlimsBaseModel):
         serialization_alias="xprs_cf_activeMousePlatform",
         validation_alias="xprs_cf_activeMousePlatform",
     )
-    created_on: Optional[datetime] = Field(
-        default=None,
-        serialization_alias="xprs_createdOn",
-        validation_alias="xprs_createdOn",
-    )
-    experimentrun_pk: Optional[int] = Field(
-        default=None,
-        serialization_alias="xprs_fk_experimentRun",
-        validation_alias="xprs_fk_experimentRun",
-    )
     # TODO: add device calibrations once we have an example
     # device_calibrations_attachment: Optional[str] = Field(
     #     default=None,
     #     serialization_alias="xprs_cf_deviceCalibrations",
     #     validation_alias="xprs_cf_deviceCalibrations"
     # )
-    _slims_table = "ExperimentRunStep"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "xprs_name": "Group of Sessions",
     }
 
 
-class SlimsMouseSessionRunStep(SlimsBaseModel):
+class SlimsMouseSessionRunStep(SlimsExperimentRunStep):
     """Model for a Slims ExperimentRunStep"""
 
-    pk: Optional[int] = Field(
-        default=None, serialization_alias="xprs_pk", validation_alias="xprs_pk"
-    )
-    # name: Optional[str] = Field(
-    #     default=None, serialization_alias="xprs_name", validation_alias="xprs_name"
-    # )
-    created_on: Optional[datetime] = Field(
-        default=None,
-        serialization_alias="xprs_createdOn",
-        validation_alias="xprs_createdOn",
-    )
-    experimentrun_pk: Optional[int] = Field(
-        default=None,
-        serialization_alias="xprs_fk_experimentRun",
-        validation_alias="xprs_fk_experimentRun",
-    )
-    # TODO: add device calibrations once we have an example
-    # device_calibrations_attachment: Optional[str] = Field(
-    #     default=None,
-    #     serialization_alias="xprs_cf_deviceCalibrations",
-    #     validation_alias="xprs_cf_deviceCalibrations"
-    # )
-    _slims_table = "ExperimentRunStep"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "xprs_name": "Mouse Session",
     }
