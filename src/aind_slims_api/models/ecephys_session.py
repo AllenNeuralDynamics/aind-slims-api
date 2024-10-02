@@ -321,8 +321,8 @@ class SlimsMouseSessionResult(SlimsBaseModel):
     test_label: str = Field(
         "Mouse Session", serialization_alias="test_label", validation_alias="test_label"
     )
-    mouse_session_id: str = Field(
-        ...,
+    mouse_session_id: Optional[str] = Field(
+        default=None,
         serialization_alias="rslt_uniqueIdentifier",
         validation_alias="rslt_uniqueIdentifier",
     )
