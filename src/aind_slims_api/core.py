@@ -12,7 +12,7 @@ import base64
 import logging
 from copy import deepcopy
 from functools import lru_cache
-from typing import Any, Optional, Type, TypeVar
+from typing import Any, Optional, Type, TypeVar, List
 
 from pydantic import ValidationError
 from requests import Response
@@ -127,7 +127,7 @@ class SlimsClient:
         start: Optional[int] = None,
         end: Optional[int] = None,
         **kwargs,
-    ) -> list[SlimsBaseModelTypeVar]:
+    ) -> List[SlimsBaseModelTypeVar]:
         """Fetch records from SLIMS and return them as SlimsBaseModel objects.
 
         Returns
@@ -190,7 +190,7 @@ class SlimsClient:
         if len(records) > 0:
             logger.debug(f"Found {len(records)} records for {model}.")
         if len(records) < 1:
-            raise SlimsRecordNotFound("No record found.")
+            raise SlimsRecordNotFound(f"No record found for {model} with {args}.")
         return records[0]
 
     @staticmethod

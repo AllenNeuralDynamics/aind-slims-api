@@ -2,9 +2,11 @@
 Module defining operations to build EcephysSession.
 """
 
+import logging
 from typing import List, Optional
 from pydantic import BaseModel
 from aind_slims_api import SlimsClient
+from aind_slims_api.exceptions import SlimsRecordNotFound
 from aind_slims_api.models.mouse import SlimsMouseContent
 from aind_slims_api.models.ecephys_session import (
     SlimsMouseSessionResult,
@@ -18,6 +20,8 @@ from aind_slims_api.models.ecephys_session import (
     SlimsGroupOfSessionsRunStep,
     SlimsMouseSessionRunStep,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class EcephysSession(BaseModel):
@@ -39,14 +43,13 @@ class SlimsEcephysSessionOperator:
     Class for fetching and encapsulating EcephysSession data from SLIMS.
     """
 
-    def __init__(self, subject_id: str, slims_client: Optional[SlimsClient] = None):
+    def __init__(self, slims_client: Optional[SlimsClient] = None):
         """
         Initializes the handler with the subject ID and optional SLIMS client.
         """
-        self.subject_id = subject_id
         self.client = slims_client or SlimsClient()
 
-    def _process_sessions(
+    def _process_session_steps(
         self,
         group_run_step: SlimsGroupOfSessionsRunStep,
         session_run_steps: List[SlimsMouseSessionRunStep],
@@ -107,13 +110,13 @@ class SlimsEcephysSessionOperator:
 
         return ecephys_sessions
 
-    def fetch_sessions(self) -> List[EcephysSession]:
+    def fetch_sessions(self, subject_id: str) -> List[EcephysSession]:
         """
         Process all run steps for a given mouse
          and return a list of EcephysSession objects.
         """
         ecephys_sessions_list = []
-        mouse = self.client.fetch_model(SlimsMouseContent, barcode=self.subject_id)
+        mouse = self.client.fetch_model(SlimsMouseContent, barcode=subject_id)
         content_runs = self.client.fetch_models(
             SlimsExperimentRunStepContent, mouse_pk=mouse.pk
         )
@@ -135,13 +138,14 @@ class SlimsEcephysSessionOperator:
                     experimentrun_pk=content_run_step.experimentrun_pk,
                 )
                 if group_run_step and session_run_steps:
-                    ecephys_sessions = self._process_sessions(
+                    ecephys_sessions = self._process_session_steps(
                         group_run_step=group_run_step[0],
                         session_run_steps=session_run_steps,
                     )
                     ecephys_sessions_list.extend(ecephys_sessions)
 
-            except Exception as e:
-                print(f"Error processing run step {content_run.runstep_pk}: {e}")
+            except SlimsRecordNotFound as e:
+                logging.info(str(e))
+                continue
 
         return ecephys_sessions_list
