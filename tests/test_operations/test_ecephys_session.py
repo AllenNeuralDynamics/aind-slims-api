@@ -19,9 +19,9 @@ from aind_slims_api.models.ecephys_session import (
     SlimsExperimentRunStepContent,
     SlimsExperimentRunStep,
 )
-from aind_slims_api.operations.ecephys_session import (
-    SlimsEcephysSessionOperator,
+from aind_slims_api.operations import (
     EcephysSession,
+    fetch_sessions
 )
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / ".." / "resources"
@@ -34,7 +34,6 @@ class TestSlimsEcephysSessionOperator(unittest.TestCase):
     def setUp(cls, mock_client):
         """setup test class"""
         cls.mock_client = mock_client()
-        cls.operator = SlimsEcephysSessionOperator(slims_client=cls.mock_client)
         with open(
             RESOURCES_DIR / "example_fetch_ecephys_session_result.json", "r"
         ) as f:
@@ -81,7 +80,7 @@ class TestSlimsEcephysSessionOperator(unittest.TestCase):
         ]
 
         # Run the fetch_sessions method
-        ecephys_sessions = self.operator.fetch_sessions(subject_id="12345")
+        ecephys_sessions = fetch_sessions(client=self.mock_client, subject_id="12345")
 
         # Assertions
         self.assertEqual(len(ecephys_sessions), 1)
@@ -104,7 +103,7 @@ class TestSlimsEcephysSessionOperator(unittest.TestCase):
         ]
 
         with patch("logging.info") as mock_log_info:
-            self.operator.fetch_sessions(subject_id="67890")
+            fetch_sessions(client=self.mock_client, subject_id="67890")
             mock_log_info.assert_called_with(
                 "No record found for SlimsExperimentRunStep with pk=3"
             )

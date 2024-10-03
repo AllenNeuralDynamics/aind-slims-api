@@ -12,7 +12,7 @@ import base64
 import logging
 from copy import deepcopy
 from functools import lru_cache
-from typing import Any, Optional, Type, TypeVar, List
+from typing import Any, Optional, Type, TypeVar
 
 from pydantic import ValidationError
 from requests import Response
@@ -127,7 +127,7 @@ class SlimsClient:
         start: Optional[int] = None,
         end: Optional[int] = None,
         **kwargs,
-    ) -> List[SlimsBaseModelTypeVar]:
+    ) -> list[SlimsBaseModelTypeVar]:
         """Fetch records from SLIMS and return them as SlimsBaseModel objects.
 
         Returns
