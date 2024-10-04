@@ -143,6 +143,7 @@ class SlimsClient:
         """
         resolved_kwargs = deepcopy(model._base_fetch_filters)
         logger.debug("Resolved kwargs: %s", resolved_kwargs)
+
         if isinstance(sort, str):
             sort = [sort]
 
@@ -160,7 +161,7 @@ class SlimsClient:
             sort=resolved_sort,
             start=start,
             end=end,
-            **resolved_kwargs
+            **resolved_kwargs,
         )
         return self._validate_models(model, response)
 
@@ -189,7 +190,7 @@ class SlimsClient:
         if len(records) > 0:
             logger.debug(f"Found {len(records)} records for {model}.")
         if len(records) < 1:
-            raise SlimsRecordNotFound("No record found.")
+            raise SlimsRecordNotFound(f"No record found for {model} with {args}.")
         return records[0]
 
     @staticmethod

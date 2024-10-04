@@ -3,8 +3,92 @@
 from datetime import datetime
 from typing import Annotated, List, Optional, ClassVar
 from pydantic import Field
+
 from aind_slims_api.models.base import SlimsBaseModel
 from aind_slims_api.models.utils import UnitSpec
+
+
+class SlimsExperimentRunStepContent(SlimsBaseModel):
+    """Model for a SLIMS ExperimentRunStepContent"""
+
+    pk: Optional[int] = Field(
+        default=None, serialization_alias="xrsc_pk", validation_alias="xrsc_pk"
+    )
+    mouse_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="xrsc_fk_content",
+        validation_alias="xrsc_fk_content",
+    )
+    runstep_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="xrsc_fk_experimentRunStep",
+        validation_alias="xrsc_fk_experimentRunStep",
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="xrsc_createdOn",
+        validation_alias="xrsc_createdOn",
+    )
+    _slims_table = "ExperimentRunStepContent"
+
+
+class SlimsExperimentRunStep(SlimsBaseModel):
+    """Model for a Slims ExperimentRunStep"""
+
+    pk: Optional[int] = Field(
+        default=None, serialization_alias="xprs_pk", validation_alias="xprs_pk"
+    )
+    name: Optional[str] = Field(
+        default=None, serialization_alias="xprs_name", validation_alias="xprs_name"
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="xprs_createdOn",
+        validation_alias="xprs_createdOn",
+    )
+    experimentrun_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="xprs_fk_experimentRun",
+        validation_alias="xprs_fk_experimentRun",
+    )
+    _slims_table = "ExperimentRunStep"
+
+
+class SlimsGroupOfSessionsRunStep(SlimsExperimentRunStep):
+    """Model for a Slims ExperimentRunStep"""
+
+    session_type: Optional[str] = Field(
+        default=None,
+        serialization_alias="xprs_cf_sessionType",
+        validation_alias="xprs_cf_sessionType",
+    )
+    mouse_platform_name: Optional[str] = Field(
+        default=None,
+        serialization_alias="xprs_cf_mousePlatformName",
+        validation_alias="xprs_cf_mousePlatformName",
+    )
+    active_mouse_platform: Optional[bool] = Field(
+        default=None,
+        serialization_alias="xprs_cf_activeMousePlatform",
+        validation_alias="xprs_cf_activeMousePlatform",
+    )
+    # TODO: add device calibrations once we have an example
+    # device_calibrations_attachment: Optional[str] = Field(
+    #     default=None,
+    #     serialization_alias="xprs_cf_deviceCalibrations",
+    #     validation_alias="xprs_cf_deviceCalibrations"
+    # )
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "xprs_name": "Group of Sessions",
+    }
+
+
+class SlimsMouseSessionRunStep(SlimsExperimentRunStep):
+    """Model for a Slims ExperimentRunStep"""
+
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "xprs_name": "Mouse Session",
+    }
 
 
 class SlimsStreamsResult(SlimsBaseModel):
@@ -54,6 +138,11 @@ class SlimsStreamsResult(SlimsBaseModel):
         serialization_alias="rslt_cf_fk_mouseSession",
         validation_alias="rslt_cf_fk_mouseSession",
     )
+    experiment_run_step_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="rslt_fk_experimentRunStep",
+        validation_alias="rslt_fk_experimentRunStep",
+    )
     created_on: Optional[datetime] = Field(
         default=None,
         serialization_alias="rslt_createdOn",
@@ -65,6 +154,7 @@ class SlimsStreamsResult(SlimsBaseModel):
     }
 
 
+# TODO: Do we also need to check StimulusEpochs in ReferenceData?
 class SlimsStimulusEpochsResult(SlimsBaseModel):
     """Model for a SLIMS Result Stimulus Epochs"""
 
@@ -148,6 +238,11 @@ class SlimsStimulusEpochsResult(SlimsBaseModel):
         serialization_alias="rslt_cf_fk_mouseSession",
         validation_alias="rslt_cf_fk_mouseSession",
     )
+    experiment_run_step_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="rslt_fk_experimentRunStep",
+        validation_alias="rslt_fk_experimentRunStep",
+    )
     created_on: Optional[datetime] = Field(
         default=None,
         serialization_alias="rslt_createdOn",
@@ -165,8 +260,8 @@ class SlimsMouseSessionResult(SlimsBaseModel):
     test_label: str = Field(
         "Mouse Session", serialization_alias="test_label", validation_alias="test_label"
     )
-    mouse_session_id: str = Field(
-        ...,
+    mouse_session_id: Optional[str] = Field(
+        default=None,
         serialization_alias="rslt_uniqueIdentifier",
         validation_alias="rslt_uniqueIdentifier",
     )
@@ -184,11 +279,6 @@ class SlimsMouseSessionResult(SlimsBaseModel):
         default=None,
         serialization_alias="rslt_cf_animalWeightPost",
         validation_alias="rslt_cf_animalWeightPost",
-    )
-    reward_delivery: Optional[str] = Field(
-        default=None,
-        serialization_alias="rslt_cf_rewardDelivery",
-        validation_alias="rslt_cf_rewardDelivery",
     )
     reward_consumed_vol: Annotated[float | None, UnitSpec("ml")] = Field(
         default=None,
@@ -214,6 +304,11 @@ class SlimsMouseSessionResult(SlimsBaseModel):
         default=None,
         serialization_alias="rslt_cf_fk_mouseSession",
         validation_alias="rslt_cf_fk_mouseSession",
+    )
+    experiment_run_step_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="rslt_fk_experimentRunStep",
+        validation_alias="rslt_fk_experimentRunStep",
     )
     created_on: Optional[datetime] = Field(
         default=None,
@@ -247,12 +342,12 @@ class SlimsEphysInsertionResult(SlimsBaseModel):
     dye: Optional[str] = Field(
         default=None, serialization_alias="rslt_cf_dye", validation_alias="rslt_cf_dye"
     )
-    manipulator_x: Annotated[float | None, UnitSpec("um")] = Field(
+    manipulator_x: Annotated[float | None, UnitSpec("&mu;m")] = Field(
         default=None,
         serialization_alias="rslt_cf_manipulatorCoordinates",
         validation_alias="rslt_cf_manipulatorCoordinates",
     )
-    manipulator_y: Annotated[float | None, UnitSpec("um")] = Field(
+    manipulator_y: Annotated[float | None, UnitSpec("&mu;m")] = Field(
         default=None,
         serialization_alias="rslt_cf_manipulatorY",
         validation_alias="rslt_cf_manipulatorY",
@@ -275,4 +370,226 @@ class SlimsEphysInsertionResult(SlimsBaseModel):
     _slims_table = "Result"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "test_name": "test_ephys_insertion",
+    }
+
+
+class SlimsDomeModuleRdrc(SlimsBaseModel):
+    """Model for Dome Module Reference Data"""
+
+    pk: Optional[int] = Field(
+        default=None, serialization_alias="rdrc_pk", validation_alias="rdrc_pk"
+    )
+    implant_hole: Optional[float] = Field(
+        default=None, serialization_alias="rdrc_cf_bsl", validation_alias="rdrc_cf_bsl"
+    )
+    assembly_name: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_assemblyName",
+        validation_alias="rdrc_cf_assemblyName",
+    )
+    probe_name: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_probeName",
+        validation_alias="rdrc_cf_probeName",
+    )
+    primary_targeted_structure: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_fk_primaryTargetedStructure_display",
+        validation_alias="rdrc_cf_fk_primaryTargetedStructure_display",
+    )
+    secondary_targeted_structures: Optional[List] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_fk_secondaryTargetedStructures2_display",
+        validation_alias="rdrc_cf_fk_secondaryTargetedStructures2_display",
+    )
+    arc_angle: Annotated[float | None, UnitSpec("degree", "°")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_arcAngle",
+        validation_alias="rdrc_cf_arcAngle",
+    )
+    module_angle: Annotated[float | None, UnitSpec("degree", "°")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_moduleAngle",
+        validation_alias="rdrc_cf_moduleAngle",
+    )
+    rotation_angle: Annotated[float | None, UnitSpec("degree", "°")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_rotationAngle",
+        validation_alias="rdrc_cf_rotationAngle",
+    )
+    coordinate_transform: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_manipulatorCalibrations_display",
+        validation_alias="rdrc_cf_manipulatorCalibrations_display",
+    )
+    ccf_coordinate_ap: Annotated[float | None, UnitSpec("&mu;m")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_targetedCcfCoordinatesAp",
+        validation_alias="rdrc_cf_targetedCcfCoordinatesAp",
+    )
+    ccf_coordinate_ml: Annotated[float | None, UnitSpec("&mu;m")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_targetedCcfCoordinatesMl",
+        validation_alias="rdrc_cf_targetedCcfCoordinatesMl",
+    )
+    ccf_coordinate_dv: Annotated[float | None, UnitSpec("&mu;m")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_targetedCcfCoordinatesDv",
+        validation_alias="rdrc_cf_targetedCcfCoordinatesDv",
+    )
+    ccf_version: Optional[float] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_ccfVersion",
+        validation_alias="rdrc_cf_ccfVersion",
+    )
+    bregma_target_ap: Annotated[
+        float | None, UnitSpec("dm", "pm", "cm", "mm", "&mu;m", "nm", "m", "dam", "Tm")
+    ] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_targetAp",
+        validation_alias="rdrc_cf_targetAp",
+    )
+    bregma_target_ml: Annotated[
+        float | None, UnitSpec("dm", "pm", "cm", "mm", "&mu;m", "nm", "m", "dam", "Tm")
+    ] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_targetMl",
+        validation_alias="rdrc_cf_targetMl",
+    )
+    bregma_target_dv: Annotated[
+        float | None, UnitSpec("dm", "pm", "cm", "mm", "&mu;m", "nm", "m", "dam", "Tm")
+    ] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_targetDv",
+        validation_alias="rdrc_cf_targetDv",
+    )
+    surface_z: Annotated[float | None, UnitSpec("&mu;m")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_surfaceZ",
+        validation_alias="rdrc_cf_surfaceZ",
+    )
+    manipulator_x: Annotated[float | None, UnitSpec("&mu;m")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_manipulatorX",
+        validation_alias="rdrc_cf_manipulatorX",
+    )
+    manipulator_y: Annotated[float | None, UnitSpec("&mu;m")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_manipulatory",
+        validation_alias="rdrc_cf_manipulatory",
+    )
+    manipulator_z: Annotated[float | None, UnitSpec("&mu;m")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_manipulatorZ",
+        validation_alias="rdrc_cf_manipulatorZ",
+    )
+    dye: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_fk_dye_display",
+        validation_alias="rdrc_cf_fk_dye_display",
+    )
+    fiber_connections_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_fk_fiberConnections",
+        validation_alias="rdrc_cf_fk_fiberConnections",
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="rdrc_createdOn",
+        validation_alias="rdrc_createdOn",
+    )
+    _slims_table = "ReferenceDataRecord"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "rdty_name": "Dome Module",
+    }
+
+
+class SlimsFiberConnectionsRdrc(SlimsBaseModel):
+    """Model for Fiber Connections Reference Data"""
+
+    pk: Optional[int] = Field(serialization_alias="rdrc_pk", validation_alias="rdrc_pk")
+    patch_cord_name: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_patchCordName",
+        validation_alias="rdrc_cf_patchCordName",
+    )
+    patch_cord_output_power: Annotated[float | None, UnitSpec("&mu;W")] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_patchCordOutputPower",
+        validation_alias="rdrc_cf_patchCordOutputPower",
+    )
+    fiber_names: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_fiberNames",
+        validation_alias="rdrc_cf_fiberNames",
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="rdrc_createdOn",
+        validation_alias="rdrc_createdOn",
+    )
+    _slims_table = "ReferenceDataRecord"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "rdty_name": "Fiber Connections",
+    }
+
+
+class SlimsRewardDeliveryRdrc(SlimsBaseModel):
+    """Model for Reward Delivery Reference Data"""
+
+    pk: Optional[int] = Field(serialization_alias="rdrc_pk", validation_alias="rdrc_pk")
+    reward_spouts_pk: Optional[int] = Field(
+        default=[],
+        serialization_alias="rdrc_cf_fk_rewardSpouts",
+        validation_alias="rdrc_cf_fk_rewardSpouts",
+    )
+    # OPTIONS: "Water", or "Other (if Other, specify below)"
+    reward_solution: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_rewardSolution",
+        validation_alias="rdrc_cf_rewardSolution",
+    )
+    other_reward_solution: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_specifyrewardSolution",
+        validation_alias="rdrc_cf_specifyrewardSolution",
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="rdrc_createdOn",
+        validation_alias="rdrc_createdOn",
+    )
+    _slims_table = "ReferenceDataRecord"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "rdty_name": "Reward Delivery",
+    }
+
+
+class SlimsRewardSpoutsRdrc(SlimsBaseModel):
+    """Model for Reward Spouts Reference Data"""
+
+    pk: Optional[int] = Field(serialization_alias="rdrc_pk", validation_alias="rdrc_pk")
+    spout_side: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_spoutSide",
+        validation_alias="rdrc_cf_spoutSide",
+    )
+    starting_position: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_startingPosition",
+        validation_alias="rdrc_cf_startingPosition",
+    )
+    variable_position: Optional[bool] = Field(
+        default=None,
+        serialization_alias="rdrc_cf_variablePosition",
+        validation_alias="rdrc_cf_variablePosition",
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="rdrc_createdOn",
+        validation_alias="rdrc_createdOn",
+    )
+    _slims_table = "ReferenceDataRecord"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "rdty_name": "Reward Spouts",
     }
