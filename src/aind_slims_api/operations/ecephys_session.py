@@ -39,13 +39,29 @@ class EcephysSession(BaseModel):
 
 
 def _process_session_steps(
-        client: SlimsClient,
-        group_run_step: SlimsGroupOfSessionsRunStep,
-        session_run_steps: List[SlimsMouseSessionRunStep],
+    client: SlimsClient,
+    group_run_step: SlimsGroupOfSessionsRunStep,
+    session_run_steps: List[SlimsMouseSessionRunStep],
 ) -> List[EcephysSession]:
     """
-    Iterates through each session step and encapsulates all its related data
-    and return a list of EcephysSession objects.
+    Process session run steps and encapsulate related data into EcephysSession objects.
+    Iterates through each run step in the provided session run steps,
+    gathers the necessary data, and creates a list of EcephysSession objects.
+
+    Parameters
+    ----------
+    client : SlimsClient
+        An instance of SlimsClient used to retrieve additional session data.
+    group_run_step : SlimsGroupOfSessionsRunStep
+        The group run step containing session metadata and run information.
+    session_run_steps : List[SlimsMouseSessionRunStep]
+        A list of individual session run steps to be processed and encapsulated.
+
+    Returns
+    -------
+    List[EcephysSession]
+        A list of EcephysSession objects containing the processed session data.
+
     """
     ecephys_sessions = []
 
@@ -54,9 +70,7 @@ def _process_session_steps(
         session = client.fetch_model(
             SlimsMouseSessionResult, experiment_run_step_pk=step.pk
         )
-        streams = client.fetch_models(
-            SlimsStreamsResult, mouse_session_pk=session.pk
-        )
+        streams = client.fetch_models(SlimsStreamsResult, mouse_session_pk=session.pk)
         stimulus_epochs = client.fetch_models(
             SlimsStimulusEpochsResult, mouse_session_pk=session.pk
         )
@@ -70,9 +84,7 @@ def _process_session_steps(
         ]
 
         reward_delivery = (
-            client.fetch_model(
-                SlimsRewardDeliveryRdrc, pk=session.reward_delivery_pk
-            )
+            client.fetch_model(SlimsRewardDeliveryRdrc, pk=session.reward_delivery_pk)
             if session.reward_delivery_pk
             else None
         )
@@ -100,21 +112,35 @@ def _process_session_steps(
     return ecephys_sessions
 
 
-def fetch_sessions(client: SlimsClient, subject_id: str) -> List[EcephysSession]:
+def fetch_ecephys_sessions(
+    client: SlimsClient, subject_id: str
+) -> List[EcephysSession]:
     """
-    Process all run steps for a given mouse
-     and return a list of EcephysSession objects.
-     Example Usage
-    --------
+    Fetch and process all electrophysiology (ecephys) run steps for a given subject.
+    Retrieves all electrophysiology sessions associated with the provided subject ID
+    and returns a list of EcephysSession objects.
+
+    Parameters
+    ----------
+    client : SlimsClient
+        An instance of SlimsClient used to connect to the SLIMS API.
+    subject_id : str
+        The ID of the subject (mouse) for which to fetch electrophysiology session data.
+
+    Returns
+    -------
+    List[EcephysSession]
+        A list of EcephysSession objects containing data for each run step.
+
+    Example
+    -------
     >>> from aind_slims_api import SlimsClient
     >>> client = SlimsClient()
-    >>> fetch_sessions(client=client, subject_id="000000")
+    >>> sessions = fetch_ecephys_sessions(client=client, subject_id="000000")
     """
     ecephys_sessions_list = []
     mouse = client.fetch_model(SlimsMouseContent, barcode=subject_id)
-    content_runs = client.fetch_models(
-        SlimsExperimentRunStepContent, mouse_pk=mouse.pk
-    )
+    content_runs = client.fetch_models(SlimsExperimentRunStepContent, mouse_pk=mouse.pk)
 
     for content_run in content_runs:
         try:

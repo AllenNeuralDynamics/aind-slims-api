@@ -19,10 +19,7 @@ from aind_slims_api.models.ecephys_session import (
     SlimsExperimentRunStepContent,
     SlimsExperimentRunStep,
 )
-from aind_slims_api.operations import (
-    EcephysSession,
-    fetch_sessions
-)
+from aind_slims_api.operations import EcephysSession, fetch_ecephys_sessions
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / ".." / "resources"
 
@@ -43,7 +40,7 @@ class TestSlimsEcephysSessionOperator(unittest.TestCase):
             ]
         cls.example_fetch_ecephys_session_result = response
 
-    def test_fetch_sessions_success(self):
+    def test_fetch_ecephys_sessions_success(self):
         """Tests session info is fetched successfully"""
         self.mock_client.fetch_models.side_effect = [
             [SlimsExperimentRunStepContent(pk=1, runstep_pk=3, mouse_pk=12345)],
@@ -80,7 +77,9 @@ class TestSlimsEcephysSessionOperator(unittest.TestCase):
         ]
 
         # Run the fetch_sessions method
-        ecephys_sessions = fetch_sessions(client=self.mock_client, subject_id="12345")
+        ecephys_sessions = fetch_ecephys_sessions(
+            client=self.mock_client, subject_id="12345"
+        )
 
         # Assertions
         self.assertEqual(len(ecephys_sessions), 1)
@@ -92,7 +91,7 @@ class TestSlimsEcephysSessionOperator(unittest.TestCase):
         self.assertEqual(len(ecephys_session.stream_modules), 2)
         self.assertIsNone(ecephys_session.stimulus_epochs)
 
-    def test_fetch_sessions_handle_exception(self):
+    def test_fetch_ecephys_sessions_handle_exception(self):
         """Tests that exception is handled as expected"""
         self.mock_client.fetch_models.side_effect = [
             [SlimsExperimentRunStepContent(pk=1, runstep_pk=3, mouse_pk=67890)]
@@ -103,7 +102,7 @@ class TestSlimsEcephysSessionOperator(unittest.TestCase):
         ]
 
         with patch("logging.info") as mock_log_info:
-            fetch_sessions(client=self.mock_client, subject_id="67890")
+            fetch_ecephys_sessions(client=self.mock_client, subject_id="67890")
             mock_log_info.assert_called_with(
                 "No record found for SlimsExperimentRunStep with pk=3"
             )
