@@ -5,6 +5,7 @@ Module defining operations to build EcephysSession.
 import logging
 from typing import List, Optional
 from pydantic import BaseModel
+
 from aind_slims_api import SlimsClient
 from aind_slims_api.exceptions import SlimsRecordNotFound
 from aind_slims_api.models.mouse import SlimsMouseContent
@@ -18,7 +19,7 @@ from aind_slims_api.models.ecephys_session import (
     SlimsRewardDeliveryRdrc,
     SlimsRewardSpoutsRdrc,
     SlimsGroupOfSessionsRunStep,
-    SlimsMouseSessionRunStep,
+    SlimsMouseSessionRunStep, SlimsBrainStructureRdrc,
 )
 
 logger = logging.getLogger(__name__)
@@ -76,12 +77,33 @@ def _process_session_steps(
         )
 
         # retrieve modules and reward info from ReferenceDataRecord table
+        for stream in streams:
+            stream_modules = (
+                [client.fetch_model(SlimsDomeModuleRdrc, pk=pk)
+                for pk in stream.stream_modules_pk]
+                if stream.stream_modules_pk else []
+            )
+            stream.stream_modules = stream_modules
         stream_modules = [
             client.fetch_model(SlimsDomeModuleRdrc, pk=stream_module_pk)
             for stream in streams
             if stream.stream_modules_pk
             for stream_module_pk in stream.stream_modules_pk
         ]
+        for stream_module in stream_modules:
+            if stream_module.primary_targeted_structure_pk:
+                primary_targeted_structure = client.fetch_model(
+                    SlimsBrainStructureRdrc,
+                    pk=stream_module.primary_targeted_structure_pk
+                )
+                secondary_targeted_structures = ([
+                    client.fetch_model(SlimsBrainStructureRdrc, pk=pk)
+                    for pk in stream_module.secondary_targeted_structures_pk]
+                    if stream_module.secondary_targeted_structures_pk else []
+                )
+                # adds field for structure name
+                stream_module.primary_targeted_structure = primary_targeted_structure.name
+                stream_module.secondary_targeted_structures = [structure.name for structure in secondary_targeted_structures]
 
         reward_delivery = (
             client.fetch_model(SlimsRewardDeliveryRdrc, pk=session.reward_delivery_pk)

@@ -2,7 +2,7 @@
 
 from datetime import datetime
 from typing import Annotated, List, Optional, ClassVar
-from pydantic import Field
+from pydantic import Field, ConfigDict
 
 from aind_slims_api.models.base import SlimsBaseModel
 from aind_slims_api.models.utils import UnitSpec
@@ -375,7 +375,6 @@ class SlimsEphysInsertionResult(SlimsBaseModel):
 
 class SlimsDomeModuleRdrc(SlimsBaseModel):
     """Model for Dome Module Reference Data"""
-
     pk: Optional[int] = Field(
         default=None, serialization_alias="rdrc_pk", validation_alias="rdrc_pk"
     )
@@ -392,15 +391,15 @@ class SlimsDomeModuleRdrc(SlimsBaseModel):
         serialization_alias="rdrc_cf_probeName",
         validation_alias="rdrc_cf_probeName",
     )
-    primary_targeted_structure: Optional[str] = Field(
+    primary_targeted_structure_pk: Optional[int] = Field(
         default=None,
-        serialization_alias="rdrc_cf_fk_primaryTargetedStructure_display",
-        validation_alias="rdrc_cf_fk_primaryTargetedStructure_display",
+        serialization_alias="rdrc_cf_fk_primaryTargetedStructure",
+        validation_alias="rdrc_cf_fk_primaryTargetedStructure",
     )
-    secondary_targeted_structures: Optional[List] = Field(
+    secondary_targeted_structures_pk: Optional[List] = Field(
         default=None,
-        serialization_alias="rdrc_cf_fk_secondaryTargetedStructures2_display",
-        validation_alias="rdrc_cf_fk_secondaryTargetedStructures2_display",
+        serialization_alias="rdrc_cf_fk_secondaryTargetedStructures",
+        validation_alias="rdrc_cf_fk_secondaryTargetedStructures",
     )
     arc_angle: Annotated[float | None, UnitSpec("degree", "°")] = Field(
         default=None,
@@ -442,6 +441,11 @@ class SlimsDomeModuleRdrc(SlimsBaseModel):
         serialization_alias="rdrc_cf_ccfVersion",
         validation_alias="rdrc_cf_ccfVersion",
     )
+    # bregma_target_ap: tuple[float, str] = Field(
+    #     default=None,
+    #     serialization_alias="rdrc_cf_targetAp",
+    #     validation_alias="rdrc_cf_targetAp"
+    # )
     bregma_target_ap: Annotated[
         float | None, UnitSpec("dm", "pm", "cm", "mm", "&mu;m", "nm", "m", "dam", "Tm")
     ] = Field(
@@ -501,6 +505,28 @@ class SlimsDomeModuleRdrc(SlimsBaseModel):
     _slims_table = "ReferenceDataRecord"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "rdty_name": "Dome Module",
+    }
+
+
+class SlimsBrainStructureRdrc(SlimsBaseModel):
+    pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="rdrc_pk",
+        validation_alias="rdrc_pk"
+    )
+    name: Optional[str] = Field(
+        default=None,
+        serialization_alias="rdrc_name",
+        validation_alias="rdrc_name"
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="rdrc_createdOn",
+        validation_alias="rdrc_createdOn",
+    )
+    _slims_table = "ReferenceDataRecord"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "rdty_name": "CCF brain structures",
     }
 
 
