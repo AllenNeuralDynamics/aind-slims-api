@@ -441,11 +441,6 @@ class SlimsDomeModuleRdrc(SlimsBaseModel):
         serialization_alias="rdrc_cf_ccfVersion",
         validation_alias="rdrc_cf_ccfVersion",
     )
-    # bregma_target_ap: tuple[float, str] = Field(
-    #     default=None,
-    #     serialization_alias="rdrc_cf_targetAp",
-    #     validation_alias="rdrc_cf_targetAp"
-    # )
     bregma_target_ap: Annotated[
         float | None, UnitSpec("dm", "pm", "cm", "mm", "&mu;m", "nm", "m", "dam", "Tm")
     ] = Field(
