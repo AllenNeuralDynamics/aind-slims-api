@@ -3,6 +3,7 @@
 from datetime import datetime
 from typing import Annotated, List, Optional, ClassVar
 from pydantic import Field, ConfigDict
+from slims.slims import Slims
 
 from aind_slims_api.models.base import SlimsBaseModel
 from aind_slims_api.models.utils import UnitSpec
@@ -71,6 +72,11 @@ class SlimsGroupOfSessionsRunStep(SlimsExperimentRunStep):
         default=None,
         serialization_alias="xprs_cf_activeMousePlatform",
         validation_alias="xprs_cf_activeMousePlatform",
+    )
+    instrument_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="xprs_cf_fk_instrumentJson",
+        validation_alias="xprs_cf_fk_instrumentJson"
     )
     # TODO: add device calibrations once we have an example
     # device_calibrations_attachment: Optional[str] = Field(
@@ -372,6 +378,23 @@ class SlimsEphysInsertionResult(SlimsBaseModel):
         "test_name": "test_ephys_insertion",
     }
 
+class SlimsInstrumentRdrc(SlimsBaseModel):
+    """Model for Instrument Rdrc"""
+    pk: Optional[int] = Field(
+        default=None, serialization_alias="rdrc_pk", validation_alias="rdrc_pk"
+    )
+    name: Optional[str] = Field(
+        default=None, serialization_alias="rdrc_name", validation_alias="rdrc_name"
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="rdrc_createdOn",
+        validation_alias="rdrc_createdOn",
+    )
+    _slims_table = "ReferenceDataRecord"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "rdty_name": "AIND Instruments",
+    }
 
 class SlimsDomeModuleRdrc(SlimsBaseModel):
     """Model for Dome Module Reference Data"""
@@ -504,6 +527,7 @@ class SlimsDomeModuleRdrc(SlimsBaseModel):
 
 
 class SlimsBrainStructureRdrc(SlimsBaseModel):
+    """Model for Brain Structure Reference Data"""
     pk: Optional[int] = Field(
         default=None,
         serialization_alias="rdrc_pk",

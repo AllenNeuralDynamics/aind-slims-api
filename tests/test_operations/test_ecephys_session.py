@@ -20,6 +20,7 @@ from aind_slims_api.models.ecephys_session import (
     SlimsExperimentRunStep,
 )
 from aind_slims_api.operations import EcephysSession, fetch_ecephys_sessions
+from aind_slims_api.operations.ecephys_session import EcephysSessionBuilder
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / ".." / "resources"
 
@@ -39,6 +40,22 @@ class TestSlimsEcephysSessionOperator(unittest.TestCase):
                 for r in json.load(f)
             ]
         cls.example_fetch_ecephys_session_result = response
+        with open(
+            RESOURCES_DIR / "example_fetch_ecephys_streams_result.json", "r"
+        ) as f:
+            response = [
+                Record(json_entity=r, slims_api=cls.mock_client.db.slims_api)
+                for r in json.load(f)
+            ]
+        cls.example_fetch_ecephys_streams_result = response
+        cls.operator = EcephysSessionBuilder(client=cls.mock_client)
+
+    def test_fetch_streams(self):
+        self.mock_client.fetch_models.return_value = [SlimsStreamsResult(stream="Stream1"),
+                                                      SlimsStreamsResult(stream="Stream2")]
+        streams = self.operator.fetch_streams(session_pk=1)
+        self.assertEqual(len(streams), 2)
+        self.assertEqual(streams[0].stream, "Stream1")
 
     def test_fetch_ecephys_sessions_success(self):
         """Tests session info is fetched successfully"""

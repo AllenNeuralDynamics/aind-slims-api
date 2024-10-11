@@ -76,15 +76,16 @@ class SlimsBaseModel(
         else:
             return field
 
-    def model_dump(self, *args, **kwargs) -> Dict[str, Any]:
+    def model_dump(self, serialize_quantity=True, *args, **kwargs) -> Dict[str, Any]:
         """Override model_dump to handle UnitSpec serialization."""
         data = super().model_dump(*args, **kwargs)
 
         # Update serialized fields with UnitSpec information
-        for key, value in data.items():
-            if isinstance(value, dict) and 'amount' in value:
-                # Extract the amount
-                data[key] = value['amount']
+        if not serialize_quantity:
+            for key, value in data.items():
+                if isinstance(value, dict) and 'amount' in value:
+                    # Extract the amount
+                    data[key] = value['amount']
         return data
 
     # TODO: Add links - need Record.json_entity['links']['self']
