@@ -83,9 +83,9 @@ class SlimsBaseModel(
         # Update serialized fields with UnitSpec information
         if not serialize_quantity:
             for key, value in data.items():
-                if isinstance(value, dict) and 'amount' in value:
+                if isinstance(value, dict) and "amount" in value:
                     # Extract the amount
-                    data[key] = value['amount']
+                    data[key] = value["amount"]
         return data
 
     # TODO: Add links - need Record.json_entity['links']['self']

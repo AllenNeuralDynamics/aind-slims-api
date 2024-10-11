@@ -19,25 +19,31 @@ from aind_slims_api.models.ecephys_session import (
     SlimsRewardDeliveryRdrc,
     SlimsRewardSpoutsRdrc,
     SlimsGroupOfSessionsRunStep,
-    SlimsMouseSessionRunStep, SlimsBrainStructureRdrc, SlimsInstrumentRdrc,
+    SlimsMouseSessionRunStep,
+    SlimsBrainStructureRdrc,
+    SlimsInstrumentRdrc,
 )
 
 logger = logging.getLogger(__name__)
 
+
 class SlimsRewardDeliveryInfo(BaseModel):
-    """"""
+    """Pydantic Model to store Reward Delivery Info"""
+
     reward_delivery: Optional[SlimsRewardDeliveryRdrc] = []
     reward_spouts: Optional[SlimsRewardSpoutsRdrc] = []
 
+
 class SlimsStreamModule(SlimsDomeModuleRdrc):
-    """"""
+    """DomeModule Wrapper to add linked brain structure models"""
     primary_targeted_structure: Optional[SlimsBrainStructureRdrc] = None
     secondary_targeted_structures: Optional[list[SlimsBrainStructureRdrc]] = None
 
 
 class SlimsStream(SlimsStreamsResult):
-    """"""
-    stream_modules: List[SlimsStreamModule]
+    """Streams wrapper to add linked stream modules"""
+    stream_modules: Optional[List[SlimsStreamModule]]
+
 
 class EcephysSession(BaseModel):
     """
@@ -56,13 +62,20 @@ class EcephysSessionBuilder:
     """Class to build EcephysSession objects from session run steps."""
 
     def __init__(self, client: SlimsClient):
+        """Initialize Session Builder"""
         self.client = client
 
-    def fetch_stream_modules(self, stream) -> List[SlimsStreamModule]:
+    def fetch_stream_modules(
+        self, stream_modules_pk: list[int]
+    ) -> List[SlimsStreamModule]:
         """Fetches stream modules and processes structure names."""
         stream_modules = (
-            [self.client.fetch_model(SlimsDomeModuleRdrc, pk=pk)
-            for pk in stream.stream_modules_pk] if stream.stream_modules_pk else []
+            [
+                self.client.fetch_model(SlimsDomeModuleRdrc, pk=pk)
+                for pk in stream_modules_pk
+            ]
+            if stream_modules_pk
+            else []
         )
 
         complete_stream_modules = []
@@ -72,7 +85,7 @@ class EcephysSessionBuilder:
             if stream_module.primary_targeted_structure_pk:
                 primary_structure = self.client.fetch_model(
                     SlimsBrainStructureRdrc,
-                    pk=stream_module.primary_targeted_structure_pk
+                    pk=stream_module.primary_targeted_structure_pk,
                 )
                 if stream_module.secondary_targeted_structures_pk:
                     secondary_structures = [
@@ -83,45 +96,63 @@ class EcephysSessionBuilder:
             stream_module_model = SlimsStreamModule(
                 **stream_module.model_dump(serialize_quantity=False),
                 primary_targeted_structure=primary_structure,
-                secondary_targeted_structures=secondary_structures
+                secondary_targeted_structures=secondary_structures,
             )
             complete_stream_modules.append(stream_module_model)
         return complete_stream_modules
 
     def fetch_streams(self, session_pk: int) -> List[SlimsStream]:
         """Fetches and completes stream information with modules."""
-        streams = self.client.fetch_models(SlimsStreamsResult, mouse_session_pk=session_pk)
+        streams = self.client.fetch_models(
+            SlimsStreamsResult, mouse_session_pk=session_pk
+        )
         complete_streams = [
             SlimsStream(
                 **stream.model_dump(serialize_quantity=False),
-                stream_modules=self.fetch_stream_modules(stream)
-            ) for stream in streams
+                stream_modules=(
+                    self.fetch_stream_modules(stream.stream_modules_pk)
+                    if stream.stream_modules_pk
+                    else []
+                ),
+            )
+            for stream in streams
         ]
         return complete_streams
 
-    def fetch_reward_data(self, session) -> SlimsRewardDeliveryInfo:
+    def fetch_reward_data(self, reward_delivery_pk: int) -> SlimsRewardDeliveryInfo:
         """Fetches reward delivery and spouts data."""
-        reward_delivery = (
-            self.client.fetch_model(SlimsRewardDeliveryRdrc, pk=session.reward_delivery_pk)
-            if session.reward_delivery_pk else None
+        reward_delivery = self.client.fetch_model(
+            SlimsRewardDeliveryRdrc, pk=reward_delivery_pk
         )
         reward_spouts = (
-            self.client.fetch_model(SlimsRewardSpoutsRdrc, pk=reward_delivery.reward_spouts_pk)
-            if reward_delivery and reward_delivery.reward_spouts_pk else None
+            self.client.fetch_model(
+                SlimsRewardSpoutsRdrc, pk=reward_delivery.reward_spouts_pk
+            )
+            if reward_delivery and reward_delivery.reward_spouts_pk
+            else None
         )
         return SlimsRewardDeliveryInfo(
-            reward_delivery=reward_delivery,
-            reward_spouts=reward_spouts
+            reward_delivery=reward_delivery, reward_spouts=reward_spouts
         )
 
     def _process_single_step(self, group_run_step, session_run_step) -> EcephysSession:
         """Process a single session run step into an EcephysSession."""
-        session = self.client.fetch_model(SlimsMouseSessionResult, experiment_run_step_pk=session_run_step.pk)
-        session_instrument = self.client.fetch_model(SlimsInstrumentRdrc, pk=group_run_step.instrument_pk)
-        stimulus_epochs = self.client.fetch_models(SlimsStimulusEpochsResult, mouse_session_pk=session.pk)
+        session = self.client.fetch_model(
+            SlimsMouseSessionResult, experiment_run_step_pk=session_run_step.pk
+        )
+        session_instrument = self.client.fetch_model(
+            SlimsInstrumentRdrc, pk=group_run_step.instrument_pk
+        )
+        stimulus_epochs = self.client.fetch_models(
+            SlimsStimulusEpochsResult, mouse_session_pk=session.pk
+        )
 
         streams = self.fetch_streams(session.pk)
-        reward_delivery = self.fetch_reward_data(session)
+        reward_delivery = (
+            self.fetch_reward_data(session.reward_delivery_pk)
+            if session.reward_delivery_pk
+            else None
+        )
 
         return EcephysSession(
             session_group=group_run_step,
@@ -151,11 +182,14 @@ class EcephysSessionBuilder:
         List[EcephysSession]
             A list of EcephysSession objects containing the processed session data.
         """
-        return [self._process_single_step(group_run_step, step) for step in session_run_steps]
+        return [
+            self._process_single_step(group_run_step, step)
+            for step in session_run_steps
+        ]
 
 
 def fetch_ecephys_sessions(
-        client: SlimsClient, subject_id: str
+    client: SlimsClient, subject_id: str
 ) -> List[EcephysSession]:
     """
     Fetch and process all electrophysiology (ecephys) run steps for a given subject.

@@ -1,7 +1,7 @@
 """Utility functions and classes for working with slims models.
 """
 
-from typing import Optional, Dict, Any
+from typing import Optional
 
 from pydantic.fields import FieldInfo
 
@@ -19,6 +19,7 @@ class UnitSpec:
             raise ValueError("One or more units must be specified")
         if preferred_unit is None:
             self.preferred_unit = self.units[0]
+
 
 def _find_unit_spec(field: FieldInfo) -> UnitSpec | None:
     """Given a Pydantic FieldInfo, find the UnitSpec in its metadata"""
