@@ -36,12 +36,14 @@ class SlimsRewardDeliveryInfo(BaseModel):
 
 class SlimsStreamModule(SlimsDomeModuleRdrc):
     """DomeModule Wrapper to add linked brain structure models"""
+
     primary_targeted_structure: Optional[SlimsBrainStructureRdrc] = None
     secondary_targeted_structures: Optional[list[SlimsBrainStructureRdrc]] = None
 
 
 class SlimsStream(SlimsStreamsResult):
     """Streams wrapper to add linked stream modules"""
+
     stream_modules: Optional[List[SlimsStreamModule]]
 
 
@@ -94,7 +96,7 @@ class EcephysSessionBuilder:
                     ]
 
             stream_module_model = SlimsStreamModule(
-                **stream_module.model_dump(serialize_quantity=False),
+                **stream_module.model_dump(),
                 primary_targeted_structure=primary_structure,
                 secondary_targeted_structures=secondary_structures,
             )
@@ -108,7 +110,7 @@ class EcephysSessionBuilder:
         )
         complete_streams = [
             SlimsStream(
-                **stream.model_dump(serialize_quantity=False),
+                **stream.model_dump(),
                 stream_modules=(
                     self.fetch_stream_modules(stream.stream_modules_pk)
                     if stream.stream_modules_pk
@@ -236,7 +238,6 @@ def fetch_ecephys_sessions(
             )
             if group_run_step and session_run_steps:
                 esb = EcephysSessionBuilder(client=client)
-                print("processing session steps")
                 ecephys_sessions = esb.process_session_steps(
                     group_run_step=group_run_step,
                     session_run_steps=session_run_steps,

@@ -3,8 +3,14 @@
 
 import logging
 from datetime import datetime
-from typing import ClassVar, Optional, Dict, Any
-from pydantic import BaseModel, ValidationInfo, field_serializer, field_validator
+from typing import ClassVar, Optional
+from pydantic import (
+    BaseModel,
+    ValidationInfo,
+    field_serializer,
+    field_validator,
+    SerializationInfo,
+)
 from slims.internal import Column as SlimsColumn  # type: ignore
 
 from aind_slims_api.models.utils import _find_unit_spec
@@ -62,31 +68,22 @@ class SlimsBaseModel(
             return value
 
     @field_serializer("*")
-    def _serialize(self, field, info):
-        """Serialize a field, accounts for Quantities and datetime"""
+    def _serialize(self, field, info: SerializationInfo):
+        """Serialize a field, accounts for Quantities and datetime."""
         unit_spec = _find_unit_spec(self.model_fields[info.field_name])
         if unit_spec and field is not None:
-            quantity = {
-                "amount": field,
-                "unit_display": unit_spec.preferred_unit,
-            }
-            return quantity
+            if info.context == "slims_post":
+                quantity = {
+                    "amount": field,
+                    "unit_display": unit_spec.preferred_unit,
+                }
+                return quantity
+            else:
+                return field
         elif isinstance(field, datetime):
             return int(field.timestamp() * 10**3)
         else:
             return field
-
-    def model_dump(self, serialize_quantity=True, *args, **kwargs) -> Dict[str, Any]:
-        """Override model_dump to handle UnitSpec serialization."""
-        data = super().model_dump(*args, **kwargs)
-
-        # Update serialized fields with UnitSpec information
-        if not serialize_quantity:
-            for key, value in data.items():
-                if isinstance(value, dict) and "amount" in value:
-                    # Extract the amount
-                    data[key] = value["amount"]
-        return data
 
     # TODO: Add links - need Record.json_entity['links']['self']
     # TODO: Add Table - need Record.json_entity['tableName']

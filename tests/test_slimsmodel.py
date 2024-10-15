@@ -34,7 +34,7 @@ class TestSlimsModel(unittest.TestCase):
 
         self.assertEqual(obj.stringfield, "value")
 
-    def test_quantity_field(self):
+    def test_quantity_field_context(self):
         """Test validation/serialization of a quantity type, with unit"""
         obj = self.TestModel()
         obj.quantfield = Column(
@@ -48,10 +48,28 @@ class TestSlimsModel(unittest.TestCase):
 
         self.assertEqual(obj.quantfield, 28.28)
 
-        serialized = obj.model_dump()["quantfield"]
+        serialized = obj.model_dump(context="slims_post")["quantfield"]
         expected = {"amount": 28.28, "unit_display": "um"}
 
         self.assertEqual(serialized, expected)
+
+    def test_quantity_field_no_context(self):
+        """Test validation/serialization of a quantity type without unit"""
+        obj = self.TestModel()
+        obj.quantfield = Column(
+            {
+                "datatype": "QUANTITY",
+                "name": "quantfield",
+                "value": 28.28,
+                "unit": "um",
+            }
+        )
+
+        self.assertEqual(obj.quantfield, 28.28)
+
+        serialized = obj.model_dump()["quantfield"]
+
+        self.assertEqual(serialized, 28.28)
 
     def test_quantity_wrong_unit(self):
         """Ensure you get an error with an unexpected unit"""
