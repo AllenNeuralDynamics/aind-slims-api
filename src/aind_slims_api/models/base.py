@@ -4,8 +4,13 @@
 import logging
 from datetime import datetime
 from typing import ClassVar, Optional
-
-from pydantic import BaseModel, ValidationInfo, field_serializer, field_validator
+from pydantic import (
+    BaseModel,
+    ValidationInfo,
+    field_serializer,
+    field_validator,
+    SerializationInfo,
+)
 from slims.internal import Column as SlimsColumn  # type: ignore
 
 from aind_slims_api.models.utils import _find_unit_spec
@@ -63,15 +68,18 @@ class SlimsBaseModel(
             return value
 
     @field_serializer("*")
-    def _serialize(self, field, info):
-        """Serialize a field, accounts for Quantities and datetime"""
+    def _serialize(self, field, info: SerializationInfo):
+        """Serialize a field, accounts for Quantities and datetime."""
         unit_spec = _find_unit_spec(self.model_fields[info.field_name])
         if unit_spec and field is not None:
-            quantity = {
-                "amount": field,
-                "unit_display": unit_spec.preferred_unit,
-            }
-            return quantity
+            if info.context == "slims_post":
+                quantity = {
+                    "amount": field,
+                    "unit_display": unit_spec.preferred_unit,
+                }
+                return quantity
+            else:
+                return field
         elif isinstance(field, datetime):
             return int(field.timestamp() * 10**3)
         else:

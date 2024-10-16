@@ -353,6 +353,7 @@ class SlimsClient:
                 exclude=fields_to_exclude,
                 **kwargs,
                 by_alias=True,
+                context="slims_post",
             ),
         )
         return type(model).model_validate(rtn)
@@ -377,9 +378,7 @@ class SlimsClient:
             model._slims_table,
             model.pk,
             model.model_dump(
-                include=fields_to_include,
-                by_alias=True,
-                **kwargs,
+                include=fields_to_include, by_alias=True, **kwargs, context="slims_post"
             ),
         )
         return type(model).model_validate(rtn)
