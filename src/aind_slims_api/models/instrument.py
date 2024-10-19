@@ -28,10 +28,9 @@ class SlimsInstrumentRdrc(SlimsBaseModel):
     }
 
 
-# Slims Instrument model may be deprecated. New Instruments are stored in RDRC table
 class SlimsInstrument(SlimsBaseModel):
     """Model for a SLIMS instrument record.
-
+    This model may be deprecated. Use SlimsInstrumentRdrc for newer instruments.
     Examples
     --------
     >>> from aind_slims_api.core import SlimsClient
