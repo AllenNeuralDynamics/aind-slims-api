@@ -19,8 +19,8 @@ from aind_slims_api.models.ecephys_session import (
     SlimsExperimentRunStepContent,
     SlimsExperimentRunStep,
     SlimsBrainStructureRdrc,
-    SlimsInstrumentRdrc,
 )
+from aind_slims_api.models.instrument import SlimsInstrumentRdrc
 from aind_slims_api.operations import EcephysSession, fetch_ecephys_sessions
 from aind_slims_api.operations.ecephys_session import EcephysSessionBuilder
 

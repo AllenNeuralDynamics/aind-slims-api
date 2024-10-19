@@ -21,8 +21,8 @@ from aind_slims_api.models.ecephys_session import (
     SlimsGroupOfSessionsRunStep,
     SlimsMouseSessionRunStep,
     SlimsBrainStructureRdrc,
-    SlimsInstrumentRdrc,
 )
+from aind_slims_api.models import SlimsInstrumentRdrc
 
 logger = logging.getLogger(__name__)
 

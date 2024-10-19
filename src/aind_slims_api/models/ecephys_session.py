@@ -180,8 +180,8 @@ class SlimsStimulusEpochsResult(SlimsBaseModel):
     )
     stimulus_name: Optional[str] = Field(
         default=None,
-        serialization_alias="rslt_cf_stimulusDeviceNames",
-        validation_alias="rslt_cf_stimulusDeviceNames",
+        serialization_alias="rslt_cf_stimulusName",
+        validation_alias="rslt_cf_stimulusName",
     )
     stimulus_modalities: Optional[List] = Field(
         default=None,
@@ -375,26 +375,6 @@ class SlimsEphysInsertionResult(SlimsBaseModel):
     _slims_table = "Result"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "test_name": "test_ephys_insertion",
-    }
-
-
-class SlimsInstrumentRdrc(SlimsBaseModel):
-    """Model for Instrument Rdrc"""
-
-    pk: Optional[int] = Field(
-        default=None, serialization_alias="rdrc_pk", validation_alias="rdrc_pk"
-    )
-    name: Optional[str] = Field(
-        default=None, serialization_alias="rdrc_name", validation_alias="rdrc_name"
-    )
-    created_on: Optional[datetime] = Field(
-        default=None,
-        serialization_alias="rdrc_createdOn",
-        validation_alias="rdrc_createdOn",
-    )
-    _slims_table = "ReferenceDataRecord"
-    _base_fetch_filters: ClassVar[dict[str, str]] = {
-        "rdty_name": "AIND Instruments",
     }
 
 
