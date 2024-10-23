@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 class SlimsRewardDeliveryInfo(BaseModel):
     """Pydantic Model to store Reward Delivery Info"""
 
-    reward_delivery: Optional[SlimsRewardDeliveryRdrc] = []
+    reward_delivery: Optional[SlimsRewardDeliveryRdrc] = None
     reward_spouts: Optional[SlimsRewardSpoutsRdrc] = []
 
 
@@ -38,7 +38,7 @@ class SlimsStreamModule(SlimsDomeModuleRdrc):
     """DomeModule Wrapper to add linked brain structure models"""
 
     primary_targeted_structure: Optional[SlimsBrainStructureRdrc] = None
-    secondary_targeted_structures: Optional[list[SlimsBrainStructureRdrc]] = None
+    secondary_targeted_structures: Optional[list[SlimsBrainStructureRdrc]] = []
 
 
 class SlimsStream(SlimsStreamsResult):
