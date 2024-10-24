@@ -152,7 +152,7 @@ class TestSlimsEcephysSessionOperator(unittest.TestCase):
         self.assertEqual(len(ecephys_session.streams), 1)
         self.assertEqual(ecephys_session.streams[0].daq_names, ["DAQ1", "DAQ2"])
         self.assertEqual(len(ecephys_session.streams[0].stream_modules), 2)
-        self.assertIsNone(ecephys_session.stimulus_epochs)
+        self.assertEqual(ecephys_session.stimulus_epochs, [])
 
     def test_fetch_ecephys_sessions_handle_exception(self):
         """Tests that exception is handled as expected"""
