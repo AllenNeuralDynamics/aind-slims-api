@@ -31,7 +31,7 @@ class SlimsRewardDeliveryInfo(BaseModel):
     """Pydantic Model to store Reward Delivery Info"""
 
     reward_delivery: Optional[SlimsRewardDeliveryRdrc] = None
-    reward_spouts: Optional[SlimsRewardSpoutsRdrc] = []
+    reward_spouts: Optional[SlimsRewardSpoutsRdrc] = None
 
 
 class SlimsStreamModule(SlimsDomeModuleRdrc):
@@ -162,7 +162,7 @@ class EcephysSessionBuilder:
             session_result=session,
             streams=streams or None,
             reward_delivery=reward_delivery,
-            stimulus_epochs=stimulus_epochs or None,
+            stimulus_epochs=stimulus_epochs or [],
         )
 
     def process_session_steps(
