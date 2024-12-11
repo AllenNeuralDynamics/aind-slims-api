@@ -13,16 +13,18 @@ from aind_slims_api.models.ecephys_session import (
     SlimsMouseSessionResult,
     SlimsStreamsResult,
     SlimsStimulusEpochsResult,
-    SlimsExperimentRunStepContent,
-    SlimsExperimentRunStep,
     SlimsDomeModuleRdrc,
     SlimsRewardDeliveryRdrc,
     SlimsRewardSpoutsRdrc,
-    SlimsGroupOfSessionsRunStep,
-    SlimsMouseSessionRunStep,
     SlimsBrainStructureRdrc,
 )
 from aind_slims_api.models import SlimsInstrumentRdrc
+from aind_slims_api.models.experiment_run_step import (
+    SlimsExperimentRunStep,
+    SlimsExperimentRunStepContent,
+    SlimsGroupOfSessionsRunStep,
+    SlimsMouseSessionRunStep
+)
 
 logger = logging.getLogger(__name__)
 

@@ -1,10 +1,9 @@
 """Contains models for workflows stored in SLIMS."""
 
 from datetime import datetime
-from typing import Annotated, List, Optional, ClassVar
+from typing import Annotated, Optional, ClassVar
 from pydantic import Field
-from slims.slims import Slims
-
+from aind_slims_api.models.utils import UnitSpec
 from aind_slims_api.models.base import SlimsBaseModel
 
 
@@ -98,7 +97,7 @@ class SlimsMouseSessionRunStep(SlimsExperimentRunStep):
 class SlimsProtocolRunStep(SlimsExperimentRunStep):
     """Model for a Slims Protocol ExperimentRunStep"""
 
-    protocol: Optional[str] = Field(
+    protocol: Optional[int] = Field(
         None,
         serialization_alias="xprs_cf_fk_protocol",
         validation_alias="xprs_cf_fk_protocol"
@@ -123,10 +122,10 @@ class SlimsWashRunStep(SlimsExperimentRunStep):
         serialization_alias="xprs_cf_spimWashType",
         validation_alias="xprs_cf_spimWashType"
     ) # FIXED CHOICE
-    reagant: Optional[str] = Field(
+    reagent: Optional[str] = Field(
         None,
-        serialization_alias="xprs_cf_fk_reagant",
-        validation_alias="xprs_cf_fk_reagant"
+        serialization_alias="xprs_cf_fk_reagent",
+        validation_alias="xprs_cf_fk_reagent"
     ) # DYNAMIC CHOICE this might be a pk
     start_time: Optional[datetime] = Field(
         None,
@@ -138,7 +137,7 @@ class SlimsWashRunStep(SlimsExperimentRunStep):
         serialization_alias="xprs_cf_sbipDelipidationWash6End",
         validation_alias="xprs_cf_sbipDelipidationWash6End"
     )
-    mass: Optional[int] = Field(
+    mass: Optional[Annotated[float | None, UnitSpec("ml")]] = Field(
         None,
         serialization_alias="xprs_cf_mass",
         validation_alias="xprs_cf_mass"

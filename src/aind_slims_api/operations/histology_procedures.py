@@ -1,68 +1,17 @@
 """Module for operations to fetch histology specimen procedures"""
+#TODO: decide whether to do this here in operation, or directly map in metadata-service
 
 # Content -> ExperimentRunStepContent -> ExperimentRunStep -> ProtocolRun.
 # The protocol runs contain reagant multiselect field, and antibody info
 from aind_slims_api import SlimsClient
-
-class HistologyProceduresBuilder:
-    """Class to build EcephysSession objects from session run steps."""
-
-    def __init__(self, client: SlimsClient):
-        """Initialize Session Builder"""
-        self.client = client
-
-    def _process_single_step(self, group_run_step, session_run_step) -> EcephysSession:
-        """Process a single session run step into an EcephysSession."""
-        session = self.client.fetch_model(
-            SlimsMouseSessionResult, experiment_run_step_pk=session_run_step.pk
-        )
-        session_instrument = self.client.fetch_model(
-            SlimsInstrumentRdrc, pk=group_run_step.instrument_pk
-        )
-        stimulus_epochs = self.client.fetch_models(
-            SlimsStimulusEpochsResult, mouse_session_pk=session.pk
-        )
-
-        streams = self.fetch_streams(session.pk)
-        reward_delivery = (
-            self.fetch_reward_data(session.reward_delivery_pk)
-            if session.reward_delivery_pk
-            else None
-        )
-
-        return EcephysSession(
-            session_group=group_run_step,
-            session_instrument=session_instrument or None,
-            session_result=session,
-            streams=streams or None,
-            reward_delivery=reward_delivery,
-            stimulus_epochs=stimulus_epochs or [],
-        )
-
-    def process_session_steps(
-        self,
-        group_run_step: SlimsGroupOfSessionsRunStep,
-        session_run_steps: List[SlimsMouseSessionRunStep],
-    ) -> List[EcephysSession]:
-        """
-        Processes all session run steps into EcephysSession objects.
-        Parameters
-        ----------
-        group_run_step : SlimsGroupOfSessionsRunStep
-            The group run step containing session metadata and run information.
-        session_run_steps : List[SlimsMouseSessionRunStep]
-            A list of individual session run steps to be processed and encapsulated.
-
-        Returns
-        -------
-        List[EcephysSession]
-            A list of EcephysSession objects containing the processed session data.
-        """
-        return [
-            self._process_single_step(group_run_step, step)
-            for step in session_run_steps
-        ]
-
+import logging
+from aind_slims_api.models.experiment_run_step import (
+    SlimsWashRunStep,
+    SlimsExperimentRunStepContent,
+    SlimsExperimentRunStep, SlimsProtocolRunStep
+)
+from aind_slims_api.models.histology import SlimsSampleContent, SlimsReagentContent, SlimsProtocolSOP
+from aind_slims_api.exceptions import SlimsRecordNotFound
 
 def fetch_specimen_procedures(
     client: SlimsClient, subject_id: str):
@@ -86,10 +35,9 @@ def fetch_specimen_procedures(
     >>> from aind_slims_api import SlimsClient
     >>> client = SlimsClient()
     """
-    histology_specimen_procedures = []
-    # TODO: Instead of SlimsMouseContent, SlimsSpecimenContent
-    mouse = client.fetch_model(SlimsMouseContent, barcode=subject_id)
-    content_runs = client.fetch_models(SlimsExperimentRunStepContent, mouse_pk=mouse.pk)
+    washes = []
+    sample = client.fetch_model(SlimsSampleContent, mouse_barcode=subject_id)
+    content_runs = client.fetch_models(SlimsExperimentRunStepContent, mouse_pk=sample.pk)
 
     for content_run in content_runs:
         try:
@@ -97,9 +45,25 @@ def fetch_specimen_procedures(
             content_run_step = client.fetch_model(
                 SlimsExperimentRunStep, pk=content_run.runstep_pk
             )
+            protocol = client.fetch_model(
+                SlimsProtocolRunStep,
+                experimentrun_pk=content_run_step.experimentrun_pk
+            )
+            protocol_sop = client.fetch_model(
+                SlimsProtocolSOP,
+                pk=protocol.pk
+            )
+            # TODO: protocol_sop.name = protocol name, might be able to get protocol_id from here
+            # right now wash run steps has no filter so it also gets protocol. maybe just keep it vague
+            # and in the metadata-service, put everything together as necessary
+            wash_run_steps = client.fetch_models(
+                SlimsWashRunStep,
+                experimentrun_pk=content_run_step.experimentrun_pk
+            )
+            washes.append(wash_run_steps)
+            # TODO: for each wash, check if theres reagent -> fetch model
 
         except SlimsRecordNotFound as e:
             logging.info(str(e))
             continue
 
-    # return ecephys_sessions_list
