@@ -1,5 +1,6 @@
 """Module for operations to fetch histology specimen procedures"""
-#TODO: decide whether to do this here in operation, or directly map in metadata-service
+#TODO: Decide whether operations should just be refactored into metadata-service?
+#TODO: Look into whether antibodies need more api calls
 
 # Content -> ExperimentRunStepContent -> ExperimentRunStep -> ProtocolRun.
 # The protocol runs contain reagant multiselect field, and antibody info
@@ -12,6 +13,17 @@ from aind_slims_api.models.experiment_run_step import (
 )
 from aind_slims_api.models.histology import SlimsSampleContent, SlimsReagentContent, SlimsProtocolSOP
 from aind_slims_api.exceptions import SlimsRecordNotFound
+from pydantic import BaseModel
+from typing import Optional, List
+
+class SlimsSpecimenProcedure(BaseModel):
+    """Pydantic model to store Specimen Procedure Info"""
+    specimen_id: str
+    protocol: Optional[SlimsProtocolSOP]
+    wash: Optional[SlimsWashRunStep]
+    reagents: Optional[List[SlimsReagentContent]]
+
+
 
 def fetch_specimen_procedures(
     client: SlimsClient, subject_id: str):
@@ -35,7 +47,7 @@ def fetch_specimen_procedures(
     >>> from aind_slims_api import SlimsClient
     >>> client = SlimsClient()
     """
-    washes = []
+    specimen_procedures = []
     sample = client.fetch_model(SlimsSampleContent, mouse_barcode=subject_id)
     content_runs = client.fetch_models(SlimsExperimentRunStepContent, mouse_pk=sample.pk)
 
@@ -45,25 +57,45 @@ def fetch_specimen_procedures(
             content_run_step = client.fetch_model(
                 SlimsExperimentRunStep, pk=content_run.runstep_pk
             )
-            protocol = client.fetch_model(
+            protocol_run_step = client.fetch_model(
                 SlimsProtocolRunStep,
                 experimentrun_pk=content_run_step.experimentrun_pk
             )
-            protocol_sop = client.fetch_model(
+            protocol = client.fetch_model(
                 SlimsProtocolSOP,
-                pk=protocol.pk
+                pk=protocol_run_step.protocol_pk
             )
-            # TODO: protocol_sop.name = protocol name, might be able to get protocol_id from here
-            # right now wash run steps has no filter so it also gets protocol. maybe just keep it vague
-            # and in the metadata-service, put everything together as necessary
             wash_run_steps = client.fetch_models(
                 SlimsWashRunStep,
                 experimentrun_pk=content_run_step.experimentrun_pk
             )
-            washes.append(wash_run_steps)
-            # TODO: for each wash, check if theres reagent -> fetch model
+            for wash in wash_run_steps:
+                # TODO: double check that we should make a sep model for each "Wash"
+                reagents = client.fetch_models(SlimsReagentContent, pk=wash.reagent) if wash.reagent else []
+                specimen_procedures.append(
+                    SlimsSpecimenProcedure(
+                        specimen_id=subject_id,
+                        protocol=protocol,
+                        wash=wash,
+                        reagents=reagents,
+                    )
+                )
+                # mappings will be moved to aind-metadata-service
+                # wash_schema = SpecimenProcedure.model_construct(
+                #     procedure_type=map_procedure_type(wash.spim_wash_type), # method to map these
+                #     procedure_name=wash.name,
+                #     start_date=wash.start_time.date(),
+                #     end_date=wash.end_time.date(),
+                #     experimenter_full_name=None, # CHECK IF THIS IS MODIFIED BY,
+                #     protocol_id=[], # protocol_sop.name = protocol name, might be able to get protocol_id
+                #     reagents=map_reagents(reagents),
+                #     antibodies=map_antibodies(), # if wash.name is "Primary Antibody Wash" or "Secondary Antibody Wash", Conjugate?
+                #     # sectioning?
+                # )
 
         except SlimsRecordNotFound as e:
             logging.info(str(e))
             continue
+
+    return specimen_procedures
 

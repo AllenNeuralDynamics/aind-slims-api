@@ -1,7 +1,7 @@
 """Contains models for workflows stored in SLIMS."""
 
 from datetime import datetime
-from typing import Annotated, Optional, ClassVar
+from typing import Annotated, Optional, ClassVar, Any
 from pydantic import Field
 from aind_slims_api.models.utils import UnitSpec
 from aind_slims_api.models.base import SlimsBaseModel
@@ -97,7 +97,7 @@ class SlimsMouseSessionRunStep(SlimsExperimentRunStep):
 class SlimsProtocolRunStep(SlimsExperimentRunStep):
     """Model for a Slims Protocol ExperimentRunStep"""
 
-    protocol: Optional[int] = Field(
+    protocol_pk: Optional[int] = Field(
         None,
         serialization_alias="xprs_cf_fk_protocol",
         validation_alias="xprs_cf_fk_protocol"
@@ -141,12 +141,26 @@ class SlimsWashRunStep(SlimsExperimentRunStep):
         None,
         serialization_alias="xprs_cf_mass",
         validation_alias="xprs_cf_mass"
-    ) # ONLY APPLIES FOR PRIMARY AND SECONDARY ANTIBODY WASHES. CHECK IF THIS NEEDS TO BE ITS OWN MODEL
+    )
     notes: Optional[str] = Field(
         None,
         serialization_alias="xprs_cf_notes",
         validation_alias="xprs_cf_notes"
     )
-
-
-
+    _base_fetch_filters: ClassVar[dict[str, Any]] = {
+        "xprs_name": [
+            "Wash 1",
+            "Wash 2",
+            "Wash 3",
+            "Wash 4",
+            "Refractive Index Matching Wash",
+            "Primary Antibody Wash",
+            "Secondary Antibody Wash",
+            "MBS Wash",
+            "Gelation PBS Wash",
+            "Stock X + VA-044 Equilibration",
+            "Gelation + ProK RT",
+            "Gelation + Add'l ProK 37C",
+            "Final PBS Wash"
+        ]
+    }

@@ -16,7 +16,7 @@ from typing import Any, Optional, Type, TypeVar
 
 from pydantic import ValidationError
 from requests import Response
-from slims.criteria import Criterion, conjunction, equals
+from slims.criteria import Criterion, conjunction, equals, is_one_of
 from slims.internal import Record as SlimsRecord
 from slims.slims import Slims, _SlimsApiException
 
@@ -85,7 +85,10 @@ class SlimsClient:
                 criteria.add(arg)
 
         for k, v in kwargs.items():
-            criteria.add(equals(k, v))
+            if isinstance(v, list):  # Handle lists as "IN" criteria
+                criteria.add(is_one_of(k, v))
+            else:
+                criteria.add(equals(k, v))
 
         if isinstance(sort, str):
             sort = [sort]
