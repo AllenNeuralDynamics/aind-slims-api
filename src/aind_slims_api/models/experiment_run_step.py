@@ -50,8 +50,32 @@ class SlimsExperimentRunStep(SlimsBaseModel):
         serialization_alias="xprs_fk_experimentRun",
         validation_alias="xprs_fk_experimentRun",
     )
+    experiment_template_pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="xpst_fk_experimentTemplate",
+        validation_alias="xpst_fk_experimentTemplate"
+    )
     _slims_table = "ExperimentRunStep"
 
+class SlimsExperimentTemplate(SlimsBaseModel):
+    """Model for a Slims Experiment Template"""
+    pk: Optional[int] = Field(
+        default=None, serialization_alias="xptm_pk", validation_alias="xptm_pk"
+    )
+    name: Optional[str] = Field(
+        default=None, serialization_alias="xptm_name", validation_alias="xptm_name"
+    )
+    version_name: Optional[str] = Field(
+        default=None,
+        serialization_alias="xptm_nameVersion",
+        validation_alias="xptm_nameVersion"
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="xptm_createdOn",
+        validation_alias="xptm_createdOn",
+    )
+    _slims_table = "ExperimentTemplate"
 
 class SlimsGroupOfSessionsRunStep(SlimsExperimentRunStep):
     """Model for a Slims ExperimentRunStep"""
@@ -109,9 +133,6 @@ class SlimsProtocolRunStep(SlimsExperimentRunStep):
 class SlimsWashRunStep(SlimsExperimentRunStep):
     """Model for a Slims Wash ExperimentRunStep"""
 
-    # Wash 1-4, Refractive Index Matching Wash, Primary Antibody Wash, Secondary Antibody Wash, MBS Wash
-    # Gelation PBS Wash, Stock X + VA-044 Equilibration, Gelation + ProK RT, Gelation + Add'l ProK 37C, Final PBS Wash
-    # no base fetch filter because all these have different names but same fields
     wash_name: Optional[str] = Field(
         None,
         serialization_alias="xprs_name",
@@ -137,7 +158,7 @@ class SlimsWashRunStep(SlimsExperimentRunStep):
         serialization_alias="xprs_cf_sbipDelipidationWash6End",
         validation_alias="xprs_cf_sbipDelipidationWash6End"
     )
-    mass: Optional[Annotated[float | None, UnitSpec("ml")]] = Field(
+    mass: Optional[Annotated[float | None, UnitSpec("&mu;g")]] = Field(
         None,
         serialization_alias="xprs_cf_mass",
         validation_alias="xprs_cf_mass"
