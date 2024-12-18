@@ -1,10 +1,7 @@
 """Module for operations to fetch SPIM histology specimen procedures"""
 
-#TODO: Decide whether operations should just be refactored into metadata-service?
-#TODO: Look into whether antibodies need more api calls
+# TODO: figure out which model has modified by and make sure to use it (maybe make a list from washes)
 
-# Content -> ExperimentRunStepContent -> ExperimentRunStep -> ProtocolRun.
-# The protocol runs contain reagant multiselect field, and antibody info
 from aind_slims_api import SlimsClient
 import logging
 from aind_slims_api.models.experiment_run_step import (
@@ -15,7 +12,7 @@ from aind_slims_api.models.experiment_run_step import (
 from aind_slims_api.models.histology import SlimsSampleContent, SlimsReagentContent, SlimsProtocolSOP
 from aind_slims_api.exceptions import SlimsRecordNotFound
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 class SlimsWash(BaseModel):
     """Pydantic model to store Specimen Procedure Info"""
@@ -24,9 +21,9 @@ class SlimsWash(BaseModel):
 
 class SlimsSPIMHistologyExpBlock(BaseModel):
     """Pydantic model to store Specimen Procedure Info"""
-    specimen_id: str
     protocol: Optional[SlimsProtocolSOP]
-    washes: Optional[List[SlimsWash]]
+    washes: Optional[Dict[SlimsWashRunStep, List[SlimsReagentContent]]]
+    experiment_template: Optional[SlimsExperimentTemplate]
 
 def fetch_specimen_procedures(
     client: SlimsClient, subject_id: str):
@@ -58,7 +55,6 @@ def fetch_specimen_procedures(
     for content_run in content_runs:
         try:
             # retrieves content step to find experimentrun_pk
-            # TODO: group here by step instead of wash. make wash a list per step
             content_run_step = client.fetch_model(
                 SlimsExperimentRunStep, pk=content_run.runstep_pk
             )
@@ -82,7 +78,6 @@ def fetch_specimen_procedures(
             )
             washes = []
             for wash in wash_run_steps:
-                # TODO: get example metadata ids with specimen procedures
                 reagents = client.fetch_models(SlimsReagentContent, pk=wash.reagent) if wash.reagent else []
                 washes.append(
                     SlimsWash(
@@ -103,16 +98,3 @@ def fetch_specimen_procedures(
             continue
 
     return specimen_procedures
-
-# mappings will be moved to aind-metadata-service
-# wash_schema = SpecimenProcedure.model_construct(
-#     procedure_type=map_procedure_type(wash.spim_wash_type), # method to map these
-#     procedure_name=wash.name,
-#     start_date=wash.start_time.date(),
-#     end_date=wash.end_time.date(),
-#     experimenter_full_name=None, # CHECK IF THIS IS MODIFIED BY,
-#     protocol_id=[], # protocol_sop.name = protocol name, might be able to get protocol_id
-#     reagents=map_reagents(wash.reagents),
-#     antibodies=map_antibodies(wash.wash), # if wash.name is "Primary Antibody Wash" or "Secondary Antibody Wash", Conjugate?
-#     # sectioning?
-# )

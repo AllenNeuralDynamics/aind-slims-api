@@ -158,7 +158,7 @@ class SlimsWashRunStep(SlimsExperimentRunStep):
         serialization_alias="xprs_cf_sbipDelipidationWash6End",
         validation_alias="xprs_cf_sbipDelipidationWash6End"
     )
-    mass: Optional[Annotated[float | None, UnitSpec("&mu;g")]] = Field(
+    mass: Annotated[float | None, UnitSpec("&mu;g")] = Field(
         None,
         serialization_alias="xprs_cf_mass",
         validation_alias="xprs_cf_mass"
