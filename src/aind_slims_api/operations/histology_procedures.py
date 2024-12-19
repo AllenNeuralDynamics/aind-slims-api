@@ -43,7 +43,7 @@ def fetch_washes(client: SlimsClient, experimentrun_pk: int) -> List[SlimsWash]:
     return washes
 
 def fetch_histology_procedures(
-    client: SlimsClient, subject_id: str) -> List[SPIMHistologyExpBlock]:
+    client: SlimsClient, specimen_id: str) -> List[SPIMHistologyExpBlock]:
     """
     Fetch and process all spim histology run steps for a given specimen id.
     Retrieves all SPIM histology steps associated with the provided specimen
@@ -53,7 +53,7 @@ def fetch_histology_procedures(
     ----------
     client : SlimsClient
         An instance of SlimsClient used to connect to the SLIMS API.
-    subject_id : str
+    specimen_id : str
         The ID of the specimen for which to fetch histology data.
 
     Returns
@@ -66,7 +66,7 @@ def fetch_histology_procedures(
     >>> specimen_procedures = fetch_histology_procedures(client, "000000")
     """
     specimen_procedures = []
-    sample = client.fetch_model(SlimsSampleContent, mouse_barcode=subject_id)
+    sample = client.fetch_model(SlimsSampleContent, mouse_barcode=specimen_id)
 
     content_runs = client.fetch_models(SlimsExperimentRunStepContent, mouse_pk=sample.pk)
 
