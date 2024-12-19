@@ -81,7 +81,7 @@ class SlimsReagentContent(SlimsBaseModel):
         serialization_alias="cntn_createdOn",
         validation_alias="cntn_createdOn",
     )
-    lot_number: Optional[int] = Field(
+    lot_number: Optional[str] = Field(
         None,
         serialization_alias="cntn_cf_lotNumber",
         validation_alias="cntn_cf_lotNumber"
@@ -91,7 +91,34 @@ class SlimsReagentContent(SlimsBaseModel):
         serialization_alias="cntn_cf_reagentName",
         validation_alias="cntn_cf_reagentName"
     )
+    source_pk: Optional[int] = Field(
+        None,
+        serialization_alias="cntn_fk_source",
+        validation_alias="cntn_fk_source"
+    )
     _slims_table = "Content"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "cntp_name": "EasyIndex",
+    }
+
+class SlimsSource(SlimsBaseModel):
+    """ Model for a Source """
+    pk: Optional[int] = Field(
+        default=None,
+        serialization_alias="sorc_pk",
+        validation_alias="sorc_pk",
+    )
+    name: Optional[str] = Field(
+        None,
+        serialization_alias="sorc_name",
+        validation_alias="sorc_name"
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="sorc_createdOn",
+        validation_alias="sorc_createdOn",
+    )
+    _slims_table = "Source"
 
 
 class SlimsProtocolSOP(SlimsBaseModel):

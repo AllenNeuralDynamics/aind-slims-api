@@ -6,7 +6,6 @@ from pydantic import Field
 from aind_slims_api.models.utils import UnitSpec
 from aind_slims_api.models.base import SlimsBaseModel
 
-
 class SlimsExperimentRunStepContent(SlimsBaseModel):
     """Model for a SLIMS ExperimentRunStepContent"""
 
@@ -44,6 +43,11 @@ class SlimsExperimentRunStep(SlimsBaseModel):
         default=None,
         serialization_alias="xprs_createdOn",
         validation_alias="xprs_createdOn",
+    )
+    modified_by: Optional[str] = Field(
+        default=None,
+        serialization_alias="xprs_modifiedBy",
+        validation_alias="xprs_modifiedBy",
     )
     experimentrun_pk: Optional[int] = Field(
         default=None,
