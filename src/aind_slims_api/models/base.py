@@ -52,7 +52,6 @@ class SlimsBaseModel(
             if value.datatype == "QUANTITY" and info.field_name is not None:
                 unit_spec = _find_unit_spec(cls.model_fields[info.field_name])
                 if unit_spec is None:
-
                     msg = (
                         f'Quantity field "{info.field_name}"'
                         "must be annotated with a UnitSpec"

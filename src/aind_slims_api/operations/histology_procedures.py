@@ -94,7 +94,7 @@ def fetch_histology_procedures(
             specimen_procedures.append(
                 SPIMHistologyExpBlock(
                 protocol=protocol_sop, # contains protocol link, name
-                experiment_template=experiment_template, # contains "purpose"
+                experiment_template=experiment_template,
                 washes=washes,
                 )
             )

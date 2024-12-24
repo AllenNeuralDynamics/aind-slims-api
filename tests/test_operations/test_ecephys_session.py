@@ -14,11 +14,13 @@ from aind_slims_api.models.ecephys_session import (
     SlimsDomeModuleRdrc,
     SlimsRewardDeliveryRdrc,
     SlimsRewardSpoutsRdrc,
+    SlimsBrainStructureRdrc,
+)
+from aind_slims_api.models.experiment_run_step import (
     SlimsGroupOfSessionsRunStep,
     SlimsMouseSessionRunStep,
     SlimsExperimentRunStepContent,
     SlimsExperimentRunStep,
-    SlimsBrainStructureRdrc,
 )
 from aind_slims_api.models.instrument import SlimsInstrumentRdrc
 from aind_slims_api.operations import EcephysSession, fetch_ecephys_sessions

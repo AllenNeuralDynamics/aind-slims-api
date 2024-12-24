@@ -1,117 +1,114 @@
-"""Testing ecephys session operation"""
-
-import os
 import unittest
-import json
-from unittest.mock import patch
-from pathlib import Path
-from slims.internal import Record
-from aind_slims_api.exceptions import SlimsRecordNotFound
-from aind_slims_api.models.mouse import SlimsMouseContent
-from aind_slims_api.models.ecephys_session import (
-    SlimsMouseSessionResult,
-    SlimsStreamsResult,
-    SlimsDomeModuleRdrc,
-    SlimsRewardDeliveryRdrc,
-    SlimsRewardSpoutsRdrc,
-    SlimsGroupOfSessionsRunStep,
-    SlimsMouseSessionRunStep,
-    SlimsExperimentRunStepContent,
-    SlimsExperimentRunStep,
-    SlimsBrainStructureRdrc,
+from unittest.mock import MagicMock, patch
+from aind_slims_api.operations.histology_procedures import (
+    fetch_washes,
+    fetch_histology_procedures,
+    SlimsWash,
+    SPIMHistologyExpBlock
 )
-from aind_slims_api.models.instrument import SlimsInstrumentRdrc
-from aind_slims_api.operations import EcephysSession, fetch_ecephys_sessions
-from aind_slims_api.operations.ecephys_session import EcephysSessionBuilder
+from aind_slims_api.models.histology import SlimsSampleContent
+from aind_slims_api.models.experiment_run_step import (
+    SlimsWashRunStep, SlimsExperimentRunStepContent, SlimsExperimentRunStep,
+    SlimsProtocolRunStep, SlimsExperimentTemplate
+)
+from aind_slims_api.models.histology import SlimsReagentContent, SlimsSource, SlimsProtocolSOP
+from aind_slims_api.exceptions import SlimsRecordNotFound
+from pathlib import Path
+import os
+from slims.internal import Record
+import json
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / ".." / "resources"
 
+class TestHistologyProcedures(unittest.TestCase):
+    """Test class for SlimsHistologyProcedures operation."""
 
-class TestSlimsEcephysSessionOperator(unittest.TestCase):
-    """Test class for SlimsEcephysSessionOperator"""
-
-    @patch("aind_slims_api.operations.ecephys_session.SlimsClient")
+    @patch("aind_slims_api.operations.histology_procedures.SlimsClient")
     def setUp(cls, mock_client):
         """setup test class"""
-        cls.mock_client = mock_client()
+        cls.client = mock_client()
         with open(
-            RESOURCES_DIR / "example_fetch_ecephys_session_result.json", "r"
+            RESOURCES_DIR / "example_fetch_histology_procedures.json", "r"
         ) as f:
             response = [
-                Record(json_entity=r, slims_api=cls.mock_client.db.slims_api)
+                Record(json_entity=r, slims_api=cls.client.db.slims_api)
                 for r in json.load(f)
             ]
-        cls.example_fetch_ecephys_session_result = response
-        cls.operator = EcephysSessionBuilder(client=cls.mock_client)
-
-    def test_fetch_ecephys_sessions_success(self):
-        """Tests session info is fetched successfully"""
-        self.mock_client.fetch_models.side_effect = [
-            [SlimsExperimentRunStepContent(pk=1, runstep_pk=3, mouse_pk=12345)],
-            [SlimsMouseSessionRunStep(pk=7, experimentrun_pk=101)],
-            None,
-            [
-                SlimsStreamsResult(
-                    pk=8,
-                    mouse_session_pk=7,
-                    stream_modules_pk=[9, 10],
-                    daq_names=["DAQ1", "DAQ2"],
-                )
-            ],
-            [],
-        ]
-
-        self.mock_client.fetch_model.side_effect = [
-            SlimsMouseContent.model_construct(pk=12345),
-            SlimsExperimentRunStep(pk=3, experimentrun_pk=101),
-            SlimsGroupOfSessionsRunStep(
-                pk=6,
-                session_type="OptoTagging",
-                mouse_platform_name="Platform1",
-                experimentrun_pk=101,
-                instrument_pk=18,
-            ),
-            SlimsMouseSessionResult(pk=12, reward_delivery_pk=14),
-            SlimsInstrumentRdrc(pk=18, name="323InstrumentA"),
-            SlimsDomeModuleRdrc(pk=9, probe_name="Probe1", arc_angle=20),
-            SlimsDomeModuleRdrc(pk=10, probe_name="Probe1", arc_angle=20),
-            SlimsRewardDeliveryRdrc(
-                pk=3, reward_spouts_pk=5, reward_solution="Solution1"
-            ),
-            SlimsRewardSpoutsRdrc(pk=5, spout_side="Left"),
-        ]
-
-        # Run the fetch_sessions method
-        ecephys_sessions = fetch_ecephys_sessions(
-            client=self.mock_client, subject_id="12345"
+        cls.example_fetch_histology_procedures = response
+        
+    @patch("aind_slims_api.operations.histology_procedures.SlimsWash")
+    def test_fetch_washes(self, mock_slims_wash):
+        """Tests washes are fetched successfully"""
+        example_reagent_content = SlimsReagentContent(
+            pk=123,
+            source_pk=456,
+            lot_number="EI60",
+            reagent_name="rgnt0000000",
         )
+        example_source = SlimsSource(
+            pk=456,
+            name="AA Opto Electronics",
+        )
+        example_wash_run_step = SlimsWashRunStep(
+            reagent_pk=123,
+            experimentrun_pk=789,
+            wash_name="Wash 1",
+            spim_wash_type="Passive Delipidation"
+        )
+        self.client.fetch_models.return_value = [example_wash_run_step]
+        self.client.fetch_models.side_effect = lambda model, pk=None: [example_reagent_content] if model == SlimsReagentContent else []
+        self.client.fetch_model.return_value = example_source
 
-        # Assertions
-        self.assertEqual(len(ecephys_sessions), 1)
-        ecephys_session = ecephys_sessions[0]
-        self.assertIsInstance(ecephys_session, EcephysSession)
-        self.assertEqual(ecephys_session.session_group.session_type, "OptoTagging")
-        self.assertEqual(len(ecephys_session.streams), 1)
-        self.assertEqual(ecephys_session.streams[0].daq_names, ["DAQ1", "DAQ2"])
-        self.assertEqual(len(ecephys_session.streams[0].stream_modules), 2)
-        self.assertEqual(ecephys_session.stimulus_epochs, [])
+        washes = fetch_washes(self.client, experimentrun_pk=789)
 
-    def test_fetch_ecephys_sessions_handle_exception(self):
-        """Tests that exception is handled as expected"""
-        self.mock_client.fetch_models.side_effect = [
-            [SlimsExperimentRunStepContent(pk=1, runstep_pk=3, mouse_pk=67890)]
-        ]
-        self.mock_client.fetch_model.side_effect = [
-            SlimsMouseContent.model_construct(pk=67890),
-            SlimsRecordNotFound("No record found for SlimsExperimentRunStep with pk=3"),
-        ]
+        self.client.fetch_models.assert_any_call(SlimsWashRunStep, experimentrun_pk=123)
+        self.client.fetch_models.assert_any_call(SlimsReagentContent, pk=1)
+        self.client.fetch_model.assert_called_with(SlimsSource, pk=2)
+        mock_slims_wash.assert_called_with(wash_step=example_wash_run_step, reagents=[(example_reagent_content, example_source)])
+        self.assertEqual(len(washes), 1)
 
-        with patch("logging.info") as mock_log_info:
-            fetch_ecephys_sessions(client=self.mock_client, subject_id="67890")
-            mock_log_info.assert_called_with(
-                "No record found for SlimsExperimentRunStep with pk=3"
-            )
+#     @patch('histology_procedures.fetch_washes')
+#     def test_fetch_histology_procedures(self, mock_fetch_washes):
+#         # Mock data for specimen and content runs
+#         mock_sample = SlimsSampleContent(pk=1)
+#         mock_content_run = SlimsExperimentRunStepContent(runstep_pk=2)
+#         mock_experiment_run_step = SlimsExperimentRunStep(experiment_template_pk=3, experimentrun_pk=4)
+#         mock_experiment_template = SlimsExperimentTemplate()
+#         mock_protocol_run_step = SlimsProtocolRunStep(protocol_pk=5)
+#         mock_protocol_sop = SlimsProtocolSOP()
 
+#         self.client.fetch_model.side_effect = lambda model, **kwargs: {
+#             SlimsSampleContent: mock_sample,
+#             SlimsExperimentRunStep: mock_experiment_run_step,
+#             SlimsExperimentTemplate: mock_experiment_template,
+#             SlimsProtocolRunStep: mock_protocol_run_step,
+#             SlimsProtocolSOP: mock_protocol_sop
+#         }.get(model, None)
+#         self.client.fetch_models.return_value = [mock_content_run]
+#         mock_fetch_washes.return_value = []
 
-if __name__ == "__main__":
-    unittest.main()
+#         procedures = fetch_histology_procedures(self.client, "000000")
+
+#         self.client.fetch_model.assert_any_call(SlimsSampleContent, mouse_barcode="000000")
+#         self.client.fetch_models.assert_called_with(SlimsExperimentRunStepContent, mouse_pk=1)
+#         self.client.fetch_model.assert_any_call(SlimsExperimentRunStep, pk=2)
+#         self.client.fetch_model.assert_any_call(SlimsExperimentTemplate, pk=3)
+#         self.client.fetch_model.assert_any_call(SlimsProtocolRunStep, experimentrun_pk=4)
+#         self.client.fetch_model.assert_any_call(SlimsProtocolSOP, pk=5)
+#         mock_fetch_washes.assert_called_with(self.client, experimentrun_pk=4)
+
+#         self.assertEqual(len(procedures), 1)
+#         self.assertIsInstance(procedures[0], SPIMHistologyExpBlock)
+
+#     def test_fetch_histology_procedures_handles_missing_records(self):
+#         # Mock raising SlimsRecordNotFound
+#         self.client.fetch_model.side_effect = SlimsRecordNotFound("Record not found")
+#         self.client.fetch_models.return_value = []
+
+#         procedures = fetch_histology_procedures(self.client, "000000")
+
+#         self.client.fetch_model.assert_called_with(SlimsSampleContent, mouse_barcode="000000")
+#         self.assertEqual(len(procedures), 0)
+
+# if __name__ == "__main__":
+#     unittest.main()
