@@ -33,9 +33,9 @@ def fetch_washes(client: SlimsClient, experimentrun_pk: int) -> List[SlimsWash]:
             reagents=[
                 (
                     reagent,
-                    client.fetch_model(SlimsSource, pk=reagent.source) if reagent.source else None
+                    client.fetch_model(SlimsSource, pk=reagent.source_pk) if reagent.source_pk else None
                 )
-                for reagent in (client.fetch_models(SlimsReagentContent, pk=wash.reagent) if wash.reagent else [])
+                for reagent in (client.fetch_models(SlimsReagentContent, pk=wash.reagent_pk) if wash.reagent_pk else [])
             ]
         )
         for wash in wash_run_steps

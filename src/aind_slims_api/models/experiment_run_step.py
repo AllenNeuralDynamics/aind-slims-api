@@ -147,11 +147,11 @@ class SlimsWashRunStep(SlimsExperimentRunStep):
         serialization_alias="xprs_cf_spimWashType",
         validation_alias="xprs_cf_spimWashType"
     ) # FIXED CHOICE
-    reagent: Optional[str] = Field(
+    reagent_pk: Optional[int] = Field(
         None,
         serialization_alias="xprs_cf_fk_reagent",
         validation_alias="xprs_cf_fk_reagent"
-    ) # DYNAMIC CHOICE this might be a pk
+    )
     start_time: Optional[datetime] = Field(
         None,
         serialization_alias="xprs_cf_sbipDelipidationWash1Start",
