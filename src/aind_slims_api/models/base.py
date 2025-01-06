@@ -4,12 +4,13 @@
 import logging
 from datetime import datetime
 from typing import ClassVar, Optional
+
 from pydantic import (
     BaseModel,
+    SerializationInfo,
     ValidationInfo,
     field_serializer,
     field_validator,
-    SerializationInfo,
 )
 from slims.internal import Column as SlimsColumn  # type: ignore
 

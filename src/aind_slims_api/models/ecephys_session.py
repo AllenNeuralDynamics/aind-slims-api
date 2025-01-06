@@ -1,11 +1,13 @@
 """Contains a model for an ecephys result stored in SLIMS."""
 
 from datetime import datetime
-from typing import Annotated, List, Optional, ClassVar
+from typing import Annotated, ClassVar, List, Optional
+
 from pydantic import Field
 
 from aind_slims_api.models.base import SlimsBaseModel
 from aind_slims_api.models.utils import UnitSpec
+
 
 class SlimsStreamsResult(SlimsBaseModel):
     """Model for a SLIMS Result Streams"""

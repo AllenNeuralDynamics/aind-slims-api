@@ -1,28 +1,30 @@
 """Testing ecephys session operation"""
 
+import json
 import os
 import unittest
-import json
-from unittest.mock import patch
 from pathlib import Path
+from unittest.mock import patch
+
 from slims.internal import Record
+
 from aind_slims_api.exceptions import SlimsRecordNotFound
-from aind_slims_api.models.mouse import SlimsMouseContent
 from aind_slims_api.models.ecephys_session import (
-    SlimsMouseSessionResult,
-    SlimsStreamsResult,
+    SlimsBrainStructureRdrc,
     SlimsDomeModuleRdrc,
+    SlimsMouseSessionResult,
     SlimsRewardDeliveryRdrc,
     SlimsRewardSpoutsRdrc,
-    SlimsBrainStructureRdrc,
+    SlimsStreamsResult,
 )
 from aind_slims_api.models.experiment_run_step import (
+    SlimsExperimentRunStep,
+    SlimsExperimentRunStepContent,
     SlimsGroupOfSessionsRunStep,
     SlimsMouseSessionRunStep,
-    SlimsExperimentRunStepContent,
-    SlimsExperimentRunStep,
 )
 from aind_slims_api.models.instrument import SlimsInstrumentRdrc
+from aind_slims_api.models.mouse import SlimsMouseContent
 from aind_slims_api.operations import EcephysSession, fetch_ecephys_sessions
 from aind_slims_api.operations.ecephys_session import EcephysSessionBuilder
 
