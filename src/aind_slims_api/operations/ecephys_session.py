@@ -25,7 +25,7 @@ from aind_slims_api.models.experiment_run_step import (
     SlimsGroupOfSessionsRunStep,
     SlimsMouseSessionRunStep,
 )
-from aind_slims_api.models.mouse import SlimsMouseContent
+from aind_slims_api.models import SlimsMouseContent
 
 logger = logging.getLogger(__name__)
 
@@ -248,7 +248,7 @@ def fetch_ecephys_sessions(
                 ecephys_sessions_list.extend(ecephys_sessions)
 
         except SlimsRecordNotFound as e:
-            logging.info(str(e))
+            logging.warning(str(e))
             continue
 
     return ecephys_sessions_list

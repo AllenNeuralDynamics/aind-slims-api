@@ -169,9 +169,9 @@ class TestHistologyProcedures(unittest.TestCase):
             SlimsRecordNotFound("No record found for SlimsExperimentRunStep with pk=3"),
         ]
 
-        with patch("logging.info") as mock_log_info:
+        with patch("logging.warning") as mock_log_warning:
             fetch_histology_procedures(client=self.client, specimen_id="67890")
-            mock_log_info.assert_called_with(
+            mock_log_warning.assert_called_with(
                 "No record found for SlimsExperimentRunStep with pk=3"
             )
 

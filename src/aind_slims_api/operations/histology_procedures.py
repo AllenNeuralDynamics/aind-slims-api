@@ -125,7 +125,7 @@ def fetch_histology_procedures(
                 )
             )
         except SlimsRecordNotFound as e:
-            logging.info(str(e))
+            logging.warning(str(e))
             continue
 
     return specimen_procedures
