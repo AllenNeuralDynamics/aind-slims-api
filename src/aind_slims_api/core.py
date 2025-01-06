@@ -74,7 +74,9 @@ class SlimsClient:
             start (int, optional):  The first row to return
             end (int, optional): The last row to return
             *args (Slims.criteria.Criterion): Optional criteria to apply
-            **kwargs (dict[str,str]): "field=value" filters
+            **kwargs (dict[str,str|list]): "field=value" filters.
+                If value is a list, will apply "field IN value" criterion
+
 
         Returns:
             records (list[SlimsRecord] | None): Matching records, if any
