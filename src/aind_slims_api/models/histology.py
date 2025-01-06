@@ -123,7 +123,7 @@ class SlimsSource(SlimsBaseModel):
 
 
 class SlimsProtocolSOP(SlimsBaseModel):
-    """"""
+    """Model for Protocols SOP"""
 
     pk: Optional[int] = Field(
         default=None,
