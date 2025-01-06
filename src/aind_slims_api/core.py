@@ -335,7 +335,9 @@ class SlimsClient:
         queries = [f"?{k}={v}" for k, v in kwargs.items()]
         return base_url + "".join(queries)
 
-    def add_model(self, model: SlimsBaseModelTypeVar, *args, **kwargs) -> SlimsBaseModelTypeVar:
+    def add_model(
+        self, model: SlimsBaseModelTypeVar, *args, **kwargs
+    ) -> SlimsBaseModelTypeVar:
         """Given a SlimsBaseModel object, add it to SLIMS
         Args
             model (SlimsBaseModel): object to add
@@ -380,7 +382,9 @@ class SlimsClient:
         rtn = self.update(
             model._slims_table,
             model.pk,
-            model.model_dump(include=fields_to_include, by_alias=True, **kwargs, context="slims_post"),
+            model.model_dump(
+                include=fields_to_include, by_alias=True, **kwargs, context="slims_post"
+            ),
         )
         return type(model).model_validate(rtn)
 
