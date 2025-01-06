@@ -4,25 +4,28 @@ Module defining operations to build EcephysSession.
 
 import logging
 from typing import List, Optional
+
 from pydantic import BaseModel
 
 from aind_slims_api import SlimsClient
 from aind_slims_api.exceptions import SlimsRecordNotFound
-from aind_slims_api.models.mouse import SlimsMouseContent
+from aind_slims_api.models import SlimsInstrumentRdrc
 from aind_slims_api.models.ecephys_session import (
-    SlimsMouseSessionResult,
-    SlimsStreamsResult,
-    SlimsStimulusEpochsResult,
-    SlimsExperimentRunStepContent,
-    SlimsExperimentRunStep,
+    SlimsBrainStructureRdrc,
     SlimsDomeModuleRdrc,
+    SlimsMouseSessionResult,
     SlimsRewardDeliveryRdrc,
     SlimsRewardSpoutsRdrc,
+    SlimsStimulusEpochsResult,
+    SlimsStreamsResult,
+)
+from aind_slims_api.models.experiment_run_step import (
+    SlimsExperimentRunStep,
+    SlimsExperimentRunStepContent,
     SlimsGroupOfSessionsRunStep,
     SlimsMouseSessionRunStep,
-    SlimsBrainStructureRdrc,
 )
-from aind_slims_api.models import SlimsInstrumentRdrc
+from aind_slims_api.models import SlimsMouseContent
 
 logger = logging.getLogger(__name__)
 
@@ -245,7 +248,7 @@ def fetch_ecephys_sessions(
                 ecephys_sessions_list.extend(ecephys_sessions)
 
         except SlimsRecordNotFound as e:
-            logging.info(str(e))
+            logging.warning(str(e))
             continue
 
     return ecephys_sessions_list

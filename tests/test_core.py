@@ -8,7 +8,7 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 from requests import Response
-from slims.criteria import conjunction, equals
+from slims.criteria import conjunction, equals, is_one_of
 from slims.internal import Record, _SlimsApiException
 
 from aind_slims_api.core import SlimsAttachment, SlimsClient
@@ -86,12 +86,12 @@ class TestSlimsClient(unittest.TestCase):
         response = self.example_client.fetch(
             "Content",
             equals("cntn_barCode", "123456"),
-            cntp_name="Mouse",
+            cntp_name=["Mouse", "Rat"],
         )
         expected_criteria = (
             conjunction()
             .add(equals("cntn_barCode", "123456"))
-            .add(equals("cntp_name", "Mouse"))
+            .add(is_one_of("cntp_name", ["Mouse", "Rat"]))
         )
         actual_criteria = mock_slims_fetch.mock_calls[0].args[1]
         self.assertEqual(expected_criteria.to_dict(), actual_criteria.to_dict())

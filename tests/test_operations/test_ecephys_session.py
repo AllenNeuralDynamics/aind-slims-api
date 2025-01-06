@@ -1,26 +1,30 @@
 """Testing ecephys session operation"""
 
+import json
 import os
 import unittest
-import json
-from unittest.mock import patch
 from pathlib import Path
+from unittest.mock import patch
+
 from slims.internal import Record
+
 from aind_slims_api.exceptions import SlimsRecordNotFound
-from aind_slims_api.models.mouse import SlimsMouseContent
 from aind_slims_api.models.ecephys_session import (
-    SlimsMouseSessionResult,
-    SlimsStreamsResult,
+    SlimsBrainStructureRdrc,
     SlimsDomeModuleRdrc,
+    SlimsMouseSessionResult,
     SlimsRewardDeliveryRdrc,
     SlimsRewardSpoutsRdrc,
+    SlimsStreamsResult,
+)
+from aind_slims_api.models.experiment_run_step import (
+    SlimsExperimentRunStep,
+    SlimsExperimentRunStepContent,
     SlimsGroupOfSessionsRunStep,
     SlimsMouseSessionRunStep,
-    SlimsExperimentRunStepContent,
-    SlimsExperimentRunStep,
-    SlimsBrainStructureRdrc,
 )
 from aind_slims_api.models.instrument import SlimsInstrumentRdrc
+from aind_slims_api.models.mouse import SlimsMouseContent
 from aind_slims_api.operations import EcephysSession, fetch_ecephys_sessions
 from aind_slims_api.operations.ecephys_session import EcephysSessionBuilder
 
@@ -164,9 +168,9 @@ class TestSlimsEcephysSessionOperator(unittest.TestCase):
             SlimsRecordNotFound("No record found for SlimsExperimentRunStep with pk=3"),
         ]
 
-        with patch("logging.info") as mock_log_info:
+        with patch("logging.warning") as mock_log_warning:
             fetch_ecephys_sessions(client=self.mock_client, subject_id="67890")
-            mock_log_info.assert_called_with(
+            mock_log_warning.assert_called_with(
                 "No record found for SlimsExperimentRunStep with pk=3"
             )
 

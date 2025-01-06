@@ -1,0 +1,1050 @@
+[
+    {
+        "pk": 3421,
+        "created_on": 1727751517566,
+        "json_entity": {
+            "pk": 3421,
+            "tableName": "Content",
+            "columns": [
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_originalContent",
+                    "title": "Original Content",
+                    "position": 0,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true,
+                    "foreignTable": "Content",
+                    "displayValue": null,
+                    "displayField": "cntn_originalContentBarCode",
+                    "foreignDisplayColumn": "cntn_id"
+                },
+                {
+                    "datatype": "ENUM",
+                    "name": "icon",
+                    "title": "Icon",
+                    "position": 1,
+                    "value": "data_icons/bottle.png",
+                    "hidden": false,
+                    "editable": true,
+                    "displayValue": "data_icons/bottle.png"
+                },
+                {
+                    "datatype": "ENUM",
+                    "name": "containerIcon",
+                    "title": "Container icon",
+                    "position": 2,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_cf_fk_reagentCatalogNumber",
+                    "title": "reagent REF number",
+                    "position": 3,
+                    "value": 3595,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "ReferenceDataRecord",
+                    "displayValue": "EI-500-1.52",
+                    "displayField": "cntn_cf_fk_reagentCatalogNumber_display",
+                    "foreignDisplayColumn": "rdrc_cf_catalogNumber"
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_category",
+                    "title": "Category",
+                    "position": 4,
+                    "value": 58,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "ContentType",
+                    "displayValue": "Reagents, Externally Manufactured",
+                    "displayField": "category_name",
+                    "foreignDisplayColumn": "cntp_name"
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_contentType",
+                    "title": "Type",
+                    "position": 5,
+                    "value": 113,
+                    "hidden": false,
+                    "editable": false,
+                    "foreignTable": "ContentType",
+                    "displayValue": "EasyIndex",
+                    "displayField": "cntp_name",
+                    "foreignDisplayColumn": "cntp_name"
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_barCode",
+                    "title": "Barcode",
+                    "position": 6,
+                    "value": "rgntE00000027",
+                    "hidden": false,
+                    "editable": false
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_cf_lotNumber",
+                    "title": "Lot number",
+                    "position": 7,
+                    "value": "EI60",
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_containerContentType",
+                    "title": "Container type",
+                    "position": 8,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "ContentType",
+                    "displayValue": null,
+                    "displayField": "container_name",
+                    "foreignDisplayColumn": "cntp_name"
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_product",
+                    "title": "Product",
+                    "position": 9,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true,
+                    "foreignTable": "Product",
+                    "displayValue": null,
+                    "displayField": "prdc_name",
+                    "foreignDisplayColumn": "prdc_name"
+                },
+                {
+                    "datatype": "FLOAT",
+                    "name": "cntn_dilutionFactor",
+                    "title": "Dilution Factor",
+                    "position": 10,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_id",
+                    "title": "Name",
+                    "position": 11,
+                    "value": "rgntE00000027",
+                    "hidden": false,
+                    "editable": false
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_user",
+                    "title": "User",
+                    "position": 12,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "User",
+                    "displayValue": null,
+                    "displayField": "user_userName",
+                    "foreignDisplayColumn": "user_userName"
+                },
+                {
+                    "datatype": "FLOAT",
+                    "name": "cntn_quantity",
+                    "title": "Quantity",
+                    "position": 13,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_unit",
+                    "title": "Unit",
+                    "position": 14,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "ENUM",
+                    "name": "cntn_status",
+                    "title": "Status",
+                    "position": 15,
+                    "value": null,
+                    "hidden": false,
+                    "editable": false
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_status",
+                    "title": "Status",
+                    "position": 16,
+                    "value": 59,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "Status",
+                    "displayValue": "Opened",
+                    "displayField": "stts_name",
+                    "foreignDisplayColumn": "stts_name"
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_location",
+                    "title": "Location",
+                    "position": 17,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "Location",
+                    "displayValue": null,
+                    "displayField": "lctn_name",
+                    "foreignDisplayColumn": "lctn_name"
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_location_recursive",
+                    "title": "Location (including sublocations)",
+                    "position": 18,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "Location",
+                    "displayValue": null,
+                    "displayField": "lctn_name",
+                    "foreignDisplayColumn": "lctn_name"
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "locationPath",
+                    "title": "Location path",
+                    "position": 19,
+                    "value": null,
+                    "hidden": false,
+                    "editable": false
+                },
+                {
+                    "datatype": "NA",
+                    "name": "cntn_cf_openDate",
+                    "title": "Open Date",
+                    "position": 20,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_source",
+                    "title": "manufacturer",
+                    "position": 21,
+                    "value": 6,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "Source",
+                    "displayValue": "AA Opto Electronic",
+                    "displayField": "sorc_name",
+                    "foreignDisplayColumn": "sorc_name"
+                },
+                {
+                    "datatype": "NA",
+                    "name": "cntn_cf_expiryDate",
+                    "title": "Expiry date",
+                    "position": 22,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_disease",
+                    "title": "Disease",
+                    "position": 23,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true,
+                    "foreignTable": "Disease",
+                    "displayValue": null,
+                    "displayField": "diss_name",
+                    "foreignDisplayColumn": "diss_name"
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_group",
+                    "title": "Group",
+                    "position": 24,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "Groups",
+                    "displayValue": null,
+                    "displayField": "grps_groupName",
+                    "foreignDisplayColumn": "grps_groupName"
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_provider",
+                    "title": "Provider",
+                    "position": 25,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true,
+                    "foreignTable": "Provider",
+                    "displayValue": null,
+                    "displayField": "prvd_name",
+                    "foreignDisplayColumn": "prvd_name"
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_position_row",
+                    "title": "Located at row",
+                    "position": 26,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_position_column",
+                    "title": "Located at column",
+                    "position": 27,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "NA",
+                    "name": "cntn_cf_externalId",
+                    "title": "External ID",
+                    "position": 28,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_cf_fk_labTeam",
+                    "title": "lab team",
+                    "position": 29,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "ReferenceDataRecord",
+                    "displayValue": null,
+                    "displayField": "cntn_cf_fk_labTeam_display",
+                    "foreignDisplayColumn": "rdrc_name"
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_cf_fk_labTeamAcronym",
+                    "title": "lab team acronym",
+                    "position": 30,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "ReferenceDataRecord",
+                    "displayValue": null,
+                    "displayField": "cntn_cf_fk_labTeamAcronym_display",
+                    "foreignDisplayColumn": "rdrc_cf_abbreviation"
+                },
+                {
+                    "datatype": "MULTIPLE_FOREIGN_KEY",
+                    "name": "cntn_cf_fk_purityStandards",
+                    "title": "Purity Standards",
+                    "position": 31,
+                    "value": [],
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "ReferenceDataRecord",
+                    "displayValues": [],
+                    "foreignDisplayColumn": "rdrc_name",
+                    "joinedDisplayValue": ""
+                },
+                {
+                    "datatype": "MULTIPLE_FOREIGN_KEY",
+                    "name": "cntn_cf_fk_specialHandlingGuidelines",
+                    "title": "special handling guidelines",
+                    "position": 32,
+                    "value": [],
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "ReferenceDataRecord",
+                    "displayValues": [],
+                    "foreignDisplayColumn": "rdrc_name",
+                    "joinedDisplayValue": ""
+                },
+                {
+                    "datatype": "MULTIPLE_FOREIGN_KEY",
+                    "name": "cntn_cf_fk_specialStorageGuidelines",
+                    "title": "special storage guidelines",
+                    "position": 33,
+                    "value": [],
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "ReferenceDataRecord",
+                    "displayValues": [],
+                    "foreignDisplayColumn": "rdrc_name",
+                    "joinedDisplayValue": ""
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_cf_fk_storageTemp_dynChoice",
+                    "title": "storage temp",
+                    "position": 34,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "ReferenceDataRecord",
+                    "displayValue": null,
+                    "displayField": "cntn_cf_fk_storageTemp_dynChoice_display",
+                    "foreignDisplayColumn": "rdrc_name"
+                },
+                {
+                    "datatype": "DATE",
+                    "name": "cntn_cf_intakeDate",
+                    "title": "intake date",
+                    "position": 35,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "dateFormat": "MM/dd/yyyy",
+                    "subType": "date",
+                    "timeZone": "America/Los_Angeles"
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_cf_parentBarcode",
+                    "title": "Parent barcode",
+                    "position": 36,
+                    "value": "N/A - no parent",
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_cf_parentName",
+                    "title": "Parent Name",
+                    "position": 37,
+                    "value": "N/A - no parent",
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_cf_ph_shortText",
+                    "title": "pH",
+                    "position": 38,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_cf_solutionConcentration",
+                    "title": "concentration",
+                    "position": 39,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "cntn_fk_product_strain",
+                    "title": "Product (filtering without version)",
+                    "position": 40,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "Product",
+                    "displayValue": null,
+                    "displayField": "prdc_name",
+                    "foreignDisplayColumn": "prdc_name"
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "relationToProband",
+                    "title": "Relation to proband",
+                    "position": 41,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "father",
+                    "title": "Father",
+                    "position": 42,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "Content",
+                    "displayValue": null,
+                    "displayField": "father_display",
+                    "foreignDisplayColumn": "cntn_id"
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "mother",
+                    "title": "Mother",
+                    "position": 43,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "Content",
+                    "displayValue": null,
+                    "displayField": "mother_display",
+                    "foreignDisplayColumn": "cntn_id"
+                },
+                {
+                    "datatype": "INTEGER",
+                    "name": "derivedCount",
+                    "title": "Derivation count",
+                    "position": 44,
+                    "value": 0,
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "INTEGER",
+                    "name": "ingredientCount",
+                    "title": "Ingredient count",
+                    "position": 45,
+                    "value": 0,
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "INTEGER",
+                    "name": "mixCount",
+                    "title": "Mix count",
+                    "position": 46,
+                    "value": 0,
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_createdBy",
+                    "title": "Created by",
+                    "position": 47,
+                    "value": "nouellette",
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "DATE",
+                    "name": "cntn_createdOn",
+                    "title": "Created on",
+                    "position": 48,
+                    "value": 1727751517566,
+                    "hidden": false,
+                    "editable": true,
+                    "dateFormat": "MM/dd/yyyy HH:mm:ss",
+                    "subType": "datetime",
+                    "timeZone": "America/Los_Angeles"
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_modifiedBy",
+                    "title": "Modified by",
+                    "position": 49,
+                    "value": "general_aind",
+                    "hidden": false,
+                    "editable": true
+                },
+                {
+                    "datatype": "DATE",
+                    "name": "cntn_modifiedOn",
+                    "title": "Modified on",
+                    "position": 50,
+                    "value": 1734571222481,
+                    "hidden": false,
+                    "editable": true,
+                    "dateFormat": "MM/dd/yyyy HH:mm:ss",
+                    "subType": "datetime",
+                    "timeZone": "America/Los_Angeles"
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "flags",
+                    "title": "Flags",
+                    "position": 51,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "ContentEventType",
+                    "displayValue": null,
+                    "displayField": "cnvt_name",
+                    "foreignDisplayColumn": "cnvt_name"
+                },
+                {
+                    "datatype": "FOREIGN_KEY",
+                    "name": "previousFlags",
+                    "title": "Previous flags",
+                    "position": 52,
+                    "value": null,
+                    "hidden": false,
+                    "editable": true,
+                    "foreignTable": "ContentEventType",
+                    "displayValue": null,
+                    "displayField": "cnvt_name",
+                    "foreignDisplayColumn": "cnvt_name"
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_externalId",
+                    "title": "External Id",
+                    "position": 53,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "isNaFilter",
+                    "title": "Field is N/A",
+                    "position": 54,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "BOOLEAN",
+                    "name": "cntp_useBarcodeAsId",
+                    "title": "Use barcode as id",
+                    "position": 55,
+                    "value": true,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "lctn_name",
+                    "title": "Name",
+                    "position": 56,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "user_userName",
+                    "title": "User name",
+                    "position": 57,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "mother_display",
+                    "title": "mother_display",
+                    "position": 58,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "stts_name",
+                    "title": "Name",
+                    "position": 59,
+                    "value": "Opened",
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "lctn_barCode",
+                    "title": "Barcode",
+                    "position": 60,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "BOOLEAN",
+                    "name": "cntp_canEnrollInStudy",
+                    "title": "Can enroll in a study",
+                    "position": 61,
+                    "value": false,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "sorc_name",
+                    "title": "Name",
+                    "position": 62,
+                    "value": "AA Opto Electronic",
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "grps_groupName",
+                    "title": "Name",
+                    "position": 63,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "INTEGER",
+                    "name": "attachmentCount",
+                    "title": "attachmentCount",
+                    "position": 64,
+                    "value": 0,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "BOOLEAN",
+                    "name": "cntp_containerType",
+                    "title": "Is a container type",
+                    "position": 65,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "lctn_rows",
+                    "title": "Rows",
+                    "position": 66,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "INTEGER",
+                    "name": "cntn_pk",
+                    "title": "cntn_pk",
+                    "position": 67,
+                    "value": 3421,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "isNotNaFilter",
+                    "title": "Field is not N/A",
+                    "position": 68,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "diss_name",
+                    "title": "Name",
+                    "position": 69,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntn_originalContentBarCode",
+                    "title": "Original content barcode",
+                    "position": 70,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "BOOLEAN",
+                    "name": "cntp_slimsGeneratesBarcode",
+                    "title": "SLIMS generates a barcode for content of this type",
+                    "position": 71,
+                    "value": true,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "INTEGER",
+                    "name": "xprs_input",
+                    "title": "xprs_input",
+                    "position": 72,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "father_display",
+                    "title": "father_display",
+                    "position": 73,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "BOOLEAN",
+                    "name": "lctp_positionLess",
+                    "title": "Don't require positions",
+                    "position": 74,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "lctn_columns",
+                    "title": "Columns",
+                    "position": 75,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "cntp_name",
+                    "title": "Name",
+                    "position": 76,
+                    "value": "EasyIndex",
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "INTEGER",
+                    "name": "xprs_output",
+                    "title": "xprs_output",
+                    "position": 77,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                },
+                {
+                    "datatype": "STRING",
+                    "name": "prvd_name",
+                    "title": "Name",
+                    "position": 78,
+                    "value": null,
+                    "hidden": true,
+                    "editable": true
+                }
+            ],
+            "canUpdate": true,
+            "canDelete": true,
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content/3421"
+                },
+                {
+                    "rel": "cntn_cf_fk_reagentCatalogNumber",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord/3595"
+                },
+                {
+                    "rel": "cntn_fk_category",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentType/58"
+                },
+                {
+                    "rel": "cntn_fk_contentType",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentType/113"
+                },
+                {
+                    "rel": "cntn_fk_status",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Status/59"
+                },
+                {
+                    "rel": "cntn_fk_source",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Source/6"
+                },
+                {
+                    "rel": "-prjo_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PrinterJob?prjo_fk_content=3421"
+                },
+                {
+                    "rel": "-flfm_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Fulfillment?flfm_fk_content=3421"
+                },
+                {
+                    "rel": "-cnvn_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_content=3421"
+                },
+                {
+                    "rel": "-cnst_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentStudy?cnst_fk_content=3421"
+                },
+                {
+                    "rel": "-rlrn_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRun?rlrn_fk_content=3421"
+                },
+                {
+                    "rel": "-qtus_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_content=3421"
+                },
+                {
+                    "rel": "-ccpt_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Occupation?ccpt_fk_content=3421"
+                },
+                {
+                    "rel": "-corl_fk_from",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentRelation?corl_fk_from=3421"
+                },
+                {
+                    "rel": "-corl_fk_to",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentRelation?corl_fk_to=3421"
+                },
+                {
+                    "rel": "-ssnc_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/SavedSelectionContent?ssnc_fk_content=3421"
+                },
+                {
+                    "rel": "-rdcn_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/OrderContent?rdcn_fk_content=3421"
+                },
+                {
+                    "rel": "-rqst_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Request?rqst_fk_content=3421"
+                },
+                {
+                    "rel": "-cntn_pk",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Schedule?cntn_pk=3421"
+                },
+                {
+                    "rel": "-qlng_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QueueElementIngredient?qlng_fk_content=3421"
+                },
+                {
+                    "rel": "-rdrc_cf_fk_dye",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_dye=3421"
+                },
+                {
+                    "rel": "-qlag_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QueueElementAggregator?qlag_fk_content=3421"
+                },
+                {
+                    "rel": "-tpnr_fk_batch",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimepointEnrollment?tpnr_fk_batch=3421"
+                },
+                {
+                    "rel": "-ssnr_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/StabilityStudyEnrollment?ssnr_fk_content=3421"
+                },
+                {
+                    "rel": "-qulm_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QueueElement?qulm_fk_content=3421"
+                },
+                {
+                    "rel": "-xrsc_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_content=3421"
+                },
+                {
+                    "rel": "-xprs_cf_fk_reagent",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_reagent=3421"
+                },
+                {
+                    "rel": "-kitc_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/KitContent?kitc_fk_content=3421"
+                },
+                {
+                    "rel": "-nrcn_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRunContent?nrcn_fk_content=3421"
+                },
+                {
+                    "rel": "-rslt_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_content=3421"
+                },
+                {
+                    "rel": "-rslt_cf_fk_injectionMaterial1",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_injectionMaterial1=3421"
+                },
+                {
+                    "rel": "-rslt_cf_fk_injection_material2",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_injection_material2=3421"
+                },
+                {
+                    "rel": "-rslt_cf_fk_injection_material3",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_injection_material3=3421"
+                },
+                {
+                    "rel": "-rslt_cf_fk_PrimaryAntibody3",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_PrimaryAntibody3=3421"
+                },
+                {
+                    "rel": "-rslt_cf_fk_SecondaryAntibody2",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_SecondaryAntibody2=3421"
+                },
+                {
+                    "rel": "-rslt_cf_fk_SecondaryAntibody3",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_SecondaryAntibody3=3421"
+                },
+                {
+                    "rel": "-rslt_cf_fk_blockingSolution",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_blockingSolution=3421"
+                },
+                {
+                    "rel": "-rslt_cf_fk_primaryAntibody",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_primaryAntibody=3421"
+                },
+                {
+                    "rel": "-rslt_cf_fk_primaryAntibody2",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_primaryAntibody2=3421"
+                },
+                {
+                    "rel": "-rslt_cf_fk_secondaryAntibody",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_secondaryAntibody=3421"
+                },
+                {
+                    "rel": "-rslt_cf_fk_virus",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_virus=3421"
+                },
+                {
+                    "rel": "-rslt_fk_batch",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_batch=3421"
+                },
+                {
+                    "rel": "-ordr_cf_fk_dye",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Order?ordr_cf_fk_dye=3421"
+                },
+                {
+                    "rel": "-ordr_fk_batch",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Order?ordr_fk_batch=3421"
+                },
+                {
+                    "rel": "-cntn_fk_originalContent",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_fk_originalContent=3421"
+                },
+                {
+                    "rel": "-cntn_cf_fk_endStorageSolution",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_endStorageSolution=3421"
+                },
+                {
+                    "rel": "-cntn_cf_fk_primaryStain",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_primaryStain=3421"
+                },
+                {
+                    "rel": "-cntn_cf_fk_secondaryStain",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_secondaryStain=3421"
+                },
+                {
+                    "rel": "-father",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?father=3421"
+                },
+                {
+                    "rel": "-mother",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?mother=3421"
+                },
+                {
+                    "rel": "-pptp_fk_content",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_content=3421"
+                },
+                {
+                    "rel": "attachments",
+                    "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/Content/3421"
+                }
+            ]
+        },
+        "barcode": "rgntE00000027",
+        "content_type": 113,
+        "lot_number": "EI60",
+        "reagent_name": null,
+        "source_pk": 6
+    }
+]
