@@ -74,7 +74,9 @@ class SlimsClient:
             start (int, optional):  The first row to return
             end (int, optional): The last row to return
             *args (Slims.criteria.Criterion): Optional criteria to apply
-            **kwargs (dict[str,str]): "field=value" filters
+            **kwargs (dict[str,str|list]): "field=value" filters.
+                If value is a list, will apply "field IN value" criterion
+
 
         Returns:
             records (list[SlimsRecord] | None): Matching records, if any
@@ -333,9 +335,7 @@ class SlimsClient:
         queries = [f"?{k}={v}" for k, v in kwargs.items()]
         return base_url + "".join(queries)
 
-    def add_model(
-        self, model: SlimsBaseModelTypeVar, *args, **kwargs
-    ) -> SlimsBaseModelTypeVar:
+    def add_model(self, model: SlimsBaseModelTypeVar, *args, **kwargs) -> SlimsBaseModelTypeVar:
         """Given a SlimsBaseModel object, add it to SLIMS
         Args
             model (SlimsBaseModel): object to add
@@ -380,9 +380,7 @@ class SlimsClient:
         rtn = self.update(
             model._slims_table,
             model.pk,
-            model.model_dump(
-                include=fields_to_include, by_alias=True, **kwargs, context="slims_post"
-            ),
+            model.model_dump(include=fields_to_include, by_alias=True, **kwargs, context="slims_post"),
         )
         return type(model).model_validate(rtn)
 
