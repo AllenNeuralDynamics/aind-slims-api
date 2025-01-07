@@ -51,7 +51,7 @@ class TestHistologyProcedures(unittest.TestCase):
             name="AA Opto Electronics",
         )
         example_wash_run_step = SlimsWashRunStep(
-            reagent_pk=123,
+            reagent_pk=[123],
             experimentrun_pk=789,
             wash_name="Wash 1",
             spim_wash_type="Passive Delipidation",
@@ -114,7 +114,7 @@ class TestHistologyProcedures(unittest.TestCase):
         mock_fetch_washes.side_effect = lambda c, experimentrun_pk: [
             SlimsWash(
                 wash_step=SlimsWashRunStep(
-                    reagent_pk=123,
+                    reagent_pk=[123],
                     experimentrun_pk=experimentrun_pk,
                     name=f"Wash {experimentrun_pk}",
                     spim_wash_type="Passive Delipidation",

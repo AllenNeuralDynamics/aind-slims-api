@@ -38,7 +38,7 @@ class SPIMHistologyExpBlock(BaseModel):
 
 
 def fetch_washes(client: SlimsClient, experimentrun_pk: int) -> List[SlimsWash]:
-    """Fetches washes for a given experimentrun_pk"""
+    """Fetches washes for a given experimentrun_pk."""
     wash_run_steps = client.fetch_models(
         SlimsWashRunStep, experimentrun_pk=experimentrun_pk
     )
@@ -54,16 +54,14 @@ def fetch_washes(client: SlimsClient, experimentrun_pk: int) -> List[SlimsWash]:
                         else None
                     ),
                 )
-                for reagent in (
-                    client.fetch_models(SlimsReagentContent, pk=wash.reagent_pk)
-                    if wash.reagent_pk
-                    else []
-                )
+                for reagent_pk in (wash.reagent_pk or [])
+                for reagent in client.fetch_models(SlimsReagentContent, pk=reagent_pk)
             ],
         )
         for wash in wash_run_steps
     ]
     return washes
+
 
 
 def fetch_histology_procedures(
