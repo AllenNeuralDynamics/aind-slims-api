@@ -81,8 +81,8 @@ class TestHistologyProcedures(unittest.TestCase):
         self.client.fetch_model.assert_any_call(SlimsReagentDetailsRdrc, pk=10)
         self.client.fetch_model.assert_any_call(SlimsSource, pk=456)
         mock_slims_reagent.assert_called_with(
-            reagent_content=self.example_reagent_content,
-            reagent_details=self.example_reagent_details,
+            content=self.example_reagent_content,
+            details=self.example_reagent_details,
             source=self.example_reagent_source,
         )
         mock_slims_wash.assert_called_with(
@@ -106,8 +106,8 @@ class TestHistologyProcedures(unittest.TestCase):
         self.client.fetch_model.assert_any_call(SlimsReagentDetailsRdrc, pk=10)
         self.client.fetch_model.assert_any_call(SlimsSource, pk=456)
         mock_slims_reagent.assert_called_with(
-            reagent_content=self.example_reagent_content,
-            reagent_details=self.example_reagent_details,
+            content=self.example_reagent_content,
+            details=self.example_reagent_details,
             source=self.example_reagent_source,
         )
         self.assertEqual(len(reagents), 1)

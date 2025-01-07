@@ -65,8 +65,8 @@ def fetch_reagents(client: SlimsClient, reagent_pks: List[int]) -> List[SlimsRea
         )
         reagents.append(
             SlimsReagent(
-                reagent_content=reagent_content,
-                reagent_details=details,
+                content=reagent_content,
+                details=details,
                 source=source,
             )
         )
