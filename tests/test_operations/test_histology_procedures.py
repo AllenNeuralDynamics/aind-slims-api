@@ -16,15 +16,16 @@ from aind_slims_api.models.experiment_run_step import (
 from aind_slims_api.models.histology import (
     SlimsProtocolSOP,
     SlimsReagentContent,
+    SlimsReagentDetailsRdrc,
     SlimsSampleContent,
-    SlimsSource, SlimsReagentDetailsRdrc,
+    SlimsSource,
 )
 from aind_slims_api.operations.histology_procedures import (
-    SlimsWash,
     SlimsReagent,
+    SlimsWash,
     fetch_histology_procedures,
+    fetch_reagents,
     fetch_washes,
-    fetch_reagents
 )
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / ".." / "resources"
@@ -162,7 +163,7 @@ class TestHistologyProcedures(unittest.TestCase):
                     SlimsReagent(
                         content=self.example_reagent_content,
                         source=self.example_reagent_source,
-                        details=self.example_reagent_details
+                        details=self.example_reagent_details,
                     )
                 ],
             )

@@ -1,7 +1,7 @@
 """Module for operations to fetch SPIM histology specimen procedures"""
 
 import logging
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -17,9 +17,11 @@ from aind_slims_api.models.experiment_run_step import (
 from aind_slims_api.models.histology import (
     SlimsProtocolSOP,
     SlimsReagentContent,
+    SlimsReagentDetailsRdrc,
     SlimsSampleContent,
-    SlimsSource, SlimsReagentDetailsRdrc,
+    SlimsSource,
 )
+
 
 class SlimsReagent(BaseModel):
     """Pydantic model to store Reagent Info"""
@@ -27,6 +29,7 @@ class SlimsReagent(BaseModel):
     content: Optional[SlimsReagentContent] = None
     source: Optional[SlimsSource] = None
     details: Optional[SlimsReagentDetailsRdrc] = None
+
 
 class SlimsWash(BaseModel):
     """Pydantic model to store Wash Info"""
@@ -43,15 +46,15 @@ class SPIMHistologyExpBlock(BaseModel):
     experiment_template: Optional[SlimsExperimentTemplate] = None
 
 
-def fetch_reagents(
-        client: SlimsClient, reagent_pks: List[int]
-) -> List[SlimsReagent]:
+def fetch_reagents(client: SlimsClient, reagent_pks: List[int]) -> List[SlimsReagent]:
     """Fetches SlimsReagent objects for given reagent primary keys."""
     reagents = []
     for pk in reagent_pks:
         reagent_content = client.fetch_model(SlimsReagentContent, pk=pk)
         details = (
-            client.fetch_model(SlimsReagentDetailsRdrc, pk=reagent_content.reagent_ref_pk)
+            client.fetch_model(
+                SlimsReagentDetailsRdrc, pk=reagent_content.reagent_ref_pk
+            )
             if reagent_content and reagent_content.reagent_ref_pk
             else None
         )
@@ -69,15 +72,21 @@ def fetch_reagents(
         )
     return reagents
 
+
 def fetch_washes(client: SlimsClient, experimentrun_pk: int) -> List[SlimsWash]:
     """Fetches washes for a given experimentrun_pk."""
     washes = []
-    wash_run_steps = client.fetch_models(SlimsWashRunStep, experimentrun_pk=experimentrun_pk)
+    wash_run_steps = client.fetch_models(
+        SlimsWashRunStep, experimentrun_pk=experimentrun_pk
+    )
     for wash_step in wash_run_steps:
-        reagents = fetch_reagents(client, wash_step.reagent_pk) if wash_step.reagent_pk else []
+        reagents = (
+            fetch_reagents(client, wash_step.reagent_pk) if wash_step.reagent_pk else []
+        )
         washes.append(SlimsWash(wash_step=wash_step, reagents=reagents))
 
     return washes
+
 
 def fetch_histology_procedures(
     client: SlimsClient, specimen_id: str
