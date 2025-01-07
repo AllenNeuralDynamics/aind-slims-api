@@ -89,10 +89,11 @@ class SlimsReagentContent(SlimsBaseModel):
         serialization_alias="cntn_cf_lotNumber",
         validation_alias="cntn_cf_lotNumber",
     )
-    reagent_name: Optional[str] = Field(
+    # TODO: is reagent name the ref number name? if so we'll need to add API call to rdrc table for it
+    reagent_ref_pk: Optional[int] = Field(
         None,
-        serialization_alias="cntn_cf_reagentName",
-        validation_alias="cntn_cf_reagentName",
+        serialization_alias="cntn_cf_fk_reagentCatalogNumber",
+        validation_alias="cntn_cf_fk_reagentCatalogNumber"
     )
     source_pk: Optional[int] = Field(
         None, serialization_alias="cntn_fk_source", validation_alias="cntn_fk_source"

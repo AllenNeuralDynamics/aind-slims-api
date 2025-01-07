@@ -26,7 +26,7 @@ class SlimsWash(BaseModel):
     """Pydantic model to store Specimen Procedure Info"""
 
     wash_step: Optional[SlimsWashRunStep] = None
-    reagents: Optional[List[Tuple[SlimsReagentContent, SlimsSource]]] = []
+    reagents: List[Tuple[SlimsReagentContent, Optional[SlimsSource]]] = []
 
 
 class SPIMHistologyExpBlock(BaseModel):
