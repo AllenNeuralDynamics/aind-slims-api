@@ -63,7 +63,6 @@ def fetch_washes(client: SlimsClient, experimentrun_pk: int) -> List[SlimsWash]:
     return washes
 
 
-
 def fetch_histology_procedures(
     client: SlimsClient, specimen_id: str
 ) -> List[SPIMHistologyExpBlock]:
