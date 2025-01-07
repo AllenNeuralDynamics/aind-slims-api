@@ -1,7 +1,7 @@
 """Contains models for a histology result stored in SLIMS."""
 
 from datetime import datetime
-from typing import ClassVar, Optional
+from typing import ClassVar, Optional, Any
 
 from pydantic import Field
 
@@ -89,7 +89,6 @@ class SlimsReagentContent(SlimsBaseModel):
         serialization_alias="cntn_cf_lotNumber",
         validation_alias="cntn_cf_lotNumber",
     )
-    # TODO: is reagent name the ref number name? if so we'll need to add API call to rdrc table for it
     reagent_ref_pk: Optional[int] = Field(
         None,
         serialization_alias="cntn_cf_fk_reagentCatalogNumber",
@@ -119,6 +118,32 @@ class SlimsSource(SlimsBaseModel):
     )
     _slims_table = "Source"
 
+class SlimsReagentDetailsRdrc(SlimsBaseModel):
+    """Model for a Reagent Catalog Reference Data Record"""
+    pk: Optional[int] = Field(
+        None, serialization_alias="rdrc_pk", validation_alias="rdrc_pk"
+    )
+    name: Optional[str] = Field(
+        None, serialization_alias="rdrc_name", validation_alias="rdrc_name"
+    )
+    manufacturer_pk: Optional[int] = Field(
+        None,
+        serialization_alias="rdrc_cf_fk_manufacturer",
+        validation_alias="rdrc_cf_fk_manufacturer"
+    )
+    created_on: Optional[datetime] = Field(
+        None,
+        serialization_alias="rdrc_createdOn",
+        validation_alias="rdrc_createdOn",
+    )
+    _slims_table = "ReferenceDataRecord"
+    _base_fetch_filters: ClassVar[dict[str, Any]] = {
+        "rdty_name": [
+            "External reagent details",
+            "Reagent Details",
+            "Internally Produced Reagent Details"
+        ]
+    }
 
 class SlimsProtocolSOP(SlimsBaseModel):
     """Model for Protocols SOP"""
