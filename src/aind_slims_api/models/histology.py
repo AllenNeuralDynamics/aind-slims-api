@@ -98,9 +98,6 @@ class SlimsReagentContent(SlimsBaseModel):
         None, serialization_alias="cntn_fk_source", validation_alias="cntn_fk_source"
     )
     _slims_table = "Content"
-    _base_fetch_filters: ClassVar[dict[str, str]] = {
-        "cntp_name": "EasyIndex",
-    }
 
 
 class SlimsSource(SlimsBaseModel):
