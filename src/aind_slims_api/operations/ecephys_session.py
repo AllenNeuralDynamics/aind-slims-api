@@ -9,7 +9,7 @@ from pydantic import BaseModel
 
 from aind_slims_api import SlimsClient
 from aind_slims_api.exceptions import SlimsRecordNotFound
-from aind_slims_api.models import SlimsInstrumentRdrc
+from aind_slims_api.models import SlimsInstrumentRdrc, SlimsMouseContent
 from aind_slims_api.models.ecephys_session import (
     SlimsBrainStructureRdrc,
     SlimsDomeModuleRdrc,
@@ -25,7 +25,6 @@ from aind_slims_api.models.experiment_run_step import (
     SlimsGroupOfSessionsRunStep,
     SlimsMouseSessionRunStep,
 )
-from aind_slims_api.models import SlimsMouseContent
 
 logger = logging.getLogger(__name__)
 

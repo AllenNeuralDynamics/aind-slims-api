@@ -16,12 +16,15 @@ from aind_slims_api.models.experiment_run_step import (
 from aind_slims_api.models.histology import (
     SlimsProtocolSOP,
     SlimsReagentContent,
+    SlimsReagentDetailsRdrc,
     SlimsSampleContent,
     SlimsSource,
 )
 from aind_slims_api.operations.histology_procedures import (
+    SlimsReagent,
     SlimsWash,
     fetch_histology_procedures,
+    fetch_reagents,
     fetch_washes,
 )
 
@@ -35,43 +38,80 @@ class TestHistologyProcedures(unittest.TestCase):
     def setUp(cls, mock_client):
         """setup test class"""
         cls.client = mock_client()
-
-    @patch("aind_slims_api.operations.histology_procedures.SlimsWash")
-    def test_fetch_washes(self, mock_slims_wash):
-        """Tests washes are fetched successfully"""
-        example_reagent_content = SlimsReagentContent(
+        cls.example_reagent_content = SlimsReagentContent(
             pk=123,
             source_pk=456,
             lot_number="EI60",
-            reagent_name="rgnt0000000",
             barcode="0000000",
+            reagent_ref_pk=10,
         )
-        example_source = SlimsSource(
+        cls.example_reagent_details = SlimsReagentDetailsRdrc(
+            pk=10,
+            manufacturer_pk=456,
+            name="Shield On",
+        )
+        cls.example_reagent_source = SlimsSource(
             pk=456,
             name="AA Opto Electronics",
         )
-        example_wash_run_step = SlimsWashRunStep(
-            reagent_pk=123,
+        cls.example_wash_run_step = SlimsWashRunStep(
+            reagent_pk=[123],
             experimentrun_pk=789,
             wash_name="Wash 1",
             spim_wash_type="Passive Delipidation",
         )
+
+    @patch("aind_slims_api.operations.histology_procedures.SlimsReagent")
+    @patch("aind_slims_api.operations.histology_procedures.SlimsWash")
+    def test_fetch_washes(self, mock_slims_wash, mock_slims_reagent):
+        """Tests washes are fetched successfully."""
         self.client.fetch_models.side_effect = lambda model, **kwargs: (
-            [example_reagent_content]
-            if model == SlimsReagentContent
-            else [example_wash_run_step] if model == SlimsWashRunStep else []
+            [self.example_wash_run_step] if model == SlimsWashRunStep else []
         )
-        self.client.fetch_model.return_value = example_source
+        self.client.fetch_model.side_effect = lambda model, **kwargs: {
+            SlimsReagentContent: self.example_reagent_content,
+            SlimsReagentDetailsRdrc: self.example_reagent_details,
+            SlimsSource: self.example_reagent_source,
+        }.get(model)
 
         washes = fetch_washes(self.client, experimentrun_pk=789)
+
         self.client.fetch_models.assert_any_call(SlimsWashRunStep, experimentrun_pk=789)
-        self.client.fetch_models.assert_any_call(SlimsReagentContent, pk=123)
-        self.client.fetch_model.assert_called_with(SlimsSource, pk=456)
+        self.client.fetch_model.assert_any_call(SlimsReagentContent, pk=123)
+        self.client.fetch_model.assert_any_call(SlimsReagentDetailsRdrc, pk=10)
+        self.client.fetch_model.assert_any_call(SlimsSource, pk=456)
+        mock_slims_reagent.assert_called_with(
+            content=self.example_reagent_content,
+            details=self.example_reagent_details,
+            source=self.example_reagent_source,
+        )
         mock_slims_wash.assert_called_with(
-            wash_step=example_wash_run_step,
-            reagents=[(example_reagent_content, example_source)],
+            wash_step=self.example_wash_run_step,
+            reagents=[mock_slims_reagent.return_value],
         )
         self.assertEqual(len(washes), 1)
+
+    @patch("aind_slims_api.operations.histology_procedures.SlimsReagent")
+    def test_fetch_reagents(self, mock_slims_reagent):
+        """Tests reagents are fetched successfully."""
+        self.client.fetch_model.side_effect = lambda model, **kwargs: {
+            SlimsReagentContent: self.example_reagent_content,
+            SlimsReagentDetailsRdrc: self.example_reagent_details,
+            SlimsSource: self.example_reagent_source,
+        }.get(model)
+
+        reagents = fetch_reagents(self.client, reagent_pks=[123])
+
+        self.client.fetch_model.assert_any_call(SlimsReagentContent, pk=123)
+        self.client.fetch_model.assert_any_call(SlimsReagentDetailsRdrc, pk=10)
+        self.client.fetch_model.assert_any_call(SlimsSource, pk=456)
+        mock_slims_reagent.assert_called_with(
+            content=self.example_reagent_content,
+            details=self.example_reagent_details,
+            source=self.example_reagent_source,
+        )
+        self.assertEqual(len(reagents), 1)
+        self.assertEqual(reagents[0], mock_slims_reagent.return_value)
 
     @patch("aind_slims_api.operations.histology_procedures.fetch_washes")
     def test_fetch_histology_procedures(self, mock_fetch_washes):
@@ -114,21 +154,16 @@ class TestHistologyProcedures(unittest.TestCase):
         mock_fetch_washes.side_effect = lambda c, experimentrun_pk: [
             SlimsWash(
                 wash_step=SlimsWashRunStep(
-                    reagent_pk=123,
+                    reagent_pk=[123],
                     experimentrun_pk=experimentrun_pk,
                     name=f"Wash {experimentrun_pk}",
                     spim_wash_type="Passive Delipidation",
                 ),
                 reagents=[
-                    (
-                        SlimsReagentContent(
-                            pk=123,
-                            source_pk=456,
-                            lot_number="EI60",
-                            reagent_name="rgnt0000000",
-                            barcode="0000000",
-                        ),
-                        SlimsSource(pk=456, name="AA Opto Electronics"),
+                    SlimsReagent(
+                        content=self.example_reagent_content,
+                        source=self.example_reagent_source,
+                        details=self.example_reagent_details,
                     )
                 ],
             )
@@ -149,15 +184,18 @@ class TestHistologyProcedures(unittest.TestCase):
                 self.assertIsNotNone(wash.wash_step)
                 self.assertEqual(wash.wash_step.spim_wash_type, "Passive Delipidation")
                 self.assertGreater(len(wash.reagents), 0)
-                for reagent, source in wash.reagents:
-                    self.assertIsInstance(reagent, SlimsReagentContent)
-                    self.assertIsInstance(source, SlimsSource)
+                for reagent in wash.reagents:
+                    self.assertIsInstance(reagent, SlimsReagent)
+                    self.assertIsInstance(reagent.content, SlimsReagentContent)
+                    self.assertIsInstance(reagent.source, SlimsSource)
+                    self.assertIsInstance(reagent.details, SlimsReagentDetailsRdrc)
         # Check attributes of first wash
         first_wash = result[0].washes[0]
         self.assertEqual(first_wash.wash_step.name, "Wash 789")
         self.assertEqual(first_wash.wash_step.experimentrun_pk, 789)
-        self.assertEqual(first_wash.reagents[0][0].reagent_name, "rgnt0000000")
-        self.assertEqual(first_wash.reagents[0][1].name, "AA Opto Electronics")
+        self.assertEqual(first_wash.reagents[0].content.lot_number, "EI60")
+        self.assertEqual(first_wash.reagents[0].source.name, "AA Opto Electronics")
+        self.assertEqual(first_wash.reagents[0].details.name, "Shield On")
 
     def test_fetch_histology_procedures_handles_exception(self):
         """Tests that exception is handled as expected"""
