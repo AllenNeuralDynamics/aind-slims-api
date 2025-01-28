@@ -1,10 +1,6 @@
 """Module for operations to fetch SPIM histology specimen procedures"""
 
 import logging
-from typing import List, Optional
-
-from pydantic import BaseModel
-
 from aind_slims_api import SlimsClient
 from aind_slims_api.exceptions import SlimsRecordNotFound
 from aind_slims_api.models.experiment_run_step import (
@@ -12,18 +8,16 @@ from aind_slims_api.models.experiment_run_step import (
     SlimsExperimentRunStepContent,
     SlimsExperimentTemplate,
     SlimsProtocolRunStep,
-    SlimsWashRunStep,
     SlimsSPIMImagingRunStep
 )
+from aind_slims_api.models import SlimsInstrumentRdrc, SlimsUser
 from aind_slims_api.models.histology import (
     SlimsProtocolSOP,
     SlimsSampleContent,
 )
+from aind_slims_api.models.imaging import SlimsImagingMetadataResult, SlimsSPIMBrainOrientationRdrc
 
-from aind_slims_api.models.imaging import SlimsImagingMetadata
-
-
-def fetch_imaging_acquisitions(
+def fetch_imaging_metadata(
     client: SlimsClient, specimen_id: str
 ):
     """
@@ -47,14 +41,12 @@ def fetch_imaging_acquisitions(
     >>> client = SlimsClient()
     >>> specimen_procedures = fetch_histology_procedures(client, "000000")
     """
-    imaging_acquisitions = []
+    imaging_metadata = []
     sample = client.fetch_model(SlimsSampleContent, mouse_barcode=specimen_id)
 
     content_runs = client.fetch_models(
         SlimsExperimentRunStepContent, mouse_pk=sample.pk
     )
-    # TODO: see if there's any info actually needed from the step or experiment template
-    # TODO: see if there's anything in content run itself that can signify imaging 
     for content_run in content_runs:
         try:
             # retrieves content step to find experimentrun_pk
@@ -73,16 +65,24 @@ def fetch_imaging_acquisitions(
                     protocol_sop = client.fetch_model(
                         SlimsProtocolSOP, pk=protocol_run_step.protocol_pk
                     )
-                # imaging_step = client.fetch_models(SlimsSPIMImagingRunStep, experimentrun_pk=content_run_step.experimentrun_pk)
-                imaging_result = client.fetch_models(SlimsImagingMetadata, experiment_run_pk=content_run_step.experimentrun_pk)
-                imaging_acquisitions.append(
-                    {
-                        "protocol_sop": protocol_sop,
-                        "imaging_metadata": imaging_result,
-                    }
-                )
+                imaging_steps = client.fetch_models(SlimsSPIMImagingRunStep, experimentrun_pk=content_run_step.experimentrun_pk)
+                for step in imaging_steps: 
+                    imaging_results = client.fetch_models(SlimsImagingMetadataResult, experiment_run_step_pk=step.pk, content_pk=sample.pk)
+                    for imaging_result in imaging_results:
+                        instrument = client.fetch_models(SlimsInstrumentRdrc, pk=imaging_result.instrument_json_pk)
+                        surgeon = client.fetch_models(SlimsUser, pk=imaging_result.surgeon_pk)
+                        brain_orientation = client.fetch_models(SlimsSPIMBrainOrientationRdrc, pk=imaging_result.brain_orientation_pk)
+                        imaging_metadata.append(
+                            {
+                                "protocol_sop": protocol_sop,
+                                "imaging_metadata": imaging_result,
+                                "instrument": instrument[0].name if instrument else None,
+                                "surgeon": surgeon[0].full_name if surgeon else None,
+                                "brain_orientation": brain_orientation
+                            }
+                        )
         except SlimsRecordNotFound as e:
             logging.warning(str(e))
             continue
 
-    return imaging_acquisitions
+    return imaging_metadata
