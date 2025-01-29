@@ -1,132 +1,115 @@
 import unittest
 from unittest.mock import MagicMock, patch
 from aind_slims_api.operations.spim_imaging import fetch_imaging_metadata
-from aind_slims_api import SlimsClient
-from aind_slims_api.exceptions import SlimsRecordNotFound
-
+from aind_slims_api.models.histology import SlimsSampleContent
 from aind_slims_api.models.experiment_run_step import (
     SlimsExperimentRunStep,
     SlimsExperimentRunStepContent,
     SlimsExperimentTemplate,
     SlimsProtocolRunStep,
-    SlimsSPIMImagingRunStep
+    SlimsSPIMImagingRunStep,
 )
-from aind_slims_api.models import SlimsInstrumentRdrc, SlimsUser
-from aind_slims_api.models.histology import (
-    SlimsProtocolSOP,
-    SlimsSampleContent,
-)
+from aind_slims_api.models.histology import SlimsProtocolSOP
 from aind_slims_api.models.imaging import SlimsImagingMetadataResult, SlimsSPIMBrainOrientationRdrc
+from aind_slims_api.models import SlimsInstrumentRdrc, SlimsUser
+from aind_slims_api.exceptions import SlimsRecordNotFound
+
 
 class TestFetchImagingMetadata(unittest.TestCase):
+    
+    @patch("aind_slims_api.operations.spim_imaging.SlimsClient")
+    def setUp(self, mock_client):
+        # Create a mock SlimsClient instance
+        self.client = mock_client()
 
-    @patch('aind_slims_api.SlimsClient')
-    def test_fetch_imaging_metadata_success(self, MockSlimsClient):
-        client = MockSlimsClient()
-        specimen_id = "000000"
+        # Mock sample data
+        self.example_sample_content = SlimsSampleContent(
+            pk=1, mouse_barcode="000000", barcode="000000"
+        )
+        self.example_run_step = SlimsExperimentRunStep(
+            experiment_template_pk=1426, experimentrun_pk=789
+        )
+        self.example_experiment_template = SlimsExperimentTemplate(pk=1426, name="SPIMImaging")
+        self.example_protocol_run_step = SlimsProtocolRunStep(protocol_pk=101)
+        self.example_protocol_sop = SlimsProtocolSOP(pk=101, name="Some Protocol SOP")
+        self.imaging_step = SlimsSPIMImagingRunStep(pk=6)
+        self.imaging_result = SlimsImagingMetadataResult(
+            pk=7, instrument_json_pk=8, surgeon_pk=9, brain_orientation_pk=10
+        )
+        self.instrument = SlimsInstrumentRdrc(pk=8, name="Instrument A")
+        self.surgeon = SlimsUser(pk=9, full_name="Surgeon 1", username="surgeon1")
+        self.brain_orientation = SlimsSPIMBrainOrientationRdrc(pk=10, name="Horizontal, Superior; AP", x_direction="Left to Right", y_direction="Anterior to Posterior", z_direction="Superior to Inferior" )
 
-        # Mocking the sample
-        sample = MagicMock()
-        sample.pk = 1
-        client.fetch_model.return_value = sample
+    def test_fetch_imaging_metadata_success(self):
+        """"Tests fetch imaging operation"""
+        self.client.fetch_model.side_effect = lambda model, **kwargs: (
+            self.example_sample_content
+            if model == SlimsSampleContent
+            else (
+                self.example_run_step
+                if model == SlimsExperimentRunStep
+                else (
+                    self.example_experiment_template
+                    if model == SlimsExperimentTemplate
+                    else (
+                        self.example_protocol_run_step
+                        if model == SlimsProtocolRunStep
+                        else self.example_protocol_sop if model == SlimsProtocolSOP else None
+                    )
+                )
+            )
+        )
+        self.client.fetch_models.side_effect = lambda model, **kwargs: (
+            [SlimsExperimentRunStepContent(runstep_pk=123)]
+            if model == SlimsExperimentRunStepContent
+            else (
+                [self.imaging_step]
+                if model == SlimsSPIMImagingRunStep
+                else (
+                    [self.imaging_result]
+                    if model == SlimsImagingMetadataResult
+                    else (
+                        [self.instrument]
+                        if model == SlimsInstrumentRdrc
+                        else [self.surgeon] if model == SlimsUser
+                        else [self.brain_orientation] if model == SlimsSPIMBrainOrientationRdrc
+                        else []
+                    )
+                )
+            )
+        )
 
-        # Mocking the content runs
-        content_run = MagicMock()
-        content_run.runstep_pk = 2
-        client.fetch_models.return_value = [content_run]
+        metadata = fetch_imaging_metadata(self.client, "000000")
+        self.assertEqual(len(metadata), 1)
+        self.assertEqual(metadata[0]["instrument"], "Instrument A")
+        self.assertEqual(metadata[0]["surgeon"], "Surgeon 1")
+        self.assertEqual(metadata[0]["brain_orientation"], [self.brain_orientation])
 
-        # Mocking the content run step
-        content_run_step = MagicMock()
-        content_run_step.experiment_template_pk = 3
-        client.fetch_model.return_value = content_run_step
+    def test_fetch_imaging_metadata_no_content(self):
+        """Tests case when specimen has no content runs"""
+        self.client.fetch_model.return_value = self.example_sample_content
+        self.client.fetch_models.side_effect = lambda model, **kwargs: {
+            SlimsExperimentRunStepContent: [],
+        }.get(model, [])
 
-        # Mocking the experiment template
-        experiment_template = MagicMock()
-        experiment_template.name = "SPIM Imaging"
-        client.fetch_model.return_value = experiment_template
+        metadata = fetch_imaging_metadata(self.client, "000000")
+        self.assertEqual(metadata, [])
 
-        # Mocking the protocol run step
-        protocol_run_step = MagicMock()
-        protocol_run_step.protocol_pk = 4
-        client.fetch_model.return_value = protocol_run_step
+    def test_fetch_imaging_metadata_missing_record(self):
+        """Tests that exception is handled as expected"""
+        self.client.fetch_models.side_effect = [
+            [SlimsExperimentRunStepContent(pk=1, runstep_pk=3, mouse_pk=67890)]
+        ]
+        self.client.fetch_model.side_effect = [
+            SlimsSampleContent.model_construct(pk=67890),
+            SlimsRecordNotFound("No record found for SlimsExperimentRunStep with pk=3"),
+        ]
 
-        # Mocking the protocol SOP
-        protocol_sop = MagicMock()
-        client.fetch_model.return_value = protocol_sop
+        with patch("logging.warning") as mock_log_warning:
+            fetch_imaging_metadata(client=self.client, specimen_id="67890")
+            mock_log_warning.assert_called_with(
+                "No record found for SlimsExperimentRunStep with pk=3"
+            )
 
-        # Mocking the imaging steps
-        imaging_step = MagicMock()
-        imaging_step.pk = 5
-        client.fetch_models.return_value = [imaging_step]
-
-        # Mocking the imaging results
-        imaging_result = MagicMock()
-        imaging_result.instrument_json_pk = 6
-        imaging_result.surgeon_pk = 7
-        imaging_result.brain_orientation_pk = 8
-        client.fetch_models.return_value = [imaging_result]
-
-        # Mocking the instrument
-        instrument = MagicMock()
-        instrument.name = "Instrument 1"
-        client.fetch_models.return_value = [instrument]
-
-        # Mocking the surgeon
-        surgeon = MagicMock()
-        surgeon.name = "Surgeon 1"
-        client.fetch_models.return_value = [surgeon]
-
-        # Mocking the brain orientation
-        brain_orientation = MagicMock()
-        client.fetch_models.return_value = brain_orientation
-
-        result = fetch_imaging_metadata(client, specimen_id)
-
-        self.assertEqual(len(result), 1)
-        self.assertEqual(result[0]["protocol_sop"], protocol_sop)
-        self.assertEqual(result[0]["imaging_metadata"], imaging_result)
-        self.assertEqual(result[0]["instrument"], "Instrument 1")
-        self.assertEqual(result[0]["surgeon"], "Surgeon 1")
-        self.assertEqual(result[0]["brain_orientation"], brain_orientation)
-
-    @patch('aind_slims_api.SlimsClient')
-    def test_fetch_imaging_metadata_no_data(self, MockSlimsClient):
-        client = MockSlimsClient()
-        specimen_id = "000000"
-
-        # Mocking the sample
-        sample = MagicMock()
-        sample.pk = 1
-        client.fetch_model.return_value = sample
-
-        # Mocking no content runs
-        client.fetch_models.return_value = []
-
-        result = fetch_imaging_metadata(client, specimen_id)
-
-        self.assertEqual(result, [])
-
-    @patch('aind_slims_api.SlimsClient')
-    def test_fetch_imaging_metadata_record_not_found(self, MockSlimsClient):
-        client = MockSlimsClient()
-        specimen_id = "000000"
-
-        # Mocking the sample
-        sample = MagicMock()
-        sample.pk = 1
-        client.fetch_model.return_value = sample
-
-        # Mocking the content runs
-        content_run = MagicMock()
-        content_run.runstep_pk = 2
-        client.fetch_models.return_value = [content_run]
-
-        # Mocking the content run step to raise SlimsRecordNotFound
-        client.fetch_model.side_effect = SlimsRecordNotFound
-
-        result = fetch_imaging_metadata(client, specimen_id)
-
-        self.assertEqual(result, [])
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

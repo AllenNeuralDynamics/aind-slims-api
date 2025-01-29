@@ -161,6 +161,7 @@ class SlimsWashRunStep(SlimsExperimentRunStep):
     start_time: Optional[datetime] = Field(
         None,
         serialization_alias="xprs_cf_sbipDelipidationWash1Start",
+
         validation_alias="xprs_cf_sbipDelipidationWash1Start",
     )
     end_time: Optional[datetime] = Field(

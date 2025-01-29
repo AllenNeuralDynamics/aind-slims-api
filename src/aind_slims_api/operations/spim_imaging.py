@@ -6,7 +6,6 @@ from aind_slims_api.exceptions import SlimsRecordNotFound
 from aind_slims_api.models.experiment_run_step import (
     SlimsExperimentRunStep,
     SlimsExperimentRunStepContent,
-    SlimsExperimentTemplate,
     SlimsProtocolRunStep,
     SlimsSPIMImagingRunStep
 )
@@ -53,34 +52,30 @@ def fetch_imaging_metadata(
             content_run_step = client.fetch_model(
                 SlimsExperimentRunStep, pk=content_run.runstep_pk
             )
-            experiment_template = client.fetch_model(
-                SlimsExperimentTemplate, pk=content_run_step.experiment_template_pk
+            protocol_run_step = client.fetch_model(
+                SlimsProtocolRunStep, experimentrun_pk=content_run_step.experimentrun_pk
             )
-            if experiment_template.name == "SPIM Imaging":
-                protocol_run_step = client.fetch_model(
-                    SlimsProtocolRunStep, experimentrun_pk=content_run_step.experimentrun_pk
+            protocol_sop = None
+            if protocol_run_step.protocol_pk:
+                protocol_sop = client.fetch_model(
+                    SlimsProtocolSOP, pk=protocol_run_step.protocol_pk
                 )
-                protocol_sop = None
-                if protocol_run_step.protocol_pk:
-                    protocol_sop = client.fetch_model(
-                        SlimsProtocolSOP, pk=protocol_run_step.protocol_pk
+            imaging_steps = client.fetch_models(SlimsSPIMImagingRunStep, experimentrun_pk=content_run_step.experimentrun_pk)
+            for step in imaging_steps: 
+                imaging_results = client.fetch_models(SlimsImagingMetadataResult, experiment_run_step_pk=step.pk, content_pk=sample.pk)
+                for imaging_result in imaging_results:
+                    instrument = client.fetch_models(SlimsInstrumentRdrc, pk=imaging_result.instrument_json_pk)
+                    surgeon = client.fetch_models(SlimsUser, pk=imaging_result.surgeon_pk)
+                    brain_orientation = client.fetch_models(SlimsSPIMBrainOrientationRdrc, pk=imaging_result.brain_orientation_pk)
+                    imaging_metadata.append(
+                        {
+                            "protocol": protocol_sop,
+                            "imaging_metadata": imaging_result,
+                            "instrument": instrument[0].name if instrument else None,
+                            "surgeon": surgeon[0].full_name if surgeon else None,
+                            "brain_orientation": brain_orientation
+                        }
                     )
-                imaging_steps = client.fetch_models(SlimsSPIMImagingRunStep, experimentrun_pk=content_run_step.experimentrun_pk)
-                for step in imaging_steps: 
-                    imaging_results = client.fetch_models(SlimsImagingMetadataResult, experiment_run_step_pk=step.pk, content_pk=sample.pk)
-                    for imaging_result in imaging_results:
-                        instrument = client.fetch_models(SlimsInstrumentRdrc, pk=imaging_result.instrument_json_pk)
-                        surgeon = client.fetch_models(SlimsUser, pk=imaging_result.surgeon_pk)
-                        brain_orientation = client.fetch_models(SlimsSPIMBrainOrientationRdrc, pk=imaging_result.brain_orientation_pk)
-                        imaging_metadata.append(
-                            {
-                                "protocol_sop": protocol_sop,
-                                "imaging_metadata": imaging_result,
-                                "instrument": instrument[0].name if instrument else None,
-                                "surgeon": surgeon[0].full_name if surgeon else None,
-                                "brain_orientation": brain_orientation
-                            }
-                        )
         except SlimsRecordNotFound as e:
             logging.warning(str(e))
             continue
