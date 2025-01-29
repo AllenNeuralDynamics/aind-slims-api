@@ -2,10 +2,9 @@
 
 from datetime import datetime
 from typing import ClassVar, Optional
-
 from pydantic import Field
-
 from aind_slims_api.models.base import SlimsBaseModel
+
 
 class SlimsImagingMetadataResult(SlimsBaseModel):
     """Model for a SLIMS Imaging Metadata"""
