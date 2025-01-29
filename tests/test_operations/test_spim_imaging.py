@@ -1,3 +1,5 @@
+"""Tests methods in spim imaging operation"""
+
 import unittest
 from unittest.mock import patch
 from aind_slims_api.operations.spim_imaging import fetch_imaging_metadata
@@ -19,10 +21,11 @@ from aind_slims_api.exceptions import SlimsRecordNotFound
 
 
 class TestFetchImagingMetadata(unittest.TestCase):
+    """Test class for fetch_imaging_metadata operation."""
 
     @patch("aind_slims_api.operations.spim_imaging.SlimsClient")
     def setUp(self, mock_client):
-        # Create a mock SlimsClient instance
+        """Setup test class"""
         self.client = mock_client()
 
         # Mock sample data
@@ -52,7 +55,7 @@ class TestFetchImagingMetadata(unittest.TestCase):
         )
 
     def test_fetch_imaging_metadata_success(self):
-        """ "Tests fetch imaging operation"""
+        """ "Tests fetch imaging operation succeeds."""
         self.client.fetch_model.side_effect = lambda model, **kwargs: (
             self.example_sample_content
             if model == SlimsSampleContent
