@@ -34,11 +34,9 @@ def fetch_imaging_metadata(client: SlimsClient, specimen_id: str) -> List[Dict]:
         An instance of SlimsClient used to connect to the SLIMS API.
     specimen_id : str
         The ID of the specimen for which to fetch histology data.
-
     Returns
     -------
-    List[Dict]
-    
+    imaging_metadata : List[Dict]
     Example
     -------
     >>> from aind_slims_api import SlimsClient
