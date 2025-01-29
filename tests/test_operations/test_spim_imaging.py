@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 from aind_slims_api.operations.spim_imaging import fetch_imaging_metadata
 from aind_slims_api.models.histology import SlimsSampleContent
 from aind_slims_api.models.experiment_run_step import (
@@ -10,13 +10,16 @@ from aind_slims_api.models.experiment_run_step import (
     SlimsSPIMImagingRunStep,
 )
 from aind_slims_api.models.histology import SlimsProtocolSOP
-from aind_slims_api.models.imaging import SlimsImagingMetadataResult, SlimsSPIMBrainOrientationRdrc
+from aind_slims_api.models.imaging import (
+    SlimsImagingMetadataResult,
+    SlimsSPIMBrainOrientationRdrc,
+)
 from aind_slims_api.models import SlimsInstrumentRdrc, SlimsUser
 from aind_slims_api.exceptions import SlimsRecordNotFound
 
 
 class TestFetchImagingMetadata(unittest.TestCase):
-    
+
     @patch("aind_slims_api.operations.spim_imaging.SlimsClient")
     def setUp(self, mock_client):
         # Create a mock SlimsClient instance
@@ -29,7 +32,9 @@ class TestFetchImagingMetadata(unittest.TestCase):
         self.example_run_step = SlimsExperimentRunStep(
             experiment_template_pk=1426, experimentrun_pk=789
         )
-        self.example_experiment_template = SlimsExperimentTemplate(pk=1426, name="SPIMImaging")
+        self.example_experiment_template = SlimsExperimentTemplate(
+            pk=1426, name="SPIMImaging"
+        )
         self.example_protocol_run_step = SlimsProtocolRunStep(protocol_pk=101)
         self.example_protocol_sop = SlimsProtocolSOP(pk=101, name="Some Protocol SOP")
         self.imaging_step = SlimsSPIMImagingRunStep(pk=6)
@@ -38,10 +43,16 @@ class TestFetchImagingMetadata(unittest.TestCase):
         )
         self.instrument = SlimsInstrumentRdrc(pk=8, name="Instrument A")
         self.surgeon = SlimsUser(pk=9, full_name="Surgeon 1", username="surgeon1")
-        self.brain_orientation = SlimsSPIMBrainOrientationRdrc(pk=10, name="Horizontal, Superior; AP", x_direction="Left to Right", y_direction="Anterior to Posterior", z_direction="Superior to Inferior" )
+        self.brain_orientation = SlimsSPIMBrainOrientationRdrc(
+            pk=10,
+            name="Horizontal, Superior; AP",
+            x_direction="Left to Right",
+            y_direction="Anterior to Posterior",
+            z_direction="Superior to Inferior",
+        )
 
     def test_fetch_imaging_metadata_success(self):
-        """"Tests fetch imaging operation"""
+        """ "Tests fetch imaging operation"""
         self.client.fetch_model.side_effect = lambda model, **kwargs: (
             self.example_sample_content
             if model == SlimsSampleContent
@@ -54,7 +65,11 @@ class TestFetchImagingMetadata(unittest.TestCase):
                     else (
                         self.example_protocol_run_step
                         if model == SlimsProtocolRunStep
-                        else self.example_protocol_sop if model == SlimsProtocolSOP else None
+                        else (
+                            self.example_protocol_sop
+                            if model == SlimsProtocolSOP
+                            else None
+                        )
                     )
                 )
             )
@@ -71,9 +86,15 @@ class TestFetchImagingMetadata(unittest.TestCase):
                     else (
                         [self.instrument]
                         if model == SlimsInstrumentRdrc
-                        else [self.surgeon] if model == SlimsUser
-                        else [self.brain_orientation] if model == SlimsSPIMBrainOrientationRdrc
-                        else []
+                        else (
+                            [self.surgeon]
+                            if model == SlimsUser
+                            else (
+                                [self.brain_orientation]
+                                if model == SlimsSPIMBrainOrientationRdrc
+                                else []
+                            )
+                        )
                     )
                 )
             )
@@ -110,6 +131,7 @@ class TestFetchImagingMetadata(unittest.TestCase):
             mock_log_warning.assert_called_with(
                 "No record found for SlimsExperimentRunStep with pk=3"
             )
+
 
 if __name__ == "__main__":
     unittest.main()

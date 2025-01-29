@@ -161,7 +161,6 @@ class SlimsWashRunStep(SlimsExperimentRunStep):
     start_time: Optional[datetime] = Field(
         None,
         serialization_alias="xprs_cf_sbipDelipidationWash1Start",
-
         validation_alias="xprs_cf_sbipDelipidationWash1Start",
     )
     end_time: Optional[datetime] = Field(
@@ -193,8 +192,10 @@ class SlimsWashRunStep(SlimsExperimentRunStep):
         ]
     }
 
+
 class SlimsSPIMImagingRunStep(SlimsExperimentRunStep):
     """Model for a Slims SPIM Imaging ExperimentRunStep"""
+
     # protocol, imaging metadata
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "xprs_name": "Imaging Metadata",

@@ -1,12 +1,11 @@
 """Contains models for Imaging in SLIMS."""
 
 from datetime import datetime
-from typing import Annotated, Any, ClassVar, Optional
+from typing import ClassVar, Optional
 
 from pydantic import Field
 
 from aind_slims_api.models.base import SlimsBaseModel
-from aind_slims_api.models.utils import UnitSpec
 
 class SlimsImagingMetadataResult(SlimsBaseModel):
     """Model for a SLIMS Imaging Metadata"""
@@ -37,32 +36,32 @@ class SlimsImagingMetadataResult(SlimsBaseModel):
     sample_refractive_index: Optional[float] = Field(
         default=None,
         serialization_alias="rslt_cf_sampleRefractiveIndex1",
-        validation_alias="rslt_cf_sampleRefractiveIndex1"
+        validation_alias="rslt_cf_sampleRefractiveIndex1",
     )
     sample_immersion_medium: Optional[str] = Field(
         default=None,
         serialization_alias="rslt_cf_sampleImmersionMedium",
-        validation_alias="rslt_cf_sampleImmersionMedium"
+        validation_alias="rslt_cf_sampleImmersionMedium",
     )
     chamber_refractive_index: Optional[float] = Field(
         default=None,
         serialization_alias="rslt_cf_chamberRefractiveIndex",
-        validation_alias="rslt_cf_chamberRefractiveIndex"
+        validation_alias="rslt_cf_chamberRefractiveIndex",
     )
     chamber_immersion_medium: Optional[str] = Field(
         default=None,
         serialization_alias="rslt_cf_chamberImmersionMedium",
-        validation_alias="rslt_cf_chamberImmersionMedium"
+        validation_alias="rslt_cf_chamberImmersionMedium",
     )
     notes: Optional[str] = Field(
         default=None,
         serialization_alias="rslt_comments",
-        validation_alias="rslt_comments"
+        validation_alias="rslt_comments",
     )
     experiment_run_step_pk: Optional[int] = Field(
         default=None,
         serialization_alias="rslt_fk_experimentRunStep",
-        validation_alias="rslt_fk_experimentRunStep"
+        validation_alias="rslt_fk_experimentRunStep",
     )
     surgeon_pk: Optional[int] = Field(
         default=None,
@@ -80,6 +79,7 @@ class SlimsImagingMetadataResult(SlimsBaseModel):
         validation_alias="rslt_cf_fk_instrumentJson",
     )
     _slims_table = "Result"
+
 
 class SlimsSPIMBrainOrientationRdrc(SlimsBaseModel):
     """Model for a SLIMS Brain Orientation"""
