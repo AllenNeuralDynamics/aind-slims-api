@@ -37,7 +37,8 @@ def fetch_imaging_metadata(client: SlimsClient, specimen_id: str) -> List[Dict]:
 
     Returns
     -------
-
+    List[Dict]
+    
     Example
     -------
     >>> from aind_slims_api import SlimsClient
