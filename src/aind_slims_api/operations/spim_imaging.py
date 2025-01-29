@@ -9,8 +9,10 @@ from aind_slims_api.models.experiment_run_step import (
     SlimsProtocolRunStep,
     SlimsSPIMImagingRunStep,
 )
-from aind_slims_api.models import SlimsInstrumentRdrc, SlimsUser
-from aind_slims_api.models.histology import (
+from typing import Dict, List
+from aind_slims_api.models import (
+    SlimsInstrumentRdrc,
+    SlimsUser,
     SlimsProtocolSOP,
     SlimsSampleContent,
 )
@@ -20,11 +22,11 @@ from aind_slims_api.models.imaging import (
 )
 
 
-def fetch_imaging_metadata(client: SlimsClient, specimen_id: str):
+def fetch_imaging_metadata(client: SlimsClient, specimen_id: str) -> List[Dict]:
     """
-    Fetch and process all spim histology run steps for a given specimen id.
-    Retrieves all SPIM histology steps associated with the provided specimen
-    and returns a list of SPIMHistologyExpBlock objects.
+    Fetch and process all spim imaging run steps for a given specimen id.
+    Retrieves all SPIM imaging steps associated with the provided specimen
+    and returns a list of dictionaries.
 
     Parameters
     ----------
@@ -40,7 +42,7 @@ def fetch_imaging_metadata(client: SlimsClient, specimen_id: str):
     -------
     >>> from aind_slims_api import SlimsClient
     >>> client = SlimsClient()
-    >>> specimen_procedures = fetch_histology_procedures(client, "000000")
+    >>> imaging = fetch_imaging_metadata(client, "000000")
     """
     imaging_metadata = []
     sample = client.fetch_model(SlimsSampleContent, mouse_barcode=specimen_id)

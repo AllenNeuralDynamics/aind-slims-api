@@ -3,7 +3,6 @@
 import unittest
 from unittest.mock import patch
 from aind_slims_api.operations.spim_imaging import fetch_imaging_metadata
-from aind_slims_api.models.histology import SlimsSampleContent
 from aind_slims_api.models.experiment_run_step import (
     SlimsExperimentRunStep,
     SlimsExperimentRunStepContent,
@@ -11,12 +10,16 @@ from aind_slims_api.models.experiment_run_step import (
     SlimsProtocolRunStep,
     SlimsSPIMImagingRunStep,
 )
-from aind_slims_api.models.histology import SlimsProtocolSOP
 from aind_slims_api.models.imaging import (
     SlimsImagingMetadataResult,
     SlimsSPIMBrainOrientationRdrc,
 )
-from aind_slims_api.models import SlimsInstrumentRdrc, SlimsUser
+from aind_slims_api.models import (
+    SlimsInstrumentRdrc,
+    SlimsUser,
+    SlimsSampleContent,
+    SlimsProtocolSOP,
+)
 from aind_slims_api.exceptions import SlimsRecordNotFound
 
 
