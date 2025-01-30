@@ -14,4 +14,5 @@ __all__ = [
     "fetch_ecephys_sessions",
     "SPIMHistologyExpBlock",
     "fetch_histology_procedures",
+    "fetch_imaging_metadata"
 ]

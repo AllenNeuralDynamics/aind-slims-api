@@ -191,3 +191,12 @@ class SlimsWashRunStep(SlimsExperimentRunStep):
             "Final PBS Wash",
         ]
     }
+
+
+class SlimsSPIMImagingRunStep(SlimsExperimentRunStep):
+    """Model for a Slims SPIM Imaging ExperimentRunStep"""
+
+    # protocol, imaging metadata
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "xprs_name": "Imaging Metadata",
+    }
