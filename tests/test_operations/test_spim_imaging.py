@@ -21,6 +21,7 @@ from aind_slims_api.models import (
     SlimsProtocolSOP,
 )
 from aind_slims_api.exceptions import SlimsRecordNotFound
+from datetime import datetime
 
 
 class TestFetchImagingMetadata(unittest.TestCase):
@@ -33,7 +34,7 @@ class TestFetchImagingMetadata(unittest.TestCase):
 
         # Mock sample data
         self.example_sample_content = SlimsSampleContent(
-            pk=1, mouse_barcode="000000", barcode="000000"
+            pk=1, mouse_barcode="000000", barcode="000001"
         )
         self.example_run_step = SlimsExperimentRunStep(
             experiment_template_pk=1426, experimentrun_pk=789
@@ -42,10 +43,20 @@ class TestFetchImagingMetadata(unittest.TestCase):
             pk=1426, name="SPIMImaging"
         )
         self.example_protocol_run_step = SlimsProtocolRunStep(protocol_pk=101)
-        self.example_protocol_sop = SlimsProtocolSOP(pk=101, name="Some Protocol SOP")
+        self.example_protocol_sop = SlimsProtocolSOP(
+            pk=101, name="Some Protocol SOP", link="https://example/protocol"
+        )
         self.imaging_step = SlimsSPIMImagingRunStep(pk=6)
         self.imaging_result = SlimsImagingMetadataResult(
-            pk=7, instrument_json_pk=8, surgeon_pk=9, brain_orientation_pk=10
+            pk=7,
+            instrument_json_pk=8,
+            surgeon_pk=9,
+            brain_orientation_pk=10,
+            date_performed=datetime(2024, 10, 18, 22, 27),
+            chamber_immersion_medium="Cargille Oil 1.5200",
+            sample_immersion_medium="EasyIndex",
+            chamber_refractive_index=1.5178,
+            sample_refractive_index=1.5180,
         )
         self.instrument = SlimsInstrumentRdrc(pk=8, name="Instrument A")
         self.surgeon = SlimsUser(pk=9, full_name="Surgeon 1", username="surgeon1")
@@ -56,6 +67,21 @@ class TestFetchImagingMetadata(unittest.TestCase):
             y_direction="Anterior to Posterior",
             z_direction="Superior to Inferior",
         )
+        self.expected_metadata = {
+            "specimen_id": "000001",
+            "subject_id": "000000",
+            "protocol_id": "https://example/protocol",
+            "date_performed": datetime(2024, 10, 18, 22, 27),
+            "chamber_immersion_medium": "Cargille Oil 1.5200",
+            "sample_immersion_medium": "EasyIndex",
+            "chamber_refractive_index": 1.5178,
+            "sample_refractive_index": 1.5180,
+            "instrument_id": "Instrument A",
+            "experimenter_name": "Surgeon 1",
+            "z_direction": "Superior to Inferior",
+            "y_direction": "Anterior to Posterior",
+            "x_direction": "Left to Right",
+        }
 
     def test_fetch_imaging_metadata_success(self):
         """ "Tests fetch imaging operation succeeds."""
@@ -108,9 +134,7 @@ class TestFetchImagingMetadata(unittest.TestCase):
 
         metadata = fetch_imaging_metadata(self.client, "000000")
         self.assertEqual(len(metadata), 1)
-        self.assertEqual(metadata[0]["instrument"], "Instrument A")
-        self.assertEqual(metadata[0]["surgeon"], "Surgeon 1")
-        self.assertEqual(metadata[0]["brain_orientation"], [self.brain_orientation])
+        self.assertEqual(metadata[0], self.expected_metadata)
 
     def test_fetch_imaging_metadata_no_content(self):
         """Tests case when specimen has no content runs"""
