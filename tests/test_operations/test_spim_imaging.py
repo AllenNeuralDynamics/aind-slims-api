@@ -1,8 +1,9 @@
 """Tests methods in spim imaging operation"""
 
 import unittest
+import xml.etree.ElementTree as ET
 from unittest.mock import patch
-from aind_slims_api.operations.spim_imaging import fetch_imaging_metadata
+from aind_slims_api.operations.spim_imaging import fetch_imaging_metadata, _extract_protocol_link
 from aind_slims_api.models.experiment_run_step import (
     SlimsExperimentRunStep,
     SlimsExperimentRunStepContent,
@@ -44,7 +45,7 @@ class TestFetchImagingMetadata(unittest.TestCase):
         )
         self.example_protocol_run_step = SlimsProtocolRunStep(protocol_pk=101)
         self.example_protocol_sop = SlimsProtocolSOP(
-            pk=101, name="Some Protocol SOP", link="https://example/protocol"
+            pk=101, name="Some Protocol SOP"
         )
         self.imaging_step = SlimsSPIMImagingRunStep(pk=6)
         self.imaging_result = SlimsImagingMetadataResult(
@@ -70,7 +71,8 @@ class TestFetchImagingMetadata(unittest.TestCase):
         self.expected_metadata = {
             "specimen_id": "000001",
             "subject_id": "000000",
-            "protocol_id": "https://example/protocol",
+            "protocol_name": "Some Protocol SOP",
+            "protocol_id": None,
             "date_performed": datetime(2024, 10, 18, 22, 27),
             "chamber_immersion_medium": "Cargille Oil 1.5200",
             "sample_immersion_medium": "EasyIndex",
@@ -162,6 +164,17 @@ class TestFetchImagingMetadata(unittest.TestCase):
                 "No record found for SlimsExperimentRunStep with pk=3"
             )
 
+    def test_extract_protocol_link(self):
+        """Tests that protocol link is extracted from html string correctly"""
+
+        protocol_html = '<a href="https://example.com">Example</a>'
+        self.assertEqual(_extract_protocol_link(protocol_html), "https://example.com")
+
+        protocol_html = '<a>Missing Href</a>'
+        self.assertIsNone(_extract_protocol_link(protocol_html))
+
+        protocol_html = "Not in HTML"
+        self.assertEqual(_extract_protocol_link(protocol_html), "Not in HTML")
 
 if __name__ == "__main__":
     unittest.main()

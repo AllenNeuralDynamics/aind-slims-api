@@ -1,6 +1,7 @@
 """Module for operations to fetch SPIM histology specimen procedures"""
 
 import logging
+import xml.etree.ElementTree as ET
 from aind_slims_api import SlimsClient
 from aind_slims_api.exceptions import SlimsRecordNotFound
 from aind_slims_api.models.experiment_run_step import (
@@ -9,7 +10,7 @@ from aind_slims_api.models.experiment_run_step import (
     SlimsProtocolRunStep,
     SlimsSPIMImagingRunStep,
 )
-from typing import Dict, List
+from typing import Dict, List, Optional
 from aind_slims_api.models import (
     SlimsInstrumentRdrc,
     SlimsUser,
@@ -21,6 +22,13 @@ from aind_slims_api.models.imaging import (
     SlimsSPIMBrainOrientationRdrc,
 )
 
+def _extract_protocol_link(protocol_html: str) -> Optional[str]:
+    """Parses out protocol link"""
+    try:
+        root = ET.fromstring(protocol_html)
+        return root.get("href")
+    except ET.ParseError:
+        return protocol_html
 
 def fetch_imaging_metadata(client: SlimsClient, subject_id: str) -> List[Dict]:
     """
@@ -88,9 +96,10 @@ def fetch_imaging_metadata(client: SlimsClient, subject_id: str) -> List[Dict]:
                         {
                             "specimen_id": sample.barcode,
                             "subject_id": subject_id,
+                            "protocol_name": getattr(protocol_sop, "name", None),
                             "protocol_id": (
-                                getattr(protocol_sop, "link", None)
-                                if protocol_sop
+                                _extract_protocol_link(protocol_sop.link)
+                                if protocol_sop and getattr(protocol_sop, "link", None)
                                 else None
                             ),
                             "date_performed": getattr(imaging_result, "date_performed"),
