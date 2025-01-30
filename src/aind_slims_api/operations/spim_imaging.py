@@ -87,11 +87,25 @@ def fetch_imaging_metadata(client: SlimsClient, subject_id: str) -> List[Dict]:
                     imaging_metadata.append(
                         {
                             "specimen_id": sample.barcode,
-                            "protocol": protocol_sop,
-                            "imaging_metadata": imaging_result,
+                            "protocol": getattr(protocol_sop, "link", None),
+                            "date_performed": getattr(imaging_result, "date_performed"),
+                            "chamber_immersion_medium": getattr(
+                                imaging_result, "chamber_immersion_medium"
+                            ),
+                            "sample_immersion_medium": getattr(
+                                imaging_result, "sample_immersion_medium"
+                            ),
+                            "chamber_refractive_index": getattr(
+                                imaging_result, "chamber_refractive_index"
+                            ),
+                            "sample_refractive_index": getattr(
+                                imaging_result, "sample_refractive_index"
+                            ),
                             "instrument": instrument[0].name if instrument else None,
                             "surgeon": surgeon[0].full_name if surgeon else None,
-                            "brain_orientation": brain_orientation,
+                            "z_direction": getattr(brain_orientation[0], "z_direction", None),
+                            "y_direction": getattr(brain_orientation[0], "y_direction", None),
+                            "x_direction": getattr(brain_orientation[0], "x_direction", None),
                         }
                     )
         except SlimsRecordNotFound as e:
