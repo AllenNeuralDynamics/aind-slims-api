@@ -88,7 +88,11 @@ def fetch_imaging_metadata(client: SlimsClient, subject_id: str) -> List[Dict]:
                         {
                             "specimen_id": sample.barcode,
                             "subject_id": subject_id,
-                            "protocol_id": getattr(protocol_sop, "link", None) if protocol_sop else None,
+                            "protocol_id": (
+                                getattr(protocol_sop, "link", None)
+                                if protocol_sop
+                                else None
+                            ),
                             "date_performed": getattr(imaging_result, "date_performed"),
                             "chamber_immersion_medium": getattr(
                                 imaging_result, "chamber_immersion_medium"
