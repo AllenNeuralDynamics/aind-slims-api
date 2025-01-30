@@ -22,9 +22,9 @@ from aind_slims_api.models.imaging import (
 )
 
 
-def fetch_imaging_metadata(client: SlimsClient, specimen_id: str) -> List[Dict]:
+def fetch_imaging_metadata(client: SlimsClient, subject_id: str) -> List[Dict]:
     """
-    Fetch and process all spim imaging run steps for a given specimen id.
+    Fetch and process all spim imaging run steps for a given subject id.
     Retrieves all SPIM imaging steps associated with the provided specimen
     and returns a list of dictionaries.
 
@@ -44,7 +44,7 @@ def fetch_imaging_metadata(client: SlimsClient, specimen_id: str) -> List[Dict]:
     >>> imaging = fetch_imaging_metadata(client, "000000")
     """
     imaging_metadata = []
-    sample = client.fetch_model(SlimsSampleContent, mouse_barcode=specimen_id)
+    sample = client.fetch_model(SlimsSampleContent, mouse_barcode=subject_id)
 
     content_runs = client.fetch_models(
         SlimsExperimentRunStepContent, mouse_pk=sample.pk
@@ -86,6 +86,7 @@ def fetch_imaging_metadata(client: SlimsClient, specimen_id: str) -> List[Dict]:
                     )
                     imaging_metadata.append(
                         {
+                            "specimen_id": sample.barcode,
                             "protocol": protocol_sop,
                             "imaging_metadata": imaging_result,
                             "instrument": instrument[0].name if instrument else None,
