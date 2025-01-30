@@ -22,6 +22,7 @@ from aind_slims_api.models.imaging import (
     SlimsSPIMBrainOrientationRdrc,
 )
 
+
 def _extract_protocol_link(protocol_html: str) -> Optional[str]:
     """Parses out protocol link"""
     try:
@@ -29,6 +30,7 @@ def _extract_protocol_link(protocol_html: str) -> Optional[str]:
         return root.get("href")
     except ET.ParseError:
         return protocol_html
+
 
 def fetch_imaging_metadata(client: SlimsClient, subject_id: str) -> List[Dict]:
     """

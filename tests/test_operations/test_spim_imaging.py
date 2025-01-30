@@ -1,9 +1,11 @@
 """Tests methods in spim imaging operation"""
 
 import unittest
-import xml.etree.ElementTree as ET
 from unittest.mock import patch
-from aind_slims_api.operations.spim_imaging import fetch_imaging_metadata, _extract_protocol_link
+from aind_slims_api.operations.spim_imaging import (
+    fetch_imaging_metadata,
+    _extract_protocol_link,
+)
 from aind_slims_api.models.experiment_run_step import (
     SlimsExperimentRunStep,
     SlimsExperimentRunStepContent,
@@ -44,9 +46,7 @@ class TestFetchImagingMetadata(unittest.TestCase):
             pk=1426, name="SPIMImaging"
         )
         self.example_protocol_run_step = SlimsProtocolRunStep(protocol_pk=101)
-        self.example_protocol_sop = SlimsProtocolSOP(
-            pk=101, name="Some Protocol SOP"
-        )
+        self.example_protocol_sop = SlimsProtocolSOP(pk=101, name="Some Protocol SOP")
         self.imaging_step = SlimsSPIMImagingRunStep(pk=6)
         self.imaging_result = SlimsImagingMetadataResult(
             pk=7,
@@ -170,11 +170,12 @@ class TestFetchImagingMetadata(unittest.TestCase):
         protocol_html = '<a href="https://example.com">Example</a>'
         self.assertEqual(_extract_protocol_link(protocol_html), "https://example.com")
 
-        protocol_html = '<a>Missing Href</a>'
+        protocol_html = "<a>Missing Href</a>"
         self.assertIsNone(_extract_protocol_link(protocol_html))
 
         protocol_html = "Not in HTML"
         self.assertEqual(_extract_protocol_link(protocol_html), "Not in HTML")
+
 
 if __name__ == "__main__":
     unittest.main()
