@@ -171,343 +171,343 @@
       "links": [
          {
             "rel": "self",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord/2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord/2742"
          },
          {
             "rel": "rdrc_fk_referenceDataType",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataType/37"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataType/37"
          },
          {
             "rel": "-rlrr_fk_referenceDataRecord",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleReferenceDataRecord?rlrr_fk_referenceDataRecord=2742"
+            "href": "https://slims.example.com/slimsrest/rest/RuleReferenceDataRecord?rlrr_fk_referenceDataRecord=2742"
          },
          {
             "rel": "-prdc_cf_fk_stringParameters",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Product?prdc_cf_fk_stringParameters=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Product?prdc_cf_fk_stringParameters=2742"
          },
          {
             "rel": "-scnr_cf_fk_labTeam",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Scenario?scnr_cf_fk_labTeam=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Scenario?scnr_cf_fk_labTeam=2742"
          },
          {
             "rel": "-scnr_cf_fk_taskType",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Scenario?scnr_cf_fk_taskType=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Scenario?scnr_cf_fk_taskType=2742"
          },
          {
             "rel": "-cnvn_cf_fk_instrument",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_cf_fk_instrument=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_cf_fk_instrument=2742"
          },
          {
             "rel": "-xptm_cf_fk_labTeam",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate?xptm_cf_fk_labTeam=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate?xptm_cf_fk_labTeam=2742"
          },
          {
             "rel": "-xptm_cf_fk_taskType",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate?xptm_cf_fk_taskType=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate?xptm_cf_fk_taskType=2742"
          },
          {
             "rel": "-lctp_cf_fk_locationTypeCateogry",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/LocationType?lctp_cf_fk_locationTypeCateogry=2742"
+            "href": "https://slims.example.com/slimsrest/rest/LocationType?lctp_cf_fk_locationTypeCateogry=2742"
          },
          {
             "rel": "-rdrc_cf_fk_storageTemp",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_storageTemp=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_storageTemp=2742"
          },
          {
             "rel": "-rdrc_cf_fk_amplifier",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_amplifier=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_amplifier=2742"
          },
          {
             "rel": "-rdrc_cf_fk_amplifierFluorophore",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_amplifierFluorophore=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_amplifierFluorophore=2742"
          },
          {
             "rel": "-rdrc_cf_fk_antibodyCloneType",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyCloneType=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyCloneType=2742"
          },
          {
             "rel": "-rdrc_cf_fk_antibodyConjugationState",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyConjugationState=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyConjugationState=2742"
          },
          {
             "rel": "-rdrc_cf_fk_antibodyFluorophore",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyFluorophore=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyFluorophore=2742"
          },
          {
             "rel": "-rdrc_cf_fk_antibodyHostSpecies",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyHostSpecies=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyHostSpecies=2742"
          },
          {
             "rel": "-rdrc_cf_fk_antibodyType",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyType=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyType=2742"
          },
          {
             "rel": "-rdrc_cf_fk_department",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_department=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_department=2742"
          },
          {
             "rel": "-rdrc_cf_fk_dyeType",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_dyeType=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_dyeType=2742"
          },
          {
             "rel": "-rdrc_cf_fk_excitationWavelength_DYN",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_excitationWavelength_DYN=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_excitationWavelength_DYN=2742"
          },
          {
             "rel": "-rdrc_cf_fk_hcrSeriesName",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_hcrSeriesName=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_hcrSeriesName=2742"
          },
          {
             "rel": "-rdrc_cf_fk_labTeam",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_labTeam=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_labTeam=2742"
          },
          {
             "rel": "-rdrc_cf_fk_organization",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_organization=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_organization=2742"
          },
          {
             "rel": "-rdrc_cf_fk_reagents",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_reagents=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_reagents=2742"
          },
          {
             "rel": "-rdrc_cf_fk_rewardSpouts",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_rewardSpouts=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_rewardSpouts=2742"
          },
          {
             "rel": "-rdrc_cf_fk_storageTemp_dynChoice",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_storageTemp_dynChoice=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_storageTemp_dynChoice=2742"
          },
          {
             "rel": "-rdrc_cf_fk_primaryTargetedStructure",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_primaryTargetedStructure=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_primaryTargetedStructure=2742"
          },
          {
             "rel": "-rdrc_cf_fk_secondaryTargetedStructures",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_secondaryTargetedStructures=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_secondaryTargetedStructures=2742"
          },
          {
             "rel": "-rdrc_cf_fk_fiberConnections",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_fiberConnections=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_fiberConnections=2742"
          },
          {
             "rel": "-xprs_cf_fk_instrumentJson",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_instrumentJson=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_instrumentJson=2742"
          },
          {
             "rel": "-xprs_cf_fk_hcrOperator",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_hcrOperator=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_hcrOperator=2742"
          },
          {
             "rel": "-xprs_cf_fk_hcrPanelToBeUsedInThisRun",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_hcrPanelToBeUsedInThisRun=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_hcrPanelToBeUsedInThisRun=2742"
          },
          {
             "rel": "-xprs_cf_fk_stimulusEpochs",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_stimulusEpochs=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_stimulusEpochs=2742"
          },
          {
             "rel": "-xprs_cf_fk_createFiberConnections",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_createFiberConnections=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_createFiberConnections=2742"
          },
          {
             "rel": "-xprs_cf_fk_calibrations",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_calibrations=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_calibrations=2742"
          },
          {
             "rel": "-xprs_cf_fk_maintenance",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_maintenance=2742"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_maintenance=2742"
          },
          {
             "rel": "-stop_cf_fk_labTeam",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Sop?stop_cf_fk_labTeam=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Sop?stop_cf_fk_labTeam=2742"
          },
          {
             "rel": "-stop_cf_fk_taskType",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Sop?stop_cf_fk_taskType=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Sop?stop_cf_fk_taskType=2742"
          },
          {
             "rel": "-rslt_cf_fk_targetRegion",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_targetRegion=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_cf_fk_targetRegion=2742"
          },
          {
             "rel": "-rslt_cf_fk_surgeryType",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_surgeryType=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_cf_fk_surgeryType=2742"
          },
          {
             "rel": "-rslt_cf_fk_spimBrainOrientation",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_spimBrainOrientation=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_cf_fk_spimBrainOrientation=2742"
          },
          {
             "rel": "-rslt_cf_fk_imagingFluidUsed",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_imagingFluidUsed=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_cf_fk_imagingFluidUsed=2742"
          },
          {
             "rel": "-rslt_cf_fk_instrumentJson",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_instrumentJson=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_cf_fk_instrumentJson=2742"
          },
          {
             "rel": "-rslt_cf_fk_rewardDelivery",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_cf_fk_rewardDelivery=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_cf_fk_rewardDelivery=2742"
          },
          {
             "rel": "-ordr_cf_fk_tangentialPlaneSectioningReference",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Order?ordr_cf_fk_tangentialPlaneSectioningReference=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_tangentialPlaneSectioningReference=2742"
          },
          {
             "rel": "-ordr_cf_fk_brainStructure",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Order?ordr_cf_fk_brainStructure=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_brainStructure=2742"
          },
          {
             "rel": "-ordr_cf_fk_hcrPanel",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Order?ordr_cf_fk_hcrPanel=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_hcrPanel=2742"
          },
          {
             "rel": "-ordr_cf_fk_desiredAntibody",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Order?ordr_cf_fk_desiredAntibody=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_desiredAntibody=2742"
          },
          {
             "rel": "-ordr_cf_fk_requestedHcrPanel",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Order?ordr_cf_fk_requestedHcrPanel=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_requestedHcrPanel=2742"
          },
          {
             "rel": "-ordr_cf_fk_regionOfInterest",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Order?ordr_cf_fk_regionOfInterest=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_regionOfInterest=2742"
          },
          {
             "rel": "-ordr_cf_fk_requestedIndexMatchingSolutionType",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Order?ordr_cf_fk_requestedIndexMatchingSolutionType=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_requestedIndexMatchingSolutionType=2742"
          },
          {
             "rel": "-ordr_cf_fk_primaryAntibody",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Order?ordr_cf_fk_primaryAntibody=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_primaryAntibody=2742"
          },
          {
             "rel": "-ordr_cf_fk_secondaryAntibody",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Order?ordr_cf_fk_secondaryAntibody=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_secondaryAntibody=2742"
          },
          {
             "rel": "-cntn_cf_fk_reagentCatalogNumber",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_reagentCatalogNumber=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_reagentCatalogNumber=2742"
          },
          {
             "rel": "-cntn_cf_fk_plasmidName",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_plasmidName=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_plasmidName=2742"
          },
          {
             "rel": "-cntn_cf_fk_reagentName",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_reagentName=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_reagentName=2742"
          },
          {
             "rel": "-cntn_cf_fk_serotype",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_serotype=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_serotype=2742"
          },
          {
             "rel": "-cntn_cf_fk_plasmid",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_plasmid=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_plasmid=2742"
          },
          {
             "rel": "-cntn_cf_fk_antibodyCatalogInfo",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_antibodyCatalogInfo=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_antibodyCatalogInfo=2742"
          },
          {
             "rel": "-cntn_cf_fk_antibodyCatalogNumber",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_antibodyCatalogNumber=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_antibodyCatalogNumber=2742"
          },
          {
             "rel": "-cntn_cf_fk_antibodyCloneType",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_antibodyCloneType=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_antibodyCloneType=2742"
          },
          {
             "rel": "-cntn_cf_fk_antibodyName",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_antibodyName=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_antibodyName=2742"
          },
          {
             "rel": "-cntn_cf_fk_antibodyType",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_antibodyType=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_antibodyType=2742"
          },
          {
             "rel": "-cntn_cf_fk_antibodyfluorophore",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_antibodyfluorophore=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_antibodyfluorophore=2742"
          },
          {
             "rel": "-cntn_cf_fk_brainRegion",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_brainRegion=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_brainRegion=2742"
          },
          {
             "rel": "-cntn_cf_fk_catalogNumber",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_catalogNumber=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_catalogNumber=2742"
          },
          {
             "rel": "-cntn_cf_fk_catalogNumberAntibodies",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_catalogNumberAntibodies=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_catalogNumberAntibodies=2742"
          },
          {
             "rel": "-cntn_cf_fk_ccfStructure",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_ccfStructure=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_ccfStructure=2742"
          },
          {
             "rel": "-cntn_cf_fk_conjugationState",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_conjugationState=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_conjugationState=2742"
          },
          {
             "rel": "-cntn_cf_fk_dyeCatalogNumber",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_dyeCatalogNumber=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_dyeCatalogNumber=2742"
          },
          {
             "rel": "-cntn_cf_fk_excitationWavelength",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_excitationWavelength=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_excitationWavelength=2742"
          },
          {
             "rel": "-cntn_cf_fk_fluorescenceChannel",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_fluorescenceChannel=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_fluorescenceChannel=2742"
          },
          {
             "rel": "-cntn_cf_fk_fluorescentLabelingProtein",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_fluorescentLabelingProtein=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_fluorescentLabelingProtein=2742"
          },
          {
             "rel": "-cntn_cf_fk_fundingCode",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_fundingCode=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_fundingCode=2742"
          },
          {
             "rel": "-cntn_cf_fk_hostSpecies",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_hostSpecies=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_hostSpecies=2742"
          },
          {
             "rel": "-cntn_cf_fk_labTeam",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_labTeam=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_labTeam=2742"
          },
          {
             "rel": "-cntn_cf_fk_labTeamAcronym",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_labTeamAcronym=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_labTeamAcronym=2742"
          },
          {
             "rel": "-cntn_cf_fk_protocolsioId",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_protocolsioId=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_protocolsioId=2742"
          },
          {
             "rel": "-cntn_cf_fk_reagentName_DYN",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_reagentName_DYN=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_reagentName_DYN=2742"
          },
          {
             "rel": "-cntn_cf_fk_regionOfInterest",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_regionOfInterest=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_regionOfInterest=2742"
          },
          {
             "rel": "-cntn_cf_fk_requestedIndexMatchingSolutionType",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_requestedIndexMatchingSolutionType=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_requestedIndexMatchingSolutionType=2742"
          },
          {
             "rel": "-cntn_cf_fk_storageTemp_dynChoice",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_storageTemp_dynChoice=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_storageTemp_dynChoice=2742"
          },
          {
             "rel": "-cntn_cf_fk_tangentialPlaneSectioningReference",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Content?cntn_cf_fk_tangentialPlaneSectioningReference=2742"
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_tangentialPlaneSectioningReference=2742"
          },
          {
             "rel": "attachments",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ReferenceDataRecord/2742"
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ReferenceDataRecord/2742"
          }
       ]
    }

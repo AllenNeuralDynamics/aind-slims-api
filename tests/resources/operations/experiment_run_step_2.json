@@ -24,10 +24,10 @@
             "editable": true,
             "foreignTable": "User",
             "displayValues": [
-               "Naveen Ouellette"
+               "PersonN"
             ],
             "foreignDisplayColumn": "user_fullName",
-            "joinedDisplayValue": "Naveen Ouellette"
+            "joinedDisplayValue": "PersonN"
          },
          {
             "datatype": "STRING",
@@ -117,7 +117,7 @@
             "name": "xprs_uniqueIdentifier",
             "title": "Unique identifier",
             "position": 10,
-            "value": "xprs_xprn0000001019_lisa_test_in_vivo_recording_v4_group_of_sessions",
+            "value": "xprs_xprn0000001019_pc_test_in_vivo_recording_v4_group_of_sessions",
             "hidden": false,
             "editable": true
          },
@@ -136,7 +136,7 @@
             "name": "xprs_createdBy",
             "title": "Created by",
             "position": 12,
-            "value": "MeghanO",
+            "value": "PersonO",
             "hidden": false,
             "editable": true
          },
@@ -157,7 +157,7 @@
             "name": "xprs_modifiedBy",
             "title": "Modified by",
             "position": 14,
-            "value": "MeghanO",
+            "value": "PersonO",
             "hidden": false,
             "editable": true
          },
@@ -292,91 +292,91 @@
       "links": [
          {
             "rel": "self",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64242"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64242"
          },
          {
             "rel": "xprs_cf_fk_instrumentJson",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord/3352"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord/3352"
          },
          {
             "rel": "xprs_fk_experimentRun",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRun/41012"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRun/41012"
          },
          {
             "rel": "xprs_fk_previousRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64241"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64241"
          },
          {
             "rel": "xpst_fk_experimentTemplate",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate/1166"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate/1166"
          },
          {
             "rel": "xprs_fk_experimentStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentStep/2897"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentStep/2897"
          },
          {
             "rel": "-cnvn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64242"
          },
          {
             "rel": "-qtus_fk_xRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64242"
          },
          {
             "rel": "-plte_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64242"
          },
          {
             "rel": "-xcui_fk_xRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64242"
          },
          {
             "rel": "-kitt_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64242"
          },
          {
             "rel": "-xrsc_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64242"
          },
          {
             "rel": "-timr_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64242"
          },
          {
             "rel": "-xprs_fk_previousRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64242"
          },
          {
             "rel": "-xprs_fk_linkContent",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64242"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64242"
          },
          {
             "rel": "-rslt_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64242"
          },
          {
             "rel": "-flag_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64242"
          },
          {
             "rel": "-nsrn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64242"
          },
          {
             "rel": "-pptp_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64242"
          },
          {
             "rel": "-xrsl_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64242"
          },
          {
             "rel": "-rrbn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64242"
+            "href": "https://slims.example.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64242"
          },
          {
             "rel": "attachments",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ExperimentRunStep/64242"
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStep/64242"
          }
       ]
    },
@@ -441,7 +441,7 @@
             "name": "xprs_uniqueIdentifier",
             "title": "Unique identifier",
             "position": 5,
-            "value": "xprs_xprn0000001019_lisa_test_in_vivo_recording_v4_mouse_session",
+            "value": "xprs_xprn0000001019_pc_test_in_vivo_recording_v4_mouse_session",
             "hidden": false,
             "editable": true
          },
@@ -460,7 +460,7 @@
             "name": "xprs_createdBy",
             "title": "Created by",
             "position": 7,
-            "value": "MeghanO",
+            "value": "PersonO",
             "hidden": false,
             "editable": true
          },
@@ -481,7 +481,7 @@
             "name": "xprs_modifiedBy",
             "title": "Modified by",
             "position": 9,
-            "value": "MeghanO",
+            "value": "PersonO",
             "hidden": false,
             "editable": true
          },
@@ -616,91 +616,91 @@
       "links": [
          {
             "rel": "self",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64243"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64243"
          },
          {
             "rel": "xprs_fk_experimentRun",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRun/41012"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRun/41012"
          },
          {
             "rel": "xprs_fk_previousRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64242"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64242"
          },
          {
             "rel": "xpst_fk_experimentTemplate",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate/1166"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate/1166"
          },
          {
             "rel": "xprs_fk_linkContent",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64241"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64241"
          },
          {
             "rel": "xprs_fk_experimentStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentStep/2898"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentStep/2898"
          },
          {
             "rel": "-cnvn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64243"
          },
          {
             "rel": "-qtus_fk_xRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64243"
          },
          {
             "rel": "-plte_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64243"
          },
          {
             "rel": "-xcui_fk_xRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64243"
          },
          {
             "rel": "-kitt_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64243"
          },
          {
             "rel": "-xrsc_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64243"
          },
          {
             "rel": "-timr_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64243"
          },
          {
             "rel": "-xprs_fk_previousRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64243"
          },
          {
             "rel": "-xprs_fk_linkContent",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64243"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64243"
          },
          {
             "rel": "-rslt_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64243"
          },
          {
             "rel": "-flag_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64243"
          },
          {
             "rel": "-nsrn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64243"
          },
          {
             "rel": "-pptp_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64243"
          },
          {
             "rel": "-xrsl_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64243"
          },
          {
             "rel": "-rrbn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64243"
+            "href": "https://slims.example.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64243"
          },
          {
             "rel": "attachments",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ExperimentRunStep/64243"
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStep/64243"
          }
       ]
    },
@@ -818,7 +818,7 @@
             "name": "xprs_uniqueIdentifier",
             "title": "Unique identifier",
             "position": 10,
-            "value": "xprs_xprn0000001020_lisa_test_in_vivo_recording_v4_group_of_sessions",
+            "value": "xprs_xprn0000001020_pc_test_in_vivo_recording_v4_group_of_sessions",
             "hidden": false,
             "editable": true
          },
@@ -837,7 +837,7 @@
             "name": "xprs_createdBy",
             "title": "Created by",
             "position": 12,
-            "value": "MeghanO",
+            "value": "PersonO",
             "hidden": false,
             "editable": true
          },
@@ -858,7 +858,7 @@
             "name": "xprs_modifiedBy",
             "title": "Modified by",
             "position": 14,
-            "value": "MeghanO",
+            "value": "PersonO",
             "hidden": false,
             "editable": true
          },
@@ -993,87 +993,87 @@
       "links": [
          {
             "rel": "self",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64247"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64247"
          },
          {
             "rel": "xprs_fk_experimentRun",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRun/41013"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRun/41013"
          },
          {
             "rel": "xprs_fk_previousRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64246"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64246"
          },
          {
             "rel": "xpst_fk_experimentTemplate",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate/1166"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate/1166"
          },
          {
             "rel": "xprs_fk_experimentStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentStep/2897"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentStep/2897"
          },
          {
             "rel": "-cnvn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64247"
          },
          {
             "rel": "-qtus_fk_xRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64247"
          },
          {
             "rel": "-plte_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64247"
          },
          {
             "rel": "-xcui_fk_xRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64247"
          },
          {
             "rel": "-kitt_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64247"
          },
          {
             "rel": "-xrsc_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64247"
          },
          {
             "rel": "-timr_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64247"
          },
          {
             "rel": "-xprs_fk_previousRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64247"
          },
          {
             "rel": "-xprs_fk_linkContent",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64247"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64247"
          },
          {
             "rel": "-rslt_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64247"
          },
          {
             "rel": "-flag_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64247"
          },
          {
             "rel": "-nsrn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64247"
          },
          {
             "rel": "-pptp_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64247"
          },
          {
             "rel": "-xrsl_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64247"
          },
          {
             "rel": "-rrbn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64247"
+            "href": "https://slims.example.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64247"
          },
          {
             "rel": "attachments",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ExperimentRunStep/64247"
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStep/64247"
          }
       ]
    },
@@ -1138,7 +1138,7 @@
             "name": "xprs_uniqueIdentifier",
             "title": "Unique identifier",
             "position": 5,
-            "value": "xprs_xprn0000001020_lisa_test_in_vivo_recording_v4_mouse_session",
+            "value": "xprs_xprn0000001020_pc_test_in_vivo_recording_v4_mouse_session",
             "hidden": false,
             "editable": true
          },
@@ -1157,7 +1157,7 @@
             "name": "xprs_createdBy",
             "title": "Created by",
             "position": 7,
-            "value": "MeghanO",
+            "value": "PersonO",
             "hidden": false,
             "editable": true
          },
@@ -1178,7 +1178,7 @@
             "name": "xprs_modifiedBy",
             "title": "Modified by",
             "position": 9,
-            "value": "MeghanO",
+            "value": "PersonO",
             "hidden": false,
             "editable": true
          },
@@ -1313,91 +1313,91 @@
       "links": [
          {
             "rel": "self",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64248"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64248"
          },
          {
             "rel": "xprs_fk_experimentRun",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRun/41013"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRun/41013"
          },
          {
             "rel": "xprs_fk_previousRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64247"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64247"
          },
          {
             "rel": "xpst_fk_experimentTemplate",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate/1166"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate/1166"
          },
          {
             "rel": "xprs_fk_linkContent",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64246"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64246"
          },
          {
             "rel": "xprs_fk_experimentStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentStep/2898"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentStep/2898"
          },
          {
             "rel": "-cnvn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64248"
          },
          {
             "rel": "-qtus_fk_xRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64248"
          },
          {
             "rel": "-plte_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64248"
          },
          {
             "rel": "-xcui_fk_xRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64248"
          },
          {
             "rel": "-kitt_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64248"
          },
          {
             "rel": "-xrsc_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64248"
          },
          {
             "rel": "-timr_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64248"
          },
          {
             "rel": "-xprs_fk_previousRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64248"
          },
          {
             "rel": "-xprs_fk_linkContent",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64248"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64248"
          },
          {
             "rel": "-rslt_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64248"
          },
          {
             "rel": "-flag_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64248"
          },
          {
             "rel": "-nsrn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64248"
          },
          {
             "rel": "-pptp_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64248"
          },
          {
             "rel": "-xrsl_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64248"
          },
          {
             "rel": "-rrbn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64248"
+            "href": "https://slims.example.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64248"
          },
          {
             "rel": "attachments",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ExperimentRunStep/64248"
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStep/64248"
          }
       ]
    },
@@ -1426,10 +1426,10 @@
             "editable": true,
             "foreignTable": "User",
             "displayValues": [
-               "Naveen Ouellette"
+               "PersonN"
             ],
             "foreignDisplayColumn": "user_fullName",
-            "joinedDisplayValue": "Naveen Ouellette"
+            "joinedDisplayValue": "PersonN"
          },
          {
             "datatype": "STRING",
@@ -1519,7 +1519,7 @@
             "name": "xprs_uniqueIdentifier",
             "title": "Unique identifier",
             "position": 10,
-            "value": "xprs_xprn0000001065_lisa_test_in_vivo_recording_v7_group_of_sessions",
+            "value": "xprs_xprn0000001065_pc_test_in_vivo_recording_v7_group_of_sessions",
             "hidden": false,
             "editable": true
          },
@@ -1538,7 +1538,7 @@
             "name": "xprs_createdBy",
             "title": "Created by",
             "position": 12,
-            "value": "MeghanO",
+            "value": "PersonO",
             "hidden": false,
             "editable": true
          },
@@ -1559,7 +1559,7 @@
             "name": "xprs_modifiedBy",
             "title": "Modified by",
             "position": 14,
-            "value": "MeghanO",
+            "value": "PersonO",
             "hidden": false,
             "editable": true
          },
@@ -1694,91 +1694,91 @@
       "links": [
          {
             "rel": "self",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64455"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64455"
          },
          {
             "rel": "xprs_cf_fk_instrumentJson",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ReferenceDataRecord/1743"
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord/1743"
          },
          {
             "rel": "xprs_fk_experimentRun",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRun/41058"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRun/41058"
          },
          {
             "rel": "xprs_fk_previousRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64454"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64454"
          },
          {
             "rel": "xpst_fk_experimentTemplate",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate/1217"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate/1217"
          },
          {
             "rel": "xprs_fk_experimentStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentStep/3069"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentStep/3069"
          },
          {
             "rel": "-cnvn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64455"
          },
          {
             "rel": "-qtus_fk_xRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64455"
          },
          {
             "rel": "-plte_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64455"
          },
          {
             "rel": "-xcui_fk_xRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64455"
          },
          {
             "rel": "-kitt_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64455"
          },
          {
             "rel": "-xrsc_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64455"
          },
          {
             "rel": "-timr_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64455"
          },
          {
             "rel": "-xprs_fk_previousRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64455"
          },
          {
             "rel": "-xprs_fk_linkContent",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64455"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64455"
          },
          {
             "rel": "-rslt_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64455"
          },
          {
             "rel": "-flag_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64455"
          },
          {
             "rel": "-nsrn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64455"
          },
          {
             "rel": "-pptp_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64455"
          },
          {
             "rel": "-xrsl_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64455"
          },
          {
             "rel": "-rrbn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64455"
+            "href": "https://slims.example.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64455"
          },
          {
             "rel": "attachments",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ExperimentRunStep/64455"
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStep/64455"
          }
       ]
    },
@@ -1843,7 +1843,7 @@
             "name": "xprs_uniqueIdentifier",
             "title": "Unique identifier",
             "position": 5,
-            "value": "xprs_xprn0000001065_lisa_test_in_vivo_recording_v7_mouse_session",
+            "value": "xprs_xprn0000001065_pc_test_in_vivo_recording_v7_mouse_session",
             "hidden": false,
             "editable": true
          },
@@ -1862,7 +1862,7 @@
             "name": "xprs_createdBy",
             "title": "Created by",
             "position": 7,
-            "value": "MeghanO",
+            "value": "PersonO",
             "hidden": false,
             "editable": true
          },
@@ -1883,7 +1883,7 @@
             "name": "xprs_modifiedBy",
             "title": "Modified by",
             "position": 9,
-            "value": "MeghanO",
+            "value": "PersonO",
             "hidden": false,
             "editable": true
          },
@@ -2018,91 +2018,91 @@
       "links": [
          {
             "rel": "self",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64456"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64456"
          },
          {
             "rel": "xprs_fk_experimentRun",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRun/41058"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRun/41058"
          },
          {
             "rel": "xprs_fk_previousRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64455"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64455"
          },
          {
             "rel": "xpst_fk_experimentTemplate",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate/1217"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate/1217"
          },
          {
             "rel": "xprs_fk_linkContent",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64454"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64454"
          },
          {
             "rel": "xprs_fk_experimentStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentStep/3070"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentStep/3070"
          },
          {
             "rel": "-cnvn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64456"
          },
          {
             "rel": "-qtus_fk_xRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64456"
          },
          {
             "rel": "-plte_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64456"
          },
          {
             "rel": "-xcui_fk_xRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64456"
          },
          {
             "rel": "-kitt_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64456"
          },
          {
             "rel": "-xrsc_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64456"
          },
          {
             "rel": "-timr_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64456"
          },
          {
             "rel": "-xprs_fk_previousRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64456"
          },
          {
             "rel": "-xprs_fk_linkContent",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64456"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64456"
          },
          {
             "rel": "-rslt_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64456"
          },
          {
             "rel": "-flag_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64456"
          },
          {
             "rel": "-nsrn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64456"
          },
          {
             "rel": "-pptp_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64456"
          },
          {
             "rel": "-xrsl_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64456"
          },
          {
             "rel": "-rrbn_fk_experimentRunStep",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64456"
+            "href": "https://slims.example.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64456"
          },
          {
             "rel": "attachments",
-            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ExperimentRunStep/64456"
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStep/64456"
          }
       ]
    }
