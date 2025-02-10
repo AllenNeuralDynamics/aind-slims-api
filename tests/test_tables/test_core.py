@@ -53,7 +53,9 @@ class TestMethods(unittest.TestCase):
             Quantity(value=25.2, unit="g"), models[0].cntn_cf_baselineWeight
         )
         self.assertEqual("PersonB", models[0].cntn_cf_contactPerson)
-        self.assertEqual(datetime(2024, 5, 15, 5, 0), models[0].cntn_cf_dateOfBirth)
+        self.assertEqual(
+            datetime.fromtimestamp(1715774400), models[0].cntn_cf_dateOfBirth
+        )
         self.assertEqual("rgntE00000027", models[1].cntn_barCode)
 
 
