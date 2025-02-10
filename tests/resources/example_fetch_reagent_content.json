@@ -530,7 +530,7 @@
                     "name": "cntn_createdBy",
                     "title": "Created by",
                     "position": 47,
-                    "value": "nouellette",
+                    "value": "PersonA",
                     "hidden": false,
                     "editable": true
                 },
@@ -551,7 +551,7 @@
                     "name": "cntn_modifiedBy",
                     "title": "Modified by",
                     "position": 49,
-                    "value": "general_aind",
+                    "value": "PersonB",
                     "hidden": false,
                     "editable": true
                 },

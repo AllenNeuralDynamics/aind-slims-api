@@ -1,0 +1,2109 @@
+[
+   {
+      "pk": 64242,
+      "tableName": "ExperimentRunStep",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xprs_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Group of Sessions",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "MULTIPLE_FOREIGN_KEY",
+            "name": "xprs_cf_fk_operator",
+            "title": "Operator",
+            "position": 1,
+            "value": [
+               5
+            ],
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValues": [
+               "PersonN"
+            ],
+            "foreignDisplayColumn": "user_fullName",
+            "joinedDisplayValue": "PersonN"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_comments",
+            "title": "Comments",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_cf_fk_instrumentJson",
+            "title": "Instrument",
+            "position": 3,
+            "value": 3352,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "ReferenceDataRecord",
+            "displayValue": "323_EPHYS1_OPTO_2024-06-18_tube",
+            "displayField": "xprs_cf_fk_instrumentJson_display",
+            "foreignDisplayColumn": "rdrc_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_user",
+            "title": "User",
+            "position": 4,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 5,
+            "value": 1719959964907,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_active",
+            "title": "Active",
+            "position": 6,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_cf_sessionType",
+            "title": "Session Type",
+            "position": 7,
+            "value": "Optotagging",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_cf_mousePlatformName",
+            "title": "Mouse platform name",
+            "position": 8,
+            "value": "Tube",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_cf_activeMousePlatform",
+            "title": "Active mouse platform",
+            "position": 9,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 10,
+            "value": "xprs_xprn0000001019_pc_test_in_vivo_recording_v4_group_of_sessions",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "xprs_status",
+            "title": "Status",
+            "position": 11,
+            "value": "DONE",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Done"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_createdBy",
+            "title": "Created by",
+            "position": 12,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_createdOn",
+            "title": "Created on",
+            "position": 13,
+            "value": 1719959964809,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_modifiedBy",
+            "title": "Modified by",
+            "position": 14,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_modifiedOn",
+            "title": "Modified on",
+            "position": 15,
+            "value": 1720043271787,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_lastEventOn",
+            "title": "Last event on",
+            "position": 16,
+            "value": 1720043271787,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 17,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_linkContent",
+            "title": "Content block",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentRun",
+            "title": "Protocol run",
+            "position": 19,
+            "value": 41012,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRun",
+            "displayValue": null,
+            "displayField": "xprn_name",
+            "foreignDisplayColumn": "xprn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentStep",
+            "title": "Protocol step",
+            "position": 20,
+            "value": 2897,
+            "hidden": true,
+            "editable": false,
+            "foreignTable": "ExperimentStep",
+            "displayValue": "Group of Sessions",
+            "displayField": "xpst_name",
+            "foreignDisplayColumn": "xpst_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_pk",
+            "title": "xprs_pk",
+            "position": 21,
+            "value": 64242,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_previousRunStep",
+            "title": "Previous protocol run step",
+            "position": 22,
+            "value": 64241,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Group of Sessions",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_actualType",
+            "title": "xprs_actualType",
+            "position": 23,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xpst_fk_experimentTemplate",
+            "title": "Protocol",
+            "position": 24,
+            "value": 1166,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentTemplate",
+            "displayValue": null,
+            "displayField": "xptm_nameVersion",
+            "foreignDisplayColumn": "xptm_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xpst_type",
+            "title": "Type",
+            "position": 25,
+            "value": "FORM_STEP",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64242"
+         },
+         {
+            "rel": "xprs_cf_fk_instrumentJson",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord/3352"
+         },
+         {
+            "rel": "xprs_fk_experimentRun",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRun/41012"
+         },
+         {
+            "rel": "xprs_fk_previousRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64241"
+         },
+         {
+            "rel": "xpst_fk_experimentTemplate",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate/1166"
+         },
+         {
+            "rel": "xprs_fk_experimentStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentStep/2897"
+         },
+         {
+            "rel": "-cnvn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64242"
+         },
+         {
+            "rel": "-qtus_fk_xRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64242"
+         },
+         {
+            "rel": "-plte_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64242"
+         },
+         {
+            "rel": "-xcui_fk_xRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64242"
+         },
+         {
+            "rel": "-kitt_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64242"
+         },
+         {
+            "rel": "-xrsc_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64242"
+         },
+         {
+            "rel": "-timr_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64242"
+         },
+         {
+            "rel": "-xprs_fk_previousRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64242"
+         },
+         {
+            "rel": "-xprs_fk_linkContent",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64242"
+         },
+         {
+            "rel": "-rslt_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64242"
+         },
+         {
+            "rel": "-flag_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64242"
+         },
+         {
+            "rel": "-nsrn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64242"
+         },
+         {
+            "rel": "-pptp_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64242"
+         },
+         {
+            "rel": "-xrsl_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64242"
+         },
+         {
+            "rel": "-rrbn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64242"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStep/64242"
+         }
+      ]
+   },
+   {
+      "pk": 64243,
+      "tableName": "ExperimentRunStep",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xprs_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Mouse Session",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_comments",
+            "title": "Comments",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_user",
+            "title": "User",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 3,
+            "value": 1719959965041,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_active",
+            "title": "Active",
+            "position": 4,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 5,
+            "value": "xprs_xprn0000001019_pc_test_in_vivo_recording_v4_mouse_session",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "xprs_status",
+            "title": "Status",
+            "position": 6,
+            "value": "DONE",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Done"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_createdBy",
+            "title": "Created by",
+            "position": 7,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_createdOn",
+            "title": "Created on",
+            "position": 8,
+            "value": 1719959964923,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_modifiedBy",
+            "title": "Modified by",
+            "position": 9,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_modifiedOn",
+            "title": "Modified on",
+            "position": 10,
+            "value": 1720043272057,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_lastEventOn",
+            "title": "Last event on",
+            "position": 11,
+            "value": 1720043272057,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 12,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_linkContent",
+            "title": "Content block",
+            "position": 13,
+            "value": 64241,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Mouse Session",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentRun",
+            "title": "Protocol run",
+            "position": 14,
+            "value": 41012,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRun",
+            "displayValue": null,
+            "displayField": "xprn_name",
+            "foreignDisplayColumn": "xprn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentStep",
+            "title": "Protocol step",
+            "position": 15,
+            "value": 2898,
+            "hidden": true,
+            "editable": false,
+            "foreignTable": "ExperimentStep",
+            "displayValue": "Mouse Session",
+            "displayField": "xpst_name",
+            "foreignDisplayColumn": "xpst_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_pk",
+            "title": "xprs_pk",
+            "position": 16,
+            "value": 64243,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_previousRunStep",
+            "title": "Previous protocol run step",
+            "position": 17,
+            "value": 64242,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Mouse Session",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_actualType",
+            "title": "xprs_actualType",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xpst_fk_experimentTemplate",
+            "title": "Protocol",
+            "position": 19,
+            "value": 1166,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentTemplate",
+            "displayValue": null,
+            "displayField": "xptm_nameVersion",
+            "foreignDisplayColumn": "xptm_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xpst_type",
+            "title": "Type",
+            "position": 20,
+            "value": "RESULT_STEP",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64243"
+         },
+         {
+            "rel": "xprs_fk_experimentRun",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRun/41012"
+         },
+         {
+            "rel": "xprs_fk_previousRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64242"
+         },
+         {
+            "rel": "xpst_fk_experimentTemplate",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate/1166"
+         },
+         {
+            "rel": "xprs_fk_linkContent",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64241"
+         },
+         {
+            "rel": "xprs_fk_experimentStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentStep/2898"
+         },
+         {
+            "rel": "-cnvn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64243"
+         },
+         {
+            "rel": "-qtus_fk_xRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64243"
+         },
+         {
+            "rel": "-plte_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64243"
+         },
+         {
+            "rel": "-xcui_fk_xRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64243"
+         },
+         {
+            "rel": "-kitt_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64243"
+         },
+         {
+            "rel": "-xrsc_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64243"
+         },
+         {
+            "rel": "-timr_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64243"
+         },
+         {
+            "rel": "-xprs_fk_previousRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64243"
+         },
+         {
+            "rel": "-xprs_fk_linkContent",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64243"
+         },
+         {
+            "rel": "-rslt_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64243"
+         },
+         {
+            "rel": "-flag_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64243"
+         },
+         {
+            "rel": "-nsrn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64243"
+         },
+         {
+            "rel": "-pptp_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64243"
+         },
+         {
+            "rel": "-xrsl_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64243"
+         },
+         {
+            "rel": "-rrbn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64243"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStep/64243"
+         }
+      ]
+   },
+   {
+      "pk": 64247,
+      "tableName": "ExperimentRunStep",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xprs_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Group of Sessions",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "MULTIPLE_FOREIGN_KEY",
+            "name": "xprs_cf_fk_operator",
+            "title": "Operator",
+            "position": 1,
+            "value": [],
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValues": [],
+            "foreignDisplayColumn": "user_fullName",
+            "joinedDisplayValue": ""
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_comments",
+            "title": "Comments",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_cf_fk_instrumentJson",
+            "title": "Instrument",
+            "position": 3,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "ReferenceDataRecord",
+            "displayValue": null,
+            "displayField": "xprs_cf_fk_instrumentJson_display",
+            "foreignDisplayColumn": "rdrc_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_user",
+            "title": "User",
+            "position": 4,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 5,
+            "value": 1720043351325,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_active",
+            "title": "Active",
+            "position": 6,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_cf_sessionType",
+            "title": "Session Type",
+            "position": 7,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_cf_mousePlatformName",
+            "title": "Mouse platform name",
+            "position": 8,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_cf_activeMousePlatform",
+            "title": "Active mouse platform",
+            "position": 9,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 10,
+            "value": "xprs_xprn0000001020_pc_test_in_vivo_recording_v4_group_of_sessions",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "xprs_status",
+            "title": "Status",
+            "position": 11,
+            "value": "DONE",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Done"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_createdBy",
+            "title": "Created by",
+            "position": 12,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_createdOn",
+            "title": "Created on",
+            "position": 13,
+            "value": 1720043351236,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_modifiedBy",
+            "title": "Modified by",
+            "position": 14,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_modifiedOn",
+            "title": "Modified on",
+            "position": 15,
+            "value": 1723615844725,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_lastEventOn",
+            "title": "Last event on",
+            "position": 16,
+            "value": 1723615844725,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 17,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_linkContent",
+            "title": "Content block",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentRun",
+            "title": "Protocol run",
+            "position": 19,
+            "value": 41013,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRun",
+            "displayValue": null,
+            "displayField": "xprn_name",
+            "foreignDisplayColumn": "xprn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentStep",
+            "title": "Protocol step",
+            "position": 20,
+            "value": 2897,
+            "hidden": true,
+            "editable": false,
+            "foreignTable": "ExperimentStep",
+            "displayValue": "Group of Sessions",
+            "displayField": "xpst_name",
+            "foreignDisplayColumn": "xpst_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_pk",
+            "title": "xprs_pk",
+            "position": 21,
+            "value": 64247,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_previousRunStep",
+            "title": "Previous protocol run step",
+            "position": 22,
+            "value": 64246,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Group of Sessions",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_actualType",
+            "title": "xprs_actualType",
+            "position": 23,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xpst_fk_experimentTemplate",
+            "title": "Protocol",
+            "position": 24,
+            "value": 1166,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentTemplate",
+            "displayValue": null,
+            "displayField": "xptm_nameVersion",
+            "foreignDisplayColumn": "xptm_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xpst_type",
+            "title": "Type",
+            "position": 25,
+            "value": "FORM_STEP",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64247"
+         },
+         {
+            "rel": "xprs_fk_experimentRun",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRun/41013"
+         },
+         {
+            "rel": "xprs_fk_previousRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64246"
+         },
+         {
+            "rel": "xpst_fk_experimentTemplate",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate/1166"
+         },
+         {
+            "rel": "xprs_fk_experimentStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentStep/2897"
+         },
+         {
+            "rel": "-cnvn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64247"
+         },
+         {
+            "rel": "-qtus_fk_xRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64247"
+         },
+         {
+            "rel": "-plte_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64247"
+         },
+         {
+            "rel": "-xcui_fk_xRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64247"
+         },
+         {
+            "rel": "-kitt_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64247"
+         },
+         {
+            "rel": "-xrsc_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64247"
+         },
+         {
+            "rel": "-timr_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64247"
+         },
+         {
+            "rel": "-xprs_fk_previousRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64247"
+         },
+         {
+            "rel": "-xprs_fk_linkContent",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64247"
+         },
+         {
+            "rel": "-rslt_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64247"
+         },
+         {
+            "rel": "-flag_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64247"
+         },
+         {
+            "rel": "-nsrn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64247"
+         },
+         {
+            "rel": "-pptp_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64247"
+         },
+         {
+            "rel": "-xrsl_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64247"
+         },
+         {
+            "rel": "-rrbn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64247"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStep/64247"
+         }
+      ]
+   },
+   {
+      "pk": 64248,
+      "tableName": "ExperimentRunStep",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xprs_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Mouse Session",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_comments",
+            "title": "Comments",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_user",
+            "title": "User",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 3,
+            "value": 1720043351368,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_active",
+            "title": "Active",
+            "position": 4,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 5,
+            "value": "xprs_xprn0000001020_pc_test_in_vivo_recording_v4_mouse_session",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "xprs_status",
+            "title": "Status",
+            "position": 6,
+            "value": "DONE",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Done"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_createdBy",
+            "title": "Created by",
+            "position": 7,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_createdOn",
+            "title": "Created on",
+            "position": 8,
+            "value": 1720043351348,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_modifiedBy",
+            "title": "Modified by",
+            "position": 9,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_modifiedOn",
+            "title": "Modified on",
+            "position": 10,
+            "value": 1723615844979,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_lastEventOn",
+            "title": "Last event on",
+            "position": 11,
+            "value": 1723615844979,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 12,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_linkContent",
+            "title": "Content block",
+            "position": 13,
+            "value": 64246,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Mouse Session",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentRun",
+            "title": "Protocol run",
+            "position": 14,
+            "value": 41013,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRun",
+            "displayValue": null,
+            "displayField": "xprn_name",
+            "foreignDisplayColumn": "xprn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentStep",
+            "title": "Protocol step",
+            "position": 15,
+            "value": 2898,
+            "hidden": true,
+            "editable": false,
+            "foreignTable": "ExperimentStep",
+            "displayValue": "Mouse Session",
+            "displayField": "xpst_name",
+            "foreignDisplayColumn": "xpst_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_pk",
+            "title": "xprs_pk",
+            "position": 16,
+            "value": 64248,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_previousRunStep",
+            "title": "Previous protocol run step",
+            "position": 17,
+            "value": 64247,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Mouse Session",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_actualType",
+            "title": "xprs_actualType",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xpst_fk_experimentTemplate",
+            "title": "Protocol",
+            "position": 19,
+            "value": 1166,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentTemplate",
+            "displayValue": null,
+            "displayField": "xptm_nameVersion",
+            "foreignDisplayColumn": "xptm_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xpst_type",
+            "title": "Type",
+            "position": 20,
+            "value": "RESULT_STEP",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64248"
+         },
+         {
+            "rel": "xprs_fk_experimentRun",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRun/41013"
+         },
+         {
+            "rel": "xprs_fk_previousRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64247"
+         },
+         {
+            "rel": "xpst_fk_experimentTemplate",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate/1166"
+         },
+         {
+            "rel": "xprs_fk_linkContent",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64246"
+         },
+         {
+            "rel": "xprs_fk_experimentStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentStep/2898"
+         },
+         {
+            "rel": "-cnvn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64248"
+         },
+         {
+            "rel": "-qtus_fk_xRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64248"
+         },
+         {
+            "rel": "-plte_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64248"
+         },
+         {
+            "rel": "-xcui_fk_xRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64248"
+         },
+         {
+            "rel": "-kitt_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64248"
+         },
+         {
+            "rel": "-xrsc_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64248"
+         },
+         {
+            "rel": "-timr_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64248"
+         },
+         {
+            "rel": "-xprs_fk_previousRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64248"
+         },
+         {
+            "rel": "-xprs_fk_linkContent",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64248"
+         },
+         {
+            "rel": "-rslt_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64248"
+         },
+         {
+            "rel": "-flag_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64248"
+         },
+         {
+            "rel": "-nsrn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64248"
+         },
+         {
+            "rel": "-pptp_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64248"
+         },
+         {
+            "rel": "-xrsl_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64248"
+         },
+         {
+            "rel": "-rrbn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64248"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStep/64248"
+         }
+      ]
+   },
+   {
+      "pk": 64455,
+      "tableName": "ExperimentRunStep",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xprs_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Group of Sessions",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "MULTIPLE_FOREIGN_KEY",
+            "name": "xprs_cf_fk_operator",
+            "title": "Operator",
+            "position": 1,
+            "value": [
+               5
+            ],
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValues": [
+               "PersonN"
+            ],
+            "foreignDisplayColumn": "user_fullName",
+            "joinedDisplayValue": "PersonN"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_comments",
+            "title": "Comments",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_cf_fk_instrumentJson",
+            "title": "Instrument",
+            "position": 3,
+            "value": 1743,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "ReferenceDataRecord",
+            "displayValue": "323_EPHYS1_OPTO_20240212",
+            "displayField": "xprs_cf_fk_instrumentJson_display",
+            "foreignDisplayColumn": "rdrc_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_user",
+            "title": "User",
+            "position": 4,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 5,
+            "value": 1724092554532,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_active",
+            "title": "Active",
+            "position": 6,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_cf_sessionType",
+            "title": "Session Type",
+            "position": 7,
+            "value": "Optotagging",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_cf_mousePlatformName",
+            "title": "Mouse platform name",
+            "position": 8,
+            "value": "Tube",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_cf_activeMousePlatform",
+            "title": "Active mouse platform",
+            "position": 9,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 10,
+            "value": "xprs_xprn0000001065_pc_test_in_vivo_recording_v7_group_of_sessions",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "xprs_status",
+            "title": "Status",
+            "position": 11,
+            "value": "DONE",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Done"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_createdBy",
+            "title": "Created by",
+            "position": 12,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_createdOn",
+            "title": "Created on",
+            "position": 13,
+            "value": 1724092554438,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_modifiedBy",
+            "title": "Modified by",
+            "position": 14,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_modifiedOn",
+            "title": "Modified on",
+            "position": 15,
+            "value": 1724113435361,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_lastEventOn",
+            "title": "Last event on",
+            "position": 16,
+            "value": 1724113435361,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 17,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_linkContent",
+            "title": "Content block",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentRun",
+            "title": "Protocol run",
+            "position": 19,
+            "value": 41058,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRun",
+            "displayValue": null,
+            "displayField": "xprn_name",
+            "foreignDisplayColumn": "xprn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentStep",
+            "title": "Protocol step",
+            "position": 20,
+            "value": 3069,
+            "hidden": true,
+            "editable": false,
+            "foreignTable": "ExperimentStep",
+            "displayValue": "Group of Sessions",
+            "displayField": "xpst_name",
+            "foreignDisplayColumn": "xpst_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_pk",
+            "title": "xprs_pk",
+            "position": 21,
+            "value": 64455,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_previousRunStep",
+            "title": "Previous protocol run step",
+            "position": 22,
+            "value": 64454,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Group of Sessions",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_actualType",
+            "title": "xprs_actualType",
+            "position": 23,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xpst_fk_experimentTemplate",
+            "title": "Protocol",
+            "position": 24,
+            "value": 1217,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentTemplate",
+            "displayValue": null,
+            "displayField": "xptm_nameVersion",
+            "foreignDisplayColumn": "xptm_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xpst_type",
+            "title": "Type",
+            "position": 25,
+            "value": "FORM_STEP",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64455"
+         },
+         {
+            "rel": "xprs_cf_fk_instrumentJson",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord/1743"
+         },
+         {
+            "rel": "xprs_fk_experimentRun",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRun/41058"
+         },
+         {
+            "rel": "xprs_fk_previousRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64454"
+         },
+         {
+            "rel": "xpst_fk_experimentTemplate",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate/1217"
+         },
+         {
+            "rel": "xprs_fk_experimentStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentStep/3069"
+         },
+         {
+            "rel": "-cnvn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64455"
+         },
+         {
+            "rel": "-qtus_fk_xRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64455"
+         },
+         {
+            "rel": "-plte_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64455"
+         },
+         {
+            "rel": "-xcui_fk_xRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64455"
+         },
+         {
+            "rel": "-kitt_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64455"
+         },
+         {
+            "rel": "-xrsc_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64455"
+         },
+         {
+            "rel": "-timr_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64455"
+         },
+         {
+            "rel": "-xprs_fk_previousRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64455"
+         },
+         {
+            "rel": "-xprs_fk_linkContent",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64455"
+         },
+         {
+            "rel": "-rslt_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64455"
+         },
+         {
+            "rel": "-flag_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64455"
+         },
+         {
+            "rel": "-nsrn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64455"
+         },
+         {
+            "rel": "-pptp_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64455"
+         },
+         {
+            "rel": "-xrsl_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64455"
+         },
+         {
+            "rel": "-rrbn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64455"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStep/64455"
+         }
+      ]
+   },
+   {
+      "pk": 64456,
+      "tableName": "ExperimentRunStep",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xprs_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Mouse Session",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_comments",
+            "title": "Comments",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_user",
+            "title": "User",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 3,
+            "value": 1724092554658,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_active",
+            "title": "Active",
+            "position": 4,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 5,
+            "value": "xprs_xprn0000001065_pc_test_in_vivo_recording_v7_mouse_session",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "xprs_status",
+            "title": "Status",
+            "position": 6,
+            "value": "DONE",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Done"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_createdBy",
+            "title": "Created by",
+            "position": 7,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_createdOn",
+            "title": "Created on",
+            "position": 8,
+            "value": 1724092554551,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_modifiedBy",
+            "title": "Modified by",
+            "position": 9,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_modifiedOn",
+            "title": "Modified on",
+            "position": 10,
+            "value": 1724113435544,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_lastEventOn",
+            "title": "Last event on",
+            "position": 11,
+            "value": 1724113435544,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 12,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_linkContent",
+            "title": "Content block",
+            "position": 13,
+            "value": 64454,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Mouse Session",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentRun",
+            "title": "Protocol run",
+            "position": 14,
+            "value": 41058,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRun",
+            "displayValue": null,
+            "displayField": "xprn_name",
+            "foreignDisplayColumn": "xprn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentStep",
+            "title": "Protocol step",
+            "position": 15,
+            "value": 3070,
+            "hidden": true,
+            "editable": false,
+            "foreignTable": "ExperimentStep",
+            "displayValue": "Mouse Session",
+            "displayField": "xpst_name",
+            "foreignDisplayColumn": "xpst_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_pk",
+            "title": "xprs_pk",
+            "position": 16,
+            "value": 64456,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_previousRunStep",
+            "title": "Previous protocol run step",
+            "position": 17,
+            "value": 64455,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Mouse Session",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_actualType",
+            "title": "xprs_actualType",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xpst_fk_experimentTemplate",
+            "title": "Protocol",
+            "position": 19,
+            "value": 1217,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentTemplate",
+            "displayValue": null,
+            "displayField": "xptm_nameVersion",
+            "foreignDisplayColumn": "xptm_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xpst_type",
+            "title": "Type",
+            "position": 20,
+            "value": "RESULT_STEP",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64456"
+         },
+         {
+            "rel": "xprs_fk_experimentRun",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRun/41058"
+         },
+         {
+            "rel": "xprs_fk_previousRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64455"
+         },
+         {
+            "rel": "xpst_fk_experimentTemplate",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate/1217"
+         },
+         {
+            "rel": "xprs_fk_linkContent",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64454"
+         },
+         {
+            "rel": "xprs_fk_experimentStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentStep/3070"
+         },
+         {
+            "rel": "-cnvn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64456"
+         },
+         {
+            "rel": "-qtus_fk_xRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64456"
+         },
+         {
+            "rel": "-plte_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64456"
+         },
+         {
+            "rel": "-xcui_fk_xRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64456"
+         },
+         {
+            "rel": "-kitt_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64456"
+         },
+         {
+            "rel": "-xrsc_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64456"
+         },
+         {
+            "rel": "-timr_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64456"
+         },
+         {
+            "rel": "-xprs_fk_previousRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64456"
+         },
+         {
+            "rel": "-xprs_fk_linkContent",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64456"
+         },
+         {
+            "rel": "-rslt_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64456"
+         },
+         {
+            "rel": "-flag_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64456"
+         },
+         {
+            "rel": "-nsrn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64456"
+         },
+         {
+            "rel": "-pptp_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64456"
+         },
+         {
+            "rel": "-xrsl_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64456"
+         },
+         {
+            "rel": "-rrbn_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64456"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStep/64456"
+         }
+      ]
+   }
+]

@@ -1,10 +1,15 @@
 """Tests methods in spim imaging operation"""
 
 import unittest
+from datetime import datetime
 from unittest.mock import patch
-from aind_slims_api.operations.spim_imaging import (
-    fetch_imaging_metadata,
-    _extract_protocol_link,
+
+from aind_slims_api.exceptions import SlimsRecordNotFound
+from aind_slims_api.models import (
+    SlimsInstrumentRdrc,
+    SlimsProtocolSOP,
+    SlimsSampleContent,
+    SlimsUser,
 )
 from aind_slims_api.models.experiment_run_step import (
     SlimsExperimentRunStep,
@@ -17,14 +22,10 @@ from aind_slims_api.models.imaging import (
     SlimsImagingMetadataResult,
     SlimsSPIMBrainOrientationRdrc,
 )
-from aind_slims_api.models import (
-    SlimsInstrumentRdrc,
-    SlimsUser,
-    SlimsSampleContent,
-    SlimsProtocolSOP,
+from aind_slims_api.operations.spim_imaging import (
+    _extract_protocol_link,
+    fetch_imaging_metadata,
 )
-from aind_slims_api.exceptions import SlimsRecordNotFound
-from datetime import datetime
 
 
 class TestFetchImagingMetadata(unittest.TestCase):

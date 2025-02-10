@@ -1,0 +1,514 @@
+[
+   {
+      "pk": 2742,
+      "tableName": "ReferenceDataRecord",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "rdrc_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Midbrain reticular nucleus",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "rdrc_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 1,
+            "value": "852",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "rdrc_active",
+            "title": "Active",
+            "position": 2,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "rdrc_fk_user",
+            "title": "User",
+            "position": 3,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "rdrc_fk_group",
+            "title": "Group",
+            "position": 4,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "Groups",
+            "displayValue": null,
+            "displayField": "grps_groupName",
+            "foreignDisplayColumn": "grps_groupName"
+         },
+         {
+            "datatype": "STRING",
+            "name": "rdrc_cf_acronym",
+            "title": "Acronym",
+            "position": 5,
+            "value": "MRN",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "rdrc_cf_atlasId",
+            "title": "Atlas ID",
+            "position": 6,
+            "value": "864",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "rdrc_cf_limsId",
+            "title": "LIMS ID",
+            "position": 7,
+            "value": 128,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "rdrc_cf_safeName",
+            "title": "Safe Name",
+            "position": 8,
+            "value": "Midbrain reticular nucleus",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "rdrc_fk_referenceDataType",
+            "title": "Reference Data Type",
+            "position": 9,
+            "value": 37,
+            "hidden": false,
+            "editable": false,
+            "foreignTable": "ReferenceDataType",
+            "displayValue": "CCF brain structures",
+            "displayField": "rdty_name",
+            "foreignDisplayColumn": "rdty_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "rdrc_createdBy",
+            "title": "Created by",
+            "position": 10,
+            "value": "ClarkR",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "rdrc_createdOn",
+            "title": "Created on",
+            "position": 11,
+            "value": 1714684390807,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "rdrc_modifiedBy",
+            "title": "Modified by",
+            "position": 12,
+            "value": "ClarkR",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "rdrc_modifiedOn",
+            "title": "Modified on",
+            "position": 13,
+            "value": 1714684390807,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 14,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "rdrc_pk",
+            "title": "rdrc_pk",
+            "position": 15,
+            "value": 2742,
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord/2742"
+         },
+         {
+            "rel": "rdrc_fk_referenceDataType",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataType/37"
+         },
+         {
+            "rel": "-rlrr_fk_referenceDataRecord",
+            "href": "https://slims.example.com/slimsrest/rest/RuleReferenceDataRecord?rlrr_fk_referenceDataRecord=2742"
+         },
+         {
+            "rel": "-prdc_cf_fk_stringParameters",
+            "href": "https://slims.example.com/slimsrest/rest/Product?prdc_cf_fk_stringParameters=2742"
+         },
+         {
+            "rel": "-scnr_cf_fk_labTeam",
+            "href": "https://slims.example.com/slimsrest/rest/Scenario?scnr_cf_fk_labTeam=2742"
+         },
+         {
+            "rel": "-scnr_cf_fk_taskType",
+            "href": "https://slims.example.com/slimsrest/rest/Scenario?scnr_cf_fk_taskType=2742"
+         },
+         {
+            "rel": "-cnvn_cf_fk_instrument",
+            "href": "https://slims.example.com/slimsrest/rest/ContentEvent?cnvn_cf_fk_instrument=2742"
+         },
+         {
+            "rel": "-xptm_cf_fk_labTeam",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate?xptm_cf_fk_labTeam=2742"
+         },
+         {
+            "rel": "-xptm_cf_fk_taskType",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentTemplate?xptm_cf_fk_taskType=2742"
+         },
+         {
+            "rel": "-lctp_cf_fk_locationTypeCateogry",
+            "href": "https://slims.example.com/slimsrest/rest/LocationType?lctp_cf_fk_locationTypeCateogry=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_storageTemp",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_storageTemp=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_amplifier",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_amplifier=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_amplifierFluorophore",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_amplifierFluorophore=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_antibodyCloneType",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyCloneType=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_antibodyConjugationState",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyConjugationState=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_antibodyFluorophore",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyFluorophore=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_antibodyHostSpecies",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyHostSpecies=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_antibodyType",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_antibodyType=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_department",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_department=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_dyeType",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_dyeType=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_excitationWavelength_DYN",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_excitationWavelength_DYN=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_hcrSeriesName",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_hcrSeriesName=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_labTeam",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_labTeam=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_organization",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_organization=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_reagents",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_reagents=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_rewardSpouts",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_rewardSpouts=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_storageTemp_dynChoice",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_storageTemp_dynChoice=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_primaryTargetedStructure",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_primaryTargetedStructure=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_secondaryTargetedStructures",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_secondaryTargetedStructures=2742"
+         },
+         {
+            "rel": "-rdrc_cf_fk_fiberConnections",
+            "href": "https://slims.example.com/slimsrest/rest/ReferenceDataRecord?rdrc_cf_fk_fiberConnections=2742"
+         },
+         {
+            "rel": "-xprs_cf_fk_instrumentJson",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_instrumentJson=2742"
+         },
+         {
+            "rel": "-xprs_cf_fk_hcrOperator",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_hcrOperator=2742"
+         },
+         {
+            "rel": "-xprs_cf_fk_hcrPanelToBeUsedInThisRun",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_hcrPanelToBeUsedInThisRun=2742"
+         },
+         {
+            "rel": "-xprs_cf_fk_stimulusEpochs",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_stimulusEpochs=2742"
+         },
+         {
+            "rel": "-xprs_cf_fk_createFiberConnections",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_createFiberConnections=2742"
+         },
+         {
+            "rel": "-xprs_cf_fk_calibrations",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_calibrations=2742"
+         },
+         {
+            "rel": "-xprs_cf_fk_maintenance",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep?xprs_cf_fk_maintenance=2742"
+         },
+         {
+            "rel": "-stop_cf_fk_labTeam",
+            "href": "https://slims.example.com/slimsrest/rest/Sop?stop_cf_fk_labTeam=2742"
+         },
+         {
+            "rel": "-stop_cf_fk_taskType",
+            "href": "https://slims.example.com/slimsrest/rest/Sop?stop_cf_fk_taskType=2742"
+         },
+         {
+            "rel": "-rslt_cf_fk_targetRegion",
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_cf_fk_targetRegion=2742"
+         },
+         {
+            "rel": "-rslt_cf_fk_surgeryType",
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_cf_fk_surgeryType=2742"
+         },
+         {
+            "rel": "-rslt_cf_fk_spimBrainOrientation",
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_cf_fk_spimBrainOrientation=2742"
+         },
+         {
+            "rel": "-rslt_cf_fk_imagingFluidUsed",
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_cf_fk_imagingFluidUsed=2742"
+         },
+         {
+            "rel": "-rslt_cf_fk_instrumentJson",
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_cf_fk_instrumentJson=2742"
+         },
+         {
+            "rel": "-rslt_cf_fk_rewardDelivery",
+            "href": "https://slims.example.com/slimsrest/rest/Result?rslt_cf_fk_rewardDelivery=2742"
+         },
+         {
+            "rel": "-ordr_cf_fk_tangentialPlaneSectioningReference",
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_tangentialPlaneSectioningReference=2742"
+         },
+         {
+            "rel": "-ordr_cf_fk_brainStructure",
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_brainStructure=2742"
+         },
+         {
+            "rel": "-ordr_cf_fk_hcrPanel",
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_hcrPanel=2742"
+         },
+         {
+            "rel": "-ordr_cf_fk_desiredAntibody",
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_desiredAntibody=2742"
+         },
+         {
+            "rel": "-ordr_cf_fk_requestedHcrPanel",
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_requestedHcrPanel=2742"
+         },
+         {
+            "rel": "-ordr_cf_fk_regionOfInterest",
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_regionOfInterest=2742"
+         },
+         {
+            "rel": "-ordr_cf_fk_requestedIndexMatchingSolutionType",
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_requestedIndexMatchingSolutionType=2742"
+         },
+         {
+            "rel": "-ordr_cf_fk_primaryAntibody",
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_primaryAntibody=2742"
+         },
+         {
+            "rel": "-ordr_cf_fk_secondaryAntibody",
+            "href": "https://slims.example.com/slimsrest/rest/Order?ordr_cf_fk_secondaryAntibody=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_reagentCatalogNumber",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_reagentCatalogNumber=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_plasmidName",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_plasmidName=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_reagentName",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_reagentName=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_serotype",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_serotype=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_plasmid",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_plasmid=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_antibodyCatalogInfo",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_antibodyCatalogInfo=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_antibodyCatalogNumber",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_antibodyCatalogNumber=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_antibodyCloneType",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_antibodyCloneType=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_antibodyName",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_antibodyName=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_antibodyType",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_antibodyType=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_antibodyfluorophore",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_antibodyfluorophore=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_brainRegion",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_brainRegion=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_catalogNumber",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_catalogNumber=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_catalogNumberAntibodies",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_catalogNumberAntibodies=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_ccfStructure",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_ccfStructure=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_conjugationState",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_conjugationState=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_dyeCatalogNumber",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_dyeCatalogNumber=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_excitationWavelength",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_excitationWavelength=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_fluorescenceChannel",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_fluorescenceChannel=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_fluorescentLabelingProtein",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_fluorescentLabelingProtein=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_fundingCode",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_fundingCode=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_hostSpecies",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_hostSpecies=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_labTeam",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_labTeam=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_labTeamAcronym",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_labTeamAcronym=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_protocolsioId",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_protocolsioId=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_reagentName_DYN",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_reagentName_DYN=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_regionOfInterest",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_regionOfInterest=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_requestedIndexMatchingSolutionType",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_requestedIndexMatchingSolutionType=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_storageTemp_dynChoice",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_storageTemp_dynChoice=2742"
+         },
+         {
+            "rel": "-cntn_cf_fk_tangentialPlaneSectioningReference",
+            "href": "https://slims.example.com/slimsrest/rest/Content?cntn_cf_fk_tangentialPlaneSectioningReference=2742"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ReferenceDataRecord/2742"
+         }
+      ]
+   }
+]
