@@ -9,6 +9,7 @@ class TestReferenceDataRecord(unittest.TestCase):
     """Test init method for ReferenceDataRecord class."""
 
     def test_init(self):
+        """Tests init method"""
         model = ReferenceDataRecord(rdrc_pk=0)
         self.assertEqual(0, model.rdrc_pk)
 

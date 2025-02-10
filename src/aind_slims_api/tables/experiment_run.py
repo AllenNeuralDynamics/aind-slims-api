@@ -52,7 +52,7 @@ class ExperimentRun(SQLModel):
     xprn_modifiedBy: Optional[str] = Field(default=None, title="Modified by")
     xprn_modifiedOn: Optional[datetime] = Field(default=None, title="Modified on")
     xprn_name: Optional[str] = Field(default=None, title="Name")
-    xprn_pk: int = Field(..., title="xprn_pk", primary_key=True)
+    xprn_pk: Optional[int] = Field(default=None, title="xprn_pk", primary_key=True)
     xprn_signed: Optional[bool] = Field(default=None, title="Signed")
     xprn_uniqueIdentifier: Optional[str] = Field(
         default=None, title="Unique identifier"

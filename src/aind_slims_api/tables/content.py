@@ -165,7 +165,7 @@ class Content(SQLModel):
     cntn_originalContentBarCode: Optional[str] = Field(
         default=None, title="Original content barcode"
     )
-    cntn_pk: int = Field(..., title="cntn_pk", primary_key=True)
+    cntn_pk: Optional[int] = Field(default=None, title="cntn_pk", primary_key=True)
     cntn_position_column: Optional[str] = Field(default=None, title="Located at column")
     cntn_position_row: Optional[str] = Field(default=None, title="Located at row")
     cntn_quantity: Optional[float] = Field(default=None, title="Quantity")

@@ -9,6 +9,7 @@ class TestExperimentRunStep(unittest.TestCase):
     """Test init method for ExperimentRunStep class."""
 
     def test_init(self):
+        """Tests init method"""
         model = ExperimentRunStep(xprs_pk=0)
         self.assertEqual(0, model.xprs_pk)
 

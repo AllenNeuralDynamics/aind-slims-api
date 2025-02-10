@@ -9,6 +9,7 @@ class TestUnit(unittest.TestCase):
     """Test init method for Unit class."""
 
     def test_init(self):
+        """Tests init method"""
         model = Unit(unit_pk=0)
         self.assertEqual(0, model.unit_pk)
 

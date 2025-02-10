@@ -289,7 +289,7 @@ class Order(SQLModel):
     )
     ordr_modifiedBy: Optional[str] = Field(default=None, title="Modified by")
     ordr_modifiedOn: Optional[datetime] = Field(default=None, title="Modified on")
-    ordr_pk: int = Field(..., title="ordr_pk", primary_key=True)
+    ordr_pk: Optional[int] = Field(default=None, title="ordr_pk", primary_key=True)
     ordr_plannedOnDate: Optional[datetime] = Field(
         default=None, title="Planned on date"
     )

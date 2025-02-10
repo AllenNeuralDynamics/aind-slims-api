@@ -562,7 +562,7 @@ class Result(SQLModel):
     )
     rslt_modifiedBy: Optional[str] = Field(default=None, title="Modified by")
     rslt_modifiedOn: Optional[datetime] = Field(default=None, title="Modified on")
-    rslt_pk: int = Field(..., title="rslt_pk", primary_key=True)
+    rslt_pk: Optional[int] = Field(default=None, title="rslt_pk", primary_key=True)
     rslt_qcCardPosition: Optional[int] = Field(default=None, title="Position")
     rslt_qcMarked: Optional[bool] = Field(default=None, title="Marked")
     rslt_qcWarning: Optional[str] = Field(default=None, title="Warning")

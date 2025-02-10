@@ -2,20 +2,21 @@
 
 import logging
 import xml.etree.ElementTree as ET
+from typing import Dict, List, Optional
+
 from aind_slims_api import SlimsClient
 from aind_slims_api.exceptions import SlimsRecordNotFound
+from aind_slims_api.models import (
+    SlimsInstrumentRdrc,
+    SlimsProtocolSOP,
+    SlimsSampleContent,
+    SlimsUser,
+)
 from aind_slims_api.models.experiment_run_step import (
     SlimsExperimentRunStep,
     SlimsExperimentRunStepContent,
     SlimsProtocolRunStep,
     SlimsSPIMImagingRunStep,
-)
-from typing import Dict, List, Optional
-from aind_slims_api.models import (
-    SlimsInstrumentRdrc,
-    SlimsUser,
-    SlimsProtocolSOP,
-    SlimsSampleContent,
 )
 from aind_slims_api.models.imaging import (
     SlimsImagingMetadataResult,

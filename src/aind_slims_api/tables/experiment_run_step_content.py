@@ -28,7 +28,7 @@ class ExperimentRunStepContent(SQLModel):
     )
     xrsc_modifiedBy: Optional[str] = Field(default=None, title="Modified by")
     xrsc_modifiedOn: Optional[datetime] = Field(default=None, title="Modified on")
-    xrsc_pk: int = Field(..., title="xrsc_pk", primary_key=True)
+    xrsc_pk: Optional[int] = Field(default=None, title="xrsc_pk", primary_key=True)
     xrsc_uniqueIdentifier: Optional[str] = Field(
         default=None, title="Unique identifier"
     )

@@ -140,7 +140,7 @@ class ExperimentRunStep(SQLModel):
     xprs_observationStartDate: Optional[datetime] = Field(
         default=None, title="Start Observation"
     )
-    xprs_pk: int = Field(..., title="xprs_pk", primary_key=True)
+    xprs_pk: Optional[int] = Field(default=None, title="xprs_pk", primary_key=True)
     xprs_status: Optional[str] = Field(default=None, title="Status")
     xprs_uniqueIdentifier: Optional[str] = Field(
         default=None, title="Unique identifier"

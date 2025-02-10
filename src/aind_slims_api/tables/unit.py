@@ -31,7 +31,7 @@ class Unit(SQLModel):
     unit_modifiedBy: Optional[str] = Field(default=None, title="Modified by")
     unit_modifiedOn: Optional[datetime] = Field(default=None, title="Modified on")
     unit_name: Optional[str] = Field(default=None, title="Name")
-    unit_pk: int = Field(..., title="unit_pk", primary_key=True)
+    unit_pk: Optional[int] = Field(default=None, title="unit_pk", primary_key=True)
     unit_prefix: Optional[str] = Field(default=None, title="Prefix")
     unit_seqNo: Optional[str] = Field(default=None, title="Sequence number")
     unit_subDimension: Optional[str] = Field(default=None, title="Sub dimension")

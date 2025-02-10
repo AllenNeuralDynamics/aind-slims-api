@@ -9,6 +9,7 @@ class TestContent(unittest.TestCase):
     """Test init method for Content class."""
 
     def test_init(self):
+        """Tests init method"""
         model = Content(cntn_pk=0)
         self.assertEqual(0, model.cntn_pk)
 

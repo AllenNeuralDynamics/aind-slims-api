@@ -1,0 +1,1898 @@
+[
+   {
+      "pk": 64238,
+      "tableName": "ExperimentRunStep",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xprs_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Select content from queue",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_comments",
+            "title": "Comments",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_user",
+            "title": "User",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 3,
+            "value": 1719959787565,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_active",
+            "title": "Active",
+            "position": 4,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 5,
+            "value": "xprs_xprn0000001018_lisa_test_prepare_implant_for_recording_v3_select_content_from_queue",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "xprs_status",
+            "title": "Status",
+            "position": 6,
+            "value": "DONE",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Done"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_createdBy",
+            "title": "Created by",
+            "position": 7,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_createdOn",
+            "title": "Created on",
+            "position": 8,
+            "value": 1719959787500,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_modifiedBy",
+            "title": "Modified by",
+            "position": 9,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_modifiedOn",
+            "title": "Modified on",
+            "position": 10,
+            "value": 1719959934226,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_lastEventOn",
+            "title": "Last event on",
+            "position": 11,
+            "value": 1719959934226,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 12,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_linkContent",
+            "title": "Content block",
+            "position": 13,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentRun",
+            "title": "Protocol run",
+            "position": 14,
+            "value": 41011,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRun",
+            "displayValue": null,
+            "displayField": "xprn_name",
+            "foreignDisplayColumn": "xprn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentStep",
+            "title": "Protocol step",
+            "position": 15,
+            "value": 2891,
+            "hidden": true,
+            "editable": false,
+            "foreignTable": "ExperimentStep",
+            "displayValue": "Select content from queue",
+            "displayField": "xpst_name",
+            "foreignDisplayColumn": "xpst_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_pk",
+            "title": "xprs_pk",
+            "position": 16,
+            "value": 64238,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_previousRunStep",
+            "title": "Previous protocol run step",
+            "position": 17,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_actualType",
+            "title": "xprs_actualType",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xpst_fk_experimentTemplate",
+            "title": "Protocol",
+            "position": 19,
+            "value": 1163,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentTemplate",
+            "displayValue": null,
+            "displayField": "xptm_nameVersion",
+            "foreignDisplayColumn": "xptm_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xpst_type",
+            "title": "Type",
+            "position": 20,
+            "value": "POP_STEP",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64238"
+         },
+         {
+            "rel": "xprs_fk_experimentRun",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRun/41011"
+         },
+         {
+            "rel": "xpst_fk_experimentTemplate",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate/1163"
+         },
+         {
+            "rel": "xprs_fk_experimentStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentStep/2891"
+         },
+         {
+            "rel": "-cnvn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64238"
+         },
+         {
+            "rel": "-qtus_fk_xRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64238"
+         },
+         {
+            "rel": "-plte_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64238"
+         },
+         {
+            "rel": "-xcui_fk_xRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64238"
+         },
+         {
+            "rel": "-kitt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64238"
+         },
+         {
+            "rel": "-xrsc_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64238"
+         },
+         {
+            "rel": "-timr_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64238"
+         },
+         {
+            "rel": "-xprs_fk_previousRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64238"
+         },
+         {
+            "rel": "-xprs_fk_linkContent",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64238"
+         },
+         {
+            "rel": "-rslt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64238"
+         },
+         {
+            "rel": "-flag_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64238"
+         },
+         {
+            "rel": "-nsrn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64238"
+         },
+         {
+            "rel": "-pptp_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64238"
+         },
+         {
+            "rel": "-xrsl_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64238"
+         },
+         {
+            "rel": "-rrbn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64238"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ExperimentRunStep/64238"
+         }
+      ]
+   },
+   {
+      "pk": 64241,
+      "tableName": "ExperimentRunStep",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xprs_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Select content from queue",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_comments",
+            "title": "Comments",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_user",
+            "title": "User",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 3,
+            "value": 1719959964793,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_active",
+            "title": "Active",
+            "position": 4,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 5,
+            "value": "xprs_xprn0000001019_lisa_test_in_vivo_recording_v4_select_content_from_queue",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "xprs_status",
+            "title": "Status",
+            "position": 6,
+            "value": "DONE",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Done"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_createdBy",
+            "title": "Created by",
+            "position": 7,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_createdOn",
+            "title": "Created on",
+            "position": 8,
+            "value": 1719959964688,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_modifiedBy",
+            "title": "Modified by",
+            "position": 9,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_modifiedOn",
+            "title": "Modified on",
+            "position": 10,
+            "value": 1720043271421,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_lastEventOn",
+            "title": "Last event on",
+            "position": 11,
+            "value": 1720043271421,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 12,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_linkContent",
+            "title": "Content block",
+            "position": 13,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentRun",
+            "title": "Protocol run",
+            "position": 14,
+            "value": 41012,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRun",
+            "displayValue": null,
+            "displayField": "xprn_name",
+            "foreignDisplayColumn": "xprn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentStep",
+            "title": "Protocol step",
+            "position": 15,
+            "value": 2896,
+            "hidden": true,
+            "editable": false,
+            "foreignTable": "ExperimentStep",
+            "displayValue": "Select content from queue",
+            "displayField": "xpst_name",
+            "foreignDisplayColumn": "xpst_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_pk",
+            "title": "xprs_pk",
+            "position": 16,
+            "value": 64241,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_previousRunStep",
+            "title": "Previous protocol run step",
+            "position": 17,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_actualType",
+            "title": "xprs_actualType",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xpst_fk_experimentTemplate",
+            "title": "Protocol",
+            "position": 19,
+            "value": 1166,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentTemplate",
+            "displayValue": null,
+            "displayField": "xptm_nameVersion",
+            "foreignDisplayColumn": "xptm_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xpst_type",
+            "title": "Type",
+            "position": 20,
+            "value": "POP_STEP",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64241"
+         },
+         {
+            "rel": "xprs_fk_experimentRun",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRun/41012"
+         },
+         {
+            "rel": "xpst_fk_experimentTemplate",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate/1166"
+         },
+         {
+            "rel": "xprs_fk_experimentStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentStep/2896"
+         },
+         {
+            "rel": "-cnvn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64241"
+         },
+         {
+            "rel": "-qtus_fk_xRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64241"
+         },
+         {
+            "rel": "-plte_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64241"
+         },
+         {
+            "rel": "-xcui_fk_xRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64241"
+         },
+         {
+            "rel": "-kitt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64241"
+         },
+         {
+            "rel": "-xrsc_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64241"
+         },
+         {
+            "rel": "-timr_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64241"
+         },
+         {
+            "rel": "-xprs_fk_previousRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64241"
+         },
+         {
+            "rel": "-xprs_fk_linkContent",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64241"
+         },
+         {
+            "rel": "-rslt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64241"
+         },
+         {
+            "rel": "-flag_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64241"
+         },
+         {
+            "rel": "-nsrn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64241"
+         },
+         {
+            "rel": "-pptp_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64241"
+         },
+         {
+            "rel": "-xrsl_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64241"
+         },
+         {
+            "rel": "-rrbn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64241"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ExperimentRunStep/64241"
+         }
+      ]
+   },
+   {
+      "pk": 64246,
+      "tableName": "ExperimentRunStep",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xprs_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Select content from queue",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_comments",
+            "title": "Comments",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_user",
+            "title": "User",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 3,
+            "value": 1720043351221,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_active",
+            "title": "Active",
+            "position": 4,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 5,
+            "value": "xprs_xprn0000001020_lisa_test_in_vivo_recording_v4_select_content_from_queue",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "xprs_status",
+            "title": "Status",
+            "position": 6,
+            "value": "DONE",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Done"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_createdBy",
+            "title": "Created by",
+            "position": 7,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_createdOn",
+            "title": "Created on",
+            "position": 8,
+            "value": 1720043351165,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_modifiedBy",
+            "title": "Modified by",
+            "position": 9,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_modifiedOn",
+            "title": "Modified on",
+            "position": 10,
+            "value": 1723615844407,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_lastEventOn",
+            "title": "Last event on",
+            "position": 11,
+            "value": 1723615844407,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 12,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_linkContent",
+            "title": "Content block",
+            "position": 13,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentRun",
+            "title": "Protocol run",
+            "position": 14,
+            "value": 41013,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRun",
+            "displayValue": null,
+            "displayField": "xprn_name",
+            "foreignDisplayColumn": "xprn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentStep",
+            "title": "Protocol step",
+            "position": 15,
+            "value": 2896,
+            "hidden": true,
+            "editable": false,
+            "foreignTable": "ExperimentStep",
+            "displayValue": "Select content from queue",
+            "displayField": "xpst_name",
+            "foreignDisplayColumn": "xpst_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_pk",
+            "title": "xprs_pk",
+            "position": 16,
+            "value": 64246,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_previousRunStep",
+            "title": "Previous protocol run step",
+            "position": 17,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_actualType",
+            "title": "xprs_actualType",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xpst_fk_experimentTemplate",
+            "title": "Protocol",
+            "position": 19,
+            "value": 1166,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentTemplate",
+            "displayValue": null,
+            "displayField": "xptm_nameVersion",
+            "foreignDisplayColumn": "xptm_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xpst_type",
+            "title": "Type",
+            "position": 20,
+            "value": "POP_STEP",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64246"
+         },
+         {
+            "rel": "xprs_fk_experimentRun",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRun/41013"
+         },
+         {
+            "rel": "xpst_fk_experimentTemplate",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate/1166"
+         },
+         {
+            "rel": "xprs_fk_experimentStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentStep/2896"
+         },
+         {
+            "rel": "-cnvn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64246"
+         },
+         {
+            "rel": "-qtus_fk_xRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64246"
+         },
+         {
+            "rel": "-plte_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64246"
+         },
+         {
+            "rel": "-xcui_fk_xRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64246"
+         },
+         {
+            "rel": "-kitt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64246"
+         },
+         {
+            "rel": "-xrsc_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64246"
+         },
+         {
+            "rel": "-timr_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64246"
+         },
+         {
+            "rel": "-xprs_fk_previousRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64246"
+         },
+         {
+            "rel": "-xprs_fk_linkContent",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64246"
+         },
+         {
+            "rel": "-rslt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64246"
+         },
+         {
+            "rel": "-flag_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64246"
+         },
+         {
+            "rel": "-nsrn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64246"
+         },
+         {
+            "rel": "-pptp_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64246"
+         },
+         {
+            "rel": "-xrsl_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64246"
+         },
+         {
+            "rel": "-rrbn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64246"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ExperimentRunStep/64246"
+         }
+      ]
+   },
+   {
+      "pk": 64452,
+      "tableName": "ExperimentRunStep",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xprs_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Select content from queue",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_comments",
+            "title": "Comments",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_user",
+            "title": "User",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 3,
+            "value": 1724092516620,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_active",
+            "title": "Active",
+            "position": 4,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 5,
+            "value": "xprs_xprn0000001064_lisa_test_prepare_implant_for_recording_v3_select_content_from_queue",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "xprs_status",
+            "title": "Status",
+            "position": 6,
+            "value": "DONE",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Done"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_createdBy",
+            "title": "Created by",
+            "position": 7,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_createdOn",
+            "title": "Created on",
+            "position": 8,
+            "value": 1724092516498,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_modifiedBy",
+            "title": "Modified by",
+            "position": 9,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_modifiedOn",
+            "title": "Modified on",
+            "position": 10,
+            "value": 1724092537629,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_lastEventOn",
+            "title": "Last event on",
+            "position": 11,
+            "value": 1724092537629,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 12,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_linkContent",
+            "title": "Content block",
+            "position": 13,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentRun",
+            "title": "Protocol run",
+            "position": 14,
+            "value": 41057,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRun",
+            "displayValue": null,
+            "displayField": "xprn_name",
+            "foreignDisplayColumn": "xprn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentStep",
+            "title": "Protocol step",
+            "position": 15,
+            "value": 2891,
+            "hidden": true,
+            "editable": false,
+            "foreignTable": "ExperimentStep",
+            "displayValue": "Select content from queue",
+            "displayField": "xpst_name",
+            "foreignDisplayColumn": "xpst_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_pk",
+            "title": "xprs_pk",
+            "position": 16,
+            "value": 64452,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_previousRunStep",
+            "title": "Previous protocol run step",
+            "position": 17,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_actualType",
+            "title": "xprs_actualType",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xpst_fk_experimentTemplate",
+            "title": "Protocol",
+            "position": 19,
+            "value": 1163,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentTemplate",
+            "displayValue": null,
+            "displayField": "xptm_nameVersion",
+            "foreignDisplayColumn": "xptm_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xpst_type",
+            "title": "Type",
+            "position": 20,
+            "value": "POP_STEP",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64452"
+         },
+         {
+            "rel": "xprs_fk_experimentRun",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRun/41057"
+         },
+         {
+            "rel": "xpst_fk_experimentTemplate",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate/1163"
+         },
+         {
+            "rel": "xprs_fk_experimentStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentStep/2891"
+         },
+         {
+            "rel": "-cnvn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64452"
+         },
+         {
+            "rel": "-qtus_fk_xRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64452"
+         },
+         {
+            "rel": "-plte_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64452"
+         },
+         {
+            "rel": "-xcui_fk_xRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64452"
+         },
+         {
+            "rel": "-kitt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64452"
+         },
+         {
+            "rel": "-xrsc_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64452"
+         },
+         {
+            "rel": "-timr_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64452"
+         },
+         {
+            "rel": "-xprs_fk_previousRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64452"
+         },
+         {
+            "rel": "-xprs_fk_linkContent",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64452"
+         },
+         {
+            "rel": "-rslt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64452"
+         },
+         {
+            "rel": "-flag_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64452"
+         },
+         {
+            "rel": "-nsrn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64452"
+         },
+         {
+            "rel": "-pptp_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64452"
+         },
+         {
+            "rel": "-xrsl_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64452"
+         },
+         {
+            "rel": "-rrbn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64452"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ExperimentRunStep/64452"
+         }
+      ]
+   },
+   {
+      "pk": 64454,
+      "tableName": "ExperimentRunStep",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xprs_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Select content from queue",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_comments",
+            "title": "Comments",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_user",
+            "title": "User",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 3,
+            "value": 1724092554419,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_active",
+            "title": "Active",
+            "position": 4,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 5,
+            "value": "xprs_xprn0000001065_lisa_test_in_vivo_recording_v7_select_content_from_queue",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "xprs_status",
+            "title": "Status",
+            "position": 6,
+            "value": "DONE",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Done"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_createdBy",
+            "title": "Created by",
+            "position": 7,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_createdOn",
+            "title": "Created on",
+            "position": 8,
+            "value": 1724092554319,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_modifiedBy",
+            "title": "Modified by",
+            "position": 9,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_modifiedOn",
+            "title": "Modified on",
+            "position": 10,
+            "value": 1724113435085,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_lastEventOn",
+            "title": "Last event on",
+            "position": 11,
+            "value": 1724113435085,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 12,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_linkContent",
+            "title": "Content block",
+            "position": 13,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentRun",
+            "title": "Protocol run",
+            "position": 14,
+            "value": 41058,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRun",
+            "displayValue": null,
+            "displayField": "xprn_name",
+            "foreignDisplayColumn": "xprn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentStep",
+            "title": "Protocol step",
+            "position": 15,
+            "value": 3068,
+            "hidden": true,
+            "editable": false,
+            "foreignTable": "ExperimentStep",
+            "displayValue": "Select content from queue",
+            "displayField": "xpst_name",
+            "foreignDisplayColumn": "xpst_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_pk",
+            "title": "xprs_pk",
+            "position": 16,
+            "value": 64454,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_previousRunStep",
+            "title": "Previous protocol run step",
+            "position": 17,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_actualType",
+            "title": "xprs_actualType",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xpst_fk_experimentTemplate",
+            "title": "Protocol",
+            "position": 19,
+            "value": 1217,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentTemplate",
+            "displayValue": null,
+            "displayField": "xptm_nameVersion",
+            "foreignDisplayColumn": "xptm_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xpst_type",
+            "title": "Type",
+            "position": 20,
+            "value": "POP_STEP",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64454"
+         },
+         {
+            "rel": "xprs_fk_experimentRun",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRun/41058"
+         },
+         {
+            "rel": "xpst_fk_experimentTemplate",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate/1217"
+         },
+         {
+            "rel": "xprs_fk_experimentStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentStep/3068"
+         },
+         {
+            "rel": "-cnvn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64454"
+         },
+         {
+            "rel": "-qtus_fk_xRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64454"
+         },
+         {
+            "rel": "-plte_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64454"
+         },
+         {
+            "rel": "-xcui_fk_xRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64454"
+         },
+         {
+            "rel": "-kitt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64454"
+         },
+         {
+            "rel": "-xrsc_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64454"
+         },
+         {
+            "rel": "-timr_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64454"
+         },
+         {
+            "rel": "-xprs_fk_previousRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64454"
+         },
+         {
+            "rel": "-xprs_fk_linkContent",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64454"
+         },
+         {
+            "rel": "-rslt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64454"
+         },
+         {
+            "rel": "-flag_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64454"
+         },
+         {
+            "rel": "-nsrn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64454"
+         },
+         {
+            "rel": "-pptp_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64454"
+         },
+         {
+            "rel": "-xrsl_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64454"
+         },
+         {
+            "rel": "-rrbn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64454"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ExperimentRunStep/64454"
+         }
+      ]
+   },
+   {
+      "pk": 64459,
+      "tableName": "ExperimentRunStep",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xprs_name",
+            "title": "Name",
+            "position": 0,
+            "value": "Select content from queue",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_comments",
+            "title": "Comments",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_user",
+            "title": "User",
+            "position": 2,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "foreignTable": "User",
+            "displayValue": null,
+            "displayField": "user_userName",
+            "foreignDisplayColumn": "user_userName"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_observationStartDate",
+            "title": "Start Observation",
+            "position": 3,
+            "value": 1724113532382,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xprs_active",
+            "title": "Active",
+            "position": 4,
+            "value": true,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 5,
+            "value": "xprs_xprn0000001066_lisa_test_brain_perfusion_macro_v3_select_content_from_queue",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "ENUM",
+            "name": "xprs_status",
+            "title": "Status",
+            "position": 6,
+            "value": "DONE",
+            "hidden": false,
+            "editable": true,
+            "displayValue": "Done"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_createdBy",
+            "title": "Created by",
+            "position": 7,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_createdOn",
+            "title": "Created on",
+            "position": 8,
+            "value": 1724113532262,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_modifiedBy",
+            "title": "Modified by",
+            "position": 9,
+            "value": "MeghanO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_modifiedOn",
+            "title": "Modified on",
+            "position": 10,
+            "value": 1724113865786,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "DATE",
+            "name": "xprs_lastEventOn",
+            "title": "Last event on",
+            "position": 11,
+            "value": 1724113865786,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "attachmentCount",
+            "title": "attachmentCount",
+            "position": 12,
+            "value": 0,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_linkContent",
+            "title": "Content block",
+            "position": 13,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentRun",
+            "title": "Protocol run",
+            "position": 14,
+            "value": 41059,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRun",
+            "displayValue": null,
+            "displayField": "xprn_name",
+            "foreignDisplayColumn": "xprn_name"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_experimentStep",
+            "title": "Protocol step",
+            "position": 15,
+            "value": 2877,
+            "hidden": true,
+            "editable": false,
+            "foreignTable": "ExperimentStep",
+            "displayValue": "Select content from queue",
+            "displayField": "xpst_name",
+            "foreignDisplayColumn": "xpst_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xprs_pk",
+            "title": "xprs_pk",
+            "position": 16,
+            "value": 64459,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xprs_fk_previousRunStep",
+            "title": "Previous protocol run step",
+            "position": 17,
+            "value": null,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": null,
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xprs_actualType",
+            "title": "xprs_actualType",
+            "position": 18,
+            "value": null,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xpst_fk_experimentTemplate",
+            "title": "Protocol",
+            "position": 19,
+            "value": 1159,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentTemplate",
+            "displayValue": null,
+            "displayField": "xptm_nameVersion",
+            "foreignDisplayColumn": "xptm_name"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xpst_type",
+            "title": "Type",
+            "position": 20,
+            "value": "POP_STEP",
+            "hidden": true,
+            "editable": true
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep/64459"
+         },
+         {
+            "rel": "xprs_fk_experimentRun",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRun/41059"
+         },
+         {
+            "rel": "xpst_fk_experimentTemplate",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentTemplate/1159"
+         },
+         {
+            "rel": "xprs_fk_experimentStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentStep/2877"
+         },
+         {
+            "rel": "-cnvn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ContentEvent?cnvn_fk_experimentRunStep=64459"
+         },
+         {
+            "rel": "-qtus_fk_xRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStep=64459"
+         },
+         {
+            "rel": "-plte_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Plate?plte_fk_experimentRunStep=64459"
+         },
+         {
+            "rel": "-xcui_fk_xRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/XprsContentUsageInstance?xcui_fk_xRunStep=64459"
+         },
+         {
+            "rel": "-kitt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Kit?kitt_fk_experimentRunStep=64459"
+         },
+         {
+            "rel": "-xrsc_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepContent?xrsc_fk_experimentRunStep=64459"
+         },
+         {
+            "rel": "-timr_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/TimerRun?timr_fk_experimentRunStep=64459"
+         },
+         {
+            "rel": "-xprs_fk_previousRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_previousRunStep=64459"
+         },
+         {
+            "rel": "-xprs_fk_linkContent",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStep?xprs_fk_linkContent=64459"
+         },
+         {
+            "rel": "-rslt_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Result?rslt_fk_experimentRunStep=64459"
+         },
+         {
+            "rel": "-flag_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/Flag?flag_fk_experimentRunStep=64459"
+         },
+         {
+            "rel": "-nsrn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/InstrumentRun?nsrn_fk_experimentRunStep=64459"
+         },
+         {
+            "rel": "-pptp_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/PlatePositionOutput?pptp_fk_experimentRunStep=64459"
+         },
+         {
+            "rel": "-xrsl_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/ExperimentRunStepLocation?xrsl_fk_experimentRunStep=64459"
+         },
+         {
+            "rel": "-rrbn_fk_experimentRunStep",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/RuleRunBinding?rrbn_fk_experimentRunStep=64459"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://aind-test.us.slims.agilent.com/slimsrest/rest/attachment/ExperimentRunStep/64459"
+         }
+      ]
+   }
+]

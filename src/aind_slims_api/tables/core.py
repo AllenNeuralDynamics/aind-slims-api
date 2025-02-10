@@ -1,10 +1,14 @@
+"""Methods to parse Record objects to SQLModel objects"""
+
 from datetime import datetime
 from enum import Enum
-from typing import Any, List, Optional, Type
+from typing import Any, List, Optional, Type, TypeVar
 
 from pydantic import BaseModel, Field
 from slims.internal import Record
 from sqlmodel import SQLModel
+
+T = TypeVar("T", bound=SQLModel)
 
 
 class SlimsColumnDataType(str, Enum):
@@ -57,7 +61,22 @@ def get_value_or_none(record: Record, field_name: str) -> Optional[Any]:
         return None
 
 
-def records_to_models(records: List[Record], model: Type[SQLModel]) -> List[SQLModel]:
+def records_to_models(records: List[Record], model: Type[T]) -> List[T]:
+    """
+    Parses a list of Slims Records into a list of SQLModels indexed by their
+    primary key. This can be converted to pandas DataFrames or other table objects.
+    Parameters
+    ----------
+    records : List[Record]
+      List of records pulled from a table.
+    model : Type[SQLModel]
+      The SQLModel class to parse the records into it.
+
+    Returns
+    -------
+    List[(int, SQLModel)]
+
+    """
     models = []
     for record in records:
         model_dict = dict()

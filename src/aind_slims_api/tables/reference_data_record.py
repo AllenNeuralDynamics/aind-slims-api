@@ -329,7 +329,7 @@ class ReferenceDataRecord(SQLModel):
     rdrc_modifiedBy: Optional[str] = Field(default=None, title="Modified by")
     rdrc_modifiedOn: Optional[datetime] = Field(default=None, title="Modified on")
     rdrc_name: Optional[str] = Field(default=None, title="Name")
-    rdrc_pk: int = Field(..., title="rdrc_pk", primary_key=True)
+    rdrc_pk: Optional[int] = Field(default=None, title="rdrc_pk", primary_key=True)
     rdrc_uniqueIdentifier: Optional[str] = Field(
         default=None, title="Unique identifier"
     )
