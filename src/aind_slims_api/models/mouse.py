@@ -23,24 +23,6 @@ class SlimsMouseContent(SlimsBaseModel):
     >>> mouse = client.fetch_model(SlimsMouseContent, barcode="00000000")
     """
 
-    x_offset: Optional[float] = Field(
-        ...,
-        serialization_alias="cntn_cf_mouseXOffset",
-        validation_alias="cntn_cf_mouseXOffset",
-    )
-
-    y_offset: Optional[float] = Field(
-        ...,
-        serialization_alias="cntn_cf_mouseYOffset",
-        validation_alias="cntn_cf_mouseYOffset",
-    )
-
-    z_offset: Optional[float] = Field(
-        ...,
-        serialization_alias="cntn_cf_mouseZOffset",
-        validation_alias="cntn_cf_mouseZOffset",
-    )
-
     baseline_weight_g: Annotated[float | None, UnitSpec("g")] = Field(
         ...,
         serialization_alias="cntn_cf_baselineWeight",
