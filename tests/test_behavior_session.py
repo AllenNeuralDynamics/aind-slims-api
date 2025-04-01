@@ -72,6 +72,10 @@ class TestBehaviorSession(unittest.TestCase):
             cntn_cf_waterRestricted=False,
             cntn_cf_scientificPointOfContact=None,
             cntn_cf_baselineWeight=None,
+            cntn_cf_mouseXOffset=None,
+            cntn_cf_mouseYOffset=None,
+            cntn_cf_mouseZOffset=None
+
         )
         cls.example_behavior_sessions = [
             SlimsBehaviorSession(

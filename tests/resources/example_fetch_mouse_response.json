@@ -415,6 +415,33 @@
             "editable": true
          },
          {
+            "datatype": "FLOAT",
+            "editable": true,
+            "hidden": false,
+            "name": "cntn_cf_mouseXOffset",
+            "position": 38,
+            "title": "Mouse X offset",
+            "value": 9.0
+         },
+        {
+           "datatype": "FLOAT",
+           "editable": true,
+           "hidden": false,
+           "name": "cntn_cf_mouseYOffset",
+           "position": 39,
+           "title": "Mouse Y offset",
+           "value": null
+        },
+        {
+          "datatype": "FLOAT",
+           "editable": true,
+           "hidden": false,
+           "name": "cntn_cf_mouseZOffset",
+           "position": 40,
+           "title": "Mouse Z offset",
+           "value": null
+        },
+         {
             "datatype": "FOREIGN_KEY",
             "name": "cntn_fk_product_strain",
             "title": "Product (filtering without version)",
