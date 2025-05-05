@@ -24,19 +24,19 @@ class SlimsMouseContent(SlimsBaseModel):
     """
 
     x_offset: Optional[float] = Field(
-        ...,
+        default=None,
         serialization_alias="cntn_cf_mouseXOffset",
         validation_alias="cntn_cf_mouseXOffset",
     )
 
     y_offset: Optional[float] = Field(
-        ...,
+        default=None,
         serialization_alias="cntn_cf_mouseYOffset",
         validation_alias="cntn_cf_mouseYOffset",
     )
 
     z_offset: Optional[float] = Field(
-        ...,
+        default=None,
         serialization_alias="cntn_cf_mouseZOffset",
         validation_alias="cntn_cf_mouseZOffset",
     )
@@ -71,16 +71,18 @@ class SlimsMouseContent(SlimsBaseModel):
         serialization_alias="cntn_fk_status",
         validation_alias="cntn_fk_status",
     )
-    content_type: Optional[int] = Field(
-        default=5,
-        serialization_alias="cntn_fk_contentType",
-        validation_alias="cntn_fk_contentType",
-    )
+
     created_on: Optional[datetime] = Field(
         None,
         serialization_alias="cntn_createdOn",
         validation_alias="cntn_createdOn",
     )
+    type_fk: Optional[int] = Field(
+        None,
+        serialization_alias="cntn_fk_contentType",
+        validation_alias="cntn_fk_contentType",
+    )
+
     _slims_table = "Content"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "cntp_name": "Mouse",

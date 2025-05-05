@@ -107,8 +107,8 @@ class SlimsBehaviorSession(SlimsBaseModel):
     )
     instrument_pk: Optional[int] = Field(
         default=None,
-        serialization_alias="cnvn_fk_instrument",
-        validation_alias="cnvn_fk_instrument",
+        serialization_alias="cnvn_cf_fk_instrument",
+        validation_alias="cnvn_cf_fk_instrument",
     )
     trainer_pks: Optional[list[int]] = Field(
         default=[],
@@ -140,7 +140,11 @@ class SlimsBehaviorSession(SlimsBaseModel):
         serialization_alias="cnvn_cf_scheduledDate",
         validation_alias="cnvn_cf_scheduledDate",
     )
-    cnvn_fk_contentEventType: int = 10  # pk of Behavior Session ContentEvent
+    type_fk: Optional[int] = Field(
+        None,
+        serialization_alias="cnvn_fk_contentEventType",
+        validation_alias="cnvn_fk_contentEventType",
+    )
     _slims_table = "ContentEvent"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "cnvt_name": "Behavior Session",

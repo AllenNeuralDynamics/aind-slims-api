@@ -11,6 +11,11 @@ from slims.internal import Column as SlimsColumn  # type: ignore
 from aind_slims_api.models.utils import _find_unit_spec
 from aind_slims_api.types import SLIMS_TABLES
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from aind_slims_api import SlimsClient
+
 logger = logging.getLogger(__name__)
 
 
@@ -39,6 +44,15 @@ class SlimsBaseModel(
     _slims_table: ClassVar[SLIMS_TABLES]
     # base filters for model fetch
     _base_fetch_filters: ClassVar[dict[str, str]] = {}
+    type_fk: Optional[int] = None
+
+    def resolve_fks(self, client: 'SlimsClient') -> None:
+        """
+        Populates table pk for model. Must be called before adding model
+        :param client: slims client from where to query pk
+        """
+
+        self.type_fk = client.fetch(f"{self._slims_table}Type", **self._base_fetch_filters)[0].pk()
 
     @field_validator("*", mode="before")
     def _validate(cls, value, info: ValidationInfo):
