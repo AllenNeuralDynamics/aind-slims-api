@@ -52,7 +52,8 @@ class SlimsBaseModel(
         :param client: slims client from where to query pk
         """
 
-        self.type_fk = client.fetch(f"{self._slims_table}Type", **self._base_fetch_filters)[0].pk()
+        fetched = client.fetch(f"{self._slims_table}Type", **self._base_fetch_filters)
+        self.type_fk = fetched[0].pk()
 
     @field_validator("*", mode="before")
     def _validate(cls, value, info: ValidationInfo):

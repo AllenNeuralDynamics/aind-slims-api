@@ -32,6 +32,7 @@ logger = logging.getLogger(__name__)
 
 SlimsBaseModelTypeVar = TypeVar("SlimsBaseModelTypeVar", bound=SlimsBaseModel)
 
+
 class SlimsClient:
     """Wrapper around slims-python-api client with convenience methods"""
 
