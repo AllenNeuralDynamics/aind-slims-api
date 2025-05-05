@@ -53,6 +53,7 @@ class SlimsBaseModel(
         """
 
         fetched = client.fetch(f"{self._slims_table}Type", **self._base_fetch_filters)
+        print(fetched[0].pk())
         self.type_fk = fetched[0].pk()
 
     @field_validator("*", mode="before")

@@ -13,6 +13,15 @@
             "editable": true
          },
          {
+            "datatype": "INT",
+            "name": "type_fk",
+            "title": "type_pk",
+            "position": 1,
+            "value": 1,
+            "hidden": false,
+            "editable": true
+         },
+         {
             "datatype": "STRING",
             "name": "unit_name",
             "title": "Name",
