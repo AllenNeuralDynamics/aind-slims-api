@@ -220,9 +220,9 @@ class TestSlimsClient(unittest.TestCase):
         mock_slims_add.return_value = record
         input_model = SlimsUnit.model_validate(record)
 
-        mock_fetch.return_value = [MagicMock()]
+        mock_fetch.return_value = [record]
         added = self.example_client.add_model(input_model)
-        self.assertEqual(input_model, added)
+        self.assertEqual(SlimsUnit.model_validate(record), added)
         mock_log.assert_called_once_with("SLIMS Add: Unit/31")
 
     @patch("slims.slims.Slims.fetch_by_pk")

@@ -5,7 +5,7 @@ import logging
 from datetime import datetime
 from typing import ClassVar, Optional
 
-from pydantic import BaseModel, ValidationInfo, field_serializer, field_validator
+from pydantic import BaseModel, ValidationInfo, field_serializer, field_validator, Field
 from slims.internal import Column as SlimsColumn  # type: ignore
 
 from aind_slims_api.models.utils import _find_unit_spec
@@ -44,7 +44,10 @@ class SlimsBaseModel(
     _slims_table: ClassVar[SLIMS_TABLES]
     # base filters for model fetch
     _base_fetch_filters: ClassVar[dict[str, str]] = {}
-    type_fk: Optional[int] = None
+    type_fk: Optional[int] = Field(default=None,
+                                   description="Model specific foreign key "
+                                               "specifying table location when "
+                                               "adding model")
 
     def resolve_fks(self, client: 'SlimsClient') -> None:
         """
@@ -53,7 +56,6 @@ class SlimsBaseModel(
         """
 
         fetched = client.fetch(f"{self._slims_table}Type", **self._base_fetch_filters)
-        print(fetched[0].pk())
         self.type_fk = fetched[0].pk()
 
     @field_validator("*", mode="before")
@@ -89,7 +91,7 @@ class SlimsBaseModel(
             }
             return quantity
         elif isinstance(field, datetime):
-            return int(field.timestamp() * 10**3)
+            return int(field.timestamp() * 10 ** 3)
         else:
             return field
 
