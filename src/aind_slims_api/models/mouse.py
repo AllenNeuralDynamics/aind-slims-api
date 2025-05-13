@@ -1,7 +1,7 @@
 """Contains a model for the mouse content, and a method for fetching it"""
 
 from datetime import datetime
-from typing import Annotated, ClassVar, Optional, Literal
+from typing import Annotated, ClassVar, Literal, Optional
 
 from pydantic import BeforeValidator, Field
 
@@ -149,4 +149,3 @@ class SlimsMouseContent(SlimsBaseModel):
     # cntn_fk_category: SlimsColumn
     # cntn_fk_contentType: SlimsColumn
     # cntn_fk_user: SlimsColumn
-

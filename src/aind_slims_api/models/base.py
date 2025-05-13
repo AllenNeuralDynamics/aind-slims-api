@@ -3,22 +3,20 @@
 
 import logging
 from datetime import datetime
-from typing import ClassVar, Optional
+from typing import TYPE_CHECKING, ClassVar, Optional
 
 from pydantic import (
     BaseModel,
+    Field,
     SerializationInfo,
     ValidationInfo,
     field_serializer,
     field_validator,
-    Field
 )
 from slims.internal import Column as SlimsColumn  # type: ignore
 
 from aind_slims_api.models.utils import _find_unit_spec
 from aind_slims_api.types import SLIMS_TABLES
-
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from aind_slims_api import SlimsClient
