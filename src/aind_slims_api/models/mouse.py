@@ -81,6 +81,7 @@ class SlimsMouseContent(SlimsBaseModel):
         None,
         serialization_alias="cntn_fk_contentType",
         validation_alias="cntn_fk_contentType",
+        json_schema_extra={"type_table": "ContentType"}
     )
 
     _slims_table = "Content"

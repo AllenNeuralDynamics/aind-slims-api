@@ -45,6 +45,9 @@ class SlimsBaseModel(
     # base filters for model fetch
     _base_fetch_filters: ClassVar[dict[str, str]] = {}
     type_fk: Optional[int] = Field(default=None,
+                                   serialization_alias=None,
+                                   validation_alias=None,
+                                   json_schema_extra={"type_table": None},
                                    description="Model specific foreign key "
                                                "specifying table location when "
                                                "adding model")
@@ -55,7 +58,8 @@ class SlimsBaseModel(
         :param client: slims client from where to query pk
         """
 
-        fetched = client.fetch(f"{self._slims_table}Type", **self._base_fetch_filters)
+        type_table = self.model_fields['type_fk'].json_schema_extra.get('type_table')
+        fetched = client.fetch(f"{type_table}", **self._base_fetch_filters)
         self.type_fk = fetched[0].pk()
 
     @field_validator("*", mode="before")

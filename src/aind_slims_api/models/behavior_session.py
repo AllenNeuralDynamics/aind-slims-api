@@ -144,6 +144,7 @@ class SlimsBehaviorSession(SlimsBaseModel):
         None,
         serialization_alias="cnvn_fk_contentEventType",
         validation_alias="cnvn_fk_contentEventType",
+        json_schema_extra={"type_table": "ContentEventType"}
     )
     _slims_table = "ContentEvent"
     _base_fetch_filters: ClassVar[dict[str, str]] = {
