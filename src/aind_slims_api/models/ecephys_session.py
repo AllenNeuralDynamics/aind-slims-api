@@ -1,94 +1,12 @@
 """Contains a model for an ecephys result stored in SLIMS."""
 
 from datetime import datetime
-from typing import Annotated, List, Optional, ClassVar
+from typing import Annotated, ClassVar, List, Optional
+
 from pydantic import Field
 
 from aind_slims_api.models.base import SlimsBaseModel
 from aind_slims_api.models.utils import UnitSpec
-
-
-class SlimsExperimentRunStepContent(SlimsBaseModel):
-    """Model for a SLIMS ExperimentRunStepContent"""
-
-    pk: Optional[int] = Field(
-        default=None, serialization_alias="xrsc_pk", validation_alias="xrsc_pk"
-    )
-    mouse_pk: Optional[int] = Field(
-        default=None,
-        serialization_alias="xrsc_fk_content",
-        validation_alias="xrsc_fk_content",
-    )
-    runstep_pk: Optional[int] = Field(
-        default=None,
-        serialization_alias="xrsc_fk_experimentRunStep",
-        validation_alias="xrsc_fk_experimentRunStep",
-    )
-    created_on: Optional[datetime] = Field(
-        default=None,
-        serialization_alias="xrsc_createdOn",
-        validation_alias="xrsc_createdOn",
-    )
-    _slims_table = "ExperimentRunStepContent"
-
-
-class SlimsExperimentRunStep(SlimsBaseModel):
-    """Model for a Slims ExperimentRunStep"""
-
-    pk: Optional[int] = Field(
-        default=None, serialization_alias="xprs_pk", validation_alias="xprs_pk"
-    )
-    name: Optional[str] = Field(
-        default=None, serialization_alias="xprs_name", validation_alias="xprs_name"
-    )
-    created_on: Optional[datetime] = Field(
-        default=None,
-        serialization_alias="xprs_createdOn",
-        validation_alias="xprs_createdOn",
-    )
-    experimentrun_pk: Optional[int] = Field(
-        default=None,
-        serialization_alias="xprs_fk_experimentRun",
-        validation_alias="xprs_fk_experimentRun",
-    )
-    _slims_table = "ExperimentRunStep"
-
-
-class SlimsGroupOfSessionsRunStep(SlimsExperimentRunStep):
-    """Model for a Slims ExperimentRunStep"""
-
-    session_type: Optional[str] = Field(
-        default=None,
-        serialization_alias="xprs_cf_sessionType",
-        validation_alias="xprs_cf_sessionType",
-    )
-    mouse_platform_name: Optional[str] = Field(
-        default=None,
-        serialization_alias="xprs_cf_mousePlatformName",
-        validation_alias="xprs_cf_mousePlatformName",
-    )
-    active_mouse_platform: Optional[bool] = Field(
-        default=None,
-        serialization_alias="xprs_cf_activeMousePlatform",
-        validation_alias="xprs_cf_activeMousePlatform",
-    )
-    # TODO: add device calibrations once we have an example
-    # device_calibrations_attachment: Optional[str] = Field(
-    #     default=None,
-    #     serialization_alias="xprs_cf_deviceCalibrations",
-    #     validation_alias="xprs_cf_deviceCalibrations"
-    # )
-    _base_fetch_filters: ClassVar[dict[str, str]] = {
-        "xprs_name": "Group of Sessions",
-    }
-
-
-class SlimsMouseSessionRunStep(SlimsExperimentRunStep):
-    """Model for a Slims ExperimentRunStep"""
-
-    _base_fetch_filters: ClassVar[dict[str, str]] = {
-        "xprs_name": "Mouse Session",
-    }
 
 
 class SlimsStreamsResult(SlimsBaseModel):
@@ -175,8 +93,8 @@ class SlimsStimulusEpochsResult(SlimsBaseModel):
     )
     stimulus_name: Optional[str] = Field(
         default=None,
-        serialization_alias="rslt_cf_stimulusDeviceNames",
-        validation_alias="rslt_cf_stimulusDeviceNames",
+        serialization_alias="rslt_cf_stimulusName",
+        validation_alias="rslt_cf_stimulusName",
     )
     stimulus_modalities: Optional[List] = Field(
         default=None,
@@ -392,15 +310,15 @@ class SlimsDomeModuleRdrc(SlimsBaseModel):
         serialization_alias="rdrc_cf_probeName",
         validation_alias="rdrc_cf_probeName",
     )
-    primary_targeted_structure: Optional[str] = Field(
+    primary_targeted_structure_pk: Optional[int] = Field(
         default=None,
-        serialization_alias="rdrc_cf_fk_primaryTargetedStructure_display",
-        validation_alias="rdrc_cf_fk_primaryTargetedStructure_display",
+        serialization_alias="rdrc_cf_fk_primaryTargetedStructure",
+        validation_alias="rdrc_cf_fk_primaryTargetedStructure",
     )
-    secondary_targeted_structures: Optional[List] = Field(
+    secondary_targeted_structures_pk: Optional[List] = Field(
         default=None,
-        serialization_alias="rdrc_cf_fk_secondaryTargetedStructures2_display",
-        validation_alias="rdrc_cf_fk_secondaryTargetedStructures2_display",
+        serialization_alias="rdrc_cf_fk_secondaryTargetedStructures",
+        validation_alias="rdrc_cf_fk_secondaryTargetedStructures",
     )
     arc_angle: Annotated[float | None, UnitSpec("degree", "°")] = Field(
         default=None,
@@ -504,6 +422,26 @@ class SlimsDomeModuleRdrc(SlimsBaseModel):
     }
 
 
+class SlimsBrainStructureRdrc(SlimsBaseModel):
+    """Model for Brain Structure Reference Data"""
+
+    pk: Optional[int] = Field(
+        default=None, serialization_alias="rdrc_pk", validation_alias="rdrc_pk"
+    )
+    name: Optional[str] = Field(
+        default=None, serialization_alias="rdrc_name", validation_alias="rdrc_name"
+    )
+    created_on: Optional[datetime] = Field(
+        default=None,
+        serialization_alias="rdrc_createdOn",
+        validation_alias="rdrc_createdOn",
+    )
+    _slims_table = "ReferenceDataRecord"
+    _base_fetch_filters: ClassVar[dict[str, str]] = {
+        "rdty_name": "CCF brain structures",
+    }
+
+
 class SlimsFiberConnectionsRdrc(SlimsBaseModel):
     """Model for Fiber Connections Reference Data"""
 
@@ -539,7 +477,7 @@ class SlimsRewardDeliveryRdrc(SlimsBaseModel):
 
     pk: Optional[int] = Field(serialization_alias="rdrc_pk", validation_alias="rdrc_pk")
     reward_spouts_pk: Optional[int] = Field(
-        default=[],
+        default=None,
         serialization_alias="rdrc_cf_fk_rewardSpouts",
         validation_alias="rdrc_cf_fk_rewardSpouts",
     )

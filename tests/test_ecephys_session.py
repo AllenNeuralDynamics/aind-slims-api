@@ -10,9 +10,9 @@ from slims.internal import Record
 
 from aind_slims_api.core import SlimsClient
 from aind_slims_api.models.ecephys_session import (
-    SlimsStreamsResult,
     SlimsMouseSessionResult,
     SlimsStimulusEpochsResult,
+    SlimsStreamsResult,
 )
 
 RESOURCES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / "resources"

@@ -16,7 +16,7 @@ from typing import Any, Optional, Type, TypeVar
 
 from pydantic import ValidationError
 from requests import Response
-from slims.criteria import Criterion, conjunction, equals
+from slims.criteria import Criterion, conjunction, equals, is_one_of
 from slims.internal import Record as SlimsRecord
 from slims.slims import Slims, _SlimsApiException
 
@@ -74,7 +74,9 @@ class SlimsClient:
             start (int, optional):  The first row to return
             end (int, optional): The last row to return
             *args (Slims.criteria.Criterion): Optional criteria to apply
-            **kwargs (dict[str,str]): "field=value" filters
+            **kwargs (dict[str,str|list]): "field=value" filters.
+                If value is a list, will apply "field IN value" criterion
+
 
         Returns:
             records (list[SlimsRecord] | None): Matching records, if any
@@ -85,7 +87,10 @@ class SlimsClient:
                 criteria.add(arg)
 
         for k, v in kwargs.items():
-            criteria.add(equals(k, v))
+            if isinstance(v, list):  # Handle lists as "IN" criteria
+                criteria.add(is_one_of(k, v))
+            else:
+                criteria.add(equals(k, v))
 
         if isinstance(sort, str):
             sort = [sort]
@@ -356,6 +361,7 @@ class SlimsClient:
                 exclude=fields_to_exclude,
                 **kwargs,
                 by_alias=True,
+                context="slims_post",
             ),
         )
         return type(model).model_validate(rtn)
@@ -380,9 +386,7 @@ class SlimsClient:
             model._slims_table,
             model.pk,
             model.model_dump(
-                include=fields_to_include,
-                by_alias=True,
-                **kwargs,
+                include=fields_to_include, by_alias=True, **kwargs, context="slims_post"
             ),
         )
         return type(model).model_validate(rtn)
