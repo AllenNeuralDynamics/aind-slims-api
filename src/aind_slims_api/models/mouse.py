@@ -73,7 +73,7 @@ class SlimsMouseContent(SlimsBaseModel):
         validation_alias="cntn_cf_dateOfBirth",
     )
 
-    project_id: Optional[str] = Field(
+    project_id: Optional[int] = Field(
         default=None,
         serialization_alias="cntn_cf_fk_projectId",
         validation_alias="cntn_cf_fk_projectId",
