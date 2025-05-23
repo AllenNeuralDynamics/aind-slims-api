@@ -64,6 +64,7 @@ class SlimsBaseModel(
         """
 
         type_table = self.model_fields['type_fk'].json_schema_extra.get('type_table')
+        print(f"{type_table}", self._base_fetch_filters)
         fetched = client.fetch(f"{type_table}", **self._base_fetch_filters)
         self.type_fk = fetched[0].pk()
 

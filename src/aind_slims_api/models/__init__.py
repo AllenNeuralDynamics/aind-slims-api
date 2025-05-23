@@ -12,6 +12,7 @@ from aind_slims_api.models.unit import SlimsUnit
 from aind_slims_api.models.user import SlimsUser
 from aind_slims_api.models.waterlog_result import SlimsWaterlogResult
 from aind_slims_api.models.waterlog_water_restriction import SlimsWaterRestrictionEvent
+from aind_slims_api.models.mouse_lickspout_offsets import SlimsMouseLickspoutOffsets
 
 __all__ = [
     "SlimsAttachment",
@@ -26,4 +27,5 @@ __all__ = [
     "SlimsMetadataReference",
     "SlimsProtocolSOP",
     "SlimsSampleContent",
+    "SlimsMouseLickspoutOffsets"
 ]
