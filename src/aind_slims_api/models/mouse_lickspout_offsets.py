@@ -1,12 +1,11 @@
 """Contains a model for the mouse content, and a method for fetching it"""
 
 from datetime import datetime
-from typing import Annotated, ClassVar, Literal, Optional
+from typing import ClassVar, Optional
 
-from pydantic import BeforeValidator, Field
+from pydantic import Field
 
 from aind_slims_api.models.base import SlimsBaseModel
-from aind_slims_api.models.utils import UnitSpec
 
 
 class SlimsMouseLickspoutOffsets(SlimsBaseModel):
@@ -73,4 +72,3 @@ class SlimsMouseLickspoutOffsets(SlimsBaseModel):
     _base_fetch_filters: ClassVar[dict[str, str]] = {
         "rdty_name": "Mouse lickspout offsets",
     }
-
