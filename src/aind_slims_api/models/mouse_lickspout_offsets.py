@@ -27,8 +27,8 @@ class SlimsMouseLickspoutOffsets(SlimsBaseModel):
 
     mouse_id: Optional[str] = Field(
         default=None,
-        serialization_alias="rdrc_cf_fk_mouseID",
-        validation_alias="rdrc_cf_fk_mouseID",
+        serialization_alias="rdrc_cf_fk_mouseId",
+        validation_alias="rdrc_cf_fk_mouseId",
     )
     barcode: Optional[str] = Field(
         default=None,
