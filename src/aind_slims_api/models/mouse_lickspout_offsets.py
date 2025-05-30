@@ -25,7 +25,7 @@ class SlimsMouseLickspoutOffsets(SlimsBaseModel):
     >>> mouse = client.fetch_model(SlimsMouseLickspoutOffsets, barcode="00000000")
     """
 
-    mouse_id: Optional[str] = Field(
+    mouse_id: Optional[int] = Field(
         default=None,
         serialization_alias="rdrc_cf_fk_mouseId",
         validation_alias="rdrc_cf_fk_mouseId",
