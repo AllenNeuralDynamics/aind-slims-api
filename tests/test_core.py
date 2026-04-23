@@ -208,15 +208,21 @@ class TestSlimsClient(unittest.TestCase):
         mock_update.assert_not_called()
         mock_log.assert_not_called()
 
+    @patch("aind_slims_api.core.SlimsClient.fetch")
     @patch("logging.Logger.info")
     @patch("slims.slims.Slims.add")
-    def test_add_model(self, mock_slims_add: MagicMock, mock_log: MagicMock):
+    def test_add_model(self,
+                       mock_slims_add: MagicMock,
+                       mock_log: MagicMock,
+                       mock_fetch: MagicMock):
         """Tests add_model method with mock mouse data"""
         record = self.example_fetch_unit_response[0]
         mock_slims_add.return_value = record
         input_model = SlimsUnit.model_validate(record)
+
+        mock_fetch.return_value = [record]
         added = self.example_client.add_model(input_model)
-        self.assertEqual(input_model, added)
+        self.assertEqual(SlimsUnit.model_validate(record), added)
         mock_log.assert_called_once_with("SLIMS Add: Unit/31")
 
     @patch("slims.slims.Slims.fetch_by_pk")

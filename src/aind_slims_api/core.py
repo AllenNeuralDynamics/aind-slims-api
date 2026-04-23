@@ -351,6 +351,9 @@ class SlimsClient:
         fields_to_include = set(args) or None
         fields_to_exclude = set(kwargs.get("exclude", []))
         fields_to_exclude.update(["pk", "attachments", "slims_api"])
+
+        model.resolve_fks(self)     # populate correct pk of table
+
         rtn = self.add(
             model._slims_table,
             model.model_dump(

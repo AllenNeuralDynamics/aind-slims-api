@@ -116,10 +116,11 @@ class SlimsWaterlogResult(SlimsBaseModel):
         serialization_alias="rslt_fk_content",
         validation_alias="rslt_fk_content",
     )
-    test_pk: Optional[int] = Field(
+    type_fk: Optional[int] = Field(
         None,
         serialization_alias="rslt_fk_test",
         validation_alias="rslt_fk_test",
+        json_schema_extra={"type_table": "Test"}
     )
 
     _slims_table = "Result"
