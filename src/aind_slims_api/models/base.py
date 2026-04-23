@@ -3,10 +3,11 @@
 
 import logging
 from datetime import datetime
-from typing import ClassVar, Optional
+from typing import TYPE_CHECKING, ClassVar, Optional
 
 from pydantic import (
     BaseModel,
+    Field,
     SerializationInfo,
     ValidationInfo,
     field_serializer,
@@ -16,6 +17,9 @@ from slims.internal import Column as SlimsColumn  # type: ignore
 
 from aind_slims_api.models.utils import _find_unit_spec
 from aind_slims_api.types import SLIMS_TABLES
+
+if TYPE_CHECKING:
+    from aind_slims_api import SlimsClient
 
 logger = logging.getLogger(__name__)
 
@@ -45,6 +49,23 @@ class SlimsBaseModel(
     _slims_table: ClassVar[SLIMS_TABLES]
     # base filters for model fetch
     _base_fetch_filters: ClassVar[dict[str, str]] = {}
+    type_fk: Optional[int] = Field(default=None,
+                                   serialization_alias=None,
+                                   validation_alias=None,
+                                   json_schema_extra={"type_table": None},
+                                   description="Model specific foreign key "
+                                               "specifying table location when "
+                                               "adding model")
+
+    def resolve_fks(self, client: 'SlimsClient') -> None:
+        """
+        Populates table pk for model. Must be called before adding model
+        :param client: slims client from where to query pk
+        """
+
+        type_table = self.model_fields['type_fk'].json_schema_extra.get('type_table')
+        fetched = client.fetch(f"{type_table}", **self._base_fetch_filters)
+        self.type_fk = fetched[0].pk()
 
     @field_validator("*", mode="before")
     def _validate(cls, value, info: ValidationInfo):
