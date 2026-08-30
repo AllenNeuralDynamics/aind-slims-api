@@ -1,0 +1,932 @@
+[
+   {
+      "pk": 4098,
+      "tableName": "ExperimentRunStepContent",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xrsc_usage",
+            "title": "Usage",
+            "position": 0,
+            "value": "input",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xrsc_usedQuantity",
+            "title": "Used quantity",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 2,
+            "value": "xrsc_xprn0000001018_pc_test_prepare_implant_for_recording_v3_select_content_from_queue_725804_input",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xrsc_contentRemoved",
+            "title": "Content removed",
+            "position": 3,
+            "value": false,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_workListDate",
+            "title": "Worklist date",
+            "position": 4,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_createdBy",
+            "title": "Created by",
+            "position": 5,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_createdOn",
+            "title": "Created on",
+            "position": 6,
+            "value": 1719959788367,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_modifiedBy",
+            "title": "Modified by",
+            "position": 7,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_modifiedOn",
+            "title": "Modified on",
+            "position": 8,
+            "value": 1719959788367,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xrsc_fk_experimentRunStep",
+            "title": "Protocol run step",
+            "position": 9,
+            "value": 64238,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Select content from queue",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xrsc_pk",
+            "title": "xrsc_pk",
+            "position": 10,
+            "value": 4098,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xrsc_fk_content",
+            "title": "Content",
+            "position": 11,
+            "value": 3135,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Content",
+            "displayValue": "725804",
+            "displayField": "cntn_id",
+            "foreignDisplayColumn": "cntn_id"
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent/4098"
+         },
+         {
+            "rel": "xrsc_fk_content",
+            "href": "https://slims.example.com/slimsrest/rest/Content/3135"
+         },
+         {
+            "rel": "xrsc_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64238"
+         },
+         {
+            "rel": "-qtus_fk_xRunStepContent",
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStepContent=4098"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStepContent/4098"
+         }
+      ]
+   },
+   {
+      "pk": 4099,
+      "tableName": "ExperimentRunStepContent",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xrsc_usage",
+            "title": "Usage",
+            "position": 0,
+            "value": "input",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xrsc_usedQuantity",
+            "title": "Used quantity",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 2,
+            "value": "xrsc_xprn0000001019_pc_test_in_vivo_recording_v4_select_content_from_queue_725804_input",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xrsc_contentRemoved",
+            "title": "Content removed",
+            "position": 3,
+            "value": false,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_workListDate",
+            "title": "Worklist date",
+            "position": 4,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_createdBy",
+            "title": "Created by",
+            "position": 5,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_createdOn",
+            "title": "Created on",
+            "position": 6,
+            "value": 1719959966311,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_modifiedBy",
+            "title": "Modified by",
+            "position": 7,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_modifiedOn",
+            "title": "Modified on",
+            "position": 8,
+            "value": 1719959966311,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xrsc_fk_experimentRunStep",
+            "title": "Protocol run step",
+            "position": 9,
+            "value": 64241,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Select content from queue",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xrsc_pk",
+            "title": "xrsc_pk",
+            "position": 10,
+            "value": 4099,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xrsc_fk_content",
+            "title": "Content",
+            "position": 11,
+            "value": 3135,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Content",
+            "displayValue": "725804",
+            "displayField": "cntn_id",
+            "foreignDisplayColumn": "cntn_id"
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent/4099"
+         },
+         {
+            "rel": "xrsc_fk_content",
+            "href": "https://slims.example.com/slimsrest/rest/Content/3135"
+         },
+         {
+            "rel": "xrsc_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64241"
+         },
+         {
+            "rel": "-qtus_fk_xRunStepContent",
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStepContent=4099"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStepContent/4099"
+         }
+      ]
+   },
+   {
+      "pk": 4100,
+      "tableName": "ExperimentRunStepContent",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xrsc_usage",
+            "title": "Usage",
+            "position": 0,
+            "value": "input",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xrsc_usedQuantity",
+            "title": "Used quantity",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 2,
+            "value": "xrsc_xprn0000001020_pc_test_in_vivo_recording_v4_select_content_from_queue_725804_input",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xrsc_contentRemoved",
+            "title": "Content removed",
+            "position": 3,
+            "value": false,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_workListDate",
+            "title": "Worklist date",
+            "position": 4,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_createdBy",
+            "title": "Created by",
+            "position": 5,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_createdOn",
+            "title": "Created on",
+            "position": 6,
+            "value": 1720043352342,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_modifiedBy",
+            "title": "Modified by",
+            "position": 7,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_modifiedOn",
+            "title": "Modified on",
+            "position": 8,
+            "value": 1720043352342,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xrsc_fk_experimentRunStep",
+            "title": "Protocol run step",
+            "position": 9,
+            "value": 64246,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Select content from queue",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xrsc_pk",
+            "title": "xrsc_pk",
+            "position": 10,
+            "value": 4100,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xrsc_fk_content",
+            "title": "Content",
+            "position": 11,
+            "value": 3135,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Content",
+            "displayValue": "725804",
+            "displayField": "cntn_id",
+            "foreignDisplayColumn": "cntn_id"
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent/4100"
+         },
+         {
+            "rel": "xrsc_fk_content",
+            "href": "https://slims.example.com/slimsrest/rest/Content/3135"
+         },
+         {
+            "rel": "xrsc_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64246"
+         },
+         {
+            "rel": "-qtus_fk_xRunStepContent",
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStepContent=4100"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStepContent/4100"
+         }
+      ]
+   },
+   {
+      "pk": 4158,
+      "tableName": "ExperimentRunStepContent",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xrsc_usage",
+            "title": "Usage",
+            "position": 0,
+            "value": "input",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xrsc_usedQuantity",
+            "title": "Used quantity",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 2,
+            "value": "xrsc_xprn0000001064_pc_test_prepare_implant_for_recording_v3_select_content_from_queue_725804_input",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xrsc_contentRemoved",
+            "title": "Content removed",
+            "position": 3,
+            "value": false,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_workListDate",
+            "title": "Worklist date",
+            "position": 4,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_createdBy",
+            "title": "Created by",
+            "position": 5,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_createdOn",
+            "title": "Created on",
+            "position": 6,
+            "value": 1724092517478,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_modifiedBy",
+            "title": "Modified by",
+            "position": 7,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_modifiedOn",
+            "title": "Modified on",
+            "position": 8,
+            "value": 1724092517478,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xrsc_fk_experimentRunStep",
+            "title": "Protocol run step",
+            "position": 9,
+            "value": 64452,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Select content from queue",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xrsc_pk",
+            "title": "xrsc_pk",
+            "position": 10,
+            "value": 4158,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xrsc_fk_content",
+            "title": "Content",
+            "position": 11,
+            "value": 3135,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Content",
+            "displayValue": "725804",
+            "displayField": "cntn_id",
+            "foreignDisplayColumn": "cntn_id"
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent/4158"
+         },
+         {
+            "rel": "xrsc_fk_content",
+            "href": "https://slims.example.com/slimsrest/rest/Content/3135"
+         },
+         {
+            "rel": "xrsc_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64452"
+         },
+         {
+            "rel": "-qtus_fk_xRunStepContent",
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStepContent=4158"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStepContent/4158"
+         }
+      ]
+   },
+   {
+      "pk": 4159,
+      "tableName": "ExperimentRunStepContent",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xrsc_usage",
+            "title": "Usage",
+            "position": 0,
+            "value": "input",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xrsc_usedQuantity",
+            "title": "Used quantity",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 2,
+            "value": "xrsc_xprn0000001065_pc_test_in_vivo_recording_v7_select_content_from_queue_725804_input",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xrsc_contentRemoved",
+            "title": "Content removed",
+            "position": 3,
+            "value": false,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_workListDate",
+            "title": "Worklist date",
+            "position": 4,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_createdBy",
+            "title": "Created by",
+            "position": 5,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_createdOn",
+            "title": "Created on",
+            "position": 6,
+            "value": 1724092555950,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_modifiedBy",
+            "title": "Modified by",
+            "position": 7,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_modifiedOn",
+            "title": "Modified on",
+            "position": 8,
+            "value": 1724092555950,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xrsc_fk_experimentRunStep",
+            "title": "Protocol run step",
+            "position": 9,
+            "value": 64454,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Select content from queue",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xrsc_pk",
+            "title": "xrsc_pk",
+            "position": 10,
+            "value": 4159,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xrsc_fk_content",
+            "title": "Content",
+            "position": 11,
+            "value": 3135,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Content",
+            "displayValue": "725804",
+            "displayField": "cntn_id",
+            "foreignDisplayColumn": "cntn_id"
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent/4159"
+         },
+         {
+            "rel": "xrsc_fk_content",
+            "href": "https://slims.example.com/slimsrest/rest/Content/3135"
+         },
+         {
+            "rel": "xrsc_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64454"
+         },
+         {
+            "rel": "-qtus_fk_xRunStepContent",
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStepContent=4159"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStepContent/4159"
+         }
+      ]
+   },
+   {
+      "pk": 4160,
+      "tableName": "ExperimentRunStepContent",
+      "columns": [
+         {
+            "datatype": "STRING",
+            "name": "xrsc_usage",
+            "title": "Usage",
+            "position": 0,
+            "value": "input",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xrsc_usedQuantity",
+            "title": "Used quantity",
+            "position": 1,
+            "value": null,
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_uniqueIdentifier",
+            "title": "Unique identifier",
+            "position": 2,
+            "value": "xrsc_xprn0000001066_pc_test_brain_perfusion_macro_v3_select_content_from_queue_725804_input",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "BOOLEAN",
+            "name": "xrsc_contentRemoved",
+            "title": "Content removed",
+            "position": 3,
+            "value": false,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_workListDate",
+            "title": "Worklist date",
+            "position": 4,
+            "value": null,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_createdBy",
+            "title": "Created by",
+            "position": 5,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_createdOn",
+            "title": "Created on",
+            "position": 6,
+            "value": 1724113533228,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "STRING",
+            "name": "xrsc_modifiedBy",
+            "title": "Modified by",
+            "position": 7,
+            "value": "PersonO",
+            "hidden": false,
+            "editable": true
+         },
+         {
+            "datatype": "DATE",
+            "name": "xrsc_modifiedOn",
+            "title": "Modified on",
+            "position": 8,
+            "value": 1724113622231,
+            "hidden": false,
+            "editable": true,
+            "dateFormat": "MM/dd/yyyy HH:mm:ss",
+            "subType": "datetime",
+            "timeZone": "America/Los_Angeles"
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xrsc_fk_experimentRunStep",
+            "title": "Protocol run step",
+            "position": 9,
+            "value": 64459,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "ExperimentRunStep",
+            "displayValue": "Select content from queue",
+            "displayField": "xprs_name",
+            "foreignDisplayColumn": "xprs_name"
+         },
+         {
+            "datatype": "INTEGER",
+            "name": "xrsc_pk",
+            "title": "xrsc_pk",
+            "position": 10,
+            "value": 4160,
+            "hidden": true,
+            "editable": true
+         },
+         {
+            "datatype": "FOREIGN_KEY",
+            "name": "xrsc_fk_content",
+            "title": "Content",
+            "position": 11,
+            "value": 3135,
+            "hidden": true,
+            "editable": true,
+            "foreignTable": "Content",
+            "displayValue": "725804",
+            "displayField": "cntn_id",
+            "foreignDisplayColumn": "cntn_id"
+         }
+      ],
+      "canUpdate": true,
+      "canDelete": true,
+      "links": [
+         {
+            "rel": "self",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStepContent/4160"
+         },
+         {
+            "rel": "xrsc_fk_content",
+            "href": "https://slims.example.com/slimsrest/rest/Content/3135"
+         },
+         {
+            "rel": "xrsc_fk_experimentRunStep",
+            "href": "https://slims.example.com/slimsrest/rest/ExperimentRunStep/64459"
+         },
+         {
+            "rel": "-qtus_fk_xRunStepContent",
+            "href": "https://slims.example.com/slimsrest/rest/QuantityUsage?qtus_fk_xRunStepContent=4160"
+         },
+         {
+            "rel": "attachments",
+            "href": "https://slims.example.com/slimsrest/rest/attachment/ExperimentRunStepContent/4160"
+         }
+      ]
+   }
+]

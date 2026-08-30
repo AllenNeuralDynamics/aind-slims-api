@@ -19,7 +19,8 @@ dynamic = ["version"]
 dependencies = [
     'slims-python-api',
     'pydantic',
-    'pydantic-settings'
+    'pydantic-settings',
+    'sqlmodel'
 ]
 
 [project.optional-dependencies]
