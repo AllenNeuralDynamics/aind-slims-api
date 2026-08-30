@@ -18,7 +18,7 @@ dynamic = ["version"]
 
 dependencies = [
     'slims-python-api',
-    'pydantic',
+    'pydantic>=2.7',
     'pydantic-settings'
 ]
 
